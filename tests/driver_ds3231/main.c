@@ -27,16 +27,55 @@
 // #include "periph/gpio.h"
 #include "periph/i2c.h"
 
+/*DS3231*/
 #include "shell.h"
 #include "xtimer.h"
 #include "ds3231.h"
 #include "ds3231_params.h"
 
-#define ISOSTR_LEN      (20U)
-#define TEST_DELAY      (2U)
+/*RTC and RTT*/
+#include "periph_conf.h"
+#include "periph/rtt.h"
+#include "timex.h"
+#include "rtt_rtc.h"
+#include "periph/rtc.h"
 
+
+/*Timer*/
+#include "timex.h"
+#include "ztimer.h"
+#include "xtimer.h"
+
+/*PM layer*/
+#include "periph/pm.h"
+#ifdef MODULE_PERIPH_GPIO
+#include "board.h"
+#include "periph/gpio.h"
+#endif
+#ifdef MODULE_PM_LAYERED
+#ifdef MODULE_PERIPH_RTC
+#include "periph/rtc.h"
+#endif
+#include "pm_layered.h"
+#endif
+
+
+#define ISOSTR_LEN      (20U)
+#define TEST_DELAY      (60U)
+
+#define TM_YEAR_OFFSET      (1900)
+#define DELAY_1S   (1U) /* 1 seconds delay between each test */
+
+static unsigned cnt = 0;
+
+int wakeup_gap =60;
 
 static ds3231_t _dev;
+
+struct tm alarm_time;
+struct tm current_time;
+
+
 
 /* 2010-09-22T15:10:42 is the author date of RIOT's initial commit */
 static struct tm _riot_bday = {
@@ -316,7 +355,7 @@ static int _cmd_test(int argc, char **argv)
         return 1;
     }
 
-    if (alarm != true){
+    if (alarm != true){ 
         puts("error: alarm was not triggered");
     }
 
@@ -331,6 +370,23 @@ static int _cmd_test(int argc, char **argv)
     return 0;
 
 #endif
+}
+
+void print_time(const char *label, const struct tm *time)
+{
+    printf("%s  %04d-%02d-%02d %02d:%02d:%02d\n", label,
+            time->tm_year + TM_YEAR_OFFSET,
+            time->tm_mon + 1,
+            time->tm_mday,
+            time->tm_hour,
+            time->tm_min,
+            time->tm_sec);
+}
+
+
+static void cb_rtc_puts(void *arg)
+{
+    puts(arg);
 }
 
 static const shell_command_t shell_commands[] = {
@@ -359,6 +415,102 @@ int main(void)
         puts("error: unable to initialize DS3231 [I2C initialization error]");
         return 1;
     }
+
+    res = ds3231_set_time(&_dev, &_riot_bday);    
+    print_time("default time: \n",&_riot_bday);
+
+    while (1) {
+        ++cnt;
+        rtc_get_time(&current_time);
+        print_time("currenttime:\n", &current_time);
+        int current_timestamp= mktime(&current_time);
+        printf("current time stamp: %d\n", current_timestamp);
+        int alarm_timestamp = 0;
+        if ((int)(current_timestamp % 120) < (wakeup_gap*1)){
+            puts("111");
+            pm_set(1);
+            // radio_on(netif);
+            int chance = ( wakeup_gap ) - ( current_timestamp % 120 );
+            alarm_timestamp = (current_timestamp / 120) *120+ (wakeup_gap * 1);
+            alarm_timestamp = alarm_timestamp- 1577836800;
+            rtc_localtime(alarm_timestamp, &alarm_time);
+            /*RTC SET ALARM*/
+            rtc_set_alarm(&alarm_time, cb_rtc_puts, "Time to sleep");
+            print_time("alarm time:\n", &alarm_time);
+            printf("---------%ds\n",chance);
+            puts("xtimer sleep");
+                        
+            xtimer_sleep(chance);
+
+            // rtc_set_alarm(&alarm_time, cb_rtc, "111");
+            
+
+            /*源代码*/
+            // rtc_get_alarm(&time);
+            // inc_secs(&time, PERIOD);
+            // rtc_set_alarm(&time, cb, &rtc_mtx);
+        }
+        else{
+            //printf("fflush");
+            puts("222");
+            fflush(stdout);
+            
+            // radio_off(netif);
+            alarm_timestamp =  current_timestamp + (120- (current_timestamp % 120));
+            // alarm_timestamp = (current_timestamp / 360) *360+ (wakeup_gap * 1);
+            alarm_timestamp = alarm_timestamp - 1577836800;
+            rtc_localtime(alarm_timestamp, &alarm_time);
+            print_time("alarm time:\n", &alarm_time);
+            
+            /*RTC SET ALARM*/
+            rtc_set_alarm(&alarm_time, cb_rtc_puts, "TIme to wake up");//(void *)modetest);
+            // rtc_set_alarm(&alarm_time, cb_rtc, (void *)modetest);
+            pm_set(0);
+            // pm_set(0);
+        }
+    }
+
+    // while (1) {
+    //     int alarm_timestamp = 0;
+    //     pm_set(1);
+    //     puts("testing device now");
+
+    //     /* set time to RIOT birthdate */
+    //     struct tm time;
+    //     // res = ds3231_set_time(&_dev, &_riot_bday);
+
+
+    //     /* read time and compare to initial value */
+    //     res = ds3231_get_time(&_dev, &time);
+    //     print_time("currenttime 111:\n", &time);
+
+    //     /* wait a short while and check if time has progressed */
+    //     // xtimer_sleep(TEST_DELAY);
+    //     res = ds3231_get_time(&_dev, &time);
+    //     print_time("currenttime 222:\n", &time);
+
+    //     /* clear all existing alarm flag */
+    //     res = ds3231_clear_alarm_1_flag(&_dev);
+
+    //     /* get time to set up next alarm*/
+    //     res = ds3231_get_time(&_dev, &time);
+    //     print_time("currenttime 333:\n", &time);
+
+        
+    //     int current_timestamp = mktime(&time);
+    //     alarm_timestamp = current_timestamp + 60;
+    //     rtc_localtime(alarm_timestamp, &alarm_time);
+    //     /* set alarm */
+    //     ds3231_toggle_alarm_1(&_dev,true);
+    //     res = ds3231_set_alarm_1(&_dev, &time, DS3231_AL1_TRIG_H_M_S);
+    
+    //     puts("alarm");
+    //     xtimer_sleep(3);
+
+    //     rtc_set_alarm(&alarm_time, cb_rtc_puts, "Time to wake up");
+    //     puts("sleep");
+    //     pm_set(0);
+    // }    
 
     /* start the shell */
     char line_buf[SHELL_DEFAULT_BUFSIZE];
