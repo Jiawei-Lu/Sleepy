@@ -10,6 +10,7 @@ USEMODULE += ds3231
 USEMODULE += xtimer
 USEMODULE += shell
 
+
 FEATURES_REQUIRED += periph_rtc
 FEATURES_OPTIONAL += periph_rtc_ms
 FEATURES_OPTIONAL += periph_rtc_mem

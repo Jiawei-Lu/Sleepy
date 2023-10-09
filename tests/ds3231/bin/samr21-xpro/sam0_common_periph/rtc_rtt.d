@@ -1,27 +1,25 @@
-/home/jl1n119/Sleepy/tests/ds3231/bin/samr21-xpro/periph_common/init.o: \
- /home/jl1n119/RIOT/drivers/periph_common/init.c \
+/home/jl1n119/Sleepy/tests/ds3231/bin/samr21-xpro/sam0_common_periph/rtc_rtt.o: \
+ /home/jl1n119/RIOT/cpu/sam0_common/periph/rtc_rtt.c \
  /home/jl1n119/Sleepy/tests/ds3231/bin/samr21-xpro/riotbuild/riotbuild.h \
- /home/jl1n119/RIOT/core/lib/include/kernel_defines.h \
- /home/jl1n119/RIOT/core/lib/include/modules.h \
- /home/jl1n119/RIOT/core/lib/include/riot_version.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
- /home/jl1n119/RIOT/core/lib/include/compiler_hints.h \
- /home/jl1n119/RIOT/core/lib/include/container.h \
+ /usr/include/newlib/string.h /usr/include/newlib/_ansi.h \
+ /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
+ /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
+ /usr/include/newlib/sys/features.h /usr/include/newlib/sys/reent.h \
+ /usr/include/newlib/_ansi.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
+ /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h \
+ /usr/include/newlib/machine/_default_types.h \
+ /usr/include/newlib/sys/lock.h \
+ /home/jl1n119/RIOT/core/lib/include/assert.h \
+ /usr/include/newlib/sys/cdefs.h /usr/include/newlib/sys/string.h \
+ /home/jl1n119/RIOT/sys/include/pm_layered.h \
  /home/jl1n119/RIOT/cpu/samd21/include/periph_cpu.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/periph_cpu_common.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/cpu.h \
- /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
- /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
- /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
- /usr/include/newlib/sys/features.h /usr/include/newlib/sys/cdefs.h \
- /usr/include/newlib/machine/_default_types.h \
+ /usr/include/newlib/stdio.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
- /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
- /usr/include/newlib/sys/_types.h /usr/include/newlib/machine/_types.h \
- /usr/include/newlib/sys/lock.h \
- /home/jl1n119/RIOT/core/lib/include/assert.h \
  /usr/include/newlib/sys/types.h /usr/include/newlib/sys/_stdint.h \
  /usr/include/newlib/sys/_pthreadtypes.h \
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
@@ -94,6 +92,11 @@
  /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr21/include/instance/wdt.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr21/include/pio/samr21g18a.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/irq_arch.h \
+ /home/jl1n119/RIOT/core/lib/include/kernel_defines.h \
+ /home/jl1n119/RIOT/core/lib/include/modules.h \
+ /home/jl1n119/RIOT/core/lib/include/riot_version.h \
+ /home/jl1n119/RIOT/core/lib/include/compiler_hints.h \
+ /home/jl1n119/RIOT/core/lib/include/container.h \
  /home/jl1n119/RIOT/sys/include/debug_irq_disable.h \
  /home/jl1n119/RIOT/core/include/sched.h /usr/include/newlib/inttypes.h \
  /usr/include/newlib/sys/_intsup.h \
@@ -110,40 +113,41 @@
  /home/jl1n119/RIOT/cpu/sam0_common/include/exti_config.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/timer_config.h \
- /home/jl1n119/RIOT/drivers/include/periph/i2c.h \
- /home/jl1n119/RIOT/boards/samr21-xpro/include/periph_conf.h \
+ /home/jl1n119/RIOT/sys/include/architecture.h \
+ /home/jl1n119/RIOT/cpu/cortexm_common/include/architecture_arch.h \
  /home/jl1n119/RIOT/drivers/include/periph/rtc.h \
  /usr/include/newlib/time.h /usr/include/newlib/machine/time.h \
  /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h \
- /home/jl1n119/RIOT/sys/include/rtc_utils.h
+ /home/jl1n119/RIOT/sys/include/rtc_utils.h \
+ /home/jl1n119/RIOT/boards/samr21-xpro/include/periph_conf.h \
+ /home/jl1n119/RIOT/drivers/include/periph/rtt.h \
+ /home/jl1n119/RIOT/core/lib/include/debug.h
 /home/jl1n119/Sleepy/tests/ds3231/bin/samr21-xpro/riotbuild/riotbuild.h:
-/home/jl1n119/RIOT/core/lib/include/kernel_defines.h:
-/home/jl1n119/RIOT/core/lib/include/modules.h:
-/home/jl1n119/RIOT/core/lib/include/riot_version.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
-/home/jl1n119/RIOT/core/lib/include/compiler_hints.h:
-/home/jl1n119/RIOT/core/lib/include/container.h:
-/usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h:
-/home/jl1n119/RIOT/cpu/samd21/include/periph_cpu.h:
-/usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h:
-/home/jl1n119/RIOT/cpu/sam0_common/include/periph_cpu_common.h:
-/home/jl1n119/RIOT/cpu/cortexm_common/include/cpu.h:
-/usr/include/newlib/stdio.h:
+/usr/include/newlib/string.h:
 /usr/include/newlib/_ansi.h:
 /usr/include/newlib/nano/newlib.h:
 /usr/include/newlib/_newlib_version.h:
 /usr/include/newlib/sys/config.h:
 /usr/include/newlib/machine/ieeefp.h:
 /usr/include/newlib/sys/features.h:
-/usr/include/newlib/sys/cdefs.h:
-/usr/include/newlib/machine/_default_types.h:
-/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h:
 /usr/include/newlib/sys/reent.h:
 /usr/include/newlib/_ansi.h:
+/usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h:
 /usr/include/newlib/sys/_types.h:
 /usr/include/newlib/machine/_types.h:
+/usr/include/newlib/machine/_default_types.h:
 /usr/include/newlib/sys/lock.h:
 /home/jl1n119/RIOT/core/lib/include/assert.h:
+/usr/include/newlib/sys/cdefs.h:
+/usr/include/newlib/sys/string.h:
+/home/jl1n119/RIOT/sys/include/pm_layered.h:
+/home/jl1n119/RIOT/cpu/samd21/include/periph_cpu.h:
+/usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h:
+/home/jl1n119/RIOT/cpu/sam0_common/include/periph_cpu_common.h:
+/home/jl1n119/RIOT/cpu/cortexm_common/include/cpu.h:
+/usr/include/newlib/stdio.h:
+/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h:
 /usr/include/newlib/sys/types.h:
 /usr/include/newlib/sys/_stdint.h:
 /usr/include/newlib/sys/_pthreadtypes.h:
@@ -218,6 +222,11 @@
 /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr21/include/instance/wdt.h:
 /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr21/include/pio/samr21g18a.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/irq_arch.h:
+/home/jl1n119/RIOT/core/lib/include/kernel_defines.h:
+/home/jl1n119/RIOT/core/lib/include/modules.h:
+/home/jl1n119/RIOT/core/lib/include/riot_version.h:
+/home/jl1n119/RIOT/core/lib/include/compiler_hints.h:
+/home/jl1n119/RIOT/core/lib/include/container.h:
 /home/jl1n119/RIOT/sys/include/debug_irq_disable.h:
 /home/jl1n119/RIOT/core/include/sched.h:
 /usr/include/newlib/inttypes.h:
@@ -235,11 +244,14 @@
 /home/jl1n119/RIOT/cpu/sam0_common/include/exti_config.h:
 /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h:
 /home/jl1n119/RIOT/cpu/sam0_common/include/timer_config.h:
-/home/jl1n119/RIOT/drivers/include/periph/i2c.h:
-/home/jl1n119/RIOT/boards/samr21-xpro/include/periph_conf.h:
+/home/jl1n119/RIOT/sys/include/architecture.h:
+/home/jl1n119/RIOT/cpu/cortexm_common/include/architecture_arch.h:
 /home/jl1n119/RIOT/drivers/include/periph/rtc.h:
 /usr/include/newlib/time.h:
 /usr/include/newlib/machine/time.h:
 /usr/include/newlib/sys/timespec.h:
 /usr/include/newlib/sys/_timespec.h:
 /home/jl1n119/RIOT/sys/include/rtc_utils.h:
+/home/jl1n119/RIOT/boards/samr21-xpro/include/periph_conf.h:
+/home/jl1n119/RIOT/drivers/include/periph/rtt.h:
+/home/jl1n119/RIOT/core/lib/include/debug.h:

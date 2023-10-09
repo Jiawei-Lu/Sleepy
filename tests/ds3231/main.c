@@ -63,10 +63,21 @@
 #define ISOSTR_LEN      (20U)
 #define TEST_DELAY      (60U)
 
+#define TM_YEAR_OFFSET      (1900)
+
+
 // struct tm alarm_time;
 // struct tm current_time;
 
+// static unsigned cnt = 0;
+ 
+int wakeup_gap = 10;
+int sleep_gap = 10;
+
 static ds3231_t _dev;
+
+struct tm alarm_time;
+struct tm current_time;
 
 /* 2010-09-22T15:10:42 is the author date of RIOT's initial commit */
 static struct tm _riot_bday = {
@@ -76,7 +87,7 @@ static struct tm _riot_bday = {
     .tm_wday = 3,
     .tm_mday = 22,
     .tm_mon = 8,
-    .tm_year = 110
+    .tm_year = 123
 };
 
 /* parse ISO date string (YYYY-MM-DDTHH:mm:ss) to struct tm */
@@ -365,6 +376,27 @@ static int _cmd_test(int argc, char **argv)
 #endif
 }
 
+void print_time(const char *label, const struct tm *time)
+{
+    printf("%s  %04d-%02d-%02d %02d:%02d:%02d\n", label,
+            time->tm_year + TM_YEAR_OFFSET,
+            time->tm_mon + 1,
+            time->tm_mday,
+            time->tm_hour,
+            time->tm_min,
+            time->tm_sec);
+}
+
+static void cb_rtc_puts(void *arg)
+{
+    puts(arg);
+}
+
+static void cb_rtc_puts1(void *arg)
+{
+    puts(arg);
+}
+
 static const shell_command_t shell_commands[] = {
     { "time_get", "init as output (push-pull mode)", _cmd_get },
     { "time_set", "init as input w/o pull resistor", _cmd_set },
@@ -378,7 +410,7 @@ static const shell_command_t shell_commands[] = {
 int main(void)
 {
     int res;
-    struct tm time;
+    // struct tm time;
 
     puts("DS3231 RTC test\n");
 
@@ -394,55 +426,107 @@ int main(void)
     }
 
     res = ds3231_set_time(&_dev, &_riot_bday);
+    ds3231_get_time(&_dev, &current_time);
+    rtc_set_time(&current_time);
+    // rtc_init(); 
 
     while (1){
-        res = ds3231_get_time(&_dev, &time);
-        if (res != 0) {
-            puts("error: unable to read time");
-            return 1;
-        }
+        // res = ds3231_get_time(&_dev, &time);
+        // if (res != 0) {
+        //     puts("error: unable to read time");
+        //     return 1;
+        // }
 
-        if ((mktime(&time) - mktime(&_riot_bday)) > 1) {
-            puts("error: device time has unexpected value");
-            return 1;
-        }
-        /* clear all existing alarm flag */
-        res = ds3231_clear_alarm_1_flag(&_dev);
-        if (res != 0) {
-            puts("error: unable to clear alarm flag");
-            return 1;
-        }
-        pm_set(1);
-        puts("wake up for 5s");
-        xtimer_sleep(5);
-        time.tm_sec += 5;
-        mktime(&time);
+        // if ((mktime(&time) - mktime(&_riot_bday)) > 1) {
+        //     puts("error: device time has unexpected value");
+        //     return 1;
+        // }
+        // /* clear all existing alarm flag */
+        // res = ds3231_clear_alarm_1_flag(&_dev);
+        // if (res != 0) {
+        //     puts("error: unable to clear alarm flag");
+        //     return 1;
+        // }
+        // pm_set(1);
+        // puts("wake up for 5s");
+        // xtimer_sleep(5);
+        // time.tm_sec += 5;
+        // mktime(&time);
 
-        /* set alarm */
+        // /* set alarm */
         
-        res = ds3231_set_alarm_1(&_dev, &time, DS3231_AL1_TRIG_H_M_S);
-        if (res != 0) {
-            puts("error: unable to program alarm");
-            return 1;
-        }
-        puts("sets to sleep 5s");
+        // res = ds3231_set_alarm_1(&_dev, &time, DS3231_AL1_TRIG_H_M_S);
+        // if (res != 0) {
+        //     puts("error: unable to program alarm");
+        //     return 1;
+        // }
+        // puts("sets to sleep 5s");
         
-        puts("set pm 0");
-        pm_set(0);
+        // puts("set pm 0");
+        // pm_set(0);
 
-        res = ds3231_await_alarm(&_dev);
-        if (res < 0){
-            puts("error: unable to program GPIO interrupt or to clear alarm flag");
-        }
+        // res = ds3231_await_alarm(&_dev);
+        // if (res < 0){
+        //     puts("error: unable to program GPIO interrupt or to clear alarm flag");
+        // }
         
-        if (!(res & DS3231_FLAG_ALARM_1)){
-            puts("error: alarm was not triggered");
-        }
-        pm_set(1);
-        puts("OK1");
-        return 0;
+        // if (!(res & DS3231_FLAG_ALARM_1)){
+        //     puts("error: alarm was not triggered");
+        // }
+        // pm_set(1);
+        // puts("OK1");
+        // return 0;
         
+        // ds3231_get_time(&_dev, &current_time);
+        // rtc_set_time(&current_time);
+        print_time("currenttime:\n", &current_time);
+        int current_timestamp= mktime(&current_time);  //curent timestamp
+        int alarm_timestamp = 0;
+        int duration = wakeup_gap + sleep_gap;
+        printf("---------%ds\n",current_timestamp);
 
+        if ((int)(current_timestamp % duration) < (wakeup_gap)){
+
+            pm_set(1);
+            // radio_on(netif);
+            int chance = ( wakeup_gap ) - ( current_timestamp % duration );
+
+
+            /*Setting up the sleep alarm after wakeup*/
+            alarm_timestamp = (current_timestamp / duration) * duration;
+            alarm_timestamp = alarm_timestamp + wakeup_gap;
+            rtc_localtime(alarm_timestamp-1577836800, &alarm_time);
+
+            /*RTC SET ALARM*/
+            rtc_set_alarm(&alarm_time, cb_rtc_puts1, "Time to sleep");
+
+            puts("commnication...");            
+            xtimer_sleep(chance);
+
+            // rtc_set_alarm(&alarm_time, cb_rtc, "111");
+            
+
+            /*源代码*/
+            // rtc_get_alarm(&time);
+            // inc_secs(&time, PERIOD);
+            // rtc_set_alarm(&time, cb, &rtc_mtx);
+        }
+        else{
+            // printf("fflush");
+            fflush(stdout);
+            // radio_off(netif);
+
+            alarm_timestamp =  current_timestamp + (duration- (current_timestamp % duration));
+
+            alarm_timestamp = alarm_timestamp - 1577836800;
+            rtc_localtime(alarm_timestamp, &alarm_time);
+
+            
+            /*RTC SET ALARM*/
+            rtc_set_alarm(&alarm_time, cb_rtc_puts, "Time to wake up");
+            puts("go sleep");
+            pm_set(0);
+        }
     }
 
     /* start the shell */

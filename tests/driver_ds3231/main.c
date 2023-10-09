@@ -67,8 +67,9 @@
 #define DELAY_1S   (1U) /* 1 seconds delay between each test */
 
 static unsigned cnt = 0;
-
-int wakeup_gap =60;
+ 
+int wakeup_gap = 60;
+int sleep_gap = 60;
 
 static ds3231_t _dev;
 
@@ -540,15 +541,17 @@ int main(void)
         ++cnt;
         ds3231_set_time(&_dev, &current_time);
         print_time("currenttime:\n", &current_time);
-        int current_timestamp= mktime(&current_time);
-        printf("current time stamp: %d\n", current_timestamp);
+        int current_timestamp= mktime(&current_time);  //curent timestamp
         int alarm_timestamp = 0;
+
         if ((int)(current_timestamp % 120) < (wakeup_gap*1)){
-            puts("111");
+
             pm_set(1);
             // radio_on(netif);
-            int chance = ( wakeup_gap ) - ( current_timestamp % 120 );
-            alarm_timestamp = (current_timestamp / 120) *120+ (wakeup_gap * 1);
+            int chance = ( wakeup_gap ) - ( current_timestamp % (wakeup_gap + sleep_gap) );
+
+            /*Setting up the sleep alarm after wakeup*/
+            alarm_timestamp = (current_timestamp / (wakeup_gap + sleep_gap)) * (wakeup_gap + sleep_gap) + wakeup_gap ;
             alarm_timestamp = alarm_timestamp- 1577836800;
             rtc_localtime(alarm_timestamp, &alarm_time);
             /*RTC SET ALARM*/
