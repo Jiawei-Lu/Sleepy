@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/tsrb/tsrb.o: \
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/tsrb/tsrb.o: \
  /home/jl1n119/RIOT/sys/tsrb/tsrb.c \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/RIOT/core/lib/include/irq.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h \
@@ -80,7 +80,7 @@
  /home/jl1n119/RIOT/sys/include/debug_irq_disable.h \
  /home/jl1n119/RIOT/sys/include/tsrb.h \
  /home/jl1n119/RIOT/core/lib/include/assert.h
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/RIOT/core/lib/include/irq.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h:
 /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h:

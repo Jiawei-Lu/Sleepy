@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/core_lib/init.o: \
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/core_lib/init.o: \
  /home/jl1n119/RIOT/core/lib/init.c \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -122,7 +122,7 @@
  /usr/include/newlib/sys/unistd.h \
  /home/jl1n119/RIOT/core/lib/include/modules.h \
  /home/jl1n119/RIOT/core/lib/include/debug.h
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/errno.h:
 /usr/include/newlib/sys/errno.h:
 /usr/include/newlib/sys/reent.h:

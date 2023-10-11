@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/core_lib/panic.o: \
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/core_lib/panic.o: \
  /home/jl1n119/RIOT/core/lib/panic.c \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/RIOT/core/lib/include/kernel_defines.h \
  /home/jl1n119/RIOT/core/lib/include/modules.h \
  /home/jl1n119/RIOT/core/lib/include/riot_version.h \
@@ -117,7 +117,7 @@
  /home/jl1n119/RIOT/sys/include/architecture.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/architecture_arch.h \
  /home/jl1n119/RIOT/core/lib/include/log.h
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/RIOT/core/lib/include/kernel_defines.h:
 /home/jl1n119/RIOT/core/lib/include/modules.h:
 /home/jl1n119/RIOT/core/lib/include/riot_version.h:

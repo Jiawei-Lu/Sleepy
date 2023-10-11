@@ -115,7 +115,8 @@
  /home/jl1n119/RIOT/drivers/include/periph/rtc.h \
  /usr/include/newlib/time.h /usr/include/newlib/machine/time.h \
  /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h \
- /home/jl1n119/RIOT/sys/include/rtc_utils.h
+ /home/jl1n119/RIOT/sys/include/rtc_utils.h \
+ /home/jl1n119/RIOT/drivers/include/periph/rtt.h
 /home/jl1n119/Sleepy/tests/ds3231/bin/samr21-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/RIOT/core/lib/include/kernel_defines.h:
 /home/jl1n119/RIOT/core/lib/include/modules.h:
@@ -243,3 +244,4 @@
 /usr/include/newlib/sys/timespec.h:
 /usr/include/newlib/sys/_timespec.h:
 /home/jl1n119/RIOT/sys/include/rtc_utils.h:
+/home/jl1n119/RIOT/drivers/include/periph/rtt.h:

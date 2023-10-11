@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/periph_common/init.o: \
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/periph_common/init.o: \
  /home/jl1n119/RIOT/drivers/periph_common/init.c \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/RIOT/core/lib/include/kernel_defines.h \
  /home/jl1n119/RIOT/core/lib/include/modules.h \
  /home/jl1n119/RIOT/core/lib/include/riot_version.h \
@@ -115,7 +115,7 @@
  /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h \
  /home/jl1n119/RIOT/sys/include/rtc_utils.h \
  /home/jl1n119/RIOT/boards/samr21-xpro/include/periph_conf.h
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/RIOT/core/lib/include/kernel_defines.h:
 /home/jl1n119/RIOT/core/lib/include/modules.h:
 /home/jl1n119/RIOT/core/lib/include/riot_version.h:

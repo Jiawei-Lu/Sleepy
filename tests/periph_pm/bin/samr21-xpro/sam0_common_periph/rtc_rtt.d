@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/sam0_common_periph/rtc_rtt.o: \
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/sam0_common_periph/rtc_rtt.o: \
  /home/jl1n119/RIOT/cpu/sam0_common/periph/rtc_rtt.c \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/string.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -122,7 +122,7 @@
  /home/jl1n119/RIOT/boards/samr21-xpro/include/periph_conf.h \
  /home/jl1n119/RIOT/drivers/include/periph/rtt.h \
  /home/jl1n119/RIOT/core/lib/include/debug.h
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/string.h:
 /usr/include/newlib/_ansi.h:

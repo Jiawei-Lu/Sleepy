@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/cortexm_common_periph/pm.o: \
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/cortexm_common_periph/pm.o: \
  /home/jl1n119/RIOT/cpu/cortexm_common/periph/pm.c \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/cpu.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -114,7 +114,7 @@
  /home/jl1n119/RIOT/sys/include/pm_layered.h \
  /home/jl1n119/RIOT/sys/include/architecture.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/architecture_arch.h
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/cpu.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:

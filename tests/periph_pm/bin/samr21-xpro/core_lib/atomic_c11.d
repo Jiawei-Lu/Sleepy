@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/core_lib/atomic_c11.o: \
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/core_lib/atomic_c11.o: \
  /home/jl1n119/RIOT/core/lib/atomic_c11.c \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
  /usr/include/newlib/stdlib.h /usr/include/newlib/machine/ieeefp.h \
  /usr/include/newlib/_ansi.h /usr/include/newlib/nano/newlib.h \
@@ -90,7 +90,7 @@
  /home/jl1n119/RIOT/core/lib/include/compiler_hints.h \
  /home/jl1n119/RIOT/core/lib/include/container.h \
  /home/jl1n119/RIOT/sys/include/debug_irq_disable.h
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h:
 /usr/include/newlib/stdlib.h:
 /usr/include/newlib/machine/ieeefp.h:

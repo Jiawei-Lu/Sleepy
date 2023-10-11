@@ -10,6 +10,9 @@ USEMODULE += shell
 FEATURES_REQUIRED += periph_rtc
 FEATURES_OPTIONAL += periph_rtc_ms
 FEATURES_OPTIONAL += periph_rtc_mem
+FEATURES_REQUIRED += periph_rtt
+FEATURES_OPTIONAL += periph_rtt_ms
+FEATURES_OPTIONAL += periph_rtt_mem
 
 
 USEMODULE += ds3231_int

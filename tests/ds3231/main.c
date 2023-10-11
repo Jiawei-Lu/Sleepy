@@ -65,6 +65,28 @@
 
 #define TM_YEAR_OFFSET      (1900)
 
+//copy
+#define RTT_SECOND      (RTT_FREQUENCY)
+
+#define _RTT(n)         ((n) & RTT_MAX_VALUE)
+
+#define RTT_SECOND_MAX  (RTT_MAX_VALUE/RTT_FREQUENCY)
+
+#define TICKS(x)        (    (x) * RTT_SECOND)
+#define SECONDS(x)      (_RTT(x) / RTT_SECOND)
+#define SUBSECONDS(x)   (_RTT(x) % RTT_SECOND)
+#define RTT_SECOND      (RTT_FREQUENCY)
+
+#define _RTT(n)         ((n) & RTT_MAX_VALUE)
+
+#define RTT_SECOND_MAX  (RTT_MAX_VALUE/RTT_FREQUENCY)
+
+#define TICKS(x)        (    (x) * RTT_SECOND)
+#define SECONDS(x)      (_RTT(x) / RTT_SECOND)
+#define SUBSECONDS(x)   (_RTT(x) % RTT_SECOND)
+//copy ends
+
+
 
 // struct tm alarm_time;
 // struct tm current_time;
@@ -76,8 +98,89 @@ int sleep_gap = 10;
 
 static ds3231_t _dev;
 
-struct tm alarm_time;
+struct tm alarm_time1;
 struct tm current_time;
+
+
+//copy
+static uint32_t rtc_now;         /**< The RTC timestamp when the last RTT alarm triggered */
+static uint32_t last_alarm;      /**< The RTT timestamp of the last alarm */
+
+static uint32_t alarm_time;                 /**< The RTC timestamp of the (user) RTC alarm */
+static rtc_alarm_cb_t alarm_cb;             /**< RTC alarm callback */
+static void *alarm_cb_arg;                  /**< RTC alarm callback argument */
+
+static void _rtt_alarm(void *arg);
+
+/* convert RTT counter into RTC timestamp */
+static inline uint32_t _rtc_now(uint32_t now)
+{
+    return rtc_now + SECONDS(now - last_alarm);
+}
+
+static inline void _set_alarm(uint32_t now, uint32_t next_alarm)
+{
+    rtt_set_alarm(now + next_alarm, _rtt_alarm, NULL);
+}
+
+/* This calculates when the next alarm should happen.
+   Always chooses the longest possible period min(alarm, overflow)
+   to minimize the amount of wake-ups. */
+static void _update_alarm(uint32_t now)
+{
+    uint32_t next_alarm;
+
+    last_alarm = TICKS(SECONDS(now));
+
+    /* no alarm or alarm beyond this period */
+    if ((alarm_cb == NULL)     ||
+        (alarm_time < rtc_now) ||
+        (alarm_time - rtc_now > RTT_SECOND_MAX)) {
+        next_alarm = RTT_SECOND_MAX;
+    } else {
+        /* alarm triggers in this period */
+        next_alarm = alarm_time - rtc_now;
+    }
+
+    /* alarm triggers NOW */
+    if (next_alarm == 0) {
+        next_alarm = RTT_SECOND_MAX;
+        alarm_cb(alarm_cb_arg);
+    }
+
+    _set_alarm(now, TICKS(next_alarm));
+}
+
+/* the RTT alarm callback */
+static void _rtt_alarm(void *arg)
+{
+    (void) arg;
+
+    uint32_t now = rtt_get_counter();
+    rtc_now = _rtc_now(now);
+
+    _update_alarm(now);
+}
+int rtc3231_set_alarm(struct tm *time, rtc_alarm_cb_t cb, void *arg)
+{
+    /* disable alarm to prevent race condition */
+    rtt_clear_alarm();
+
+    uint32_t now = rtt_get_counter();
+
+    rtc_tm_normalize(time);
+
+    alarm_time   = rtc_mktime(time);
+    alarm_cb_arg = arg;
+    alarm_cb     = cb;
+
+    /* RTT interrupt is disabled here */
+    rtc_now      = _rtc_now(now);
+    _update_alarm(now);
+
+    return 0;
+}
+//copy ends
 
 /* 2010-09-22T15:10:42 is the author date of RIOT's initial commit */
 static struct tm _riot_bday = {
@@ -479,6 +582,8 @@ int main(void)
         
         // ds3231_get_time(&_dev, &current_time);
         // rtc_set_time(&current_time);
+        ds3231_get_time(&_dev, &current_time);
+        // rtc_set_time(&current_time);
         print_time("currenttime:\n", &current_time);
         int current_timestamp= mktime(&current_time);  //curent timestamp
         int alarm_timestamp = 0;
@@ -495,10 +600,10 @@ int main(void)
             /*Setting up the sleep alarm after wakeup*/
             alarm_timestamp = (current_timestamp / duration) * duration;
             alarm_timestamp = alarm_timestamp + wakeup_gap;
-            rtc_localtime(alarm_timestamp-1577836800, &alarm_time);
+            rtc_localtime(alarm_timestamp-1577836800, &alarm_time1);
 
             /*RTC SET ALARM*/
-            rtc_set_alarm(&alarm_time, cb_rtc_puts1, "Time to sleep");
+            rtc3231_set_alarm(&alarm_time1, cb_rtc_puts1, "Time to sleep");
 
             puts("commnication...");            
             xtimer_sleep(chance);
@@ -519,16 +624,17 @@ int main(void)
             alarm_timestamp =  current_timestamp + (duration- (current_timestamp % duration));
 
             alarm_timestamp = alarm_timestamp - 1577836800;
-            rtc_localtime(alarm_timestamp, &alarm_time);
+            rtc_localtime(alarm_timestamp, &alarm_time1);
 
             
             /*RTC SET ALARM*/
-            rtc_set_alarm(&alarm_time, cb_rtc_puts, "Time to wake up");
+            rtc_set_alarm(&alarm_time1, cb_rtc_puts1, "Time to wake up");
             puts("go sleep");
             pm_set(0);
         }
     }
-
+    rtc3231_set_alarm(&alarm_time1, cb_rtc_puts, "Time to wake up");
+    puts("noooooooooo");
     /* start the shell */
     char line_buf[SHELL_DEFAULT_BUFSIZE];
     shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);

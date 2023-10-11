@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/periph/pm.o: \
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/periph/pm.o: \
  /home/jl1n119/RIOT/cpu/samd21/periph/pm.c \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/RIOT/drivers/include/periph/pm.h \
  /home/jl1n119/RIOT/cpu/samd21/include/periph_cpu.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h \
@@ -115,7 +115,7 @@
  /home/jl1n119/RIOT/sys/include/architecture.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/architecture_arch.h \
  /home/jl1n119/RIOT/core/lib/include/debug.h
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/RIOT/drivers/include/periph/pm.h:
 /home/jl1n119/RIOT/cpu/samd21/include/periph_cpu.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h:

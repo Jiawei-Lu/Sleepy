@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/samd21_vectors/vectors_samd2x.o: \
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/samd21_vectors/vectors_samd2x.o: \
  /home/jl1n119/RIOT/cpu/samd21/vectors/vectors_samd2x.c \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/vectors_cortexm.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h \
@@ -105,7 +105,7 @@
  /home/jl1n119/RIOT/core/include/sched.h \
  /home/jl1n119/RIOT/core/lib/include/thread_config.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/vectors_cortexm.h:
 /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h:

@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/rtc_utils/rtc_utils.o: \
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/rtc_utils/rtc_utils.o: \
  /home/jl1n119/RIOT/sys/rtc_utils/rtc_utils.c \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/stdlib.h /usr/include/newlib/machine/ieeefp.h \
  /usr/include/newlib/_ansi.h /usr/include/newlib/nano/newlib.h \
@@ -119,7 +119,7 @@
  /home/jl1n119/RIOT/cpu/sam0_common/include/exti_config.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/timer_config.h
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/stdlib.h:
 /usr/include/newlib/machine/ieeefp.h:

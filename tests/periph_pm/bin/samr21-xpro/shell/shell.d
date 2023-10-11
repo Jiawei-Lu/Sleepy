@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/shell/shell.o: \
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/shell/shell.o: \
  /home/jl1n119/RIOT/sys/shell/shell.c \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/string.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
  /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
@@ -122,7 +122,7 @@
  /home/jl1n119/RIOT/core/lib/include/modules.h \
  /home/jl1n119/RIOT/sys/include/shell_lock.h \
  /home/jl1n119/RIOT/sys/include/shell.h
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/string.h:
 /usr/include/newlib/_ansi.h:
 /usr/include/newlib/nano/newlib.h:

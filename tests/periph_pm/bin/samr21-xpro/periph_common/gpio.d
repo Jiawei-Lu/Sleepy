@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/periph_common/gpio.o: \
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/periph_common/gpio.o: \
  /home/jl1n119/RIOT/drivers/periph_common/gpio.c \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/RIOT/drivers/include/periph/gpio.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h \
  /home/jl1n119/RIOT/cpu/samd21/include/periph_cpu.h \
@@ -112,7 +112,7 @@
  /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/timer_config.h \
  /home/jl1n119/RIOT/boards/samr21-xpro/include/periph_conf.h
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/RIOT/drivers/include/periph/gpio.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h:
 /home/jl1n119/RIOT/cpu/samd21/include/periph_cpu.h:

@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/auto_init/auto_init.o: \
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/auto_init/auto_init.o: \
  /home/jl1n119/RIOT/sys/auto_init/auto_init.c \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -32,7 +32,7 @@
  /home/jl1n119/RIOT/core/lib/include/xfa.h \
  /home/jl1n119/RIOT/core/lib/include/macros/xtstr.h \
  /home/jl1n119/RIOT/core/lib/include/modules.h \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/preprocessor/preprocessor_successor.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/preprocessor/preprocessor_successor.h \
  /home/jl1n119/RIOT/sys/auto_init/include/auto_init_priorities.h \
  /home/jl1n119/RIOT/core/lib/include/debug.h \
  /home/jl1n119/RIOT/core/include/thread.h \
@@ -108,7 +108,7 @@
  /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr21/include/pio/samr21g18a.h \
  /home/jl1n119/RIOT/core/lib/include/thread_config.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:
@@ -149,7 +149,7 @@
 /home/jl1n119/RIOT/core/lib/include/xfa.h:
 /home/jl1n119/RIOT/core/lib/include/macros/xtstr.h:
 /home/jl1n119/RIOT/core/lib/include/modules.h:
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/preprocessor/preprocessor_successor.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/preprocessor/preprocessor_successor.h:
 /home/jl1n119/RIOT/sys/auto_init/include/auto_init_priorities.h:
 /home/jl1n119/RIOT/core/lib/include/debug.h:
 /home/jl1n119/RIOT/core/include/thread.h:

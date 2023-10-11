@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/newlib_syscalls_default/syscalls.o: \
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/newlib_syscalls_default/syscalls.o: \
  /home/jl1n119/RIOT/sys/newlib_syscalls_default/syscalls.c \
- /home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/unistd.h /usr/include/newlib/sys/unistd.h \
  /usr/include/newlib/_ansi.h /usr/include/newlib/nano/newlib.h \
  /usr/include/newlib/_newlib_version.h /usr/include/newlib/sys/config.h \
@@ -128,7 +128,7 @@
  /home/jl1n119/RIOT/sys/include/stdio_base.h \
  /home/jl1n119/RIOT/core/lib/include/modules.h \
  /usr/include/newlib/sys/times.h
-/home/jl1n119/RIOT/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/periph_pm/bin/samr21-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/unistd.h:
 /usr/include/newlib/sys/unistd.h:
 /usr/include/newlib/_ansi.h:
