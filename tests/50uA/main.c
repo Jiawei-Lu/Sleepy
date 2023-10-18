@@ -343,8 +343,27 @@ int main(void)
     }
     pm_set(SAML21_PM_MODE_STANDBY);
     puts(" WAKED UP SUCCESSFULLY ");
+    // pm_set(SAML21_PM_MODE_IDLE);
+    // puts(" WAKED UP SUCCESSFULLY ");
+    // puts("setting SLEEP dalay for 10s");
+    /*CLEAR ALARM FLAG*/
+    res = ds3231_clear_alarm_1_flag(&_dev);
+    if (res != 0) {
+        puts("error: unable to clear alarm flag");
+        return 1;
+    }
     /*wait for the pin gpio goes high*/
+    res = ds3231_get_time(&_dev, &testtime);
+    testtime.tm_sec += TEST_DELAY;
+    mktime(&testtime);
 
+    /* set alarm */
+    res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_D_H_M_S);
+    if (res != 0) {
+        puts("error: unable to program alarm");
+        return 1;
+    }
+    // pm_set(SAML21_PM_MODE_STANDBY);
     pm_set(SAML21_PM_MODE_IDLE);
     puts(" WAKED UP SUCCESSFULLY ");
 

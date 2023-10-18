@@ -540,6 +540,17 @@ int main(void)
 
     char line_buf[SHELL_DEFAULT_BUFSIZE];
 
+    ds3231_params_t params= ds3231_params[0];
+    params.opt     = DS3231_OPT_BAT_ENABLE;
+    params.opt    |= DS3231_OPT_INTER_ENABLE;
+
+    res = ds3231_init(&_dev, &params);
+
+    if (res != 0) {
+        puts("error: unable to initialize DS3231 [I2C initialization error]");
+        return 1;
+    }
+
     /* print test application information */
     #ifdef MODULE_PM_LAYERED
         printf("This application allows you to test the CPU power management.\n"
@@ -559,9 +570,9 @@ int main(void)
              "needed.");
     #endif
 
-    #if defined(MODULE_PERIPH_GPIO_IRQ) && defined(BTN0_PIN)
-        puts("using BTN0 as wake-up source");
-        gpio_init_int(BTN0_PIN, BTN0_MODE, BTN0_INT_FLANK, btn_cb, NULL);
+    #if defined(MODULE_PERIPH_GPIO_IRQ)
+        puts("using DS3231 Alarm Flag as wake-up source");
+        gpio_init_int(GPIO_PIN(PA , 15), GPIO_IN, GPIO_FALLING, btn_cb, NULL);
     #endif
     // /* 1. Run a callback after 3s */
     // static ztimer_t cb_timer = {.callback = callback, .arg = "Hello World"};
@@ -569,7 +580,7 @@ int main(void)
     // /* 2. Sleep the current thread for 60s */
     // ztimer_sleep(ZTIMER_MSEC, 5 * MS_PER_SEC);
 
-    puts("set idle");
+    puts("radio off for test lowest current consumption");
     // pm_set(SAML21_PM_MODE_IDLE);
     netopt_state_t state = NETOPT_STATE_SLEEP;//NETOPT_STATE_OFF - will increse power consumption
     while ((netif = gnrc_netif_iter(netif))) {
@@ -577,137 +588,164 @@ int main(void)
             while (gnrc_netapi_set(netif->pid, NETOPT_STATE, 0,
                 &state, sizeof(state)) == -EBUSY) {}
     }
-    
-
 
     /* run the shell and wait for the user to enter a mode */
 
-    puts("DS3231 RTC test\n");
-
-    ds3231_params_t params= ds3231_params[0];
-    params.opt     = DS3231_OPT_BAT_ENABLE;
-    params.opt    |= DS3231_OPT_INTER_ENABLE;
-
-    res = ds3231_init(&_dev, &params);
-
+    res = ds3231_set_time(&_dev, &_riot_bday);
     if (res != 0) {
-        puts("error: unable to initialize DS3231 [I2C initialization error]");
+        puts("error: unable to set time");
+        return 1;
+    }
+    ds3231_get_time(&_dev, &current_time);
+    if (res != 0) {
+        puts("error: unable to read time");
+        return 1;
+    }
+    if ((mktime(&current_time) - mktime(&_riot_bday)) > 1) {
+        puts("error: device time has unexpected value");
+        return 1;
+    }
+    // rtc_set_time(&current_time);
+    // rtc_init(); 
+    res = ds3231_clear_alarm_1_flag(&_dev);
+    if (res != 0) {
+        puts("error: unable to clear alarm flag");
         return 1;
     }
 
-    res = ds3231_set_time(&_dev, &_riot_bday);
-    ds3231_get_time(&_dev, &current_time);
-    rtc_set_time(&current_time);
-    // rtc_init(); 
+    //set a 3231 alarm to make all node wake up at the same day xx clock and do the loop
 
-    while (1){
-        // res = ds3231_get_time(&_dev, &time);
-        // if (res != 0) {
-        //     puts("error: unable to read time");
-        //     return 1;
-        // }
-
-        // if ((mktime(&time) - mktime(&_riot_bday)) > 1) {
-        //     puts("error: device time has unexpected value");
-        //     return 1;
-        // }
-        // /* clear all existing alarm flag */
-        // res = ds3231_clear_alarm_1_flag(&_dev);
-        // if (res != 0) {
-        //     puts("error: unable to clear alarm flag");
-        //     return 1;
-        // }
-        // pm_set(1);
-        // puts("wake up for 5s");
-        // xtimer_sleep(5);
-        // time.tm_sec += 5;
-        // mktime(&time);
-
-        // /* set alarm */
-        
-        // res = ds3231_set_alarm_1(&_dev, &time, DS3231_AL1_TRIG_H_M_S);
-        // if (res != 0) {
-        //     puts("error: unable to program alarm");
-        //     return 1;
-        // }
-        // puts("sets to sleep 5s");
-        
-        // puts("set pm 0");
-        // pm_set(0);
-
-        // res = ds3231_await_alarm(&_dev);
-        // if (res < 0){
-        //     puts("error: unable to program GPIO interrupt or to clear alarm flag");
-        // }
-        
-        // if (!(res & DS3231_FLAG_ALARM_1)){
-        //     puts("error: alarm was not triggered");
-        // }
-        // pm_set(1);
-        // puts("OK1");
-        // return 0;
-        
-        // ds3231_get_time(&_dev, &current_time);
-        // rtc_set_time(&current_time);
-        // ds3231_get_time(&_dev, &current_time);
-        // rtc_set_time(&current_time);
-        ds3231_get_time(&_dev, &current_time);
-        print_time("currenttime:\n", &current_time);
+    while (1) {
+        // one flag for schedule update by coap put -- maybe the first duration of the next start of zhengdian (xx:00m:00s) xx is integer
+        /* get time to set up next alarm*/
+        res = ds3231_get_time(&_dev, &current_time);
         int current_timestamp= mktime(&current_time);  //curent timestamp
-        int alarm_timestamp = 0;
+        // int alarm_timestamp = 0;
         int duration = wakeup_gap + sleep_gap;
         printf("---------%ds\n",current_timestamp);
-        puts("111");
-        if ((int)(current_timestamp % duration) < (wakeup_gap)){
-            puts("111");
-
-            // pm_set(SAML21_PM_MODE_STANDBY);
+        if((current_timestamp % duration) < sleep_gap){  //use gpio test to see what level s/ms/us should be considered here be more precessly
+            int wake_up_alarm_timestamp = current_timestamp + sleep_gap - (current_timestamp % duration);
+            puts("start sleep");
+            rtc_localtime(wake_up_alarm_timestamp -1577836800, &current_time);
+            mktime(&current_time);
+            /*set wake up alarm*/
+            ds3231_set_alarm_1(&_dev, &current_time, DS3231_AL1_TRIG_H_M_S);
+            if (res != 0) {
+                puts("error: unable to program alarm");
+                return 1;
+            }
+            puts("going to sleep");
+            pm_set(SAML21_PM_MODE_STANDBY);
+            puts("going to wake up");
             pm_set(SAML21_PM_MODE_IDLE);
 
-            // radio_on(netif);
-            int chance = ( wakeup_gap ) - ( current_timestamp % duration );
-
-            puts("111");
-
-            /*Setting up the sleep alarm after wakeup*/
-            alarm_timestamp = (current_timestamp / duration) * duration;
-            alarm_timestamp = alarm_timestamp + wakeup_gap;
-            rtc_localtime(alarm_timestamp-1577836800, &alarm_time1);
-            puts("111");
-            /*RTC SET ALARM*/
-            rtc_set_alarm(&alarm_time1, cb_rtc_puts, "Time to sleep");
-
-            puts("commnication...");            
-            // ztimer_sleep(chance);
-            ztimer_sleep(ZTIMER_USEC, chance * US_PER_SEC);
-
-
-            // rtc_set_alarm(&alarm_time, cb_rtc, "111");
-            
-
-            /*源代码*/
-            // rtc_get_alarm(&time);
-            // inc_secs(&time, PERIOD);
-            // rtc_set_alarm(&time, cb, &rtc_mtx);
+            /* set sleep alarm */
+            res = ds3231_get_time(&_dev, &current_time);
+            int sleep_alarm_timestamp = current_timestamp + wakeup_gap;
+            rtc_localtime(sleep_alarm_timestamp -1577836800, &current_time);
+            mktime(&current_time);
+            res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
+            if (res != 0) {
+                puts("error: unable to program alarm");
+                return 1;
+            }
+            ztimer_sleep(ZTIMER_USEC, wakeup_gap * US_PER_SEC);
+            puts("going to sleep");
         }
         else{
-            // printf("fflush");
-            fflush(stdout);
-            // radio_off(netif);
+            pm_set(SAML21_PM_MODE_IDLE);
+            int sleep_alarm_timestamp = current_timestamp + wakeup_gap;
+            rtc_localtime(sleep_alarm_timestamp -1577836800, &current_time);
+            mktime(&current_time);
+            /*set sleep alarm*/
+            ds3231_set_alarm_1(&_dev, &current_time, DS3231_AL1_TRIG_H_M_S);
+            if (res != 0) {
+                puts("error: unable to program alarm");
+                return 1;
+            }
+            
+            puts("going to sleep");
+            
+        }
+        
+        /*set wake up alarm*/
+        ds3231_set_alarm_1(&_dev, &current_time, DS3231_AL1_TRIG_H_M_S);
+        if (res != 0) {
+            puts("error: unable to program alarm");
+            return 1;
+        }
+        puts("going to sleep");
+        pm_set(SAML21_PM_MODE_STANDBY);
+        puts("going to wake up");
+        
 
-            alarm_timestamp =  current_timestamp + (duration- (current_timestamp % duration));
+        pm_set(SAML21_PM_MODE_IDLE);
 
-            alarm_timestamp = alarm_timestamp - 1577836800;
-            rtc_localtime(alarm_timestamp, &alarm_time1);
+        
+         
+    }
+    /*OBSOLETED wakeup/sleep schedule version*/
+    
+    // while (1){
+    //     ds3231_get_time(&_dev, &current_time);
+    //     print_time("currenttime:\n", &current_time);
+    //     int current_timestamp= mktime(&current_time);  //curent timestamp
+    //     int alarm_timestamp = 0;
+    //     int duration = wakeup_gap + sleep_gap;
+    //     printf("---------%ds\n",current_timestamp);
+    //     puts("111");
+    //     if ((int)(current_timestamp % duration) < (wakeup_gap)){
+    //         puts("111");
+
+    //         // pm_set(SAML21_PM_MODE_STANDBY);
+    //         pm_set(SAML21_PM_MODE_IDLE);
+
+    //         // radio_on(netif);
+    //         int chance = ( wakeup_gap ) - ( current_timestamp % duration );
+
+    //         puts("111");
+
+    //         /*Setting up the sleep alarm after wakeup*/
+    //         alarm_timestamp = (current_timestamp / duration) * duration;
+    //         alarm_timestamp = alarm_timestamp + wakeup_gap;
+    //         rtc_localtime(alarm_timestamp-1577836800, &alarm_time1);
+    //         puts("111");
+    //         /*RTC SET ALARM*/
+    //         rtc_set_alarm(&alarm_time1, cb_rtc_puts, "Time to sleep");
+
+    //         puts("commnication...");            
+    //         // ztimer_sleep(chance);
+    //         ztimer_sleep(ZTIMER_USEC, chance * US_PER_SEC);
+
+
+    //         // rtc_set_alarm(&alarm_time, cb_rtc, "111");
+            
+
+    //         /*源代码*/
+    //         // rtc_get_alarm(&time);
+    //         // inc_secs(&time, PERIOD);
+    //         // rtc_set_alarm(&time, cb, &rtc_mtx);
+    //     }
+    //     else{
+    //         // printf("fflush");
+    //         fflush(stdout);
+    //         // radio_off(netif);
+
+    //         alarm_timestamp =  current_timestamp + (duration- (current_timestamp % duration));
+
+    //         alarm_timestamp = alarm_timestamp - 1577836800;
+    //         rtc_localtime(alarm_timestamp, &alarm_time1);
 
             
-            /*RTC SET ALARM*/
-            rtc_set_alarm(&alarm_time1, cb_rtc_puts1, "Time to wake up");
-            puts("go sleep");
-            // pm_set(SAML21_PM_MODE_IDLE);
-            pm_set(SAML21_PM_MODE_STANDBY);
-        }
-    }
+    //         /*RTC SET ALARM*/
+    //         rtc_set_alarm(&alarm_time1, cb_rtc_puts1, "Time to wake up");
+    //         puts("go sleep");
+    //         // pm_set(SAML21_PM_MODE_IDLE);
+    //         pm_set(SAML21_PM_MODE_STANDBY);
+    //     }
+    // }
+    
+    /*ends of the OBSOLETED version*/
     // rtc3231_set_alarm(&alarm_time1, cb_rtc_puts, "Time to wake up");
     puts("noooooooooo");
     /* start the shell */
