@@ -51,6 +51,33 @@ gnrc_netif_t* netif = NULL;
 #include "msg.h"
 #include "board.h"
 
+/*copy*/
+#include <time.h>
+
+// #include "periph/gpio.h"
+#include "periph/i2c.h"
+
+#include "xtimer.h"
+#include "ds3231.h"
+#include "ds3231_params.h"
+
+#define TEST_DELAY      (10U)
+
+
+static ds3231_t _dev;
+
+/* 2010-09-22T15:10:42 is the author date of RIOT's initial commit */
+static struct tm _riot_bday = {
+    .tm_sec = 42,
+    .tm_min = 10,
+    .tm_hour = 15,
+    .tm_wday = 3,
+    .tm_mday = 22,
+    .tm_mon = 8,
+    .tm_year = 110
+};
+/*copy ends*/
+
 #ifndef BTN0_INT_FLANK
 #define BTN0_INT_FLANK  GPIO_RISING
 #endif
@@ -202,10 +229,10 @@ static void _show_blockers(void)
 }
 #endif /* MODULE_PM_LAYERED */
 
-// /*ztimer callback*/
-// static void callback (void * arg) {
-// puts((char*) arg);
-// }
+/*ztimer callback*/
+static void callback (void * arg) {
+puts((char*) arg);
+}
 
 /**
  * @brief   Application entry point.
@@ -215,8 +242,8 @@ int main(void)
     char line_buf[SHELL_DEFAULT_BUFSIZE];
 
     /* print test application information */
-#ifdef MODULE_PM_LAYERED
-    printf("This application allows you to test the CPU power management.\n"
+    #ifdef MODULE_PM_LAYERED
+        printf("This application allows you to test the CPU power management.\n"
            "The available power modes are 0 - %d. Lower-numbered power modes\n"
            "save more power, but may require an event/interrupt to wake up\n"
            "the CPU. Reset the CPU if needed.\n",
@@ -226,22 +253,39 @@ int main(void)
      * the state of PM blockers so that the user will know which power mode has
      * been entered and is presumably responsible for the unresponsive shell.
      */
-    _show_blockers();
-#else
-    puts("This application allows you to test the CPU power management.\n"
-         "Layered support is not unavailable for this CPU. Reset the CPU if\n"
-         "needed.");
-#endif
+        _show_blockers();
+    #else
+        puts("This application allows you to test the CPU power management.\n"
+             "Layered support is not unavailable for this CPU. Reset the CPU if\n"
+             "needed.");
+    #endif
 
-#if defined(MODULE_PERIPH_GPIO_IRQ) && defined(BTN0_PIN)
-    puts("using BTN0 as wake-up source");
-    gpio_init_int(BTN0_PIN, BTN0_MODE, BTN0_INT_FLANK, btn_cb, NULL);
-#endif
-    // /* 1. Run a callback after 3s */
-    // static ztimer_t cb_timer = {.callback = callback, .arg = "Hello World"};
-    // ztimer_set(ZTIMER_USEC, &cb_timer, 3 * US_PER_SEC);
-    // /* 2. Sleep the current thread for 60s */
+    #if defined(MODULE_PERIPH_GPIO_IRQ) //&& defined(BTN0_PIN)
+        puts("using BTN0 as wake-up source");
+        gpio_init_int(GPIO_PIN(PA , 15), GPIO_IN, GPIO_FALLING, btn_cb, NULL);
+    #endif
+
+    int res;
+    struct tm testtime;
+
+    puts("DS3231 RTC test\n");
+
+    ds3231_params_t params= ds3231_params[0];
+    params.opt     = DS3231_OPT_BAT_ENABLE;
+    params.opt    |= DS3231_OPT_INTER_ENABLE;
+
+    res = ds3231_init(&_dev, &params);
+
+    if (res != 0) {
+        puts("error: unable to initialize DS3231 [I2C initialization error]");
+        return 1;
+    }
+    /* 1. Run a callback after 3s */
+    static ztimer_t cb_timer = {.callback = callback, .arg = "Hello World"};
+    ztimer_set(ZTIMER_USEC, &cb_timer, 3 * US_PER_SEC);
+    /* 2. Sleep the current thread for 60s */
     // ztimer_sleep(ZTIMER_MSEC, 5 * MS_PER_SEC);
+    ztimer_sleep(ZTIMER_USEC, 5 * US_PER_SEC);
 
     puts("set idle");
     // pm_set(SAML21_PM_MODE_IDLE);
@@ -252,8 +296,58 @@ int main(void)
                 &state, sizeof(state)) == -EBUSY) {}
     }
     
-    pm_set(SAML21_PM_MODE_STANDBY);
+    // pm_set(SAML21_PM_MODE_STANDBY);
     _show_blockers();
+
+    /*test if the pin can wake up node from standby*/
+    res = ds3231_set_time(&_dev, &_riot_bday);
+    if (res != 0) {
+        puts("error: unable to set time");
+        return 1;
+    }
+
+    /* read time and compare to initial value */
+    res = ds3231_get_time(&_dev, &testtime);
+    if (res != 0) {
+        puts("error: unable to read time");
+        return 1;
+    }
+
+    if ((mktime(&testtime) - mktime(&_riot_bday)) > 1) {
+        puts("error: device time has unexpected value");
+        return 1;
+    }
+     /* clear all existing alarm flag */
+    res = ds3231_clear_alarm_1_flag(&_dev);
+    if (res != 0) {
+        puts("error: unable to clear alarm flag");
+        return 1;
+    }
+
+    /* get time to set up next alarm*/
+    res = ds3231_get_time(&_dev, &testtime);
+    if (res != 0) {
+        puts("error: unable to read time");
+        return 1;
+    }
+    
+    puts("setting up wakeup dalay for 10s");
+    testtime.tm_sec += TEST_DELAY;
+    mktime(&testtime);
+
+    /* set alarm */
+    res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
+    if (res != 0) {
+        puts("error: unable to program alarm");
+        return 1;
+    }
+    pm_set(SAML21_PM_MODE_STANDBY);
+    puts(" WAKED UP SUCCESSFULLY ");
+    /*wait for the pin gpio goes high*/
+
+    pm_set(SAML21_PM_MODE_IDLE);
+    puts(" WAKED UP SUCCESSFULLY ");
+
     /* run the shell and wait for the user to enter a mode */
     shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
 

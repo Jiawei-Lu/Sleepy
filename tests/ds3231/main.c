@@ -29,7 +29,6 @@
 
 /*DS3231*/
 #include "shell.h"
-#include "xtimer.h"
 #include "ds3231.h"
 #include "ds3231_params.h"
 
@@ -44,7 +43,7 @@
 /*Timer*/
 #include "timex.h"
 #include "ztimer.h"
-#include "xtimer.h"
+// #include "xtimer.h"
 
 /*PM layer*/
 #include "periph/pm.h"
@@ -59,6 +58,21 @@
 #include "pm_layered.h"
 #endif
 
+/*Radio netif*/
+#include "net/gnrc/netif.h"
+#include "net/netif.h"
+#include "net/gnrc/netapi.h"
+
+/*Radio netif*/
+gnrc_netif_t* netif = NULL;
+
+#include "shell.h"
+#include "msg.h"
+#include "board.h"
+
+#ifndef BTN0_INT_FLANK
+#define BTN0_INT_FLANK  GPIO_RISING
+#endif
 
 #define ISOSTR_LEN      (20U)
 #define TEST_DELAY      (60U)
@@ -395,7 +409,8 @@ static int _cmd_test(int argc, char **argv)
     }
 
     /* wait a short while and check if time has progressed */
-    xtimer_sleep(TEST_DELAY);
+    // ztimer_sleep(TEST_DELAY);
+    ztimer_sleep(ZTIMER_USEC, TEST_DELAY * US_PER_SEC);
     res = ds3231_get_time(&_dev, &time);
     if (res != 0) {
         puts("error: unable to read time");
@@ -451,7 +466,7 @@ static int _cmd_test(int argc, char **argv)
 #else
 
     /* wait for the alarm to trigger */
-    xtimer_sleep(TEST_DELAY);
+    ztimer_sleep(ZTIMER_USEC, TEST_DELAY * US_PER_SEC);
 
     bool alarm;
 
@@ -500,6 +515,14 @@ static void cb_rtc_puts1(void *arg)
     puts(arg);
 }
 
+#if defined(MODULE_PERIPH_GPIO_IRQ) && defined(BTN0_PIN)
+static void btn_cb(void *ctx)
+{
+    (void) ctx;
+    puts("BTN0 pressed.");
+}
+#endif /* MODULE_PERIPH_GPIO_IRQ */
+
 static const shell_command_t shell_commands[] = {
     { "time_get", "init as output (push-pull mode)", _cmd_get },
     { "time_set", "init as input w/o pull resistor", _cmd_set },
@@ -514,6 +537,50 @@ int main(void)
 {
     int res;
     // struct tm time;
+
+    char line_buf[SHELL_DEFAULT_BUFSIZE];
+
+    /* print test application information */
+    #ifdef MODULE_PM_LAYERED
+        printf("This application allows you to test the CPU power management.\n"
+           "The available power modes are 0 - %d. Lower-numbered power modes\n"
+           "save more power, but may require an event/interrupt to wake up\n"
+           "the CPU. Reset the CPU if needed.\n",
+        PM_NUM_MODES - 1);
+
+    /* In case the system boots into an unresponsive shell, at least display
+     * the state of PM blockers so that the user will know which power mode has
+     * been entered and is presumably responsible for the unresponsive shell.
+     */
+
+    #else
+        puts("This application allows you to test the CPU power management.\n"
+             "Layered support is not unavailable for this CPU. Reset the CPU if\n"
+             "needed.");
+    #endif
+
+    #if defined(MODULE_PERIPH_GPIO_IRQ) && defined(BTN0_PIN)
+        puts("using BTN0 as wake-up source");
+        gpio_init_int(BTN0_PIN, BTN0_MODE, BTN0_INT_FLANK, btn_cb, NULL);
+    #endif
+    // /* 1. Run a callback after 3s */
+    // static ztimer_t cb_timer = {.callback = callback, .arg = "Hello World"};
+    // ztimer_set(ZTIMER_USEC, &cb_timer, 3 * US_PER_SEC);
+    // /* 2. Sleep the current thread for 60s */
+    // ztimer_sleep(ZTIMER_MSEC, 5 * MS_PER_SEC);
+
+    puts("set idle");
+    // pm_set(SAML21_PM_MODE_IDLE);
+    netopt_state_t state = NETOPT_STATE_SLEEP;//NETOPT_STATE_OFF - will increse power consumption
+    while ((netif = gnrc_netif_iter(netif))) {
+            /* retry if busy */
+            while (gnrc_netapi_set(netif->pid, NETOPT_STATE, 0,
+                &state, sizeof(state)) == -EBUSY) {}
+    }
+    
+
+
+    /* run the shell and wait for the user to enter a mode */
 
     puts("DS3231 RTC test\n");
 
@@ -584,6 +651,7 @@ int main(void)
         // rtc_set_time(&current_time);
         // ds3231_get_time(&_dev, &current_time);
         // rtc_set_time(&current_time);
+        ds3231_get_time(&_dev, &current_time);
         print_time("currenttime:\n", &current_time);
         int current_timestamp= mktime(&current_time);  //curent timestamp
         int alarm_timestamp = 0;
@@ -593,7 +661,9 @@ int main(void)
         if ((int)(current_timestamp % duration) < (wakeup_gap)){
             puts("111");
 
-            pm_set(1);
+            // pm_set(SAML21_PM_MODE_STANDBY);
+            pm_set(SAML21_PM_MODE_IDLE);
+
             // radio_on(netif);
             int chance = ( wakeup_gap ) - ( current_timestamp % duration );
 
@@ -608,7 +678,9 @@ int main(void)
             rtc_set_alarm(&alarm_time1, cb_rtc_puts, "Time to sleep");
 
             puts("commnication...");            
-            xtimer_sleep(chance);
+            // ztimer_sleep(chance);
+            ztimer_sleep(ZTIMER_USEC, chance * US_PER_SEC);
+
 
             // rtc_set_alarm(&alarm_time, cb_rtc, "111");
             
@@ -632,13 +704,14 @@ int main(void)
             /*RTC SET ALARM*/
             rtc_set_alarm(&alarm_time1, cb_rtc_puts1, "Time to wake up");
             puts("go sleep");
-            // pm_set(0);
+            // pm_set(SAML21_PM_MODE_IDLE);
+            pm_set(SAML21_PM_MODE_STANDBY);
         }
     }
     // rtc3231_set_alarm(&alarm_time1, cb_rtc_puts, "Time to wake up");
-    // puts("noooooooooo");
+    puts("noooooooooo");
     /* start the shell */
-    char line_buf[SHELL_DEFAULT_BUFSIZE];
+
     shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
 
     return 0;

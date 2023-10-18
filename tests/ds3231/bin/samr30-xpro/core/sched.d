@@ -108,6 +108,7 @@
  /home/jl1n119/RIOT/core/include/msg.h \
  /home/jl1n119/RIOT/core/include/sched.h \
  /home/jl1n119/RIOT/core/lib/include/thread_config.h \
+ /home/jl1n119/RIOT/core/include/thread_flags.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h \
  /home/jl1n119/RIOT/core/lib/include/panic.h \
  /home/jl1n119/RIOT/core/lib/include/kernel_defines.h \
@@ -229,6 +230,7 @@
 /home/jl1n119/RIOT/core/include/msg.h:
 /home/jl1n119/RIOT/core/include/sched.h:
 /home/jl1n119/RIOT/core/lib/include/thread_config.h:
+/home/jl1n119/RIOT/core/include/thread_flags.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h:
 /home/jl1n119/RIOT/core/lib/include/panic.h:
 /home/jl1n119/RIOT/core/lib/include/kernel_defines.h:

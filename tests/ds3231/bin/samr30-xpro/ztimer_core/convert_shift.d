@@ -108,6 +108,7 @@
  /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr30/include/instance/wdt.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr30/include/pio/samr30g18a.h \
  /home/jl1n119/RIOT/core/lib/include/thread_config.h \
+ /home/jl1n119/RIOT/core/include/thread_flags.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h \
  /home/jl1n119/RIOT/core/lib/include/rmutex.h \
  /home/jl1n119/RIOT/sys/include/ztimer/convert_shift.h \
@@ -230,6 +231,7 @@
 /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr30/include/instance/wdt.h:
 /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr30/include/pio/samr30g18a.h:
 /home/jl1n119/RIOT/core/lib/include/thread_config.h:
+/home/jl1n119/RIOT/core/include/thread_flags.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h:
 /home/jl1n119/RIOT/core/lib/include/rmutex.h:
 /home/jl1n119/RIOT/sys/include/ztimer/convert_shift.h:

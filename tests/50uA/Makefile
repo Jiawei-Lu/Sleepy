@@ -1,7 +1,12 @@
 BOARD ?= slstk3401a
 include ../Makefile.tests_common
 
-FEATURES_OPTIONAL += periph_rtc
+FEATURES_REQUIRED = periph_i2c
+FEATURES_OPTIONAL = periph_i2c_reconfigure
+USEMODULE += ds3231
+USEMODULE += xtimer
+USEMODULE += shell
+
 FEATURES_OPTIONAL += periph_gpio_irq
 
 USEMODULE += gnrc_netif
@@ -14,6 +19,10 @@ USEMODULE += netstats_l2
 USEMODULE += netstats_ipv6
 USEMODULE += ztimer ztimer_usec ztimer_msec ztimer_periph_rtc   
 #ztimer_periph_rtt will conflict with periph_rtc(periph_rtc is required by pm_layered)
+FEATURES_REQUIRED += periph_rtc
+FEATURES_OPTIONAL += periph_rtc_ms
+FEATURES_OPTIONAL += periph_rtc_mem
+
 
 # use GNRC by default
 LWIP_IPV4 ?= 0
@@ -52,5 +61,8 @@ USEMODULE += shell_cmds_default
 
 # avoid running Kconfig by default
 SHOULD_RUN_KCONFIG ?=
+
+USEMODULE += ds3231_int
+CFLAGS +="-DDS3231_PARAM_INT_PIN=(GPIO_PIN(PA,15))"
 
 include $(RIOTBASE)/Makefile.include

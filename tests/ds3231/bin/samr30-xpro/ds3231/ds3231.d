@@ -103,6 +103,7 @@
  /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr30/include/pio/samr30g18a.h \
  /home/jl1n119/RIOT/core/lib/include/thread_config.h \
  /home/jl1n119/RIOT/core/include/sched.h \
+ /home/jl1n119/RIOT/core/include/thread_flags.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h \
  /home/jl1n119/RIOT/drivers/include/ds3231.h /usr/include/newlib/time.h \
  /usr/include/newlib/machine/time.h /usr/include/newlib/sys/types.h \
@@ -239,6 +240,7 @@
 /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr30/include/pio/samr30g18a.h:
 /home/jl1n119/RIOT/core/lib/include/thread_config.h:
 /home/jl1n119/RIOT/core/include/sched.h:
+/home/jl1n119/RIOT/core/include/thread_flags.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h:
 /home/jl1n119/RIOT/drivers/include/ds3231.h:
 /usr/include/newlib/time.h:

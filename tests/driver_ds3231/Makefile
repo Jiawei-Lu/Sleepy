@@ -16,7 +16,7 @@ FEATURES_OPTIONAL += periph_rtc_ms
 FEATURES_OPTIONAL += periph_rtc_mem
 
 
-# USEMODULE += ds3231_int
-# CFLAGS +="-DDS3231_PARAM_INT_PIN=(GPIO_PIN(PA,28))"
+USEMODULE += ds3231_int
+CFLAGS +="-DDS3231_PARAM_INT_PIN=(GPIO_PIN(PA,28))"
 
 include $(RIOTBASE)/Makefile.include
