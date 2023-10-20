@@ -66,7 +66,7 @@ gnrc_netif_t* netif = NULL;
 #include "ds3231.h"
 #include "ds3231_params.h"
 
-#define TEST_DELAY      (10U)
+#define TEST_DELAY      (2466U)
 
 
 static ds3231_t _dev;
