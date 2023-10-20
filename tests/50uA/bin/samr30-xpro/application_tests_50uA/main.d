@@ -17,6 +17,8 @@
  /usr/include/newlib/sys/_pthreadtypes.h \
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
  /usr/include/newlib/stdlib.h /usr/include/newlib/machine/stdlib.h \
+ /usr/include/newlib/time.h /usr/include/newlib/machine/time.h \
+ /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h \
  /home/jl1n119/RIOT/sys/include/ztimer.h \
  /home/jl1n119/RIOT/core/include/sched.h /usr/include/newlib/inttypes.h \
  /usr/include/newlib/sys/_intsup.h \
@@ -132,9 +134,8 @@
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h \
  /home/jl1n119/RIOT/boards/samr30-xpro/include/periph_conf.h \
  /home/jl1n119/RIOT/drivers/include/periph/rtc.h \
- /usr/include/newlib/time.h /usr/include/newlib/machine/time.h \
- /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h \
  /home/jl1n119/RIOT/sys/include/rtc_utils.h \
+ /home/jl1n119/RIOT/drivers/include/rtt_rtc.h \
  /home/jl1n119/RIOT/sys/include/net/gnrc/netif.h \
  /home/jl1n119/RIOT/sys/include/event.h /usr/include/newlib/string.h \
  /usr/include/newlib/sys/string.h \
@@ -213,6 +214,10 @@
 /usr/include/newlib/sys/stdio.h:
 /usr/include/newlib/stdlib.h:
 /usr/include/newlib/machine/stdlib.h:
+/usr/include/newlib/time.h:
+/usr/include/newlib/machine/time.h:
+/usr/include/newlib/sys/timespec.h:
+/usr/include/newlib/sys/_timespec.h:
 /home/jl1n119/RIOT/sys/include/ztimer.h:
 /home/jl1n119/RIOT/core/include/sched.h:
 /usr/include/newlib/inttypes.h:
@@ -329,11 +334,8 @@
 /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h:
 /home/jl1n119/RIOT/boards/samr30-xpro/include/periph_conf.h:
 /home/jl1n119/RIOT/drivers/include/periph/rtc.h:
-/usr/include/newlib/time.h:
-/usr/include/newlib/machine/time.h:
-/usr/include/newlib/sys/timespec.h:
-/usr/include/newlib/sys/_timespec.h:
 /home/jl1n119/RIOT/sys/include/rtc_utils.h:
+/home/jl1n119/RIOT/drivers/include/rtt_rtc.h:
 /home/jl1n119/RIOT/sys/include/net/gnrc/netif.h:
 /home/jl1n119/RIOT/sys/include/event.h:
 /usr/include/newlib/string.h:

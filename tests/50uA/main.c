@@ -21,10 +21,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 /*ztimer usecond*/
 #include "ztimer.h"
 #include "timex.h"
+
 
 
 #include "periph/pm.h"
@@ -38,6 +40,9 @@
 #endif
 #include "pm_layered.h"
 #endif
+#include "rtt_rtc.h"
+#include "periph/rtc.h"
+
 
 /*Radio netif*/
 #include "net/gnrc/netif.h"
@@ -262,11 +267,12 @@ int main(void)
 
     #if defined(MODULE_PERIPH_GPIO_IRQ) //&& defined(BTN0_PIN)
         puts("using BTN0 as wake-up source");
-        gpio_init_int(GPIO_PIN(PA , 15), GPIO_IN, GPIO_FALLING, btn_cb, NULL);
+        gpio_init_int(GPIO_PIN(PA , 15), GPIO_IN, GPIO_BOTH, btn_cb, NULL);//GPIO_FALLING,
     #endif
 
     int res;
-    struct tm testtime;
+    struct tm testtime; 
+    // sturct tm alarmtime;
 
     puts("DS3231 RTC test\n");
 
@@ -298,7 +304,7 @@ int main(void)
     
     // pm_set(SAML21_PM_MODE_STANDBY);
     _show_blockers();
-
+ while(1){   
     /*test if the pin can wake up node from standby*/
     res = ds3231_set_time(&_dev, &_riot_bday);
     if (res != 0) {
@@ -334,13 +340,13 @@ int main(void)
     puts("setting up wakeup dalay for 10s");
     testtime.tm_sec += TEST_DELAY;
     mktime(&testtime);
-
     /* set alarm */
     res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
     if (res != 0) {
         puts("error: unable to program alarm");
         return 1;
     }
+    puts("1");
     pm_set(SAML21_PM_MODE_STANDBY);
     puts(" WAKED UP SUCCESSFULLY ");
     // pm_set(SAML21_PM_MODE_IDLE);
@@ -356,17 +362,30 @@ int main(void)
     res = ds3231_get_time(&_dev, &testtime);
     testtime.tm_sec += TEST_DELAY;
     mktime(&testtime);
+    // testtime_stamp = mktime(&alarmtime);
+    // rtc_localtime(testtime_stamp - 1577836800 + 5, &alarmtime);
+    ztimer_sleep(ZTIMER_USEC, TEST_DELAY * US_PER_SEC);
+    // mktime(&testtime);
 
-    /* set alarm */
-    res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_D_H_M_S);
-    if (res != 0) {
-        puts("error: unable to program alarm");
-        return 1;
-    }
+    // /* set alarm */
+    // res = ds3231_set_alarm_2(&_dev, &alarmtime, DS3231_AL2_TRIG_D_H_M_S);
+    // if (res != 0) {
+    //     puts("error: unable to program alarm");
+    //     return 1;
+    // }
+    // res = ds3231_await_alarm(&_dev);
+    //     if (res < 0){
+    //         puts("error: unable to program GPIO interrupt or to clear alarm flag");
+    //     }
+    // res = ds3231_clear_alarm_2_flag(&_dev);
+    // if (res != 0) {
+    //     puts("error: unable to clear alarm flag");
+    //     return 1;
+    // }
     // pm_set(SAML21_PM_MODE_STANDBY);
-    pm_set(SAML21_PM_MODE_IDLE);
-    puts(" WAKED UP SUCCESSFULLY ");
-
+    // pm_set(SAML21_PM_MODE_IDLE);
+    // puts(" WAKED UP SUCCESSFULLY ");
+    }
     /* run the shell and wait for the user to enter a mode */
     shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
 

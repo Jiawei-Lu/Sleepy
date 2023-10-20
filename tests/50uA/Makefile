@@ -62,7 +62,7 @@ USEMODULE += shell_cmds_default
 # avoid running Kconfig by default
 SHOULD_RUN_KCONFIG ?=
 
-USEMODULE += ds3231_int
-CFLAGS +="-DDS3231_PARAM_INT_PIN=(GPIO_PIN(PA,15))"
+# USEMODULE += ds3231_int
+# CFLAGS +="-DDS3231_PARAM_INT_PIN=(GPIO_PIN(PA,15))"
 
 include $(RIOTBASE)/Makefile.include
