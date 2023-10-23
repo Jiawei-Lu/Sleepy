@@ -1,3 +1,5 @@
+include ../Makefile.tests_common
+
 # name of your application
 APPLICATION = filesystem
 
@@ -8,8 +10,7 @@ BOARD ?= native
 # Blacklisting msp430-based boards, as file syscalls are not supported
 FEATURES_BLACKLIST += arch_msp430
 
-# This has to be the absolute path to the RIOT base directory:
-RIOTBASE ?= $(CURDIR)/../..
+
 
 # Comment this out to disable code in RIOT that does safety checking
 # which is not needed in a production environment but helps in the
@@ -119,7 +120,7 @@ ifeq (1,$(USE_ZEP))
   endif
 endif
 
-FEATURES_OPTIONAL += periph_rtc
+# FEATURES_OPTIONAL += periph_rtc
 FEATURES_REQUIRED += periph_spi
 
 
@@ -132,16 +133,22 @@ USEMODULE += netstats_l2
 USEMODULE += netstats_ipv6
 USEMODULE += netstats_rpl
 
+#DS3231
+FEATURES_REQUIRED = periph_i2c
+FEATURES_OPTIONAL = periph_i2c_reconfigure
 
-# rtc
-FEATURES_REQUIRED += periph_rtc
-FEATURES_OPTIONAL += periph_rtc_ms
-FEATURES_OPTIONAL += periph_rtc_mem
-DISABLE_MODULE += periph_init_rtc
+USEMODULE += pm_layered
+USEMODULE += ds3231
+
+# # rtc
+# FEATURES_REQUIRED += periph_rtc
+# FEATURES_OPTIONAL += periph_rtc_ms
+# FEATURES_OPTIONAL += periph_rtc_mem
+# DISABLE_MODULE += periph_init_rtc
 
 # IO1 Xplained
 USEMODULE += io1_xplained
-USEMODULE += ztimer_msec
+USEMODULE += ztimer ztimer_usec ztimer_msec ztimer_periph_rtc   
 USEMODULE += sdcard_spi
 
 # Use the default file system

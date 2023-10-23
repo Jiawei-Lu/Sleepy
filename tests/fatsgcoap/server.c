@@ -43,8 +43,14 @@
 
 /*RTC*/
 #include "periph_conf.h"
-#include "periph/rtc.h"
+// #include "periph/rtc.h"
 // #include "periph/rtc_mem.h"
+
+/*DS3231 wakeup and sleep schedule*/
+#include "periph/i2c.h"
+#include "ds3231.h"
+#include "ds3231_params.h"
+#include "timex.h"
 
 /*Networking API - netapi/netopt/netdev*/
 #include "net/gnrc/netif.h"
@@ -55,6 +61,7 @@
 #include "net/credman.h"
 #include "net/dsm.h"
 #include "tinydtls_keys.h"
+
 
 /* Example credential tag for credman. Tag together with the credential type needs to be unique. */
 #define GCOAP_DTLS_CREDENTIAL_TAG 10
@@ -125,19 +132,21 @@ static ssize_t _encode_link(const coap_resource_t *resource, char *buf,
 }
 
 /* _systime_handler time structure defination*/
-extern void print_time(const char *label, const struct tm *time);
+extern int ds3231_print_time(struct tm testtime);
 struct tm handler_time;
 
 static ssize_t _systime_handler(coap_pkt_t* pdu, uint8_t *buf, size_t len, coap_request_ctx_t *ctx)
 {
     (void)ctx;
+    static ds3231_t _dev;
 
     /* read coap method type in packet */
     unsigned method_flag = coap_method2flag(coap_get_code_detail(pdu));
 
     switch (method_flag) {
         case COAP_GET:
-            rtc_get_time(&handler_time);
+            // rtc_get_time(&handler_time);
+            ds3231_get_time(&_dev, &handler_time);
             int payload_time = mktime(&handler_time);
             gcoap_resp_init(pdu, buf, len, COAP_CODE_CONTENT);
             coap_opt_add_format(pdu, COAP_FORMAT_TEXT);
@@ -160,9 +169,12 @@ static ssize_t _systime_handler(coap_pkt_t* pdu, uint8_t *buf, size_t len, coap_
                 req_count = strtoull(payload, NULL, 10);
                 printf("%d\n", req_count);
                 puts("have the number\n");
-                rtc_localtime((int)req_count, &handler_time);
-                rtc_set_time(&handler_time);
-                print_time("This is the current system time",&handler_time);
+                // rtc_localtime((int)req_count, &handler_time);
+                // rtc_set_time(&handler_time);
+                ds3231_set_time(&_dev, &handler_time);
+                puts("This is the current system time :");
+                ds3231_print_time(handler_time);
+                // ds3231_print_time("This is the current system time",&handler_time);
                 return gcoap_response(pdu, buf, len, COAP_CODE_CHANGED);
             }
             else {

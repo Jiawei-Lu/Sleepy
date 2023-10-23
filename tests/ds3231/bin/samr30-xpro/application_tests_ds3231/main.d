@@ -136,9 +136,6 @@
  /home/jl1n119/RIOT/drivers/ds3231/include/ds3231_params.h \
  /home/jl1n119/RIOT/sys/include/timex.h \
  /home/jl1n119/RIOT/sys/include/time_units.h \
- /home/jl1n119/RIOT/drivers/include/rtt_rtc.h \
- /home/jl1n119/RIOT/drivers/include/periph/rtc.h \
- /home/jl1n119/RIOT/sys/include/rtc_utils.h \
  /home/jl1n119/RIOT/sys/include/ztimer.h \
  /home/jl1n119/RIOT/core/include/msg.h \
  /home/jl1n119/RIOT/core/include/mutex.h \
@@ -146,6 +143,8 @@
  /home/jl1n119/RIOT/core/include/thread.h \
  /home/jl1n119/RIOT/core/lib/include/rmutex.h \
  /home/jl1n119/RIOT/drivers/include/periph/gpio.h \
+ /home/jl1n119/RIOT/drivers/include/periph/rtc.h \
+ /home/jl1n119/RIOT/sys/include/rtc_utils.h \
  /home/jl1n119/RIOT/sys/include/net/gnrc/netif.h \
  /home/jl1n119/RIOT/sys/include/event.h \
  /home/jl1n119/RIOT/core/include/thread_flags.h \
@@ -336,9 +335,6 @@
 /home/jl1n119/RIOT/drivers/ds3231/include/ds3231_params.h:
 /home/jl1n119/RIOT/sys/include/timex.h:
 /home/jl1n119/RIOT/sys/include/time_units.h:
-/home/jl1n119/RIOT/drivers/include/rtt_rtc.h:
-/home/jl1n119/RIOT/drivers/include/periph/rtc.h:
-/home/jl1n119/RIOT/sys/include/rtc_utils.h:
 /home/jl1n119/RIOT/sys/include/ztimer.h:
 /home/jl1n119/RIOT/core/include/msg.h:
 /home/jl1n119/RIOT/core/include/mutex.h:
@@ -346,6 +342,8 @@
 /home/jl1n119/RIOT/core/include/thread.h:
 /home/jl1n119/RIOT/core/lib/include/rmutex.h:
 /home/jl1n119/RIOT/drivers/include/periph/gpio.h:
+/home/jl1n119/RIOT/drivers/include/periph/rtc.h:
+/home/jl1n119/RIOT/sys/include/rtc_utils.h:
 /home/jl1n119/RIOT/sys/include/net/gnrc/netif.h:
 /home/jl1n119/RIOT/sys/include/event.h:
 /home/jl1n119/RIOT/core/include/thread_flags.h:

@@ -36,8 +36,8 @@
 #include "periph_conf.h"
 // #include "periph/rtt.h"
 #include "timex.h"
-#include "rtt_rtc.h"
-#include "periph/rtc.h"
+// #include "rtt_rtc.h"
+// #include "periph/rtc.h"
 
 
 /*Timer*/
