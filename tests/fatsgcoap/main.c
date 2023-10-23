@@ -535,6 +535,7 @@ static const shell_command_t shell_commands[] = {
 
 int main(void)
 {   
+
     msg_init_queue(_main_msg_queue, MAIN_QUEUE_SIZE);
     server_init();
 
@@ -802,18 +803,20 @@ int main(void)
 
         /*radio off*/
         radio_off(netif);
-
+        gpio_clear(GPIO_PIN(PB, 23));
+        gpio_set(GPIO_PIN(PA , 14));
         /* set alarm */
         res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
         if (res != 0) {
             puts("error: unable to program alarm");
             return 1;
         }
-
-        pm_set(SAML21_PM_MODE_STANDBY);
-
-        puts(" WAKED UP SUCCESSFULLY ");
         
+        pm_set(SAML21_PM_MODE_STANDBY);
+        
+        puts(" WAKED UP SUCCESSFULLY ");
+        gpio_set(GPIO_PIN(PB , 23));
+        gpio_clear(GPIO_PIN(PA , 14));
         /*radio on*/
         radio_on(netif);
 
