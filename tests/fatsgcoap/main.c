@@ -655,7 +655,7 @@ int main(void)
 
     #if defined(MODULE_PERIPH_GPIO_IRQ)
         puts("using DS3231 Alarm Flag as wake-up source");
-        gpio_init_int(GPIO_PIN(PA , 15), GPIO_IN, GPIO_BOTH, btn_cb, NULL);
+        gpio_init_int(GPIO_PIN(PA , 15), GPIO_IN, GPIO_FALLING, btn_cb, NULL);
     #endif
 
     res = ds3231_set_time(&_dev, &_riot_bday);
