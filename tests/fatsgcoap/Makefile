@@ -140,6 +140,9 @@ FEATURES_OPTIONAL = periph_i2c_reconfigure
 USEMODULE += pm_layered
 USEMODULE += ds3231
 
+USEMODULE += ds3231_int
+CFLAGS +="-DDS3231_PARAM_INT_PIN=(GPIO_PIN(PA , 15))"
+
 # # rtc
 # FEATURES_REQUIRED += periph_rtc
 # FEATURES_OPTIONAL += periph_rtc_ms

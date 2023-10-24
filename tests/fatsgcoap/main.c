@@ -797,7 +797,7 @@ int main(void)
 
         ds3231_print_time(testtime);
         
-        puts("setting up wakeup dalay for 10s");
+        puts("setting up wakeup delay for 10s");
         testtime.tm_sec += TEST_DELAY;
         mktime(&testtime);
 
@@ -834,7 +834,21 @@ int main(void)
 
         testtime.tm_sec += TEST_DELAY;
         mktime(&testtime);
+        // ztimer_sleep(ZTIMER_USEC, TEST_DELAY * US_PER_SEC);
+        res = ds3231_set_alarm_2(&_dev, &testtime, DS3231_AL2_TRIG_D_H_M_S);
+        if (res != 0) {
+            puts("error: unable to program alarm");
+            return 1;
+        }
         ztimer_sleep(ZTIMER_USEC, TEST_DELAY * US_PER_SEC);
+
+        res = ds3231_clear_alarm_2_flag(&_dev);
+        if (res != 0) {
+            puts("error: unable to clear alarm flag");
+            return 1;
+        }
+        puts("GOING TO SLEEP NOW");
+
     }
 
 
