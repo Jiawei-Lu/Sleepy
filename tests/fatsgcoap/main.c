@@ -765,6 +765,8 @@ int main(void)
     vfs_umount(&flash_mount);
     puts("flash point umount");
 
+    ds3231_toggle_alarm_2(&_dev, 1);
+
     while (1) {
         struct tm testtime;
 
@@ -826,7 +828,7 @@ int main(void)
             puts("error: unable to clear alarm flag");
             return 1;
         }
-
+        
         /*wait for the pin gpio goes high*/
         res = ds3231_get_time(&_dev, &testtime);
 
@@ -834,21 +836,24 @@ int main(void)
 
         testtime.tm_sec += TEST_DELAY;
         mktime(&testtime);
-        // ztimer_sleep(ZTIMER_USEC, TEST_DELAY * US_PER_SEC);
-        res = ds3231_set_alarm_2(&_dev, &testtime, DS3231_AL2_TRIG_D_H_M_S);
+        // bool alarm;
+        // ds3231_toggle_alarm_2(&_dev, alarm);
+        res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_M_S);
         if (res != 0) {
             puts("error: unable to program alarm");
             return 1;
         }
-        ztimer_sleep(ZTIMER_USEC, TEST_DELAY * US_PER_SEC);
+        
+        pm_set(SAML21_PM_MODE_IDLE);
+        // ztimer_sleep(ZTIMER_USEC, TEST_DELAY * US_PER_SEC);
 
-        res = ds3231_clear_alarm_2_flag(&_dev);
+        res = ds3231_clear_alarm_1_flag(&_dev);
         if (res != 0) {
             puts("error: unable to clear alarm flag");
             return 1;
         }
         puts("GOING TO SLEEP NOW");
-
+        // gpio_clear(GPIO_PIN(PB, 23));
     }
 
 
