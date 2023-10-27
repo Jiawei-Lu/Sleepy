@@ -256,6 +256,14 @@ int main(void)
 
     while(1){   
         struct tm testtime;
+        /*Enable bakc battery of DS3231*/
+        res = ds3231_enable_bat(&_dev);
+        if (res == 0) {
+            puts("success: backup battery enabled");
+        }
+        else {
+            puts("error: unable to enable backup battery");
+        }
 
         /* read time and compare to initial value */
         res = ds3231_get_time(&_dev, &testtime);
@@ -292,14 +300,15 @@ int main(void)
 
         /*radio off*/
         radio_off(netif);
-
+        res = ds3231_disable_bat(&_dev);
         /* set alarm */
         res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
         if (res != 0) {
             puts("error: unable to program alarm");
             return 1;
         }
-
+        // gpio_clear(GPIO_PIN(PA,16));
+        // gpio_clear(GPIO_PIN(PA,17));
         pm_set(SAML21_PM_MODE_STANDBY);
 
         puts(" WAKED UP SUCCESSFULLY ");
