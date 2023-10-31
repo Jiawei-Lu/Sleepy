@@ -7,7 +7,7 @@ USEMODULE += ds3231
 # USEMODULE += xtimer
 
 # FEATURES_OPTIONAL += periph_rtc
-FEATURES_OPTIONAL += periph_gpio_irq
+# FEATURES_OPTIONAL += periph_gpio_irq
 
 USEMODULE += shell
 USEMODULE += shell_cmds_default
@@ -72,7 +72,7 @@ SHOULD_RUN_KCONFIG ?=
 # FEATURES_OPTIONAL += periph_rtt_mem
 
 
-# USEMODULE += ds3231_int
-# CFLAGS +="-DDS3231_PARAM_INT_PIN=(GPIO_PIN(PA,15))"
+USEMODULE += ds3231_int
+CFLAGS +="-DDS3231_PARAM_INT_PIN=(GPIO_PIN(PA,15))"
 
 include $(RIOTBASE)/Makefile.include

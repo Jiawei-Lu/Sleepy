@@ -24,7 +24,7 @@
 #include <time.h>
 
 #include "board.h"
-// #include "periph/gpio.h"
+#include "periph/gpio.h"
 #include "periph/i2c.h"
 
 #include "shell.h"
@@ -32,8 +32,12 @@
 #include "ds3231.h"
 #include "ds3231_params.h"
 
+#include "periph/pm.h"
+#include "pm_layered.h"
+#include "periph/gpio.h"
+
 #define ISOSTR_LEN      (20U)
-#define TEST_DELAY      (20U)
+#define TEST_DELAY      (10U)
 
 
 static ds3231_t _dev;
@@ -288,8 +292,6 @@ static int _cmd_test(int argc, char **argv)
         return 1;
     }
 
-#ifdef MODULE_DS3231_INT
-
     /* wait for an alarm with GPIO interrupt */
     res = ds3231_await_alarm(&_dev);
     if (res < 0){
@@ -312,7 +314,7 @@ static int _cmd_test(int argc, char **argv)
         puts("error: unable to program alarm");
         return 1;
     }
-    
+
 
     res = ds3231_await_alarm(&_dev);
     if (res < 0){
@@ -326,35 +328,6 @@ static int _cmd_test(int argc, char **argv)
     puts("OK1");
     return 0;
 
-#else
-
-    /* wait for the alarm to trigger */
-    xtimer_sleep(TEST_DELAY);
-
-    bool alarm;
-
-    /* check if alarm flag is on */
-    res = ds3231_get_alarm_1_flag(&_dev, &alarm);
-    if (res != 0) {
-        puts("error: unable to get alarm flag");
-        return 1;
-    }
-
-    if (alarm != true){
-        puts("error: alarm was not triggered");
-    }
-
-    /* clear alarm flag */
-    res = ds3231_clear_alarm_1_flag(&_dev);
-    if (res != 0) {
-        puts("error: unable to clear alarm flag");
-        return 1;
-    }
-
-    puts("OK");
-    return 0;
-
-#endif
 }
 
 int _test(void)
@@ -421,24 +394,40 @@ int _test(void)
         puts("error: unable to program alarm");
         return 1;
     }
+    pm_set(SAML21_PM_MODE_STANDBY);
 
-#ifdef MODULE_DS3231_INT
+    
+    // /* wait for an alarm with GPIO interrupt */
+    // res = ds3231_await_alarm(&_dev);
+    // if (res < 0){
+    //     puts("error: unable to program GPIO interrupt or to clear alarm flag");
+    // }
 
-    /* wait for an alarm with GPIO interrupt */
-    res = ds3231_await_alarm(&_dev);
-    if (res < 0){
-        puts("error: unable to program GPIO interrupt or to clear alarm flag");
-    }
-
-    if (!(res & DS3231_FLAG_ALARM_1)){
-        puts("error: alarm was not triggered");
-    }
+    // if (!(res & DS3231_FLAG_ALARM_1)){
+    //     puts("error: alarm was not triggered");
+    // }
 
     puts("OK1");
     puts("start alarm2");
 
+    /* clear all existing alarm flag */
+    res = ds3231_clear_alarm_1_flag(&_dev);
+    if (res != 0) {
+        puts("error: unable to clear alarm flag");
+        return 1;
+    }
+
+    /* get time to set up next alarm*/
+    res = ds3231_get_time(&_dev, &time);
+    if (res != 0) {
+        puts("error: unable to read time");
+        return 1;
+    }
+
     time.tm_sec += (2*TEST_DELAY);
     mktime(&time);
+
+
 
     /* set alarm */
     res = ds3231_set_alarm_1(&_dev, &time, DS3231_AL1_TRIG_H_M_S);
@@ -459,36 +448,12 @@ int _test(void)
 
     puts("OK1");
     return 0;
+}
 
-#else
-
-    /* wait for the alarm to trigger */
-    xtimer_sleep(TEST_DELAY);
-
-    bool alarm;
-
-    /* check if alarm flag is on */
-    res = ds3231_get_alarm_1_flag(&_dev, &alarm);
-    if (res != 0) {
-        puts("error: unable to get alarm flag");
-        return 1;
-    }
-
-    if (alarm != true){
-        puts("error: alarm was not triggered");
-    }
-
-    /* clear alarm flag */
-    res = ds3231_clear_alarm_1_flag(&_dev);
-    if (res != 0) {
-        puts("error: unable to clear alarm flag");
-        return 1;
-    }
-
-    puts("OK");
-    return 0;
-
-#endif
+static void btn_cb(void *ctx)
+{
+    (void) ctx;
+    puts("BTN0 pressed.");
 }
 
 static const shell_command_t shell_commands[] = {
@@ -518,6 +483,7 @@ int main(void)
         return 1;
     }
 
+    gpio_init_int(GPIO_PIN(PA , 14), BTN0_MODE, GPIO_FALLING, btn_cb, NULL);
     while(1){
         _test();
     }

@@ -1,4 +1,5 @@
 /* Generated file do not edit */
+#define DS3231_PARAM_INT_PIN (GPIO_PIN(PA,15))
 #define DEVELHELP 1
 #define CPU_SAMR30 1
 #define CPU_COMMON_SAML21 1
@@ -44,6 +45,7 @@
 #define MODULE_CPU 1
 #define MODULE_DIV 1
 #define MODULE_DS3231 1
+#define MODULE_DS3231_INT 1
 #define MODULE_EUI_PROVIDER 1
 #define MODULE_EVENT 1
 #define MODULE_EVTIMER 1
