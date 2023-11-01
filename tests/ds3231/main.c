@@ -24,7 +24,7 @@
 #include <time.h>
 
 #include "board.h"
-// #include "periph/gpio.h"
+
 #include "periph/i2c.h"
 
 /*DS3231*/
@@ -46,17 +46,20 @@
 // #include "xtimer.h"
 
 /*PM layer*/
+// #include "periph/pm.h"
+// #ifdef MODULE_PERIPH_GPIO
+// #include "board.h"
+// #include "periph/gpio.h"
+// #endif
+// #ifdef MODULE_PM_LAYERED
+// #ifdef MODULE_PERIPH_RTC
+// #include "periph/rtc.h"
+// #endif
+// #include "pm_layered.h"
+// #endif
 #include "periph/pm.h"
-#ifdef MODULE_PERIPH_GPIO
-#include "board.h"
-#include "periph/gpio.h"
-#endif
-#ifdef MODULE_PM_LAYERED
-#ifdef MODULE_PERIPH_RTC
-#include "periph/rtc.h"
-#endif
 #include "pm_layered.h"
-#endif
+#include "periph/gpio.h"
 
 /*Radio netif*/
 #include "net/gnrc/netif.h"
@@ -70,9 +73,6 @@ gnrc_netif_t* netif = NULL;
 #include "msg.h"
 #include "board.h"
 
-// #ifndef BTN0_INT_FLANK
-// #define BTN0_INT_FLANK  GPIO_RISING
-// #endif
 
 #define ISOSTR_LEN      (20U)
 #define TEST_DELAY      (10U)
@@ -221,10 +221,13 @@ int main(void)
              "needed.");
     #endif
 
-    #if defined(MODULE_PERIPH_GPIO_IRQ)
-        puts("using DS3231 Alarm Flag as wake-up source");
-        gpio_init_int(GPIO_PIN(PA , 15), GPIO_IN, GPIO_BOTH, btn_cb, NULL);
-    #endif
+
+    gpio_init_int(GPIO_PIN(PA , 14), BTN0_MODE, GPIO_FALLING, btn_cb, NULL);
+
+    // #if defined(MODULE_PERIPH_GPIO_IRQ)
+    //     puts("using DS3231 Alarm Flag as wake-up source");
+    //     gpio_init_int(GPIO_PIN(PA , 15), GPIO_IN, GPIO_BOTH, btn_cb, NULL);
+    // #endif
     // /* 1. Run a callback after 3s */
     // static ztimer_t cb_timer = {.callback = callback, .arg = "Hello World"};
     // ztimer_set(ZTIMER_USEC, &cb_timer, 3 * US_PER_SEC);
@@ -293,39 +296,20 @@ int main(void)
         // res = ds3231_disable_bat(&_dev);
         /* set alarm */
         puts("start alarm1");
-        ds3231_toggle_alarm_1(&_dev, true);	
+        // res = ds3231_enable_bat(&_dev);
         res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
         if (res != 0) {
             puts("error: unable to program alarm");
             return 1;
         }
-        bool alarm;
 
-        /* check if alarm flag is on */
-        res = ds3231_get_alarm_1_flag(&_dev, &alarm);
-        if (res != 0) {
-            puts("error: unable to get alarm flag");
-            return 1;
-        }
-
-        if (alarm != true){
-            puts("error: alarm was not triggered");
-        }
-
-        res = ds3231_await_alarm(&_dev);
-        if (res < 0){
-            puts("error: unable to program GPIO interrupt or to clear alarm flag");
-        }
-        if (!(res & DS3231_FLAG_ALARM_1)){
-            puts("error: alarm was not triggered");
-        }
 
         // gpio_clear(GPIO_PIN(PA,16));
         // gpio_clear(GPIO_PIN(PA,17));
         pm_set(SAML21_PM_MODE_STANDBY);
 
         puts(" WAKED UP SUCCESSFULLY ");
-        
+        // res = ds3231_disable_bat(&_dev);
         /*radio on*/
         radio_on(netif);
 
@@ -338,10 +322,14 @@ int main(void)
 
         /*wait for the pin gpio goes high*/
         res = ds3231_get_time(&_dev, &testtime);
+        if (res != 0) {
+            puts("error: unable to read time");
+            return 1;
+        }
 
         ds3231_print_time(testtime);
 
-        testtime.tm_sec += TEST_DELAY;
+        testtime.tm_sec += (2*TEST_DELAY);
         mktime(&testtime);
         
         puts("start alarm2");
@@ -364,11 +352,6 @@ int main(void)
 
         puts("OK1");
         /* clear all existing alarm flag */
-        res = ds3231_clear_alarm_1_flag(&_dev);
-        if (res != 0) {
-            puts("error: unable to clear alarm flag");
-            return 1;
-        }
 
     }
 

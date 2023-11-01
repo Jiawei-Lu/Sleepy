@@ -7,7 +7,7 @@ USEMODULE += ds3231
 # USEMODULE += xtimer
 
 # FEATURES_OPTIONAL += periph_rtc
-# FEATURES_OPTIONAL += periph_gpio_irq
+FEATURES_OPTIONAL += periph_gpio_irq
 
 USEMODULE += shell
 USEMODULE += shell_cmds_default

@@ -143,8 +143,6 @@
  /home/jl1n119/RIOT/core/include/thread.h \
  /home/jl1n119/RIOT/core/lib/include/rmutex.h \
  /home/jl1n119/RIOT/drivers/include/periph/gpio.h \
- /home/jl1n119/RIOT/drivers/include/periph/rtc.h \
- /home/jl1n119/RIOT/sys/include/rtc_utils.h \
  /home/jl1n119/RIOT/sys/include/net/gnrc/netif.h \
  /home/jl1n119/RIOT/sys/include/event.h \
  /home/jl1n119/RIOT/core/include/thread_flags.h \
@@ -342,8 +340,6 @@
 /home/jl1n119/RIOT/core/include/thread.h:
 /home/jl1n119/RIOT/core/lib/include/rmutex.h:
 /home/jl1n119/RIOT/drivers/include/periph/gpio.h:
-/home/jl1n119/RIOT/drivers/include/periph/rtc.h:
-/home/jl1n119/RIOT/sys/include/rtc_utils.h:
 /home/jl1n119/RIOT/sys/include/net/gnrc/netif.h:
 /home/jl1n119/RIOT/sys/include/event.h:
 /home/jl1n119/RIOT/core/include/thread_flags.h:
