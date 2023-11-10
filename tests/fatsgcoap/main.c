@@ -655,7 +655,7 @@ int main(void)
 
     #if defined(MODULE_PERIPH_GPIO_IRQ)
         puts("using DS3231 Alarm Flag as wake-up source");
-        gpio_init_int(GPIO_PIN(PA , 15), GPIO_IN, GPIO_FALLING, btn_cb, NULL);
+        gpio_init_int(GPIO_PIN(PA , 14), GPIO_IN, GPIO_FALLING, btn_cb, NULL);
     #endif
 
     res = ds3231_set_time(&_dev, &_riot_bday);
@@ -668,6 +668,12 @@ int main(void)
         puts("error: unable to read time");
         return 1;
     }
+    if ((mktime(&current_time) - mktime(&_riot_bday)) > 1) {
+        puts("error: device time has unexpected value");
+        return 1;
+    }
+    // rtc_set_time(&current_time);
+    // rtc_init(); 
     res = ds3231_clear_alarm_1_flag(&_dev);
     if (res != 0) {
         puts("error: unable to clear alarm flag");
@@ -765,11 +771,11 @@ int main(void)
     vfs_umount(&flash_mount);
     puts("flash point umount");
 
-    ds3231_toggle_alarm_2(&_dev, 1);
+ 
 
     while (1) {
         struct tm testtime;
-
+        
         /* read time and compare to initial value */
         res = ds3231_get_time(&_dev, &testtime);
         if (res != 0) {
@@ -796,29 +802,30 @@ int main(void)
             puts("error: unable to read time");
             return 1;
         }
-
-        ds3231_print_time(testtime);
-        
-        puts("setting up wakeup delay for 10s");
+        // ds3231_print_time(testtime);
+        // puts("setting up wakeup dalay for 10s");
         testtime.tm_sec += TEST_DELAY;
         mktime(&testtime);
 
         /*radio off*/
         radio_off(netif);
-        gpio_clear(GPIO_PIN(PB, 23));
-        gpio_set(GPIO_PIN(PA , 14));
+        // res = ds3231_disable_bat(&_dev);
         /* set alarm */
+        puts("start alarm1");
+        // res = ds3231_enable_bat(&_dev);
         res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
         if (res != 0) {
             puts("error: unable to program alarm");
             return 1;
         }
-        
+
+
+        // gpio_clear(GPIO_PIN(PA,16));
+        // gpio_clear(GPIO_PIN(PA,17));
         pm_set(SAML21_PM_MODE_STANDBY);
-        
+
         puts(" WAKED UP SUCCESSFULLY ");
-        gpio_set(GPIO_PIN(PB , 23));
-        gpio_clear(GPIO_PIN(PA , 14));
+        // res = ds3231_disable_bat(&_dev);
         /*radio on*/
         radio_on(netif);
 
@@ -828,32 +835,125 @@ int main(void)
             puts("error: unable to clear alarm flag");
             return 1;
         }
-        
+
         /*wait for the pin gpio goes high*/
         res = ds3231_get_time(&_dev, &testtime);
+        if (res != 0) {
+            puts("error: unable to read time");
+            return 1;
+        }
 
         ds3231_print_time(testtime);
 
-        testtime.tm_sec += TEST_DELAY;
+        testtime.tm_sec += (2*TEST_DELAY);
         mktime(&testtime);
-        // bool alarm;
-        // ds3231_toggle_alarm_2(&_dev, alarm);
-        res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_M_S);
-        if (res != 0) {
-            puts("error: unable to program alarm");
-            return 1;
-        }
         
-        pm_set(SAML21_PM_MODE_IDLE);
+        puts("start alarm2");
         // ztimer_sleep(ZTIMER_USEC, TEST_DELAY * US_PER_SEC);
-
-        res = ds3231_clear_alarm_1_flag(&_dev);
+        res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
         if (res != 0) {
-            puts("error: unable to clear alarm flag");
-            return 1;
+        puts("error: unable to program alarm");
+        return 1;
         }
-        puts("GOING TO SLEEP NOW");
+
+
+        res = ds3231_await_alarm(&_dev);
+        if (res < 0){
+        puts("error: unable to program GPIO interrupt or to clear alarm flag");
+        }
+
+        if (!(res & DS3231_FLAG_ALARM_1)){
+        puts("error: alarm was not triggered");
+        }
+
+        puts("OK1");
+        /* clear all existing alarm flag */
+        // struct tm testtime;
+
+        // /* read time and compare to initial value */
+        // res = ds3231_get_time(&_dev, &testtime);
+        // if (res != 0) {
+        //     puts("error: unable to read time");
+        //     return 1;
+        // }
+        // // print_time("current time is:", &current_time);
+
+        // // size_t pos = strftime(dstr, ISOSTR_LEN, "%Y-%m-%dT%H:%M:%S", &testtime);
+        // // dstr[pos] = '\0';
+        // // printf("The current time is: %s\n", dstr);    
+        // ds3231_print_time(testtime);
+
+        // /* clear all existing alarm flag */
+        // res = ds3231_clear_alarm_1_flag(&_dev);
+        // if (res != 0) {
+        //     puts("error: unable to clear alarm flag");
+        //     return 1;
+        // }
+
+        // /* get time to set up next alarm*/
+        // res = ds3231_get_time(&_dev, &testtime);
+        // if (res != 0) {
+        //     puts("error: unable to read time");
+        //     return 1;
+        // }
+
+        // ds3231_print_time(testtime);
+        
+        // puts("setting up wakeup delay for 10s");
+        // testtime.tm_sec += TEST_DELAY;
+        // mktime(&testtime);
+
+        // /*radio off*/
+        // radio_off(netif);
         // gpio_clear(GPIO_PIN(PB, 23));
+        // gpio_set(GPIO_PIN(PA , 14));
+        // /* set alarm */
+        // res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
+        // if (res != 0) {
+        //     puts("error: unable to program alarm");
+        //     return 1;
+        // }
+        
+        // pm_set(SAML21_PM_MODE_STANDBY);
+        
+        // puts(" WAKED UP SUCCESSFULLY ");
+        // gpio_set(GPIO_PIN(PB , 23));
+        // gpio_clear(GPIO_PIN(PA , 14));
+        // /*radio on*/
+        // radio_on(netif);
+
+        // /*CLEAR ALARM FLAG*/
+        // res = ds3231_clear_alarm_1_flag(&_dev);
+        // if (res != 0) {
+        //     puts("error: unable to clear alarm flag");
+        //     return 1;
+        // }
+        
+        // /*wait for the pin gpio goes high*/
+        // res = ds3231_get_time(&_dev, &testtime);
+
+        // ds3231_print_time(testtime);
+
+        // testtime.tm_sec += TEST_DELAY;
+        // mktime(&testtime);
+        // // bool alarm;
+        // // ds3231_toggle_alarm_2(&_dev, alarm);
+        // res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_M_S);
+        // if (res != 0) {
+        //     puts("error: unable to program alarm");
+        //     return 1;
+        // }
+        
+        // pm_set(SAML21_PM_MODE_IDLE);
+        // // ztimer_sleep(ZTIMER_USEC, TEST_DELAY * US_PER_SEC);
+
+        // res = ds3231_clear_alarm_1_flag(&_dev);
+        // if (res != 0) {
+        //     puts("error: unable to clear alarm flag");
+        //     return 1;
+        // }
+        // puts("GOING TO SLEEP NOW");
+        // // gpio_clear(GPIO_PIN(PB, 23));
     }
 
 

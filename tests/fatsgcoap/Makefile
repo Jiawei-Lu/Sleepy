@@ -136,6 +136,7 @@ USEMODULE += netstats_rpl
 #DS3231
 FEATURES_REQUIRED = periph_i2c
 FEATURES_OPTIONAL = periph_i2c_reconfigure
+FEATURES_OPTIONAL += periph_gpio_irq
 
 USEMODULE += pm_layered
 USEMODULE += ds3231
