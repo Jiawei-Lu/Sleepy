@@ -339,7 +339,8 @@ static ssize_t _stats_handler(coap_pkt_t* pdu, uint8_t *buf, size_t len, coap_re
 }
 
 static ssize_t _riot_board_handler(coap_pkt_t *pdu, uint8_t *buf, size_t len, coap_request_ctx_t *ctx)
-{
+{   
+    gpio_set(GPIO_PIN(PA , 8));
     (void)ctx;
     gcoap_resp_init(pdu, buf, len, COAP_CODE_CONTENT);
     coap_opt_add_format(pdu, COAP_FORMAT_TEXT);
@@ -349,11 +350,13 @@ static ssize_t _riot_board_handler(coap_pkt_t *pdu, uint8_t *buf, size_t len, co
     if (pdu->payload_len >= strlen(RIOT_BOARD)) {
         memcpy(pdu->payload, RIOT_BOARD, strlen(RIOT_BOARD));
         return resp_len + strlen(RIOT_BOARD);
+        
     }
     else {
         puts("gcoap_cli: msg buffer too small");
         return gcoap_response(pdu, buf, len, COAP_CODE_INTERNAL_SERVER_ERROR);
     }
+    
 }
 
 void notify_observers(void)

@@ -645,7 +645,10 @@ int main(void)
     /*DS18 Param_Pin init*/
     ds18_t dev18;
     int result;
-    gpio_init(DS18_PARAM_PIN, GPIO_OUT); 
+    gpio_init(DS18_PARAM_PIN, GPIO_OUT);
+    gpio_init(GPIO_PIN(PA , 8), GPIO_OUT); 
+    gpio_init(GPIO_PIN(PA , 13), GPIO_OUT); 
+    
     // gpio_set(DS18_PARAM_PIN);
 
     /* print test application information */
@@ -929,7 +932,7 @@ int main(void)
         /*11111111111111111*/
         vfs_umount(&flash_mount);
         // gpio_set(DS18_PARAM_PIN);
-        gpio_set(GPIO_PIN(PA, 13));
+        // gpio_set(GPIO_PIN(PA, 13));
         puts("flash point umount");
         // gpio_clear(GPIO_PIN(PA, 13));
         
