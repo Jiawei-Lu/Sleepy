@@ -864,30 +864,15 @@ int main(void)
         }
         
         /*DS18 sensing*/
-        gpio_set(DS18_PARAM_PIN);
+        
         
         int16_t temperature;
         float ds18_data = 0.00;
         
+        
+        
+        gpio_set(DS18_PARAM_PIN);
         // gpio_set(GPIO_PIN(PA, 13));
-        /* Get temperature in centidegrees celsius */
-        if (ds18_get_temperature(&dev18, &temperature) == DS18_OK) {
-            bool negative = (temperature < 0);
-            ds18_data = (float) temperature/100;
-            if (negative) {
-                ds18_data = -ds18_data;
-            }
-            
-            printf("Temperature [ºC]: %c%.2f"
-                   "\n+-------------------------------------+\n",
-                   negative ? '-': '+',
-                   ds18_data);
-        }
-        else{
-            puts("error");
-        }
-
-        gpio_set(GPIO_PIN(PA, 13));
         vfs_mount(&flash_mount);
 
         char data_file_path[] = "/sd0/DATA.TXT";
@@ -899,10 +884,28 @@ int main(void)
         else{
             puts("creating file success");
         }
-        char test_data[] = "testtesttesttesttest";
+        // gpio_set(GPIO_PIN(PA, 13));
+        /* Get temperature in centidegrees celsius */
+        ds18_get_temperature(&dev18, &temperature);
+        bool negative = (temperature < 0);
+        ds18_data = (float) temperature/100;
+        if (negative) {
+            ds18_data = -ds18_data;
+        }
+        
+        
+        printf("Temperature [ºC]: %c%.2f"
+                "\n+-------------------------------------+\n",
+                negative ? '-': '+',
+                ds18_data);
+        char test[100];
+        fmt_float(test,ds18_data,2);
+        printf("%s",test);
+        // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
+        
 
 
-        if (write(fo, test_data, strlen(test_data)) != (ssize_t)strlen(test_data)) {
+        if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
             puts("Error while writing");
         }
         close(fo);
@@ -926,6 +929,7 @@ int main(void)
         /*11111111111111111*/
         vfs_umount(&flash_mount);
         // gpio_set(DS18_PARAM_PIN);
+        gpio_set(GPIO_PIN(PA, 13));
         puts("flash point umount");
         // gpio_clear(GPIO_PIN(PA, 13));
         
