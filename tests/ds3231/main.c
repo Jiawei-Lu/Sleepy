@@ -79,6 +79,11 @@ gnrc_netif_t* netif = NULL;
 
 #define TM_YEAR_OFFSET      (1900)
 
+/*DS18*/
+#include "ds18.h"
+#include "ds18_params.h"
+// #define SAMPLING_PERIOD     2
+
 // struct tm alarm_time;
 // struct tm current_time;
 
@@ -88,6 +93,7 @@ int wakeup_gap = 5;
 int sleep_gap = 5;
 
 static ds3231_t _dev;
+extern ds18_t dev;
 
 struct tm alarm_time1;
 struct tm current_time;
@@ -180,6 +186,11 @@ int main(void)
 
     int res;
 
+    ds18_t dev;
+    int result;
+    gpio_init(DS18_PARAM_PIN, GPIO_OUT); 
+    gpio_set(DS18_PARAM_PIN);
+
     char line_buf[SHELL_DEFAULT_BUFSIZE];
 
     ds3231_params_t params= ds3231_params[0];
@@ -259,7 +270,10 @@ int main(void)
 
     while(1){   
         struct tm testtime;
-        
+        gpio_init(GPIO_PIN(PA, 13), GPIO_OUT);
+        gpio_init(GPIO_PIN(PA, 23), GPIO_IN);
+        // gpio_set(GPIO_PIN(PA, 13));
+        gpio_set(GPIO_PIN(PA, 23));
         /* read time and compare to initial value */
         res = ds3231_get_time(&_dev, &testtime);
         if (res != 0) {
@@ -309,9 +323,43 @@ int main(void)
         pm_set(SAML21_PM_MODE_STANDBY);
 
         puts(" WAKED UP SUCCESSFULLY ");
+        // gpio_clear(GPIO_PIN(PA, 18));
         // res = ds3231_disable_bat(&_dev);
         /*radio on*/
+        gpio_set(GPIO_PIN(PA, 13));
         radio_on(netif);
+        gpio_clear(GPIO_PIN(PA, 13));
+
+        /*DS18 INIT*/
+        // gpio_set(GPIO_PIN(PA, 13));
+        result = ds18_init(&dev, &ds18_params[0]);
+        if (result == DS18_ERROR) {
+            puts("[Error] The sensor pin could not be initialized");
+            return 1;
+        }
+        
+        /*DS18 sensing*/
+        int16_t temperature;
+        // gpio_set(GPIO_PIN(PA, 13));
+        /* Get temperature in centidegrees celsius */
+        if (ds18_get_temperature(&dev, &temperature) == DS18_OK) {
+            bool negative = (temperature < 0);
+            if (negative) {
+                temperature = -temperature;
+            }
+            printf("Temperature [ºC]: %c%d.%02d"
+                   "\n+-------------------------------------+\n",
+                   negative ? '-': ' ',
+                   temperature / 100,
+                   temperature % 100);
+        }
+        else{
+            puts("error");
+        }
+        // gpio_clear(GPIO_PIN(PA, 13));
+        /*DS18 sampling rate*/
+        // ztimer_sleep(ZTIMER_USEC, SAMPLING_PERIOD * US_PER_SEC);
+
 
         /*CLEAR ALARM FLAG*/
         res = ds3231_clear_alarm_1_flag(&_dev);

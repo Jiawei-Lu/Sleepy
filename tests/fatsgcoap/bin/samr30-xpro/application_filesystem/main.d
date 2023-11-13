@@ -238,10 +238,15 @@
  /home/jl1n119/RIOT/drivers/include/periph/gpio.h \
  /home/jl1n119/RIOT/drivers/include/periph/i2c.h \
  /home/jl1n119/RIOT/drivers/ds3231/include/ds3231_params.h \
+ /home/jl1n119/RIOT/drivers/include/ds18.h \
+ /home/jl1n119/RIOT/drivers/ds18/include/ds18_params.h \
+ /home/jl1n119/RIOT/sys/include/saul_reg.h \
+ /home/jl1n119/RIOT/drivers/include/saul.h \
+ /home/jl1n119/RIOT/sys/include/phydat.h \
+ /home/jl1n119/RIOT/sys/include/phydat.h \
  /home/jl1n119/RIOT/drivers/include/at30tse75x.h \
  /home/jl1n119/RIOT/drivers/include/io1_xplained.h \
  /home/jl1n119/RIOT/drivers/include/saul.h \
- /home/jl1n119/RIOT/sys/include/phydat.h \
  /home/jl1n119/RIOT/drivers/include/at30tse75x.h \
  /home/jl1n119/RIOT/drivers/include/sdcard_spi.h \
  /home/jl1n119/RIOT/drivers/include/periph/spi.h \
@@ -249,9 +254,6 @@
  /home/jl1n119/RIOT/drivers/io1_xplained/include/io1_xplained_internals.h \
  /home/jl1n119/RIOT/drivers/include/periph/adc.h \
  /home/jl1n119/RIOT/drivers/include/periph/spi.h \
- /home/jl1n119/RIOT/sys/include/saul_reg.h \
- /home/jl1n119/RIOT/drivers/include/saul.h \
- /home/jl1n119/RIOT/sys/include/phydat.h \
  /home/jl1n119/RIOT/drivers/include/saul/periph.h \
  /home/jl1n119/RIOT/sys/include/xtimer.h \
  /home/jl1n119/RIOT/sys/include/ztimer/xtimer_compat.h \
@@ -523,10 +525,15 @@
 /home/jl1n119/RIOT/drivers/include/periph/gpio.h:
 /home/jl1n119/RIOT/drivers/include/periph/i2c.h:
 /home/jl1n119/RIOT/drivers/ds3231/include/ds3231_params.h:
+/home/jl1n119/RIOT/drivers/include/ds18.h:
+/home/jl1n119/RIOT/drivers/ds18/include/ds18_params.h:
+/home/jl1n119/RIOT/sys/include/saul_reg.h:
+/home/jl1n119/RIOT/drivers/include/saul.h:
+/home/jl1n119/RIOT/sys/include/phydat.h:
+/home/jl1n119/RIOT/sys/include/phydat.h:
 /home/jl1n119/RIOT/drivers/include/at30tse75x.h:
 /home/jl1n119/RIOT/drivers/include/io1_xplained.h:
 /home/jl1n119/RIOT/drivers/include/saul.h:
-/home/jl1n119/RIOT/sys/include/phydat.h:
 /home/jl1n119/RIOT/drivers/include/at30tse75x.h:
 /home/jl1n119/RIOT/drivers/include/sdcard_spi.h:
 /home/jl1n119/RIOT/drivers/include/periph/spi.h:
@@ -534,9 +541,6 @@
 /home/jl1n119/RIOT/drivers/io1_xplained/include/io1_xplained_internals.h:
 /home/jl1n119/RIOT/drivers/include/periph/adc.h:
 /home/jl1n119/RIOT/drivers/include/periph/spi.h:
-/home/jl1n119/RIOT/sys/include/saul_reg.h:
-/home/jl1n119/RIOT/drivers/include/saul.h:
-/home/jl1n119/RIOT/sys/include/phydat.h:
 /home/jl1n119/RIOT/drivers/include/saul/periph.h:
 /home/jl1n119/RIOT/sys/include/xtimer.h:
 /home/jl1n119/RIOT/sys/include/ztimer/xtimer_compat.h:

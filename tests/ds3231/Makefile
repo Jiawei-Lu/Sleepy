@@ -59,6 +59,9 @@ USEMODULE += pm_layered
 USEMODULE += shell
 USEMODULE += shell_cmds_default
 
+
+USEMODULE += ds18
+USEMODULE += printf_float
 # avoid running Kconfig by default
 SHOULD_RUN_KCONFIG ?=
 
@@ -74,5 +77,6 @@ SHOULD_RUN_KCONFIG ?=
 
 USEMODULE += ds3231_int
 CFLAGS +="-DDS3231_PARAM_INT_PIN=(GPIO_PIN(PA,15))"
+CFLAGS +="-DDS18_PARAM_PIN=(GPIO_PIN(PA,28))"
 
 include $(RIOTBASE)/Makefile.include

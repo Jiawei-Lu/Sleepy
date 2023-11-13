@@ -182,7 +182,13 @@
  /home/jl1n119/RIOT/sys/include/net/ipv6/ext/frag.h \
  /home/jl1n119/RIOT/sys/include/net/ipv6/ext/rh.h \
  /home/jl1n119/RIOT/sys/include/net/ipv6/hdr.h \
- /home/jl1n119/RIOT/sys/include/net/inet_csum.h
+ /home/jl1n119/RIOT/sys/include/net/inet_csum.h \
+ /home/jl1n119/RIOT/drivers/include/ds18.h \
+ /home/jl1n119/RIOT/drivers/ds18/include/ds18_params.h \
+ /home/jl1n119/RIOT/sys/include/saul_reg.h \
+ /home/jl1n119/RIOT/drivers/include/saul.h \
+ /home/jl1n119/RIOT/sys/include/phydat.h \
+ /home/jl1n119/RIOT/sys/include/phydat.h
 /home/jl1n119/Sleepy/tests/ds3231/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:
@@ -381,3 +387,9 @@
 /home/jl1n119/RIOT/sys/include/net/ipv6/ext/rh.h:
 /home/jl1n119/RIOT/sys/include/net/ipv6/hdr.h:
 /home/jl1n119/RIOT/sys/include/net/inet_csum.h:
+/home/jl1n119/RIOT/drivers/include/ds18.h:
+/home/jl1n119/RIOT/drivers/ds18/include/ds18_params.h:
+/home/jl1n119/RIOT/sys/include/saul_reg.h:
+/home/jl1n119/RIOT/drivers/include/saul.h:
+/home/jl1n119/RIOT/sys/include/phydat.h:
+/home/jl1n119/RIOT/sys/include/phydat.h:

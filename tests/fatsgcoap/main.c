@@ -73,6 +73,10 @@
 #include "ds3231_params.h"
 #include "timex.h"
 
+/*DS18*/
+#include "ds18.h"
+#include "ds18_params.h"
+
 /*IO1 Xplianed Extension Board*/
 #include "at30tse75x.h"
 #include "io1_xplained.h"
@@ -119,6 +123,9 @@ static msg_t _main_msg_queue[MAIN_QUEUE_SIZE];
 
 /*DS3231 Device*/
 static ds3231_t _dev;
+
+/*DS18 Device*/
+extern ds18_t dev18;
 
 /*Radio netif*/
 gnrc_netif_t* netif = NULL;
@@ -634,6 +641,12 @@ int main(void)
         puts("error: unable to enable backup battery");
     }
 
+    /*DS18 Param_Pin init*/
+    ds18_t dev18;
+    int result;
+    gpio_init(DS18_PARAM_PIN, GPIO_OUT); 
+    gpio_set(DS18_PARAM_PIN);
+
     /* print test application information */
     #ifdef MODULE_PM_LAYERED
         printf("This application allows you to test the CPU power management.\n"
@@ -826,8 +839,39 @@ int main(void)
 
         puts(" WAKED UP SUCCESSFULLY ");
         // res = ds3231_disable_bat(&_dev);
+    
         /*radio on*/
         radio_on(netif);
+
+        /*DS18 INIT*/
+        // gpio_set(GPIO_PIN(PA, 13));
+        result = ds18_init(&dev18, &ds18_params[0]);
+        if (result == DS18_ERROR) {
+            puts("[Error] The sensor pin could not be initialized");
+            return 1;
+        }
+        
+        /*DS18 sensing*/
+        int16_t temperature;
+        // gpio_set(GPIO_PIN(PA, 13));
+        /* Get temperature in centidegrees celsius */
+        if (ds18_get_temperature(&dev18, &temperature) == DS18_OK) {
+            bool negative = (temperature < 0);
+            if (negative) {
+                temperature = -temperature;
+            }
+            printf("Temperature [ºC]: %c%d.%02d"
+                   "\n+-------------------------------------+\n",
+                   negative ? '-': ' ',
+                   temperature / 100,
+                   temperature % 100);
+        }
+        else{
+            puts("error");
+        }
+        // gpio_clear(GPIO_PIN(PA, 13));
+        /*DS18 sampling rate*/
+        // ztimer_sleep(ZTIMER_USEC, SAMPLING_PERIOD * US_PER_SEC);
 
         /*CLEAR ALARM FLAG*/
         res = ds3231_clear_alarm_1_flag(&_dev);
