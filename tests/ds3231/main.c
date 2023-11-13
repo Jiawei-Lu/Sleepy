@@ -93,10 +93,12 @@ int wakeup_gap = 5;
 int sleep_gap = 5;
 
 static ds3231_t _dev;
-extern ds18_t dev;
+extern ds18_t dev18;
 
 struct tm alarm_time1;
 struct tm current_time;
+
+// float ds18_data;
 
 
 
@@ -186,7 +188,7 @@ int main(void)
 
     int res;
 
-    ds18_t dev;
+    ds18_t dev18;
     int result;
     gpio_init(DS18_PARAM_PIN, GPIO_OUT); 
     gpio_set(DS18_PARAM_PIN);
@@ -332,30 +334,51 @@ int main(void)
 
         /*DS18 INIT*/
         // gpio_set(GPIO_PIN(PA, 13));
-        result = ds18_init(&dev, &ds18_params[0]);
+        result = ds18_init(&dev18, &ds18_params[0]);
         if (result == DS18_ERROR) {
             puts("[Error] The sensor pin could not be initialized");
             return 1;
         }
         
-        /*DS18 sensing*/
+        // /*DS18 sensing*/
+        // int16_t temperature;
+        // // gpio_set(GPIO_PIN(PA, 13));
+        // /* Get temperature in centidegrees celsius */
+        // if (ds18_get_temperature(&dev, &temperature) == DS18_OK) {
+        //     bool negative = (temperature < 0);
+        //     if (negative) {
+        //         temperature = -temperature;
+        //     }
+        //     printf("Temperature [ºC]: %c%d.%02d"
+        //            "\n+-------------------------------------+\n",
+        //            negative ? '-': ' ',
+        //            temperature / 100,
+        //            temperature % 100);
+        // }
+        // else{
+        //     puts("error");
+        // }
+
         int16_t temperature;
+        
+        
         // gpio_set(GPIO_PIN(PA, 13));
         /* Get temperature in centidegrees celsius */
-        if (ds18_get_temperature(&dev, &temperature) == DS18_OK) {
+        if (ds18_get_temperature(&dev18, &temperature) == DS18_OK) {
             bool negative = (temperature < 0);
             if (negative) {
                 temperature = -temperature;
             }
-            printf("Temperature [ºC]: %c%d.%02d"
+            printf("Temperature [ºC]: %c%d"
                    "\n+-------------------------------------+\n",
                    negative ? '-': ' ',
-                   temperature / 100,
-                   temperature % 100);
+                   temperature);
         }
         else{
             puts("error");
         }
+        char test_data[100000];
+        sprintf(test_data, "%d", temperature);
         // gpio_clear(GPIO_PIN(PA, 13));
         /*DS18 sampling rate*/
         // ztimer_sleep(ZTIMER_USEC, SAMPLING_PERIOD * US_PER_SEC);

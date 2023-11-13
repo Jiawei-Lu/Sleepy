@@ -127,6 +127,7 @@ static ds3231_t _dev;
 /*DS18 Device*/
 extern ds18_t dev18;
 
+
 /*Radio netif*/
 gnrc_netif_t* netif = NULL;
 
@@ -645,7 +646,7 @@ int main(void)
     ds18_t dev18;
     int result;
     gpio_init(DS18_PARAM_PIN, GPIO_OUT); 
-    gpio_set(DS18_PARAM_PIN);
+    // gpio_set(DS18_PARAM_PIN);
 
     /* print test application information */
     #ifdef MODULE_PM_LAYERED
@@ -699,7 +700,15 @@ int main(void)
 
     /*RPL config and print*/
     puts("Configured rpl:");
+    // gpio_set(GPIO_PIN(PA, 13));
+    // // //gpio_set(DS18_PARAM_PIN);
+
     gnrc_rpl_init(7);
+    
+    // gpio_set(GPIO_PIN(PA, 13));
+    // ztimer_sleep(ZTIMER_MSEC, 3 * MS_PER_SEC);
+    // gpio_clear(GPIO_PIN(PA, 13));
+    // gpio_set(DS18_PARAM_PIN);
     puts("printing route:");
     while (gnrc_ipv6_nib_ft_iter(NULL, iface, &state, &entry)) {
         char addr_str[IPV6_ADDR_MAX_STR_LEN];
@@ -723,7 +732,8 @@ int main(void)
 
     // _gnrc_netif_config(0, NULL);
 
-    
+    // gpio_set(GPIO_PIN(PA, 13));
+    // //gpio_set(DS18_PARAM_PIN);
 
     /*FS part*/
     _MTD_define();
@@ -743,7 +753,8 @@ int main(void)
     //printf("\ndata dir: %s\n", VFS_DEFAULT_DATA);
     
     /*------------Typical file create and write test start--------------*/
-
+    // gpio_set(GPIO_PIN(PA, 13));
+    // gpio_set(DS18_PARAM_PIN);
     /*11111111111111111*/
     vfs_mount(&flash_mount);
 
@@ -782,9 +793,10 @@ int main(void)
 
     /*11111111111111111*/
     vfs_umount(&flash_mount);
+    // gpio_set(DS18_PARAM_PIN);
     puts("flash point umount");
-
- 
+    // gpio_clear(GPIO_PIN(PA, 13));
+    
 
     while (1) {
         struct tm testtime;
@@ -852,23 +864,71 @@ int main(void)
         }
         
         /*DS18 sensing*/
+        gpio_set(DS18_PARAM_PIN);
+        
         int16_t temperature;
+        float ds18_data = 0.00;
+        
         // gpio_set(GPIO_PIN(PA, 13));
         /* Get temperature in centidegrees celsius */
         if (ds18_get_temperature(&dev18, &temperature) == DS18_OK) {
             bool negative = (temperature < 0);
+            ds18_data = (float) temperature/100;
             if (negative) {
-                temperature = -temperature;
+                ds18_data = -ds18_data;
             }
-            printf("Temperature [ºC]: %c%d.%02d"
+            
+            printf("Temperature [ºC]: %c%.2f"
                    "\n+-------------------------------------+\n",
-                   negative ? '-': ' ',
-                   temperature / 100,
-                   temperature % 100);
+                   negative ? '-': '+',
+                   ds18_data);
         }
         else{
             puts("error");
         }
+
+        gpio_set(GPIO_PIN(PA, 13));
+        vfs_mount(&flash_mount);
+
+        char data_file_path[] = "/sd0/DATA.TXT";
+        int fo = open(data_file_path, O_RDWR | O_CREAT, 00777);
+        if (fo < 0) {
+            printf("error while trying to create %s\n", data_file_path);
+            return 1;
+        }
+        else{
+            puts("creating file success");
+        }
+        char test_data[] = "testtesttesttesttest";
+
+
+        if (write(fo, test_data, strlen(test_data)) != (ssize_t)strlen(test_data)) {
+            puts("Error while writing");
+        }
+        close(fo);
+        int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
+                                                                //will conflict with open(file)
+                                                                //open(file)will equal 0, have to beb a O_RDPNLY for read
+        // char data_buf[sizeof(test_data)];
+        // printf("data:[],length=");
+        // vfs_read(fo,data_buf,sizeof(test_data));    
+        // printf("data:[],length=");
+        char c;
+
+        while (read(fr, &c, 1) != 0){
+        putchar(c);  //printf won't work here
+        }
+        puts("\n");
+        
+        close(fo);
+        puts("closing file");
+
+        /*11111111111111111*/
+        vfs_umount(&flash_mount);
+        // gpio_set(DS18_PARAM_PIN);
+        puts("flash point umount");
+        // gpio_clear(GPIO_PIN(PA, 13));
+        
         // gpio_clear(GPIO_PIN(PA, 13));
         /*DS18 sampling rate*/
         // ztimer_sleep(ZTIMER_USEC, SAMPLING_PERIOD * US_PER_SEC);
