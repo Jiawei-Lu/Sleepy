@@ -854,7 +854,23 @@ int main(void)
 
         puts(" WAKED UP SUCCESSFULLY ");
         // res = ds3231_disable_bat(&_dev);
-    
+        res = ds3231_clear_alarm_1_flag(&_dev);
+        if (res != 0) {
+            puts("error: unable to clear alarm flag");
+            return 1;
+        }
+
+        /*wait for the pin gpio goes high*/
+        res = ds3231_get_time(&_dev, &testtime);
+        if (res != 0) {
+            puts("error: unable to read time");
+            return 1;
+        }
+
+        ds3231_print_time(testtime);
+
+        testtime.tm_sec += (2*TEST_DELAY);
+        mktime(&testtime);
         /*radio on*/
         radio_on(netif);
 
@@ -867,7 +883,7 @@ int main(void)
         }
         
         /*DS18 sensing*/
-        
+    
         
         int16_t temperature;
         float ds18_data = 0.00;
@@ -941,23 +957,7 @@ int main(void)
         // ztimer_sleep(ZTIMER_USEC, SAMPLING_PERIOD * US_PER_SEC);
 
         /*CLEAR ALARM FLAG*/
-        res = ds3231_clear_alarm_1_flag(&_dev);
-        if (res != 0) {
-            puts("error: unable to clear alarm flag");
-            return 1;
-        }
 
-        /*wait for the pin gpio goes high*/
-        res = ds3231_get_time(&_dev, &testtime);
-        if (res != 0) {
-            puts("error: unable to read time");
-            return 1;
-        }
-
-        ds3231_print_time(testtime);
-
-        testtime.tm_sec += (2*TEST_DELAY);
-        mktime(&testtime);
         
         puts("start alarm2");
         // ztimer_sleep(ZTIMER_USEC, TEST_DELAY * US_PER_SEC);
