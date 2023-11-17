@@ -770,7 +770,7 @@ int main(void)
     else{
         puts("creating file success");
     }
-    char test_data[] = "testtesttesttesttest";
+    char test_data[] = "1";
 
 
     if (write(fo, test_data, strlen(test_data)) != (ssize_t)strlen(test_data)) {
@@ -919,7 +919,7 @@ int main(void)
                 ds18_data);
         char test[100];
         fmt_float(test,ds18_data,2);
-        printf("%s",test);
+        printf("%s\n",test);
         // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
         
 
