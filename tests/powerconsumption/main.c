@@ -128,8 +128,11 @@ static ds3231_t _dev;
 extern ds18_t dev18;
 
 
+
 /*Radio netif*/
 gnrc_netif_t* netif = NULL;
+
+
 
 static io1_xplained_t dev;
 
@@ -330,13 +333,17 @@ static struct tm _riot_bday = {
 };
 
 
-void radio_off(gnrc_netif_t *netif){
-    netopt_state_t state = NETOPT_STATE_SLEEP;
+void radio_off(gnrc_netif_t *netif,netif_t *_netif){
+    
+    netopt_state_t state = NETOPT_STATE_SLEEP;//NETOPT_STATE_SLEEP;
     while ((netif = gnrc_netif_iter(netif))) {
             /* retry if busy */
             while (gnrc_netapi_set(netif->pid, NETOPT_STATE, 0,
                 &state, sizeof(state)) == -EBUSY) {}
+            netif_set_opt(_netif, NETOPT_STATE, 0,
+                      &state, sizeof(netopt_state_t));
     }
+
 }
 void radio_on(gnrc_netif_t *netif){
     netopt_state_t state = NETOPT_STATE_IDLE;
@@ -686,7 +693,26 @@ int main(void)
         puts("error: unable to clear alarm flag");
         return 1;
     }
-    radio_off(netif);
+    
+
+    // netif_t *_netif= netif_iter(NULL);
+    netif_t *last = NULL;
+
+        /* Get interfaces in reverse order since the list is used like a stack.
+         * Stop when first netif in list already has been listed. */
+    while (last != netif_iter(NULL)) {
+        netif_t *_netif = NULL;
+        netif_t *next = netif_iter(_netif);
+        /* Step until next is end of list or was previously listed. */
+        do {
+            _netif = next;
+            next = netif_iter(_netif);
+        } while (next && next != last);
+        // _netif_list(netif);
+        last = _netif;
+        radio_off(netif,_netif);
+    }
+    
     while (1) {
         res = ds3231_get_time(&_dev, &testtime);
         if (res != 0) {
@@ -733,7 +759,7 @@ int main(void)
         // ztimer_sleep(ZTIMER_USEC, 4 * US_PER_SEC);
         /*radio on*/
         // puts("radio ononononononon");
-        something
+        ///////////////////////
         // radio_on(netif);
         res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
         if (res != 0) {

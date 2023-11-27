@@ -300,6 +300,9 @@ int main(void)
             /* retry if busy */
             while (gnrc_netapi_set(netif->pid, NETOPT_STATE, 0,
                 &state, sizeof(state)) == -EBUSY) {}
+            netif_set_opt(iface, NETOPT_STATE, 0,
+                      &state, sizeof(netopt_state_t));
+
     }
     
     // pm_set(SAML21_PM_MODE_STANDBY);

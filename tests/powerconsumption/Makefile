@@ -5,7 +5,7 @@ APPLICATION = filesystem
 
 # If no BOARD is found in the environment, use this default:
 BOARD ?= native
-
+CFLAGS += -DCONFIG_IEEE802154_DEFAULT_SUBGHZ_CHANNEL=0 
 
 # Blacklisting msp430-based boards, as file syscalls are not supported
 FEATURES_BLACKLIST += arch_msp430

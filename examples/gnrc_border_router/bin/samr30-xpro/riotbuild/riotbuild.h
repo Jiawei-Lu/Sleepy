@@ -1,4 +1,5 @@
 /* Generated file do not edit */
+#define CONFIG_IEEE802154_DEFAULT_SUBGHZ_PAGE 2
 #define ETHOS_BAUDRATE 115200
 #define DEVELHELP 1
 #define CPU_SAMR30 1

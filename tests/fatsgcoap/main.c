@@ -346,6 +346,19 @@ void radio_off(gnrc_netif_t *netif){
                 &state, sizeof(state)) == -EBUSY) {}
     }
 }
+/*
+        case NETOPT_STATE_STANDBY:
+            at86rf2xx_set_state(dev, AT86RF2XX_STATE_TRX_OFF);
+            break;
+        case NETOPT_STATE_SLEEP:
+            at86rf2xx_set_state(dev, AT86RF2XX_STATE_SLEEP);
+            break;
+        case NETOPT_STATE_IDLE:
+            at86rf2xx_set_state(dev, AT86RF2XX_PHY_STATE_RX);
+            break;
+        case NETOPT_STATE_TX:
+*/
+
 void radio_on(gnrc_netif_t *netif){
     netopt_state_t state = NETOPT_STATE_IDLE;
     while ((netif = gnrc_netif_iter(netif))) {

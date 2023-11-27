@@ -1,4 +1,5 @@
 /* Generated file do not edit */
+#define CONFIG_IEEE802154_DEFAULT_SUBGHZ_CHANNEL 0
 #define DS3231_PARAM_INT_PIN (GPIO_PIN(PA,15))
 #define DS18_PARAM_PIN (GPIO_PIN(PA,28))
 #define DEVELHELP 1
