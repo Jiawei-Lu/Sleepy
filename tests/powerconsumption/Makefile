@@ -59,6 +59,17 @@ USEMODULE += netstats_rpl
 LWIP_IPV4 ?= 0
 LWIP_IPV6 ?= 0
 
+DISABLE_MODULE += auto_init_at86rf2xx
+# define the driver to be used for selected boards
+ifneq (,$(filter samr21-xpro,$(BOARD)))
+  DRIVER := at86rf233
+endif
+ifneq (,$(filter sam30-xpro,$(BOARD)))
+  DRIVER := at86rf212b
+endif
+
+# use the at86rf212b as fallback device
+DRIVER ?= at86rf212b
 ifeq (,$(filter 1, $(LWIP_IPV4) $(LWIP_IPV6)))
   USEMODULE += auto_init_gnrc_netif
   # Specify the mandatory networking modules

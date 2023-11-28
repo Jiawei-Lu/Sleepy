@@ -233,9 +233,17 @@
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h \
  /home/jl1n119/RIOT/drivers/include/periph/rtc.h \
  /home/jl1n119/RIOT/sys/include/rtc_utils.h \
+ /home/jl1n119/Sleepy/tests/powerconsumption/common.h \
+ /home/jl1n119/RIOT/drivers/include/at86rf2xx.h \
+ /home/jl1n119/RIOT/drivers/include/net/netdev.h \
+ /home/jl1n119/RIOT/drivers/include/net/netdev/ieee802154.h \
+ /home/jl1n119/RIOT/sys/include/net/eui_provider.h \
+ /home/jl1n119/RIOT/sys/include/net/eui48.h \
+ /home/jl1n119/RIOT/drivers/include/periph/spi.h \
+ /home/jl1n119/RIOT/drivers/include/periph/gpio.h \
+ /home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_params.h \
  /home/jl1n119/RIOT/drivers/include/periph/i2c.h \
  /home/jl1n119/RIOT/drivers/include/ds3231.h \
- /home/jl1n119/RIOT/drivers/include/periph/gpio.h \
  /home/jl1n119/RIOT/drivers/include/periph/i2c.h \
  /home/jl1n119/RIOT/drivers/ds3231/include/ds3231_params.h \
  /home/jl1n119/RIOT/drivers/include/ds18.h \
@@ -249,7 +257,6 @@
  /home/jl1n119/RIOT/drivers/include/saul.h \
  /home/jl1n119/RIOT/drivers/include/at30tse75x.h \
  /home/jl1n119/RIOT/drivers/include/sdcard_spi.h \
- /home/jl1n119/RIOT/drivers/include/periph/spi.h \
  /home/jl1n119/RIOT/drivers/io1_xplained/include/io1_xplained_params.h \
  /home/jl1n119/RIOT/drivers/io1_xplained/include/io1_xplained_internals.h \
  /home/jl1n119/RIOT/drivers/include/periph/adc.h \
@@ -520,9 +527,17 @@
 /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h:
 /home/jl1n119/RIOT/drivers/include/periph/rtc.h:
 /home/jl1n119/RIOT/sys/include/rtc_utils.h:
+/home/jl1n119/Sleepy/tests/powerconsumption/common.h:
+/home/jl1n119/RIOT/drivers/include/at86rf2xx.h:
+/home/jl1n119/RIOT/drivers/include/net/netdev.h:
+/home/jl1n119/RIOT/drivers/include/net/netdev/ieee802154.h:
+/home/jl1n119/RIOT/sys/include/net/eui_provider.h:
+/home/jl1n119/RIOT/sys/include/net/eui48.h:
+/home/jl1n119/RIOT/drivers/include/periph/spi.h:
+/home/jl1n119/RIOT/drivers/include/periph/gpio.h:
+/home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_params.h:
 /home/jl1n119/RIOT/drivers/include/periph/i2c.h:
 /home/jl1n119/RIOT/drivers/include/ds3231.h:
-/home/jl1n119/RIOT/drivers/include/periph/gpio.h:
 /home/jl1n119/RIOT/drivers/include/periph/i2c.h:
 /home/jl1n119/RIOT/drivers/ds3231/include/ds3231_params.h:
 /home/jl1n119/RIOT/drivers/include/ds18.h:
@@ -536,7 +551,6 @@
 /home/jl1n119/RIOT/drivers/include/saul.h:
 /home/jl1n119/RIOT/drivers/include/at30tse75x.h:
 /home/jl1n119/RIOT/drivers/include/sdcard_spi.h:
-/home/jl1n119/RIOT/drivers/include/periph/spi.h:
 /home/jl1n119/RIOT/drivers/io1_xplained/include/io1_xplained_params.h:
 /home/jl1n119/RIOT/drivers/io1_xplained/include/io1_xplained_internals.h:
 /home/jl1n119/RIOT/drivers/include/periph/adc.h:

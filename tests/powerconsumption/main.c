@@ -130,7 +130,7 @@ extern ds18_t dev18;
 
 
 /*Radio netif*/
-gnrc_netif_t* netif = NULL;
+gnrc_netif_t* gnrc_netif = NULL;
 
 
 
@@ -333,15 +333,48 @@ static struct tm _riot_bday = {
 };
 
 
-void radio_off(gnrc_netif_t *netif,netif_t *_netif){
+void radio_off(gnrc_netif_t *_gnrc_netif){//,netif_t *_netif){
     
     netopt_state_t state = NETOPT_STATE_SLEEP;//NETOPT_STATE_SLEEP;
-    while ((netif = gnrc_netif_iter(netif))) {
+    while ((_gnrc_netif = gnrc_netif_iter(_gnrc_netif))) {
             /* retry if busy */
-            while (gnrc_netapi_set(netif->pid, NETOPT_STATE, 0,
-                &state, sizeof(state)) == -EBUSY) {}
-            netif_set_opt(_netif, NETOPT_STATE, 0,
-                      &state, sizeof(netopt_state_t));
+            while (gnrc_netapi_set(_gnrc_netif->pid, NETOPT_STATE, 0,
+                &state, sizeof(state)) == -EBUSY) {// netif_t *last = NULL;
+
+        /* Get interfaces in reverse order since the list is used like a stack.
+         * Stop when first netif in list already has been listed. */
+                // while (last != netif_iter(NULL)) {
+                    netif_t *_netif = &_gnrc_netif->netif;
+                    // netif_t *next = netif_iter(_netif);
+                    // /* Step until next is end of list or was previously listed. */
+                    // do {
+                    //     _netif = next;
+                    //     next = netif_iter(_netif);
+                    // } while (next && next != last);
+                    // // _netif_list(netif);
+                    // last = _netif;
+                    netif_set_opt(_netif, NETOPT_STATE, 0,
+                      &state, sizeof(netopt_state_t));}
+                // netif_t *last = NULL;
+
+        /* Get interfaces in reverse order since the list is used like a stack.
+         * Stop when first netif in list already has been listed. */
+                // while (last != netif_iter(NULL)) {
+                    // netif_t *_netif = &_gnrc_netif->netif;
+                    // // netif_t *next = netif_iter(_netif);
+                    // // /* Step until next is end of list or was previously listed. */
+                    // // do {
+                    // //     _netif = next;
+                    // //     next = netif_iter(_netif);
+                    // // } while (next && next != last);
+                    // // // _netif_list(netif);
+                    // // last = _netif;
+                    // netif_set_opt(_netif, NETOPT_STATE, 0,
+                    //   &state, sizeof(netopt_state_t));
+                    //}
+                
+            
+            
     }
 
 }
@@ -696,23 +729,10 @@ int main(void)
     
 
     // netif_t *_netif= netif_iter(NULL);
-    netif_t *last = NULL;
 
-        /* Get interfaces in reverse order since the list is used like a stack.
-         * Stop when first netif in list already has been listed. */
-    while (last != netif_iter(NULL)) {
-        netif_t *_netif = NULL;
-        netif_t *next = netif_iter(_netif);
-        /* Step until next is end of list or was previously listed. */
-        do {
-            _netif = next;
-            next = netif_iter(_netif);
-        } while (next && next != last);
-        // _netif_list(netif);
-        last = _netif;
-        radio_off(netif,_netif);
-    }
+    radio_off(gnrc_netif);
     
+
     while (1) {
         res = ds3231_get_time(&_dev, &testtime);
         if (res != 0) {
@@ -958,7 +978,7 @@ int main(void)
 
     }
 
-
+    
     /* start shell */
     puts("All up, running the shell now");
 
