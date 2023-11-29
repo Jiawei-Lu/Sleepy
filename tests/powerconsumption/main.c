@@ -603,6 +603,8 @@ int main(void)
     gpio_init(GPIO_PIN(PA , 8), GPIO_OUT); 
     gpio_init(GPIO_PIN(PA , 13), GPIO_OUT); 
     gpio_set(DS18_PARAM_PIN);
+    // gpio_set(GPIO_PIN(PA , 13));
+    // gpio_set(GPIO_PIN(PA , 8));
     result = ds18_init(&dev18, &ds18_params[0]);
     if (result == DS18_ERROR) {
         puts("[Error] The sensor pin could not be initialized");
@@ -797,7 +799,7 @@ int main(void)
     radio_off(gnrc_netif);
     
 
-    while (1) {
+    // while (1) {
         res = ds3231_get_time(&_dev, &testtime);
         if (res != 0) {
             puts("error: unable to read time");
@@ -812,7 +814,7 @@ int main(void)
         mktime(&testtime);
         // puts("radio off");
         // radio_off(netif);
-        // ztimer_sleep(ZTIMER_USEC, 2 * US_PER_SEC);
+
         res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
         if (res != 0) {
             puts("error: unable to program alarm");
@@ -845,6 +847,71 @@ int main(void)
         // puts("radio ononononononon");
         ///////////////////////
         // radio_on(netif);
+        ztimer_sleep(ZTIMER_USEC, 2 * US_PER_SEC);
+
+    // puts("mount points:");
+    // while (vfs_iterate_mount_dirs(&mount)) {
+    //     printf("\t%s\n", mount.mp->mount_point);
+    // }
+    
+    // //printf("\ndata dir: %s\n", VFS_DEFAULT_DATA);
+    
+    // /*------------Typical file create and write test start--------------*/
+    // // gpio_set(GPIO_PIN(PA, 13));
+    // // gpio_set(DS18_PARAM_PIN);
+    // /*11111111111111111*/
+    // vfs_mount(&flash_mount);
+
+    // char data_file_path[] = "/sd0/DATA.TXT";
+    // int fo = open(data_file_path, O_RDWR | O_CREAT, 00777);
+    // if (fo < 0) {
+    //     printf("error while trying to create %s\n", data_file_path);
+    //     return 1;
+    // }
+    // else{
+    //     puts("creating file success");
+    // }
+    // // char test_data[] = "112233";
+    //     /* Get temperature in centidegrees celsius */
+  
+    
+    // printf("Temperature [ºC]: %c%.2f"
+    //         "\n+-------------------------------------+\n",
+    //         negative ? '-': '+',
+    //         ds18_data);
+    // char test[100];
+    // fmt_float(test,ds18_data,2);
+    // printf("%s\n",test);
+    // // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
+
+
+    // if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
+    //     puts("Error while writing");
+    // }
+    // close(fo);
+    // int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
+    //                                                         //will conflict with open(file)
+    //                                                         //open(file)will equal 0, have to beb a O_RDPNLY for read
+    // // char data_buf[sizeof(test_data)];
+    // // printf("data:[],length=");
+    // // vfs_read(fo,data_buf,sizeof(test_data));    
+    // // printf("data:[],length=");
+    // char c;
+
+    // while (read(fr, &c, 1) != 0){
+    // putchar(c);  //printf won't work here
+    // }
+    // puts("\n");
+    
+    // close(fo);
+    // puts("closing file");
+
+    // /*11111111111111111*/
+    // vfs_umount(&flash_mount);
+    // // gpio_set(DS18_PARAM_PIN);
+    // puts("flash point umount");
+
+
         res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
         if (res != 0) {
         puts("error: unable to program alarm");
@@ -860,6 +927,83 @@ int main(void)
         if (!(res & DS3231_FLAG_ALARM_1)){
         puts("error: alarm was not triggered");
         }
+
+puts("ds18 start");
+gpio_set(GPIO_PIN(PA, 13));
+for(int i=0; i<100;i++){
+//   puts("mount points:");
+    while (vfs_iterate_mount_dirs(&mount)) {
+        printf("\t%s\n", mount.mp->mount_point);
+    }
+    
+    //printf("\ndata dir: %s\n", VFS_DEFAULT_DATA);
+    
+    /*------------Typical file create and write test start--------------*/
+    // gpio_set(GPIO_PIN(PA, 13));
+    // gpio_set(DS18_PARAM_PIN);
+    /*11111111111111111*/
+    vfs_mount(&flash_mount);
+
+    char data_file_path[] = "/sd0/DATA.TXT";
+    int fo = open(data_file_path, O_RDWR | O_CREAT | O_APPEND, 00777);
+    if (fo < 0) {
+        printf("error while trying to create %s\n", data_file_path);
+        return 1;
+    }
+    else{
+        puts("creating file success");
+    }
+    char test_data[] = "112233";
+    if (write(fo, test_data, strlen(test_data)) != (ssize_t)strlen(test_data)) {
+        puts("Error while writing");
+    }
+    close(fo);
+        /* Get temperature in centidegrees celsius */
+    // ds18_get_temperature(&dev18, &temperature_ds18);
+    // bool negative = (temperature_ds18 < 0);
+    // ds18_data = (float) temperature_ds18/100;
+    // if (negative) {
+    //     ds18_data = -ds18_data;
+    // }
+    
+    
+    // // // printf("Temperature [ºC]: %c%.2f"
+    // // //         "\n+-------------------------------------+\n",
+    // // //         negative ? '-': '+',
+    // // //         ds18_data);
+    // char test[100];
+    // fmt_float(test,ds18_data,2);
+    // printf("%s\n",test);
+    // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
+
+
+    // if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
+    //     puts("Error while writing");
+    // }
+    // close(fo);
+    // int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
+    //                                                         //will conflict with open(file)
+    //                                                         //open(file)will equal 0, have to beb a O_RDPNLY for read
+    // // char data_buf[sizeof(test_data)];
+    // // printf("data:[],length=");
+    // // vfs_read(fo,data_buf,sizeof(test_data));    
+    // // printf("data:[],length=");
+    // char c;
+
+    // while (read(fr, &c, 1) != 0){
+    // putchar(c);  //printf won't work here
+    // }
+    // puts("\n");
+    
+    // close(fo);
+    puts("closing file");
+
+    /*11111111111111111*/
+    vfs_umount(&flash_mount);
+    // // gpio_set(DS18_PARAM_PIN);
+    // puts("flash point umount");
+    // // gpio_clear(GPIO_PIN(PA, 13));
+     
 
         // puts("OK1");
 
@@ -1041,7 +1185,8 @@ int main(void)
         // puts("OK1");
 
     }
-
+    gpio_set(GPIO_PIN(PA, 8));
+puts("ds18 end");
     
     /* start shell */
     puts("All up, running the shell now");
