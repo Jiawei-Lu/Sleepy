@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/fmt/fmt.o: \
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/fmt/fmt.o: \
  /home/jl1n119/RIOT/sys/fmt/fmt.c \
- /home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
@@ -26,7 +26,7 @@
  /home/jl1n119/RIOT/sys/include/fmt.h \
  /home/jl1n119/RIOT/sys/include/stdio_base.h \
  /home/jl1n119/RIOT/core/lib/include/modules.h
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h:

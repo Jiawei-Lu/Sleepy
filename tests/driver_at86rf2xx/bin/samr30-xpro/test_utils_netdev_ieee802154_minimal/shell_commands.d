@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/test_utils_netdev_ieee802154_minimal/shell_commands.o: \
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/test_utils_netdev_ieee802154_minimal/shell_commands.o: \
  /home/jl1n119/RIOT/sys/test_utils/netdev_ieee802154_minimal/shell_commands.c \
- /home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -154,7 +154,7 @@
  /home/jl1n119/RIOT/core/lib/include/list.h \
  /home/jl1n119/RIOT/core/include/thread.h \
  /home/jl1n119/RIOT/core/lib/include/rmutex.h \
- /home/jl1n119/RIOT/tests/driver_at86rf2xx/init_dev.h \
+ /home/jl1n119/Sleepy/tests/driver_at86rf2xx/init_dev.h \
  /home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_params.h \
  /home/jl1n119/RIOT/drivers/include/at86rf2xx.h \
  /home/jl1n119/RIOT/boards/samr30-xpro/include/board.h \
@@ -167,7 +167,7 @@
  /home/jl1n119/RIOT/drivers/include/periph/gpio.h \
  /home/jl1n119/RIOT/sys/include/test_utils/netdev_ieee802154_minimal.h \
  /home/jl1n119/RIOT/core/lib/include/debug.h
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/errno.h:
 /usr/include/newlib/sys/errno.h:
 /usr/include/newlib/sys/reent.h:
@@ -333,7 +333,7 @@
 /home/jl1n119/RIOT/core/lib/include/list.h:
 /home/jl1n119/RIOT/core/include/thread.h:
 /home/jl1n119/RIOT/core/lib/include/rmutex.h:
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/init_dev.h:
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/init_dev.h:
 /home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_params.h:
 /home/jl1n119/RIOT/drivers/include/at86rf2xx.h:
 /home/jl1n119/RIOT/boards/samr30-xpro/include/board.h:

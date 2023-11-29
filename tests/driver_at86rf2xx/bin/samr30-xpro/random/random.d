@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/random/random.o: \
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/random/random.o: \
  /home/jl1n119/RIOT/sys/random/random.c \
- /home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /home/jl1n119/RIOT/core/lib/include/assert.h \
  /home/jl1n119/RIOT/core/lib/include/log.h /usr/include/newlib/stdio.h \
@@ -119,9 +119,8 @@
  /home/jl1n119/RIOT/core/include/msg.h \
  /home/jl1n119/RIOT/core/include/sched.h \
  /home/jl1n119/RIOT/core/lib/include/thread_config.h \
- /home/jl1n119/RIOT/core/include/thread_flags.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /home/jl1n119/RIOT/core/lib/include/assert.h:
 /home/jl1n119/RIOT/core/lib/include/log.h:
@@ -252,5 +251,4 @@
 /home/jl1n119/RIOT/core/include/msg.h:
 /home/jl1n119/RIOT/core/include/sched.h:
 /home/jl1n119/RIOT/core/lib/include/thread_config.h:
-/home/jl1n119/RIOT/core/include/thread_flags.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h:

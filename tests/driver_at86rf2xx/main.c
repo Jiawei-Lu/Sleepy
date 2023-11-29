@@ -67,6 +67,9 @@ static const shell_command_t shell_commands[] = {
     { NULL, NULL, NULL }
 };
 #endif
+static const shell_command_t shell_commands[] = {
+    { NULL, NULL, NULL }
+};
 
 int netdev_ieee802154_minimal_init_devs(netdev_event_cb_t cb) {
 
@@ -89,25 +92,47 @@ int netdev_ieee802154_minimal_init_devs(netdev_event_cb_t cb) {
 
     return 0;
 }
-
+static void _event_cb(netdev_t *dev, netdev_event_t event)
+{
+    /* Ignore interrupts */
+    (void)dev;
+    (void)event;
+}
 int main(void)
 {
     puts("Test application for AT86RF2XX IEEE 802.15.4 device driver");
 
-    int res = netdev_ieee802154_minimal_init();
-    if (res) {
-        puts("Error initializing devices");
-        return 1;
+    // int res = netdev_ieee802154_minimal_init();
+    // if (res) {
+    //     puts("Error initializing devices");
+    //     return 1;
+    // }
+    puts("Initializing AT86RF2XX devices");
+
+    for (unsigned i = 0; i < AT86RF2XX_NUM; i++) {
+        printf("%d out of %d\n", i + 1, AT86RF2XX_NUM);
+        /* setup the specific driver */
+        at86rf2xx_setup(&at86rf2xx[i], &at86rf2xx_params[i], i);
+
+        /* set the application-provided callback */
+        at86rf2xx[i].netdev.netdev.event_callback = _event_cb;
+
+        /* initialize the device driver */
+        int res = at86rf2xx[i].netdev.netdev.driver->init(&at86rf2xx[i].netdev.netdev);
+        if (res != 0) {
+            return -1;
+        }
     }
 
     /* start the shell */
     puts("Initialization successful - starting the shell now");
     at86rf2xx_set_state(at86rf2xx, AT86RF2XX_STATE_SLEEP);
+    // at86rf2xx_set_state(at86rf2xx, AT86RF2XX_STATE_FORCE_TRX_OFF);
     char line_buf[SHELL_DEFAULT_BUFSIZE];
 #if AT86RF2XX_RANDOM_NUMBER_GENERATOR
     shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
 #else
-    shell_run(NULL, line_buf, SHELL_DEFAULT_BUFSIZE);
+    shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
 #endif
 
     return 0;

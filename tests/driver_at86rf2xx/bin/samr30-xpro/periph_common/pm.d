@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/periph_common/pm.o: \
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/periph_common/pm.o: \
  /home/jl1n119/RIOT/drivers/periph_common/pm.c \
- /home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/RIOT/core/lib/include/irq.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h \
@@ -110,7 +110,6 @@
  /home/jl1n119/RIOT/core/include/msg.h \
  /home/jl1n119/RIOT/core/include/sched.h \
  /home/jl1n119/RIOT/core/lib/include/thread_config.h \
- /home/jl1n119/RIOT/core/include/thread_flags.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/exti_config.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h \
@@ -119,7 +118,7 @@
  /home/jl1n119/RIOT/sys/include/architecture.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/architecture_arch.h \
  /home/jl1n119/RIOT/core/lib/include/debug.h
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/RIOT/core/lib/include/irq.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h:
 /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h:
@@ -238,7 +237,6 @@
 /home/jl1n119/RIOT/core/include/msg.h:
 /home/jl1n119/RIOT/core/include/sched.h:
 /home/jl1n119/RIOT/core/lib/include/thread_config.h:
-/home/jl1n119/RIOT/core/include/thread_flags.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h:
 /home/jl1n119/RIOT/cpu/sam0_common/include/exti_config.h:
 /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h:

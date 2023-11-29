@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/ztimer_core/convert_frac.o: \
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/ztimer_core/convert_frac.o: \
  /home/jl1n119/RIOT/sys/ztimer/convert_frac.c \
- /home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/inttypes.h /usr/include/newlib/nano/newlib.h \
  /usr/include/newlib/_newlib_version.h /usr/include/newlib/sys/config.h \
@@ -103,7 +103,6 @@
  /home/jl1n119/RIOT/core/lib/include/assert.h \
  /home/jl1n119/RIOT/core/include/msg.h \
  /home/jl1n119/RIOT/core/lib/include/thread_config.h \
- /home/jl1n119/RIOT/core/include/thread_flags.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h \
  /home/jl1n119/RIOT/core/lib/include/rmutex.h \
  /home/jl1n119/RIOT/sys/include/ztimer/convert_frac.h \
@@ -118,7 +117,7 @@
  /usr/include/newlib/sys/_pthreadtypes.h \
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
  /home/jl1n119/RIOT/core/include/thread.h
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/inttypes.h:
 /usr/include/newlib/nano/newlib.h:
@@ -225,7 +224,6 @@
 /home/jl1n119/RIOT/core/lib/include/assert.h:
 /home/jl1n119/RIOT/core/include/msg.h:
 /home/jl1n119/RIOT/core/lib/include/thread_config.h:
-/home/jl1n119/RIOT/core/include/thread_flags.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h:
 /home/jl1n119/RIOT/core/lib/include/rmutex.h:
 /home/jl1n119/RIOT/sys/include/ztimer/convert_frac.h:

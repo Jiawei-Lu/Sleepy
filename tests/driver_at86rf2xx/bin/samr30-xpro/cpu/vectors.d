@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/cpu/vectors.o: \
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/cpu/vectors.o: \
  /home/jl1n119/RIOT/cpu/saml21/vectors.c \
- /home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/vectors_cortexm.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h \
@@ -73,7 +73,7 @@
  /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr30/include/instance/usb.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr30/include/instance/wdt.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr30/include/pio/samr30g18a.h
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/vectors_cortexm.h:
 /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h:

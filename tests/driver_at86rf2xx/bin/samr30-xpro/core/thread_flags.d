@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/core/thread_flags.o: \
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/core/thread_flags.o: \
  /home/jl1n119/RIOT/core/thread_flags.c \
- /home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/RIOT/core/include/thread_flags.h \
  /home/jl1n119/RIOT/core/include/sched.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
@@ -110,7 +110,7 @@
  /usr/include/newlib/sys/types.h /usr/include/newlib/sys/_stdint.h \
  /usr/include/newlib/sys/_pthreadtypes.h \
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/RIOT/core/include/thread_flags.h:
 /home/jl1n119/RIOT/core/include/sched.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h:

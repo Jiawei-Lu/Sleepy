@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/cortexm_common/cortexm_init.o: \
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/cortexm_common/cortexm_init.o: \
  /home/jl1n119/RIOT/cpu/cortexm_common/cortexm_init.c \
- /home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/cpu.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -107,9 +107,8 @@
  /home/jl1n119/RIOT/core/include/msg.h \
  /home/jl1n119/RIOT/core/include/sched.h \
  /home/jl1n119/RIOT/core/lib/include/thread_config.h \
- /home/jl1n119/RIOT/core/include/thread_flags.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/cpu.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:
@@ -225,5 +224,4 @@
 /home/jl1n119/RIOT/core/include/msg.h:
 /home/jl1n119/RIOT/core/include/sched.h:
 /home/jl1n119/RIOT/core/lib/include/thread_config.h:
-/home/jl1n119/RIOT/core/include/thread_flags.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h:

@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/at86rf2xx/at86rf2xx.o: \
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/at86rf2xx/at86rf2xx.o: \
  /home/jl1n119/RIOT/drivers/at86rf2xx/at86rf2xx.c \
- /home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/RIOT/core/lib/include/kernel_defines.h \
  /home/jl1n119/RIOT/core/lib/include/modules.h \
  /home/jl1n119/RIOT/core/lib/include/riot_version.h \
@@ -108,7 +108,6 @@
  /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr30/include/pio/samr30g18a.h \
  /home/jl1n119/RIOT/core/lib/include/thread_config.h \
  /home/jl1n119/RIOT/core/include/sched.h \
- /home/jl1n119/RIOT/core/include/thread_flags.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h \
  /home/jl1n119/RIOT/sys/include/net/gnrc/nettype.h \
  /home/jl1n119/RIOT/sys/include/net/ethertype.h \
@@ -180,7 +179,7 @@
  /home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_internal.h \
  /home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_registers.h \
  /home/jl1n119/RIOT/core/lib/include/debug.h
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/RIOT/core/lib/include/kernel_defines.h:
 /home/jl1n119/RIOT/core/lib/include/modules.h:
 /home/jl1n119/RIOT/core/lib/include/riot_version.h:
@@ -297,7 +296,6 @@
 /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr30/include/pio/samr30g18a.h:
 /home/jl1n119/RIOT/core/lib/include/thread_config.h:
 /home/jl1n119/RIOT/core/include/sched.h:
-/home/jl1n119/RIOT/core/include/thread_flags.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h:
 /home/jl1n119/RIOT/sys/include/net/gnrc/nettype.h:
 /home/jl1n119/RIOT/sys/include/net/ethertype.h:

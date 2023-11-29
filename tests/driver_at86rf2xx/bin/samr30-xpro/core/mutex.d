@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/core/mutex.o: \
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/core/mutex.o: \
  /home/jl1n119/RIOT/core/mutex.c \
- /home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -107,14 +107,13 @@
  /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr30/include/pio/samr30g18a.h \
  /home/jl1n119/RIOT/core/lib/include/thread_config.h \
  /home/jl1n119/RIOT/core/include/sched.h \
- /home/jl1n119/RIOT/core/include/thread_flags.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h \
  /home/jl1n119/RIOT/core/include/thread.h \
  /home/jl1n119/RIOT/core/lib/include/irq.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/irq_arch.h \
  /home/jl1n119/RIOT/sys/include/debug_irq_disable.h \
  /home/jl1n119/RIOT/core/lib/include/debug.h
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/errno.h:
 /usr/include/newlib/sys/errno.h:
 /usr/include/newlib/sys/reent.h:
@@ -230,7 +229,6 @@
 /home/jl1n119/RIOT/cpu/sam0_common/include/vendor/samr30/include/pio/samr30g18a.h:
 /home/jl1n119/RIOT/core/lib/include/thread_config.h:
 /home/jl1n119/RIOT/core/include/sched.h:
-/home/jl1n119/RIOT/core/include/thread_flags.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h:
 /home/jl1n119/RIOT/core/include/thread.h:
 /home/jl1n119/RIOT/core/lib/include/irq.h:

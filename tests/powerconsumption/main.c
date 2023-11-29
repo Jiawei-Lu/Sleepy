@@ -33,7 +33,6 @@
 
 /*GCoAP*/
 #include "net/gcoap.h"
-#include "shell.h"
 #include "gcoap_example.h"
 
 /*Kernel*/
@@ -90,6 +89,16 @@
 #include "ztimer.h"
 #include "xtimer.h"
 
+/*IEEE 802.15.4 and AT86RF212B*/
+#include "at86rf2xx.h"
+#include "at86rf2xx_params.h"
+#include "at86rf2xx_internal.h"
+#include "init_dev.h"
+#include "net/ieee802154.h"
+#include "net/netdev/ieee802154.h"
+#include "test_utils/netdev_ieee802154_minimal.h"
+#include "test_utils/expect.h"
+
 /*FAT Filesystem and VFS tool*/
 #include "fs/fatfs.h"
 #include "vfs.h"
@@ -127,7 +136,8 @@ static ds3231_t _dev;
 /*DS18 Device*/
 extern ds18_t dev18;
 
-
+/*AT86RF212B Device*/
+static at86rf2xx_t at86rf2xx[AT86RF2XX_NUM];
 
 /*Radio netif*/
 gnrc_netif_t* gnrc_netif = NULL;
@@ -332,6 +342,34 @@ static struct tm _riot_bday = {
     .tm_year = 123
 };
 
+int netdev_ieee802154_minimal_init_devs(netdev_event_cb_t cb) {
+
+    puts("Initializing AT86RF2XX devices");
+
+    for (unsigned i = 0; i < AT86RF2XX_NUM; i++) {
+        printf("%d out of %d\n", i + 1, AT86RF2XX_NUM);
+        /* setup the specific driver */
+        at86rf2xx_setup(&at86rf2xx[i], &at86rf2xx_params[i], i);
+
+        /* set the application-provided callback */
+        at86rf2xx[i].netdev.netdev.event_callback = cb;
+
+        /* initialize the device driver */
+        int res = at86rf2xx[i].netdev.netdev.driver->init(&at86rf2xx[i].netdev.netdev);
+        if (res != 0) {
+            return -1;
+        }
+    }
+
+    return 0;
+}
+
+static void _event_cb(netdev_t *dev, netdev_event_t event)
+{
+    /* Ignore interrupts */
+    (void)dev;
+    (void)event;
+}
 
 void radio_off(gnrc_netif_t *_gnrc_netif){//,netif_t *_netif){
     
@@ -447,6 +485,31 @@ static const shell_command_t shell_commands[] = {
 
 int main(void)
 {   
+    // /*AT86RF212B minimal init*/
+    // int res802154 = netdev_ieee802154_minimal_init();
+    // if (res802154) {
+    //     puts("Error initializing devices");
+    //     return 1;
+    // }
+
+    /*AT86RF212B init*/
+    puts("Initializing AT86RF2XX devices");
+
+    for (unsigned i = 0; i < AT86RF2XX_NUM; i++) {
+        printf("%d out of %d\n", i + 1, AT86RF2XX_NUM);
+        /* setup the specific driver */
+        at86rf2xx_setup(&at86rf2xx[i], &at86rf2xx_params[i], i);
+
+        /* set the application-provided callback */
+        at86rf2xx[i].netdev.netdev.event_callback = _event_cb;
+
+        /* initialize the device driver */
+        int res = at86rf2xx[i].netdev.netdev.driver->init(&at86rf2xx[i].netdev.netdev);
+        if (res != 0) {
+            return -1;
+        }
+    }
+
 
     msg_init_queue(_main_msg_queue, MAIN_QUEUE_SIZE);
     server_init();
@@ -729,7 +792,8 @@ int main(void)
     
 
     // netif_t *_netif= netif_iter(NULL);
-
+    at86rf2xx_set_state(at86rf2xx, AT86RF2XX_STATE_SLEEP);
+    // at86rf2xx_set_state(at86rf2xx, AT86RF2XX_STATE_FORCE_TRX_OFF);
     radio_off(gnrc_netif);
     
 

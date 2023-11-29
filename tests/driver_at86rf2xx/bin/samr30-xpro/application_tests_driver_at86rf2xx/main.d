@@ -1,6 +1,6 @@
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/application_tests_driver_at86rf2xx/main.o: \
- /home/jl1n119/RIOT/tests/driver_at86rf2xx/main.c \
- /home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/application_tests_driver_at86rf2xx/main.o: \
+ /home/jl1n119/Sleepy/tests/driver_at86rf2xx/main.c \
+ /home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
  /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
@@ -109,7 +109,6 @@
  /home/jl1n119/RIOT/core/include/msg.h \
  /home/jl1n119/RIOT/core/include/sched.h \
  /home/jl1n119/RIOT/core/lib/include/thread_config.h \
- /home/jl1n119/RIOT/core/include/thread_flags.h \
  /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h \
  /home/jl1n119/RIOT/drivers/include/net/netdev.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
@@ -143,7 +142,7 @@
  /home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_params.h \
  /home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_internal.h \
  /home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_registers.h \
- /home/jl1n119/RIOT/tests/driver_at86rf2xx/init_dev.h \
+ /home/jl1n119/Sleepy/tests/driver_at86rf2xx/init_dev.h \
  /home/jl1n119/RIOT/drivers/include/net/netdev/ieee802154.h \
  /home/jl1n119/RIOT/sys/include/shell.h \
  /home/jl1n119/RIOT/drivers/include/periph/pm.h \
@@ -156,7 +155,7 @@
  /home/jl1n119/RIOT/core/lib/include/compiler_hints.h \
  /home/jl1n119/RIOT/core/lib/include/panic.h \
  /home/jl1n119/RIOT/core/lib/include/kernel_defines.h
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:
 /usr/include/newlib/nano/newlib.h:
@@ -274,7 +273,6 @@
 /home/jl1n119/RIOT/core/include/msg.h:
 /home/jl1n119/RIOT/core/include/sched.h:
 /home/jl1n119/RIOT/core/lib/include/thread_config.h:
-/home/jl1n119/RIOT/core/include/thread_flags.h:
 /home/jl1n119/RIOT/cpu/cortexm_common/include/thread_arch.h:
 /home/jl1n119/RIOT/drivers/include/net/netdev.h:
 /usr/include/newlib/errno.h:
@@ -312,7 +310,7 @@
 /home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_params.h:
 /home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_internal.h:
 /home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_registers.h:
-/home/jl1n119/RIOT/tests/driver_at86rf2xx/init_dev.h:
+/home/jl1n119/Sleepy/tests/driver_at86rf2xx/init_dev.h:
 /home/jl1n119/RIOT/drivers/include/net/netdev/ieee802154.h:
 /home/jl1n119/RIOT/sys/include/shell.h:
 /home/jl1n119/RIOT/drivers/include/periph/pm.h:

@@ -3,7 +3,10 @@ BOARD ?= samr21-xpro
 
 include ../Makefile.tests_common
 
-USEMODULE += test_utils_netdev_ieee802154_minimal
+USEMODULE += shell
+USEMODULE += shell_cmds_default
+
+# USEMODULE += test_utils_netdev_ieee802154_minimal
 
 # define the driver to be used for selected boards
 ifneq (,$(filter samr21-xpro,$(BOARD)))
@@ -16,8 +19,8 @@ ifneq (,$(filter samr30-xpro,$(BOARD)))
   DRIVER := at86rf212b
 endif
 
-# use the at86rf231 as fallback device
-DRIVER ?= at86rf231
+# use the at86rf212b as fallback device
+DRIVER ?= at86rf212b
 
 # include the selected driver
 USEMODULE += $(DRIVER)
