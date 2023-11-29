@@ -953,34 +953,38 @@ for(int i=0; i<100;i++){
     else{
         puts("creating file success");
     }
-    char test_data[] = "112233";
-    if (write(fo, test_data, strlen(test_data)) != (ssize_t)strlen(test_data)) {
-        puts("Error while writing");
-    }
-    close(fo);
-        /* Get temperature in centidegrees celsius */
-    // ds18_get_temperature(&dev18, &temperature_ds18);
-    // bool negative = (temperature_ds18 < 0);
-    // ds18_data = (float) temperature_ds18/100;
-    // if (negative) {
-    //     ds18_data = -ds18_data;
-    // }
-    
-    
-    // // // printf("Temperature [ºC]: %c%.2f"
-    // // //         "\n+-------------------------------------+\n",
-    // // //         negative ? '-': '+',
-    // // //         ds18_data);
-    // char test[100];
-    // fmt_float(test,ds18_data,2);
-    // printf("%s\n",test);
-    // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
 
-
-    // if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
+    
+    // char test_data[] = "112233";
+    // if (write(fo, test_data, strlen(test_data)) != (ssize_t)strlen(test_data)) {
     //     puts("Error while writing");
     // }
     // close(fo);
+
+
+    /* Get temperature in centidegrees celsius */
+    ds18_get_temperature(&dev18, &temperature_ds18);
+    bool negative = (temperature_ds18 < 0);
+    ds18_data = (float) temperature_ds18/100;
+    if (negative) {
+        ds18_data = -ds18_data;
+    }
+    
+    
+    // // printf("Temperature [ºC]: %c%.2f"
+    // //         "\n+-------------------------------------+\n",
+    // //         negative ? '-': '+',
+    // //         ds18_data);
+    char test[100];
+    fmt_float(test,ds18_data,2);
+    printf("%s\n",test);
+    sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
+
+
+    if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
+        puts("Error while writing");
+    }
+    close(fo);
     // int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
     //                                                         //will conflict with open(file)
     //                                                         //open(file)will equal 0, have to beb a O_RDPNLY for read
