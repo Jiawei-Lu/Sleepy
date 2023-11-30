@@ -137,7 +137,7 @@ static ds3231_t _dev;
 extern ds18_t dev18;
 
 /*AT86RF212B Device*/
-static at86rf2xx_t at86rf2xx[AT86RF2XX_NUM];
+// static at86rf2xx_t at86rf2xx[AT86RF2XX_NUM];
 
 /*Radio netif*/
 static gnrc_netif_t* gnrc_netif = NULL;
@@ -342,37 +342,16 @@ static struct tm _riot_bday = {
     .tm_year = 123
 };
 
-int netdev_ieee802154_minimal_init_devs(netdev_event_cb_t cb) {
 
-    puts("Initializing AT86RF2XX devices");
-
-    for (unsigned i = 0; i < AT86RF2XX_NUM; i++) {
-        printf("%d out of %d\n", i + 1, AT86RF2XX_NUM);
-        /* setup the specific driver */
-        at86rf2xx_setup(&at86rf2xx[i], &at86rf2xx_params[i], i);
-
-        /* set the application-provided callback */
-        at86rf2xx[i].netdev.netdev.event_callback = cb;
-
-        /* initialize the device driver */
-        int res = at86rf2xx[i].netdev.netdev.driver->init(&at86rf2xx[i].netdev.netdev);
-        if (res != 0) {
-            return -1;
-        }
-    }
-
-    return 0;
-}
-
-static void _event_cb(netdev_t *dev, netdev_event_t event)
-{
-    /* Ignore interrupts */
-    (void)dev;
-    (void)event;
-}
+// static void _event_cb(netdev_t *dev, netdev_event_t event)
+// {
+//     /* Ignore interrupts */
+//     (void)dev;
+//     (void)event;
+// }
 
 void radio_off(gnrc_netif_t *_gnrc_netif){//,netif_t *_netif){
-    at86rf2xx_set_state(at86rf2xx, AT86RF2XX_STATE_SLEEP);
+    // at86rf2xx_set_state(at86rf2xx, AT86RF2XX_STATE_SLEEP);
 
     netopt_state_t state = NETOPT_STATE_SLEEP;//NETOPT_STATE_SLEEP;
     while ((_gnrc_netif = gnrc_netif_iter(_gnrc_netif))) {
@@ -380,37 +359,37 @@ void radio_off(gnrc_netif_t *_gnrc_netif){//,netif_t *_netif){
             while (gnrc_netapi_set(_gnrc_netif->pid, NETOPT_STATE, 0,
                 &state, sizeof(state)) == -EBUSY) {// netif_t *last = NULL;
 
-        /* Get interfaces in reverse order since the list is used like a stack.
-         * Stop when first netif in list already has been listed. */
-                // while (last != netif_iter(NULL)) {
-                    netif_t *_netif = &_gnrc_netif->netif;
-                    // netif_t *next = netif_iter(_netif);
-                    // /* Step until next is end of list or was previously listed. */
-                    // do {
-                    //     _netif = next;
-                    //     next = netif_iter(_netif);
-                    // } while (next && next != last);
-                    // // _netif_list(netif);
-                    // last = _netif;
-                    netif_set_opt(_netif, NETOPT_STATE, 0,
-                      &state, sizeof(netopt_state_t));
-                // netif_t *last = NULL;
+        // /* Get interfaces in reverse order since the list is used like a stack.
+        //  * Stop when first netif in list already has been listed. */
+        //         // while (last != netif_iter(NULL)) {
+        //             netif_t *_netif = &_gnrc_netif->netif;
+        //             // netif_t *next = netif_iter(_netif);
+        //             // /* Step until next is end of list or was previously listed. */
+        //             // do {
+        //             //     _netif = next;
+        //             //     next = netif_iter(_netif);
+        //             // } while (next && next != last);
+        //             // // _netif_list(netif);
+        //             // last = _netif;
+        //             netif_set_opt(_netif, NETOPT_STATE, 0,
+        //               &state, sizeof(netopt_state_t));
+        //         // netif_t *last = NULL;
 
-        /* Get interfaces in reverse order since the list is used like a stack.
-         * Stop when first netif in list already has been listed. */
-                // while (last != netif_iter(NULL)) {
-                    // netif_t *_netif = &_gnrc_netif->netif;
-                    // // netif_t *next = netif_iter(_netif);
-                    // // /* Step until next is end of list or was previously listed. */
-                    // // do {
-                    // //     _netif = next;
-                    // //     next = netif_iter(_netif);
-                    // // } while (next && next != last);
-                    // // // _netif_list(netif);
-                    // // last = _netif;
-                    // netif_set_opt(_netif, NETOPT_STATE, 0,
-                    //   &state, sizeof(netopt_state_t));
-                    //}
+        // /* Get interfaces in reverse order since the list is used like a stack.
+        //  * Stop when first netif in list already has been listed. */
+        //         // while (last != netif_iter(NULL)) {
+        //             // netif_t *_netif = &_gnrc_netif->netif;
+        //             // // netif_t *next = netif_iter(_netif);
+        //             // // /* Step until next is end of list or was previously listed. */
+        //             // // do {
+        //             // //     _netif = next;
+        //             // //     next = netif_iter(_netif);
+        //             // // } while (next && next != last);
+        //             // // // _netif_list(netif);
+        //             // // last = _netif;
+        //             // netif_set_opt(_netif, NETOPT_STATE, 0,
+        //             //   &state, sizeof(netopt_state_t));
+        //             //}
                 
             
             
@@ -419,16 +398,16 @@ void radio_off(gnrc_netif_t *_gnrc_netif){//,netif_t *_netif){
     }
 }
 void radio_on(gnrc_netif_t *netif){
-    at86rf2xx_set_state(at86rf2xx, AT86RF2XX_STATE_RX_AACK_ON);
+    // at86rf2xx_set_state(at86rf2xx, AT86RF2XX_STATE_RX_AACK_ON);
 
     netopt_state_t state = NETOPT_STATE_IDLE;
     while ((netif = gnrc_netif_iter(netif))) {
             /* retry if busy */
             while (gnrc_netapi_set(netif->pid, NETOPT_STATE, 0,
                 &state, sizeof(state)) == -EBUSY) {
-                    netif_t *_netif = &netif->netif;
-                    netif_set_opt(_netif, NETOPT_STATE, 0,
-                      &state, sizeof(netopt_state_t));
+                    // netif_t *_netif = &netif->netif;
+                    // netif_set_opt(_netif, NETOPT_STATE, 0,
+                    //   &state, sizeof(netopt_state_t));
 
                 }
     }
@@ -534,23 +513,39 @@ int main(void)
     _gnrc_netif_config(0, NULL);
 
 
-        /*AT86RF212B init*/
-    puts("Initializing AT86RF2XX devices");
+    //     /*AT86RF212B init*/
+    // puts("Initializing AT86RF2XX devices");
 
-    for (unsigned i = 0; i < AT86RF2XX_NUM; i++) {
-        printf("%d out of %d\n", i + 1, AT86RF2XX_NUM);
-        /* setup the specific driver */
-        at86rf2xx_setup(&at86rf2xx[i], &at86rf2xx_params[i], i);
+    // // /*AT86RF212B old version init*/
+    // for (unsigned i = 0; i < AT86RF2XX_NUM; i++) {
+    //     at86rf2xx_setup(&at86rf2xx[i], &at86rf2xx_params[i], i);
+    //     at86rf2xx[i].netdev.netdev.event_callback = _event_cb;
+    //     if (at86rf2xx[i].netdev.netdev.driver->init(&at86rf2xx[i].netdev.netdev) != 0) {
+    //         return EXIT_FAILURE;
+    //     }
+    // }
+    // /*AT86RF212B old version init*/ 
+    // for (unsigned i = 0; i < AT86RF2XX_NUM; i++) {
+    //     printf("%d out of %d\n", i + 1, AT86RF2XX_NUM);
+    //     /* setup the specific driver */
+    //     at86rf2xx_setup(&at86rf2xx[i], &at86rf2xx_params[i], i);
 
-        /* set the application-provided callback */
-        at86rf2xx[i].netdev.netdev.event_callback = _event_cb;
+    //     /* set the application-provided callback */
+    //     at86rf2xx[i].netdev.netdev.event_callback = _event_cb;
 
-        /* initialize the device driver */
-        int res = at86rf2xx[i].netdev.netdev.driver->init(&at86rf2xx[i].netdev.netdev);
-        if (res != 0) {
-            return -1;
-        }
-    }
+    //     /* initialize the device driver */
+    //     int res = at86rf2xx[i].netdev.netdev.driver->init(&at86rf2xx[i].netdev.netdev);
+    //     if (res != 0) {
+    //         return -1;
+    //     }
+    // }
+
+    //     // /*AT86RF212B minimal init*/
+    // int res802154 = netdev_ieee802154_minimal_init();
+    // if (res802154) {
+    //     puts("Error initializing devices");
+    //     return 1;
+    // }
 
     float temperature;
 
@@ -818,9 +813,9 @@ int main(void)
         puts("error: unable to clear alarm flag");
         return 1;
     }
-    uint8_t state_at86rf212b = at86rf2xx_get_status(at86rf2xx);
-    printf("%d", state_at86rf212b);
-    xtimer_sleep(5);
+    // uint8_t state_at86rf212b = at86rf2xx_get_status(at86rf2xx);
+    // printf("%d", state_at86rf212b);
+    // // xtimer_sleep(5);
 
     // netif_t *_netif= netif_iter(NULL);
     // at86rf2xx_set_state(at86rf2xx, AT86RF2XX_STATE_FORCE_TRX_OFF);
@@ -955,10 +950,11 @@ int main(void)
         if (!(res & DS3231_FLAG_ALARM_1)){
         puts("error: alarm was not triggered");
         }
+radio_on(gnrc_netif);
 
 puts("ds18 start");
 gpio_set(GPIO_PIN(PA, 13));
-for(int i=0; i<100;i++){
+for(int i=0; i<10;i++){
 //   puts("mount points:");
     while (vfs_iterate_mount_dirs(&mount)) {
         printf("\t%s\n", mount.mp->mount_point);
@@ -1219,7 +1215,7 @@ for(int i=0; i<100;i++){
     }
     gpio_set(GPIO_PIN(PA, 8));
 puts("ds18 end");
-    
+    radio_on(gnrc_netif);
     /* start shell */
     puts("All up, running the shell now");
 
