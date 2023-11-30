@@ -140,7 +140,7 @@ extern ds18_t dev18;
 static at86rf2xx_t at86rf2xx[AT86RF2XX_NUM];
 
 /*Radio netif*/
-gnrc_netif_t* gnrc_netif = NULL;
+static gnrc_netif_t* gnrc_netif = NULL;
 
 
 
@@ -372,7 +372,8 @@ static void _event_cb(netdev_t *dev, netdev_event_t event)
 }
 
 void radio_off(gnrc_netif_t *_gnrc_netif){//,netif_t *_netif){
-    
+    at86rf2xx_set_state(at86rf2xx, AT86RF2XX_STATE_SLEEP);
+
     netopt_state_t state = NETOPT_STATE_SLEEP;//NETOPT_STATE_SLEEP;
     while ((_gnrc_netif = gnrc_netif_iter(_gnrc_netif))) {
             /* retry if busy */
@@ -392,7 +393,7 @@ void radio_off(gnrc_netif_t *_gnrc_netif){//,netif_t *_netif){
                     // // _netif_list(netif);
                     // last = _netif;
                     netif_set_opt(_netif, NETOPT_STATE, 0,
-                      &state, sizeof(netopt_state_t));}
+                      &state, sizeof(netopt_state_t));
                 // netif_t *last = NULL;
 
         /* Get interfaces in reverse order since the list is used like a stack.
@@ -413,15 +414,23 @@ void radio_off(gnrc_netif_t *_gnrc_netif){//,netif_t *_netif){
                 
             
             
-    }
+        }
 
+    }
 }
 void radio_on(gnrc_netif_t *netif){
+    at86rf2xx_set_state(at86rf2xx, AT86RF2XX_STATE_RX_AACK_ON);
+
     netopt_state_t state = NETOPT_STATE_IDLE;
     while ((netif = gnrc_netif_iter(netif))) {
             /* retry if busy */
             while (gnrc_netapi_set(netif->pid, NETOPT_STATE, 0,
-                &state, sizeof(state)) == -EBUSY) {}
+                &state, sizeof(state)) == -EBUSY) {
+                    netif_t *_netif = &netif->netif;
+                    netif_set_opt(_netif, NETOPT_STATE, 0,
+                      &state, sizeof(netopt_state_t));
+
+                }
     }
 }
 
@@ -493,6 +502,39 @@ int main(void)
     // }
 
     /*AT86RF212B init*/
+    // puts("Initializing AT86RF2XX devices");
+
+    // for (unsigned i = 0; i < AT86RF2XX_NUM; i++) {
+    //     printf("%d out of %d\n", i + 1, AT86RF2XX_NUM);
+    //     /* setup the specific driver */
+    //     at86rf2xx_setup(&at86rf2xx[i], &at86rf2xx_params[i], i);
+
+    //     /* set the application-provided callback */
+    //     at86rf2xx[i].netdev.netdev.event_callback = _event_cb;
+
+    //     /* initialize the device driver */
+    //     int res = at86rf2xx[i].netdev.netdev.driver->init(&at86rf2xx[i].netdev.netdev);
+    //     if (res != 0) {
+    //         return -1;
+    //     }
+    // }
+
+
+    msg_init_queue(_main_msg_queue, MAIN_QUEUE_SIZE);
+    server_init();
+
+
+    puts("Waiting for address autoconfiguration...");
+    xtimer_sleep(3);
+
+    /* print network addresses */
+    printf("{\"IPv6 addresses\": [\"");
+    netifs_print_ipv6("\", \"");
+    puts("\"]}");
+    _gnrc_netif_config(0, NULL);
+
+
+        /*AT86RF212B init*/
     puts("Initializing AT86RF2XX devices");
 
     for (unsigned i = 0; i < AT86RF2XX_NUM; i++) {
@@ -509,21 +551,6 @@ int main(void)
             return -1;
         }
     }
-
-
-    msg_init_queue(_main_msg_queue, MAIN_QUEUE_SIZE);
-    server_init();
-
-
-    puts("Waiting for address autoconfiguration...");
-    xtimer_sleep(3);
-
-    /* print network addresses */
-    printf("{\"IPv6 addresses\": [\"");
-    netifs_print_ipv6("\", \"");
-    puts("\"]}");
-    _gnrc_netif_config(0, NULL);
-
 
     float temperature;
 
@@ -791,10 +818,11 @@ int main(void)
         puts("error: unable to clear alarm flag");
         return 1;
     }
-    
+    uint8_t state_at86rf212b = at86rf2xx_get_status(at86rf2xx);
+    printf("%d", state_at86rf212b);
+    xtimer_sleep(5);
 
     // netif_t *_netif= netif_iter(NULL);
-    at86rf2xx_set_state(at86rf2xx, AT86RF2XX_STATE_SLEEP);
     // at86rf2xx_set_state(at86rf2xx, AT86RF2XX_STATE_FORCE_TRX_OFF);
     radio_off(gnrc_netif);
     
@@ -954,7 +982,7 @@ for(int i=0; i<100;i++){
         puts("creating file success");
     }
 
-    
+
     // char test_data[] = "112233";
     // if (write(fo, test_data, strlen(test_data)) != (ssize_t)strlen(test_data)) {
     //     puts("Error while writing");
