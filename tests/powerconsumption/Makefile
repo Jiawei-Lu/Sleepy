@@ -59,24 +59,24 @@ USEMODULE += netstats_rpl
 LWIP_IPV4 ?= 0
 LWIP_IPV6 ?= 0
 
-# at86212b by default
-INCLUDES += -I$(APPDIR)
-# USEMODULE += test_utils_netdev_ieee802154_minimal
-# define the driver to be used for selected boards
-ifneq (,$(filter samr21-xpro,$(BOARD)))
-  DRIVER := at86rf233
-endif
-ifneq (,$(filter iotlab-m3,$(BOARD)))
-  DRIVER := at86rf231
-endif
-ifneq (,$(filter samr30-xpro,$(BOARD)))
-  DRIVER := at86rf212b
-endif
-# use the at86rf212b as fallback device
-DRIVER ?= at86rf212b
-# include the selected driver
-USEMODULE += $(DRIVER)
-CFLAGS += -DEVENT_THREAD_STACKSIZE_DEFAULT=1024
+# # at86212b by default
+# INCLUDES += -I$(APPDIR)
+# # USEMODULE += test_utils_netdev_ieee802154_minimal
+# # define the driver to be used for selected boards
+# ifneq (,$(filter samr21-xpro,$(BOARD)))
+#   DRIVER := at86rf233
+# endif
+# ifneq (,$(filter iotlab-m3,$(BOARD)))
+#   DRIVER := at86rf231
+# endif
+# ifneq (,$(filter samr30-xpro,$(BOARD)))
+#   DRIVER := at86rf212b
+# endif
+# # use the at86rf212b as fallback device
+# DRIVER ?= at86rf212b
+# # include the selected driver
+# USEMODULE += $(DRIVER)
+# CFLAGS += -DEVENT_THREAD_STACKSIZE_DEFAULT=1024
 
 
 

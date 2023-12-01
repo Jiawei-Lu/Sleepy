@@ -257,21 +257,6 @@
  /home/jl1n119/RIOT/drivers/include/saul/periph.h \
  /home/jl1n119/RIOT/sys/include/xtimer.h \
  /home/jl1n119/RIOT/sys/include/ztimer/xtimer_compat.h \
- /home/jl1n119/RIOT/drivers/include/at86rf2xx.h \
- /home/jl1n119/RIOT/drivers/include/net/netdev.h \
- /home/jl1n119/RIOT/drivers/include/net/netdev/ieee802154.h \
- /home/jl1n119/RIOT/sys/include/net/eui_provider.h \
- /home/jl1n119/RIOT/sys/include/net/eui48.h \
- /home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_params.h \
- /home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_internal.h \
- /home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_registers.h \
- /home/jl1n119/Sleepy/tests/powerconsumption/init_dev.h \
- /home/jl1n119/RIOT/drivers/include/net/netdev/ieee802154.h \
- /home/jl1n119/RIOT/sys/include/test_utils/netdev_ieee802154_minimal.h \
- /home/jl1n119/RIOT/sys/include/test_utils/expect.h \
- /home/jl1n119/RIOT/core/lib/include/compiler_hints.h \
- /home/jl1n119/RIOT/core/lib/include/panic.h \
- /home/jl1n119/RIOT/core/lib/include/kernel_defines.h \
  /home/jl1n119/RIOT/sys/include/fs/fatfs.h \
  /home/jl1n119/RIOT/build/pkg/fatfs/source/ff.h \
  /home/jl1n119/RIOT/pkg/fatfs/vendor/include/ffconf.h \
@@ -559,21 +544,6 @@
 /home/jl1n119/RIOT/drivers/include/saul/periph.h:
 /home/jl1n119/RIOT/sys/include/xtimer.h:
 /home/jl1n119/RIOT/sys/include/ztimer/xtimer_compat.h:
-/home/jl1n119/RIOT/drivers/include/at86rf2xx.h:
-/home/jl1n119/RIOT/drivers/include/net/netdev.h:
-/home/jl1n119/RIOT/drivers/include/net/netdev/ieee802154.h:
-/home/jl1n119/RIOT/sys/include/net/eui_provider.h:
-/home/jl1n119/RIOT/sys/include/net/eui48.h:
-/home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_params.h:
-/home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_internal.h:
-/home/jl1n119/RIOT/drivers/at86rf2xx/include/at86rf2xx_registers.h:
-/home/jl1n119/Sleepy/tests/powerconsumption/init_dev.h:
-/home/jl1n119/RIOT/drivers/include/net/netdev/ieee802154.h:
-/home/jl1n119/RIOT/sys/include/test_utils/netdev_ieee802154_minimal.h:
-/home/jl1n119/RIOT/sys/include/test_utils/expect.h:
-/home/jl1n119/RIOT/core/lib/include/compiler_hints.h:
-/home/jl1n119/RIOT/core/lib/include/panic.h:
-/home/jl1n119/RIOT/core/lib/include/kernel_defines.h:
 /home/jl1n119/RIOT/sys/include/fs/fatfs.h:
 /home/jl1n119/RIOT/build/pkg/fatfs/source/ff.h:
 /home/jl1n119/RIOT/pkg/fatfs/vendor/include/ffconf.h:

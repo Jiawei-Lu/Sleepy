@@ -89,15 +89,15 @@
 #include "ztimer.h"
 #include "xtimer.h"
 
-/*IEEE 802.15.4 and AT86RF212B*/
-#include "at86rf2xx.h"
-#include "at86rf2xx_params.h"
-#include "at86rf2xx_internal.h"
-#include "init_dev.h"
-#include "net/ieee802154.h"
-#include "net/netdev/ieee802154.h"
-#include "test_utils/netdev_ieee802154_minimal.h"
-#include "test_utils/expect.h"
+// /*IEEE 802.15.4 and AT86RF212B*/
+// #include "at86rf2xx.h"
+// #include "at86rf2xx_params.h"
+// #include "at86rf2xx_internal.h"
+// #include "init_dev.h"
+// #include "net/ieee802154.h"
+// #include "net/netdev/ieee802154.h"
+// #include "test_utils/netdev_ieee802154_minimal.h"
+// #include "test_utils/expect.h"
 
 /*FAT Filesystem and VFS tool*/
 #include "fs/fatfs.h"
@@ -690,7 +690,7 @@ int main(void)
     // gpio_set(GPIO_PIN(PA, 13));
     // // //gpio_set(DS18_PARAM_PIN);
 
-    gnrc_rpl_init(7);
+    // gnrc_rpl_init(7);
     
     // gpio_set(GPIO_PIN(PA, 13));
     // ztimer_sleep(ZTIMER_MSEC, 3 * MS_PER_SEC);
@@ -870,7 +870,7 @@ int main(void)
         // puts("radio ononononononon");
         ///////////////////////
         // radio_on(netif);
-        ztimer_sleep(ZTIMER_USEC, 2 * US_PER_SEC);
+        // ztimer_sleep(ZTIMER_USEC, 2 * US_PER_SEC);
 
     // puts("mount points:");
     // while (vfs_iterate_mount_dirs(&mount)) {
@@ -951,270 +951,271 @@ int main(void)
         puts("error: alarm was not triggered");
         }
 radio_on(gnrc_netif);
+puts("radio on");
 
-puts("ds18 start");
-gpio_set(GPIO_PIN(PA, 13));
-for(int i=0; i<10;i++){
-//   puts("mount points:");
-    while (vfs_iterate_mount_dirs(&mount)) {
-        printf("\t%s\n", mount.mp->mount_point);
-    }
+// puts("ds18 start");
+// gpio_set(GPIO_PIN(PA, 13));
+// for(int i=0; i<10;i++){
+// //   puts("mount points:");
+//     while (vfs_iterate_mount_dirs(&mount)) {
+//         printf("\t%s\n", mount.mp->mount_point);
+//     }
     
-    //printf("\ndata dir: %s\n", VFS_DEFAULT_DATA);
+//     //printf("\ndata dir: %s\n", VFS_DEFAULT_DATA);
     
-    /*------------Typical file create and write test start--------------*/
-    // gpio_set(GPIO_PIN(PA, 13));
-    // gpio_set(DS18_PARAM_PIN);
-    /*11111111111111111*/
-    vfs_mount(&flash_mount);
+//     /*------------Typical file create and write test start--------------*/
+//     // gpio_set(GPIO_PIN(PA, 13));
+//     // gpio_set(DS18_PARAM_PIN);
+//     /*11111111111111111*/
+//     vfs_mount(&flash_mount);
 
-    char data_file_path[] = "/sd0/DATA.TXT";
-    int fo = open(data_file_path, O_RDWR | O_CREAT | O_APPEND, 00777);
-    if (fo < 0) {
-        printf("error while trying to create %s\n", data_file_path);
-        return 1;
-    }
-    else{
-        puts("creating file success");
-    }
-
-
-    // char test_data[] = "112233";
-    // if (write(fo, test_data, strlen(test_data)) != (ssize_t)strlen(test_data)) {
-    //     puts("Error while writing");
-    // }
-    // close(fo);
+//     char data_file_path[] = "/sd0/DATA.TXT";
+//     int fo = open(data_file_path, O_RDWR | O_CREAT | O_APPEND, 00777);
+//     if (fo < 0) {
+//         printf("error while trying to create %s\n", data_file_path);
+//         return 1;
+//     }
+//     else{
+//         puts("creating file success");
+//     }
 
 
-    /* Get temperature in centidegrees celsius */
-    ds18_get_temperature(&dev18, &temperature_ds18);
-    bool negative = (temperature_ds18 < 0);
-    ds18_data = (float) temperature_ds18/100;
-    if (negative) {
-        ds18_data = -ds18_data;
-    }
+//     // char test_data[] = "112233";
+//     // if (write(fo, test_data, strlen(test_data)) != (ssize_t)strlen(test_data)) {
+//     //     puts("Error while writing");
+//     // }
+//     // close(fo);
+
+
+//     /* Get temperature in centidegrees celsius */
+//     ds18_get_temperature(&dev18, &temperature_ds18);
+//     bool negative = (temperature_ds18 < 0);
+//     ds18_data = (float) temperature_ds18/100;
+//     if (negative) {
+//         ds18_data = -ds18_data;
+//     }
     
     
-    // // printf("Temperature [ºC]: %c%.2f"
-    // //         "\n+-------------------------------------+\n",
-    // //         negative ? '-': '+',
-    // //         ds18_data);
-    char test[100];
-    fmt_float(test,ds18_data,2);
-    printf("%s\n",test);
-    sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
+//     // // printf("Temperature [ºC]: %c%.2f"
+//     // //         "\n+-------------------------------------+\n",
+//     // //         negative ? '-': '+',
+//     // //         ds18_data);
+//     char test[100];
+//     fmt_float(test,ds18_data,2);
+//     printf("%s\n",test);
+//     sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
 
 
-    if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
-        puts("Error while writing");
-    }
-    close(fo);
-    // int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
-    //                                                         //will conflict with open(file)
-    //                                                         //open(file)will equal 0, have to beb a O_RDPNLY for read
-    // // char data_buf[sizeof(test_data)];
-    // // printf("data:[],length=");
-    // // vfs_read(fo,data_buf,sizeof(test_data));    
-    // // printf("data:[],length=");
-    // char c;
+//     if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
+//         puts("Error while writing");
+//     }
+//     close(fo);
+//     // int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
+//     //                                                         //will conflict with open(file)
+//     //                                                         //open(file)will equal 0, have to beb a O_RDPNLY for read
+//     // // char data_buf[sizeof(test_data)];
+//     // // printf("data:[],length=");
+//     // // vfs_read(fo,data_buf,sizeof(test_data));    
+//     // // printf("data:[],length=");
+//     // char c;
 
-    // while (read(fr, &c, 1) != 0){
-    // putchar(c);  //printf won't work here
-    // }
-    // puts("\n");
+//     // while (read(fr, &c, 1) != 0){
+//     // putchar(c);  //printf won't work here
+//     // }
+//     // puts("\n");
     
-    // close(fo);
-    puts("closing file");
+//     // close(fo);
+//     puts("closing file");
 
-    /*11111111111111111*/
-    vfs_umount(&flash_mount);
-    // // gpio_set(DS18_PARAM_PIN);
-    // puts("flash point umount");
-    // // gpio_clear(GPIO_PIN(PA, 13));
+//     /*11111111111111111*/
+//     vfs_umount(&flash_mount);
+//     // // gpio_set(DS18_PARAM_PIN);
+//     // puts("flash point umount");
+//     // // gpio_clear(GPIO_PIN(PA, 13));
      
 
-        // puts("OK1");
+//         // puts("OK1");
 
 
-        // struct tm testtime;
+//         // struct tm testtime;
         
-        // /* read time and compare to initial value */
-        // res = ds3231_get_time(&_dev, &testtime);
-        // if (res != 0) {
-        //     puts("error: unable to read time");
-        //     return 1;
-        // }
-        // // print_time("current time is:", &current_time);
+//         // /* read time and compare to initial value */
+//         // res = ds3231_get_time(&_dev, &testtime);
+//         // if (res != 0) {
+//         //     puts("error: unable to read time");
+//         //     return 1;
+//         // }
+//         // // print_time("current time is:", &current_time);
 
-        // // size_t pos = strftime(dstr, ISOSTR_LEN, "%Y-%m-%dT%H:%M:%S", &testtime);
-        // // dstr[pos] = '\0';
-        // // printf("The current time is: %s\n", dstr);    
-        // ds3231_print_time(testtime);
+//         // // size_t pos = strftime(dstr, ISOSTR_LEN, "%Y-%m-%dT%H:%M:%S", &testtime);
+//         // // dstr[pos] = '\0';
+//         // // printf("The current time is: %s\n", dstr);    
+//         // ds3231_print_time(testtime);
 
-        // /* clear all existing alarm flag */
-        // res = ds3231_clear_alarm_1_flag(&_dev);
-        // if (res != 0) {
-        //     puts("error: unable to clear alarm flag");
-        //     return 1;
-        // }
+//         // /* clear all existing alarm flag */
+//         // res = ds3231_clear_alarm_1_flag(&_dev);
+//         // if (res != 0) {
+//         //     puts("error: unable to clear alarm flag");
+//         //     return 1;
+//         // }
 
-        // /* get time to set up next alarm*/
-        // res = ds3231_get_time(&_dev, &testtime);
-        // if (res != 0) {
-        //     puts("error: unable to read time");
-        //     return 1;
-        // }
-        // // ds3231_print_time(testtime);
-        // // puts("setting up wakeup dalay for 10s");
-        // testtime.tm_sec += TEST_DELAY;
-        // mktime(&testtime);
+//         // /* get time to set up next alarm*/
+//         // res = ds3231_get_time(&_dev, &testtime);
+//         // if (res != 0) {
+//         //     puts("error: unable to read time");
+//         //     return 1;
+//         // }
+//         // // ds3231_print_time(testtime);
+//         // // puts("setting up wakeup dalay for 10s");
+//         // testtime.tm_sec += TEST_DELAY;
+//         // mktime(&testtime);
 
-        // /*radio off*/
-        // radio_off(netif);
-        // // res = ds3231_disable_bat(&_dev);
-        // /* set alarm */
-        // puts("start alarm1");
-        // // res = ds3231_enable_bat(&_dev);
-        // res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
-        // if (res != 0) {
-        //     puts("error: unable to program alarm");
-        //     return 1;
-        // }
+//         // /*radio off*/
+//         // radio_off(netif);
+//         // // res = ds3231_disable_bat(&_dev);
+//         // /* set alarm */
+//         // puts("start alarm1");
+//         // // res = ds3231_enable_bat(&_dev);
+//         // res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
+//         // if (res != 0) {
+//         //     puts("error: unable to program alarm");
+//         //     return 1;
+//         // }
 
 
-        // // gpio_clear(GPIO_PIN(PA,16));
-        // // gpio_clear(GPIO_PIN(PA,17));
-        // pm_set(SAML21_PM_MODE_STANDBY);
+//         // // gpio_clear(GPIO_PIN(PA,16));
+//         // // gpio_clear(GPIO_PIN(PA,17));
+//         // pm_set(SAML21_PM_MODE_STANDBY);
 
-        // puts(" WAKED UP SUCCESSFULLY ");
-        // // res = ds3231_disable_bat(&_dev);
-        // res = ds3231_clear_alarm_1_flag(&_dev);
-        // if (res != 0) {
-        //     puts("error: unable to clear alarm flag");
-        //     return 1;
-        // }
+//         // puts(" WAKED UP SUCCESSFULLY ");
+//         // // res = ds3231_disable_bat(&_dev);
+//         // res = ds3231_clear_alarm_1_flag(&_dev);
+//         // if (res != 0) {
+//         //     puts("error: unable to clear alarm flag");
+//         //     return 1;
+//         // }
 
-        // /*wait for the pin gpio goes high*/
-        // res = ds3231_get_time(&_dev, &testtime);
-        // if (res != 0) {
-        //     puts("error: unable to read time");
-        //     return 1;
-        // }
+//         // /*wait for the pin gpio goes high*/
+//         // res = ds3231_get_time(&_dev, &testtime);
+//         // if (res != 0) {
+//         //     puts("error: unable to read time");
+//         //     return 1;
+//         // }
 
-        // ds3231_print_time(testtime);
+//         // ds3231_print_time(testtime);
 
-        // testtime.tm_sec += (2*TEST_DELAY);
-        // mktime(&testtime);
-        // /*radio on*/
-        // radio_on(netif);
+//         // testtime.tm_sec += (2*TEST_DELAY);
+//         // mktime(&testtime);
+//         // /*radio on*/
+//         // radio_on(netif);
 
-        // /*DS18 INIT*/
-        // // gpio_set(GPIO_PIN(PA, 13));
-        // result = ds18_init(&dev18, &ds18_params[0]);
-        // if (result == DS18_ERROR) {
-        //     puts("[Error] The sensor pin could not be initialized");
-        //     return 1;
-        // }
+//         // /*DS18 INIT*/
+//         // // gpio_set(GPIO_PIN(PA, 13));
+//         // result = ds18_init(&dev18, &ds18_params[0]);
+//         // if (result == DS18_ERROR) {
+//         //     puts("[Error] The sensor pin could not be initialized");
+//         //     return 1;
+//         // }
         
-        // /*DS18 sensing*/
+//         // /*DS18 sensing*/
     
         
-        // int16_t temperature;
-        // float ds18_data = 0.00;
+//         // int16_t temperature;
+//         // float ds18_data = 0.00;
         
         
-        // gpio_set(DS18_PARAM_PIN);
-        // // gpio_set(GPIO_PIN(PA, 13));
-        // vfs_mount(&flash_mount);
+//         // gpio_set(DS18_PARAM_PIN);
+//         // // gpio_set(GPIO_PIN(PA, 13));
+//         // vfs_mount(&flash_mount);
 
-        // char data_file_path[] = "/sd0/DATA.TXT";
-        // int fo = open(data_file_path, O_RDWR | O_CREAT, 00777);
-        // if (fo < 0) {
-        //     printf("error while trying to create %s\n", data_file_path);
-        //     return 1;
-        // }
-        // else{
-        //     puts("creating file success");
-        // }
-        // // gpio_set(GPIO_PIN(PA, 13));
-        // /* Get temperature in centidegrees celsius */
-        // ds18_get_temperature(&dev18, &temperature);
-        // bool negative = (temperature < 0);
-        // ds18_data = (float) temperature/100;
-        // if (negative) {
-        //     ds18_data = -ds18_data;
-        // }
+//         // char data_file_path[] = "/sd0/DATA.TXT";
+//         // int fo = open(data_file_path, O_RDWR | O_CREAT, 00777);
+//         // if (fo < 0) {
+//         //     printf("error while trying to create %s\n", data_file_path);
+//         //     return 1;
+//         // }
+//         // else{
+//         //     puts("creating file success");
+//         // }
+//         // // gpio_set(GPIO_PIN(PA, 13));
+//         // /* Get temperature in centidegrees celsius */
+//         // ds18_get_temperature(&dev18, &temperature);
+//         // bool negative = (temperature < 0);
+//         // ds18_data = (float) temperature/100;
+//         // if (negative) {
+//         //     ds18_data = -ds18_data;
+//         // }
         
         
-        // printf("Temperature [ºC]: %c%.2f"
-        //         "\n+-------------------------------------+\n",
-        //         negative ? '-': '+',
-        //         ds18_data);
-        // char test[100];
-        // fmt_float(test,ds18_data,2);
-        // printf("%s\n",test);
-        // // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
+//         // printf("Temperature [ºC]: %c%.2f"
+//         //         "\n+-------------------------------------+\n",
+//         //         negative ? '-': '+',
+//         //         ds18_data);
+//         // char test[100];
+//         // fmt_float(test,ds18_data,2);
+//         // printf("%s\n",test);
+//         // // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
         
 
 
-        // if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
-        //     puts("Error while writing");
-        // }
-        // close(fo);
-        // int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
-        //                                                         //will conflict with open(file)
-        //                                                         //open(file)will equal 0, have to beb a O_RDPNLY for read
-        // // char data_buf[sizeof(test_data)];
-        // // printf("data:[],length=");
-        // // vfs_read(fo,data_buf,sizeof(test_data));    
-        // // printf("data:[],length=");
-        // char c;
+//         // if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
+//         //     puts("Error while writing");
+//         // }
+//         // close(fo);
+//         // int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
+//         //                                                         //will conflict with open(file)
+//         //                                                         //open(file)will equal 0, have to beb a O_RDPNLY for read
+//         // // char data_buf[sizeof(test_data)];
+//         // // printf("data:[],length=");
+//         // // vfs_read(fo,data_buf,sizeof(test_data));    
+//         // // printf("data:[],length=");
+//         // char c;
 
-        // while (read(fr, &c, 1) != 0){
-        // putchar(c);  //printf won't work here
-        // }
-        // puts("\n");
+//         // while (read(fr, &c, 1) != 0){
+//         // putchar(c);  //printf won't work here
+//         // }
+//         // puts("\n");
         
-        // close(fo);
-        // puts("closing file");
+//         // close(fo);
+//         // puts("closing file");
 
-        // /*11111111111111111*/
-        // vfs_umount(&flash_mount);
-        // // gpio_set(DS18_PARAM_PIN);
-        // // gpio_set(GPIO_PIN(PA, 13));
-        // puts("flash point umount");
-        // // gpio_clear(GPIO_PIN(PA, 13));
+//         // /*11111111111111111*/
+//         // vfs_umount(&flash_mount);
+//         // // gpio_set(DS18_PARAM_PIN);
+//         // // gpio_set(GPIO_PIN(PA, 13));
+//         // puts("flash point umount");
+//         // // gpio_clear(GPIO_PIN(PA, 13));
         
-        // // gpio_clear(GPIO_PIN(PA, 13));
-        // /*DS18 sampling rate*/
-        // // ztimer_sleep(ZTIMER_USEC, SAMPLING_PERIOD * US_PER_SEC);
+//         // // gpio_clear(GPIO_PIN(PA, 13));
+//         // /*DS18 sampling rate*/
+//         // // ztimer_sleep(ZTIMER_USEC, SAMPLING_PERIOD * US_PER_SEC);
 
-        // /*CLEAR ALARM FLAG*/
+//         // /*CLEAR ALARM FLAG*/
 
         
-        // puts("start alarm2");
-        // // ztimer_sleep(ZTIMER_USEC, TEST_DELAY * US_PER_SEC);
-        // res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
-        // if (res != 0) {
-        // puts("error: unable to program alarm");
-        // return 1;
-        // }
+//         // puts("start alarm2");
+//         // // ztimer_sleep(ZTIMER_USEC, TEST_DELAY * US_PER_SEC);
+//         // res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
+//         // if (res != 0) {
+//         // puts("error: unable to program alarm");
+//         // return 1;
+//         // }
 
 
-        // res = ds3231_await_alarm(&_dev);
-        // if (res < 0){
-        // puts("error: unable to program GPIO interrupt or to clear alarm flag");
-        // }
+//         // res = ds3231_await_alarm(&_dev);
+//         // if (res < 0){
+//         // puts("error: unable to program GPIO interrupt or to clear alarm flag");
+//         // }
 
-        // if (!(res & DS3231_FLAG_ALARM_1)){
-        // puts("error: alarm was not triggered");
-        // }
+//         // if (!(res & DS3231_FLAG_ALARM_1)){
+//         // puts("error: alarm was not triggered");
+//         // }
 
-        // puts("OK1");
+//         // puts("OK1");
 
-    }
-    gpio_set(GPIO_PIN(PA, 8));
-puts("ds18 end");
+//     }
+//     gpio_set(GPIO_PIN(PA, 8));
+// puts("ds18 end");
     radio_on(gnrc_netif);
     /* start shell */
     puts("All up, running the shell now");
