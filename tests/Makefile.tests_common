@@ -17,6 +17,7 @@ ifneq (,$(filter tests_driver_%,$(APPLICATION)))
 endif
 BOARD ?= native
 RIOTBASE ?= $(CURDIR)/../../../RIOT
+#RIOTBASE ?= $(CURDIR)/../../../test_RPL/RIOT
 QUIET ?= 1
 # DEVELHELP enabled by default for all tests, set 0 to disable
 DEVELHELP ?= 1
