@@ -124,6 +124,7 @@ static msg_t _main_msg_queue[MAIN_QUEUE_SIZE];
 int sensing_rate = 600;
 int communication_rate = 3600;
 int data_numbering = 0;
+int extra_slots;
 char data_file_path[30];
 // int communication_rate = 60;
 
@@ -560,8 +561,7 @@ static const shell_command_t shell_commands[] = {
     { NULL, NULL, NULL }
 };
 
-int main(void)
-{   
+int main(void){   
 
     msg_init_queue(_main_msg_queue, MAIN_QUEUE_SIZE);
     server_init();
@@ -826,10 +826,10 @@ int main(void)
         int slots = 86400 / sensing_rate; 
         int times = communication_rate / sensing_rate; 
         if (86400 % sensing_rate != 0 ){
-            bool extra_slots = 1 ;
+            extra_slots = 1 ;
         }
         else{
-            bool extra_slots = 0 ;
+            extra_slots = 0 ;
         }
         /*sensing state start*/
         for (int counter_slots = 0; counter_slots != slots; counter_slots++){
@@ -839,7 +839,7 @@ int main(void)
                 //send /sd0/DATA_data_numbering.txt
                 xtimer_sleep(2);
                 radio_off(netif);
-                data_numbering = data_numbering++;
+                data_numbering = data_numbering +1;
             }
                 res = ds3231_clear_alarm_1_flag(&_dev);
                 if (res != 0) {
@@ -870,7 +870,7 @@ int main(void)
                 // gpio_set(GPIO_PIN(PA, 13));
                 vfs_mount(&flash_mount);
                 char file_path[] = "/sd0/data";
-                sprintf(data_file_path, "%s%d.txt", file_path, data_numbering)
+                sprintf(data_file_path, "%s%d.txt", file_path, data_numbering);
                 int fo = open(data_file_path, O_RDWR | O_CREAT, 00777);
                 if (fo < 0) {
                     printf("error while trying to create %s\n", data_file_path);
@@ -940,7 +940,7 @@ int main(void)
 
             
         }
-        if (extra_slots){
+        if (extra_slots == 1){
                 res = ds3231_clear_alarm_1_flag(&_dev);
                 if (res != 0) {
                     puts("error: unable to clear alarm flag");
@@ -970,7 +970,7 @@ int main(void)
                 vfs_mount(&flash_mount);
 
                 char file_path[] = "/sd0/data";
-                sprintf(data_file_path, "%s%d.txt", file_path, data_numbering)
+                sprintf(data_file_path, "%s%d.txt", file_path, data_numbering);
                 int fo = open(data_file_path, O_RDWR | O_CREAT, 00777);
                 if (fo < 0) {
                     printf("error while trying to create %s\n", data_file_path);
@@ -1049,7 +1049,7 @@ int main(void)
             int sensing_count = slots;
         }
         */
-
+            }
     }
 
 
