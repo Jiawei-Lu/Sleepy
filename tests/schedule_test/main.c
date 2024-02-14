@@ -122,6 +122,9 @@ static msg_t _main_msg_queue[MAIN_QUEUE_SIZE];
 #define TEST_DELAY      (10U)
 #define ONE_S      (1U)
 int sensing_rate = 600;
+int communication_rate = 3600;
+int data_numbering = 0;
+char data_file_path[30];
 // int communication_rate = 60;
 
 /*DS3231 Device*/
@@ -777,10 +780,10 @@ int main(void)
     /*11111111111111111*/
     vfs_mount(&flash_mount);
 
-    char data_file_path[] = "/sd0/DATA.TXT";
-    int fo = open(data_file_path, O_RDWR | O_CREAT, 00777);
+    char path[] = "/sd0/DATA.TXT";
+    int fo = open(path, O_RDWR | O_CREAT, 00777);
     if (fo < 0) {
-        printf("error while trying to create %s\n", data_file_path);
+        printf("error while trying to create %s\n", path);
         return 1;
     }
     else{
@@ -793,7 +796,7 @@ int main(void)
         puts("Error while writing");
     }
     close(fo);
-    int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
+    int fr = open(path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
                                                                //will conflict with open(file)
                                                                //open(file)will equal 0, have to beb a O_RDPNLY for read
     // char data_buf[sizeof(test_data)];
@@ -821,6 +824,7 @@ int main(void)
     while (1){
         struct tm testtime;
         int slots = 86400 / sensing_rate; 
+        int times = communication_rate / sensing_rate; 
         if (86400 % sensing_rate != 0 ){
             bool extra_slots = 1 ;
         }
@@ -829,7 +833,14 @@ int main(void)
         }
         /*sensing state start*/
         for (int counter_slots = 0; counter_slots != slots; counter_slots++){
-            if ((extra_slots) && (counter_slots = slots -1)){
+            if (counter_slots % times == 0){
+                //commnunication start
+                radio_on(netif);
+                //send /sd0/DATA_data_numbering.txt
+                xtimer_sleep(2);
+                radio_off(netif);
+                data_numbering = data_numbering++;
+            }
                 res = ds3231_clear_alarm_1_flag(&_dev);
                 if (res != 0) {
                     puts("error: unable to clear alarm flag");
@@ -851,6 +862,106 @@ int main(void)
                 }
                 
                 /*DS18 sensing*/
+            
+                
+                int16_t temperature;
+                float ds18_data = 0.00;   
+                // gpio_set(DS18_PARAM_PIN);
+                // gpio_set(GPIO_PIN(PA, 13));
+                vfs_mount(&flash_mount);
+                char file_path[] = "/sd0/data";
+                sprintf(data_file_path, "%s%d.txt", file_path, data_numbering)
+                int fo = open(data_file_path, O_RDWR | O_CREAT, 00777);
+                if (fo < 0) {
+                    printf("error while trying to create %s\n", data_file_path);
+                    return 1;
+                }
+                else{
+                    puts("creating file success");
+                }
+                // gpio_set(GPIO_PIN(PA, 13));
+                /* Get temperature in centidegrees celsius */
+                ds18_get_temperature(&dev18, &temperature);
+                bool negative = (temperature < 0);
+                ds18_data = (float) temperature/100;
+                if (negative) {
+                    ds18_data = -ds18_data;
+                }
+                
+                
+                printf("Temperature [ºC]: %c%.2f"
+                        "\n+-------------------------------------+\n",
+                        negative ? '-': '+',
+                        ds18_data);
+                char test[100];
+                fmt_float(test,ds18_data,2);
+                printf("%s\n",test);
+                // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
+                
+
+
+                if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
+                    puts("Error while writing");
+                }
+                close(fo);
+                int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
+                                                                        //will conflict with open(file)
+                                                                        //open(file)will equal 0, have to beb a O_RDPNLY for read
+                // char data_buf[sizeof(test_data)];
+                // printf("data:[],length=");
+                // vfs_read(fo,data_buf,sizeof(test_data));    
+                // printf("data:[],length=");
+                char c;
+
+                while (read(fr, &c, 1) != 0){
+                putchar(c);  //printf won't work here
+                }
+                puts("\n");
+                
+                close(fo);
+                puts("closing file");
+
+                /*11111111111111111*/
+                vfs_umount(&flash_mount);
+                // gpio_set(DS18_PARAM_PIN);
+                // gpio_set(GPIO_PIN(PA, 13));
+                puts("flash point umount");
+                puts("start alarm1");
+                // res = ds3231_enable_bat(&_dev);
+                res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
+                if (res != 0) {
+                    puts("error: unable to program alarm");
+                    return 1;
+                }
+
+                pm_set(SAML21_PM_MODE_STANDBY);
+
+                puts(" WAKED UP SUCCESSFULLY ");
+
+            
+        }
+        if (extra_slots){
+                res = ds3231_clear_alarm_1_flag(&_dev);
+                if (res != 0) {
+                    puts("error: unable to clear alarm flag");
+                    return 1;
+                }
+                res = ds3231_get_time(&_dev, &testtime);
+                if (res != 0) {
+                    puts("error: unable to read time");
+                    return 1;
+                }
+                testtime.tm_sec += (86400 -sensing_rate * slots) * ONE_S;
+                mktime(&testtime);
+                /*DS18 INIT*/
+                // gpio_set(GPIO_PIN(PA, 13));
+                result = ds18_init(&dev18, &ds18_params[0]);
+                if (result == DS18_ERROR) {
+                    puts("[Error] The sensor pin could not be initialized");
+                    return 1;
+                }
+                
+                /*DS18 sensing*/
                 int16_t temperature;
                 float ds18_data = 0.00;
    
@@ -858,7 +969,8 @@ int main(void)
                 // gpio_set(GPIO_PIN(PA, 13));
                 vfs_mount(&flash_mount);
 
-                char data_file_path[] = "/sd0/DATA.TXT";
+                char file_path[] = "/sd0/data";
+                sprintf(data_file_path, "%s%d.txt", file_path, data_numbering)
                 int fo = open(data_file_path, O_RDWR | O_CREAT, 00777);
                 if (fo < 0) {
                     printf("error while trying to create %s\n", data_file_path);
@@ -928,109 +1040,15 @@ int main(void)
                         
             }
             else {
-                res = ds3231_clear_alarm_1_flag(&_dev);
-                if (res != 0) {
-                    puts("error: unable to clear alarm flag");
-                    return 1;
-                }
-                res = ds3231_get_time(&_dev, &testtime);
-                if (res != 0) {
-                    puts("error: unable to read time");
-                    return 1;
-                }
-                testtime.tm_sec += sensing_rate * ONE_S;
-                mktime(&testtime);
-                /*DS18 INIT*/
-                // gpio_set(GPIO_PIN(PA, 13));
-                result = ds18_init(&dev18, &ds18_params[0]);
-                if (result == DS18_ERROR) {
-                    puts("[Error] The sensor pin could not be initialized");
-                    return 1;
-                }
-                
-                /*DS18 sensing*/
-            
-                
-                int16_t temperature;
-                float ds18_data = 0.00;
-                
-                
-                
-                gpio_set(DS18_PARAM_PIN);
-                // gpio_set(GPIO_PIN(PA, 13));
-                vfs_mount(&flash_mount);
-
-                char data_file_path[] = "/sd0/DATA.TXT";
-                int fo = open(data_file_path, O_RDWR | O_CREAT, 00777);
-                if (fo < 0) {
-                    printf("error while trying to create %s\n", data_file_path);
-                    return 1;
-                }
-                else{
-                    puts("creating file success");
-                }
-                // gpio_set(GPIO_PIN(PA, 13));
-                /* Get temperature in centidegrees celsius */
-                ds18_get_temperature(&dev18, &temperature);
-                bool negative = (temperature < 0);
-                ds18_data = (float) temperature/100;
-                if (negative) {
-                    ds18_data = -ds18_data;
-                }
-                
-                
-                printf("Temperature [ºC]: %c%.2f"
-                        "\n+-------------------------------------+\n",
-                        negative ? '-': '+',
-                        ds18_data);
-                char test[100];
-                fmt_float(test,ds18_data,2);
-                printf("%s\n",test);
-                // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
-                
-
-
-                if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
-                    puts("Error while writing");
-                }
-                close(fo);
-                int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
-                                                                        //will conflict with open(file)
-                                                                        //open(file)will equal 0, have to beb a O_RDPNLY for read
-                // char data_buf[sizeof(test_data)];
-                // printf("data:[],length=");
-                // vfs_read(fo,data_buf,sizeof(test_data));    
-                // printf("data:[],length=");
-                char c;
-
-                while (read(fr, &c, 1) != 0){
-                putchar(c);  //printf won't work here
-                }
-                puts("\n");
-                
-                close(fo);
-                puts("closing file");
-
-                /*11111111111111111*/
-                vfs_umount(&flash_mount);
-                // gpio_set(DS18_PARAM_PIN);
-                // gpio_set(GPIO_PIN(PA, 13));
-                puts("flash point umount");
-                puts("start alarm1");
-                // res = ds3231_enable_bat(&_dev);
-                res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
-                if (res != 0) {
-                    puts("error: unable to program alarm");
-                    return 1;
-                }
-
-                pm_set(SAML21_PM_MODE_STANDBY);
-
-                puts(" WAKED UP SUCCESSFULLY ");
-
-            }
-        }
         /*sensing state end*/
+        /*
+        if (extra_slots){
+            int sensing_count = slots ++;
+        }
+        else{
+            int sensing_count = slots;
+        }
+        */
 
     }
 
@@ -1128,10 +1146,10 @@ int main(void)
         // gpio_set(GPIO_PIN(PA, 13));
         vfs_mount(&flash_mount);
 
-        char data_file_path[] = "/sd0/DATA.TXT";
-        int fo = open(data_file_path, O_RDWR | O_CREAT, 00777);
+        char data_file_path1[] = "/sd0/DATA.TXT";
+        int fo = open(data_file_path1, O_RDWR | O_CREAT, 00777);
         if (fo < 0) {
-            printf("error while trying to create %s\n", data_file_path);
+            printf("error while trying to create %s\n", data_file_path1);
             return 1;
         }
         else{
@@ -1162,7 +1180,7 @@ int main(void)
             puts("Error while writing");
         }
         close(fo);
-        int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
+        int fr = open(data_file_path1, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
                                                                 //will conflict with open(file)
                                                                 //open(file)will equal 0, have to beb a O_RDPNLY for read
         // char data_buf[sizeof(test_data)];
