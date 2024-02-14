@@ -819,6 +819,11 @@ int main(void){
     puts("flash point umount");
     // gpio_clear(GPIO_PIN(PA, 13));
     
+    /*sychronization*/
+    //
+    
+    //
+
 
     radio_off(netif);
     while (1){
