@@ -180,7 +180,7 @@ static ssize_t _systime_handler(coap_pkt_t* pdu, uint8_t *buf, size_t len, coap_
                 unsigned long req_count = strtoull(payload_digit, NULL, 10);
                 //req_count = atoi(payload_digit);
                 printf("%ld\n", req_count);
-                req_count = req_count -1577923200;
+                req_count = req_count -1577836800;
                 puts("have the number\n");
                 rtc_localtime((int)req_count, &handler_time);
                 
