@@ -821,10 +821,15 @@ int main(void){
     
     /*sychronization*/
     //
-    
+
+
+    ds3231_get_time(&_dev, &current_time);
+    ds3231_print_time("This is the current system time",&current_time);
+
     //
 
 
+    xtimer_sleep(3600);
     radio_off(netif);
     while (1){
         struct tm testtime;

@@ -133,7 +133,7 @@ static ssize_t _encode_link(const coap_resource_t *resource, char *buf,
 
 /* _systime_handler time structure defination*/
 extern int ds3231_print_time(struct tm testtime);
-struct tm handler_time;
+extern struct tm current_time;
 
 static ssize_t _systime_handler(coap_pkt_t* pdu, uint8_t *buf, size_t len, coap_request_ctx_t *ctx)
 {
@@ -146,8 +146,8 @@ static ssize_t _systime_handler(coap_pkt_t* pdu, uint8_t *buf, size_t len, coap_
     switch (method_flag) {
         case COAP_GET:
             // rtc_get_time(&handler_time);
-            ds3231_get_time(&_dev, &handler_time);
-            int payload_time = mktime(&handler_time);
+            ds3231_get_time(&_dev, &current_time);
+            int payload_time = mktime(&current_time);
             gcoap_resp_init(pdu, buf, len, COAP_CODE_CONTENT);
             coap_opt_add_format(pdu, COAP_FORMAT_TEXT);
             size_t resp_len = coap_opt_finish(pdu, COAP_OPT_FINISH_PAYLOAD);
@@ -169,11 +169,12 @@ static ssize_t _systime_handler(coap_pkt_t* pdu, uint8_t *buf, size_t len, coap_
                 req_count = strtoull(payload, NULL, 10);
                 printf("%d\n", req_count);
                 puts("have the number\n");
-                // rtc_localtime((int)req_count, &handler_time);
+                rtc_localtime((int)req_count, &handler_time);
                 // rtc_set_time(&handler_time);
-                ds3231_set_time(&_dev, &handler_time);
+                ds3231_set_time(&_dev, &current_time);
+                ds3231_get_time(&_dev, &current_time);
                 puts("This is the current system time :");
-                ds3231_print_time(handler_time);
+                ds3231_print_time(current_time);
                 // ds3231_print_time("This is the current system time",&handler_time);
                 return gcoap_response(pdu, buf, len, COAP_CODE_CHANGED);
             }

@@ -148,7 +148,7 @@ USEMODULE += printf_float
 CFLAGS +="-DDS18_PARAM_PIN=(GPIO_PIN(PA,28))"
 
 # # rtc
-# FEATURES_REQUIRED += periph_rtc
+FEATURES_REQUIRED += periph_rtc
 # FEATURES_OPTIONAL += periph_rtc_ms
 # FEATURES_OPTIONAL += periph_rtc_mem
 # DISABLE_MODULE += periph_init_rtc
