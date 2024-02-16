@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "time.h"
 
 #include "fmt.h"
 #include "net/gcoap.h"
@@ -51,6 +52,7 @@
 #include "ds3231.h"
 #include "ds3231_params.h"
 #include "timex.h"
+
 
 /*Networking API - netapi/netopt/netdev*/
 #include "net/gnrc/netif.h"

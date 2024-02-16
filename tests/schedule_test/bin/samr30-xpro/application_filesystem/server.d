@@ -18,7 +18,7 @@
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
  /usr/include/newlib/stdlib.h /usr/include/newlib/machine/stdlib.h \
  /usr/include/newlib/string.h /usr/include/newlib/sys/string.h \
- /home/jl1n119/RIOT/sys/include/fmt.h \
+ /usr/include/newlib/ctype.h /home/jl1n119/RIOT/sys/include/fmt.h \
  /home/jl1n119/RIOT/sys/include/net/gcoap.h \
  /home/jl1n119/RIOT/sys/include/event/callback.h \
  /home/jl1n119/RIOT/sys/include/event.h \
@@ -205,11 +205,13 @@
  /home/jl1n119/RIOT/cpu/sam0_common/include/exti_config.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h \
  /home/jl1n119/RIOT/cpu/sam0_common/include/timer_config.h \
+ /home/jl1n119/RIOT/drivers/include/periph/rtc.h \
+ /usr/include/newlib/time.h /usr/include/newlib/machine/time.h \
+ /usr/include/newlib/sys/timespec.h /usr/include/newlib/sys/_timespec.h \
+ /home/jl1n119/RIOT/sys/include/rtc_utils.h \
  /home/jl1n119/RIOT/drivers/include/periph/i2c.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h \
- /home/jl1n119/RIOT/drivers/include/ds3231.h /usr/include/newlib/time.h \
- /usr/include/newlib/machine/time.h /usr/include/newlib/sys/timespec.h \
- /usr/include/newlib/sys/_timespec.h \
+ /home/jl1n119/RIOT/drivers/include/ds3231.h \
  /home/jl1n119/RIOT/drivers/include/periph/gpio.h \
  /home/jl1n119/RIOT/drivers/include/periph/i2c.h \
  /home/jl1n119/RIOT/drivers/ds3231/include/ds3231_params.h
@@ -241,6 +243,7 @@
 /usr/include/newlib/machine/stdlib.h:
 /usr/include/newlib/string.h:
 /usr/include/newlib/sys/string.h:
+/usr/include/newlib/ctype.h:
 /home/jl1n119/RIOT/sys/include/fmt.h:
 /home/jl1n119/RIOT/sys/include/net/gcoap.h:
 /home/jl1n119/RIOT/sys/include/event/callback.h:
@@ -431,13 +434,15 @@
 /home/jl1n119/RIOT/cpu/sam0_common/include/exti_config.h:
 /home/jl1n119/RIOT/cpu/sam0_common/include/cpu_conf.h:
 /home/jl1n119/RIOT/cpu/sam0_common/include/timer_config.h:
-/home/jl1n119/RIOT/drivers/include/periph/i2c.h:
-/usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h:
-/home/jl1n119/RIOT/drivers/include/ds3231.h:
+/home/jl1n119/RIOT/drivers/include/periph/rtc.h:
 /usr/include/newlib/time.h:
 /usr/include/newlib/machine/time.h:
 /usr/include/newlib/sys/timespec.h:
 /usr/include/newlib/sys/_timespec.h:
+/home/jl1n119/RIOT/sys/include/rtc_utils.h:
+/home/jl1n119/RIOT/drivers/include/periph/i2c.h:
+/usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h:
+/home/jl1n119/RIOT/drivers/include/ds3231.h:
 /home/jl1n119/RIOT/drivers/include/periph/gpio.h:
 /home/jl1n119/RIOT/drivers/include/periph/i2c.h:
 /home/jl1n119/RIOT/drivers/ds3231/include/ds3231_params.h:

@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "fmt.h"
 #include "net/gcoap.h"
@@ -43,7 +44,7 @@
 
 /*RTC*/
 #include "periph_conf.h"
-// #include "periph/rtc.h"
+#include "periph/rtc.h"
 // #include "periph/rtc_mem.h"
 
 /*DS3231 wakeup and sleep schedule*/
@@ -94,7 +95,7 @@ static const coap_resource_t _resources[] = {
     { "/cli/stats", COAP_GET | COAP_PUT, _stats_handler, NULL },
     { "/riot/board", COAP_GET, _riot_board_handler, NULL },
     { "/riot/r", COAP_GET, _rpl_table_handler, NULL },
-    { "/riot/time", COAP_GET, _timetest_handler, NULL },
+    { "/riot/time", COAP_GET | COAP_PUT, _timetest_handler, NULL },
     { "/riot/systime", COAP_GET | COAP_PUT, _systime_handler, NULL },
 };
 
@@ -134,6 +135,7 @@ static ssize_t _encode_link(const coap_resource_t *resource, char *buf,
 /* _systime_handler time structure defination*/
 extern int ds3231_print_time(struct tm testtime);
 extern struct tm current_time;
+struct  tm  handler_time;
 
 static ssize_t _systime_handler(coap_pkt_t* pdu, uint8_t *buf, size_t len, coap_request_ctx_t *ctx)
 {
@@ -161,20 +163,32 @@ static ssize_t _systime_handler(coap_pkt_t* pdu, uint8_t *buf, size_t len, coap_
                value */
             if (pdu->payload_len <= 10) {
                 puts("<=11\n");
-                char payload[11] = { 0 };
+                char payload[11];
+                char payload_digit[11];
                 puts("received\n");
                 memcpy(payload, (char *)pdu->payload, pdu->payload_len);
+                //strncpy(payload_fix,payload,10);
                 puts("memery allocation\n");
-                printf("%s",payload);
-                req_count = strtoull(payload, NULL, 10);
-                printf("%d\n", req_count);
+                printf("%s\n",payload);
+                int i, j = 0;
+                for (i = 0; i < 10 && j < 10; i++){
+                    if (isdigit((unsigned char)payload[i])){
+                        payload_digit[j++] = payload[i];
+                    }
+                }
+                payload_digit[j] = '\0';
+                unsigned long req_count = strtoull(payload_digit, NULL, 10);
+                //req_count = atoi(payload_digit);
+                printf("%ld\n", req_count);
+                req_count = req_count -1577923200;
                 puts("have the number\n");
                 rtc_localtime((int)req_count, &handler_time);
+                
                 // rtc_set_time(&handler_time);
-                ds3231_set_time(&_dev, &current_time);
-                ds3231_get_time(&_dev, &current_time);
-                puts("This is the current system time :");
-                ds3231_print_time(current_time);
+                ds3231_set_time(&_dev, &handler_time);
+                //ds3231_get_time(&_dev, &current_time);
+                //puts("This is the current system time :");
+                //ds3231_print_time(current_time);
                 // ds3231_print_time("This is the current system time",&handler_time);
                 return gcoap_response(pdu, buf, len, COAP_CODE_CHANGED);
             }
@@ -277,21 +291,32 @@ static ssize_t _timetest_handler(coap_pkt_t* pdu, uint8_t *buf, size_t len, coap
         case COAP_PUT:
             /* convert the payload to an integer and update the internal
                value */
-            if (pdu->payload_len <= 12) {
-                puts("<=11\n");
-                char payload[13] = { 0 };
-                puts("received\n");
+            if (pdu->payload_len <= 5) {
+                char payload[6] = { 0 };
                 memcpy(payload, (char *)pdu->payload, pdu->payload_len);
-                puts("memery allocation\n");
+                puts("received\n");
                 printf("%s",payload);
-                req_count = strtoull(payload, NULL, 10);
-                printf("%d\n", req_count);
-                puts("have the number\n");
+                req_count = (uint16_t)strtoul(payload, NULL, 10);
                 return gcoap_response(pdu, buf, len, COAP_CODE_CHANGED);
             }
             else {
                 return gcoap_response(pdu, buf, len, COAP_CODE_BAD_REQUEST);
             }
+        //     //if (pdu->payload_len <= 13) {
+        //         puts("<=11\n");
+        //         char payload1[13] = { 0 };
+        //         puts("received\n");
+        //         memcpy(payload1, (char *)pdu->payload, pdu->payload_len);
+        //         puts("memery allocation\n");
+        //         printf("%s",payload1);
+        //         req_count = strtoull(payload1, NULL, 10);
+        //         printf("%d\n", req_count);
+        //         puts("have the number\n");
+        //         return gcoap_response(pdu, buf, len, COAP_CODE_CHANGED);
+        //     //}
+        //    //else {
+        //         //return gcoap_response(pdu, buf, len, COAP_CODE_BAD_REQUEST);
+        //     //}
     }
 
     return 0;
