@@ -153,7 +153,10 @@ uint8_t dst_address[] = {0};
 // int i = 0;
 unsigned iface = 0U;
 
+int _coap_result = 0;
+
 extern int _gnrc_netif_config(int argc, char **argv);
+extern int gcoap_cli_cmd(int argc, char **argv);
 
 /*-----------------FAT File System config Start-----------------*/
 static fatfs_desc_t fatfs;
@@ -827,6 +830,22 @@ int main(void){
     puts("This is the current system time");
     ds3231_print_time(current_time);
     xtimer_sleep(10);
+
+    int argc = 5;
+    char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
+
+    _coap_result = gcoap_cli_cmd(argc,argv);
+
+    // Check the result
+    if (_coap_result == 0) {
+        printf("Command executed successfully\n");
+    } else {
+        printf("Command execution failed\n");
+    }
+    int argc1 = 4;
+    char *argv1[] = {"coap", "get", "[2001:db8::58a4:8450:8511:6445]:5683", "/riot/value"};
+    _coap_result = gcoap_cli_cmd(argc1,argv1);
+
     }
     //
     radio_off(netif);
