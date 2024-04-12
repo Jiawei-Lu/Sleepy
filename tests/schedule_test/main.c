@@ -300,6 +300,8 @@ static int _umount(int argc, char **argv)
     (void)argc;
     (void)argv;
 #if FLASH_AND_FILESYSTEM_PRESENT
+    //int res = vfs_umount_jl(&flash_mount);//
+
     int res = vfs_umount(&flash_mount);
     if (res < 0) {
         printf("Error while unmounting %s\n", FLASH_MOUNT_POINT);
@@ -764,9 +766,9 @@ int main(void){
     _MTD_define();
     
     vfs_format(&flash_mount);
-
+    puts("******************\n");
     vfs_DIR mount = {0};
-    
+    puts("******************\n");
 
     /* list mounted file systems */
 
@@ -817,6 +819,7 @@ int main(void){
     puts("closing file");
 
     /*11111111111111111*/
+    //vfs_umount_jl(&flash_mount);
     vfs_umount(&flash_mount);
     // gpio_set(DS18_PARAM_PIN);
     puts("flash point umount");
@@ -950,6 +953,7 @@ int main(void){
                 puts("closing file");
 
                 /*11111111111111111*/
+                //vfs_umount_jl(&flash_mount);
                 vfs_umount(&flash_mount);
                 // gpio_set(DS18_PARAM_PIN);
                 // gpio_set(GPIO_PIN(PA, 13));
@@ -1050,6 +1054,7 @@ int main(void){
                 puts("closing file");
 
                 /*11111111111111111*/
+                //vfs_umount_jl(&flash_mount);
                 vfs_umount(&flash_mount);
                 // gpio_set(DS18_PARAM_PIN);
                 // gpio_set(GPIO_PIN(PA, 13));
@@ -1226,6 +1231,7 @@ int main(void){
         puts("closing file");
 
         /*11111111111111111*/
+        //vfs_umount_jl(&flash_mount);
         vfs_umount(&flash_mount);
         // gpio_set(DS18_PARAM_PIN);
         // gpio_set(GPIO_PIN(PA, 13));
