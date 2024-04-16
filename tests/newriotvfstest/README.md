@@ -8,6 +8,7 @@
 	1. Adapting to the latest RIOT-OS file system and IO1 Xplained extension board sdcard spi & params.
 	2. Node communication using CoAP: request PUT/GET
 	3. Working sleepy network schdule
-	
+	4. CoAP PUT Confirmable with ACK reply
+ 	5. ACK and message ID reply check scheme 
 
 
