@@ -862,25 +862,31 @@ int main(void){
     ds3231_get_time(&_dev, &current_time);
     puts("This is the current system time");
     ds3231_print_time(current_time);
-    xtimer_sleep(10);
+    // xtimer_sleep(10);
 
     while (message_ack_flag == 0){
-    int argc = 5;
-    char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
+    xtimer_sleep(3);
+    int argc = 6;
+    char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", "1710939181/+24.23/"};
+    // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
 
     _coap_result = gcoap_cli_cmd(argc,argv);
+    xtimer_sleep(3);
 
     }
+    message_ack_flag = 0;
     // Check the result
     if (_coap_result == 0) {
         printf("Command executed successfully\n");
     } else {
         printf("Command execution failed\n");
     }
+    xtimer_sleep(3);
     int argc1 = 4;
-    char *argv1[] = {"coap", "get", "[2001:db8::58a4:8450:8511:6445]:5683", "/riot/value"};
+    char *argv1[] = {"coap", "get", "[2001:630:d0:1000::d6f9]:5683", "/time"};
+    // char *argv1[] = {"coap", "get", "[2001:db8::58a4:8450:8511:6445]:5683", "/riot/value"};
     _coap_result = gcoap_cli_cmd(argc1,argv1);
-
+    xtimer_sleep(3);
     }
     //
     radio_off(netif);
