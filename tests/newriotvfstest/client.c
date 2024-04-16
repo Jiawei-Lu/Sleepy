@@ -116,6 +116,24 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
         printf(", empty payload\n");
     }
 
+    /*Check if the response received with ACK type*/
+    if (req_state == GCOAP_MEMO_RESP && pdu->hdr->type == COAP_TYPE_ACK) {
+        printf("Received ACK for message ID %u\n", pdu->hdr->id);
+        if (expected_msg_id == pdu->hdr->id) {
+            puts("ACK received with correct message ID");
+            message_ack_flag =1;
+        } else {
+            printf("Mismatch in message ID. Expected %u, got %u\n", expected_msg_id, pdu->hdr->id);
+            message_ack_flag =0;
+        }
+    } else if (req_state == GCOAP_MEMO_TIMEOUT) {
+        puts("Request timeout");
+        message_ack_flag =0;
+    } else if (req_state == GCOAP_MEMO_ERR) {
+        puts("Request error");
+        message_ack_flag =0;
+    }
+
     /* ask for next block if present */
     if (coap_get_block2(pdu, &block)) {
         if (block.more) {
@@ -385,8 +403,14 @@ int gcoap_cli_cmd(int argc, char **argv)
             coap_opt_add_uri_path(&pdu, uri);
         }
 
-        coap_hdr_set_type(pdu.hdr, msg_type);
-
+        /*set the coap_hdr_t* hdr, where 
+        typedef struct __attribute__((packed)) {
+            uint8_t ver_t_tkl;          
+            uint8_t code;               
+            uint16_t id;  //Req/resp ID             
+        } coap_hdr_t;*/
+        coap_hdr_set_type(pdu.hdr, msg_type);  /*msg_type is CON or NON*/
+        int expected_msg_id == pdu->hdr->id;
         memset(_last_req_path, 0, _LAST_REQ_PATH_MAX);
         if (uri_len < _LAST_REQ_PATH_MAX) {
             memcpy(_last_req_path, uri, uri_len);
@@ -394,7 +418,7 @@ int gcoap_cli_cmd(int argc, char **argv)
 
         size_t paylen = (argc == apos + 3) ? strlen(argv[apos+2]) : 0;
         if (paylen) {
-            coap_opt_add_format(&pdu, COAP_FORMAT_TEXT);
+            coap_opt_add_format(&pdu, COAP_FORMAT_TEXT); /*coap.h defined different format of coap payload, can be image/link/json*/
         }
 
         if (_proxied) {
@@ -418,6 +442,8 @@ int gcoap_cli_cmd(int argc, char **argv)
 
         printf("gcoap_cli: sending msg ID %u, %" PRIuSIZE " bytes\n",
                 coap_get_id(&pdu), len);
+
+        /*Send CoAP request*/
         if (!_send(&buf[0], len, _proxied ? &_proxy_remote : &remote)) {
             puts("gcoap_cli: msg send failed");
         }

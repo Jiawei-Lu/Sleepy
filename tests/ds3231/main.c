@@ -372,7 +372,7 @@ int main(void)
             printf("Temperature [ºC]: %c%d"
                    "\n+-------------------------------------+\n",
                    negative ? '-': ' ',
-                   temperature\n);
+                   temperaturn);
         }
         else{
             puts("error");

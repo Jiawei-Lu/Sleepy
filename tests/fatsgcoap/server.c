@@ -23,7 +23,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "time.h"
+
 
 #include "fmt.h"
 #include "net/gcoap.h"
@@ -44,7 +44,7 @@
 
 /*RTC*/
 #include "periph_conf.h"
-// #include "periph/rtc.h"
+#include "periph/rtc.h"
 // #include "periph/rtc_mem.h"
 
 /*DS3231 wakeup and sleep schedule*/

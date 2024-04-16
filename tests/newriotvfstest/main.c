@@ -156,6 +156,7 @@ uint8_t dst_address[] = {0};
 unsigned iface = 0U;
 
 int _coap_result = 0;
+int message_ack_flag =0;
 
 extern int _gnrc_netif_config(int argc, char **argv);
 extern int gcoap_cli_cmd(int argc, char **argv);
@@ -863,11 +864,13 @@ int main(void){
     ds3231_print_time(current_time);
     xtimer_sleep(10);
 
+    while (message_ack_flag == 0){
     int argc = 5;
     char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
 
     _coap_result = gcoap_cli_cmd(argc,argv);
 
+    }
     // Check the result
     if (_coap_result == 0) {
         printf("Command executed successfully\n");
