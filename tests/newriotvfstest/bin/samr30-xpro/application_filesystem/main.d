@@ -26,6 +26,7 @@
  /usr/include/newlib/inttypes.h /usr/include/newlib/sys/_intsup.h \
  /usr/include/newlib/stdlib.h /usr/include/newlib/machine/stdlib.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
+ /usr/include/newlib/ctype.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/shell.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/pm.h \
  /home/jl1n119/test_RPL/RIOT/cpu/saml21/include/periph_cpu.h \
@@ -322,6 +323,7 @@
 /usr/include/newlib/machine/stdlib.h:
 /usr/include/newlib/errno.h:
 /usr/include/newlib/sys/errno.h:
+/usr/include/newlib/ctype.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/shell.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/periph/pm.h:
 /home/jl1n119/test_RPL/RIOT/cpu/saml21/include/periph_cpu.h:

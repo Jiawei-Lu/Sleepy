@@ -18,6 +18,7 @@
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
  /usr/include/newlib/stdlib.h /usr/include/newlib/machine/stdlib.h \
  /usr/include/newlib/string.h /usr/include/newlib/sys/string.h \
+ /usr/include/newlib/ctype.h \
  /home/jl1n119/test_RPL/RIOT/sys/posix/include/arpa/inet.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/af.h \
  /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/bytes.h \
@@ -231,6 +232,7 @@
 /usr/include/newlib/machine/stdlib.h:
 /usr/include/newlib/string.h:
 /usr/include/newlib/sys/string.h:
+/usr/include/newlib/ctype.h:
 /home/jl1n119/test_RPL/RIOT/sys/posix/include/arpa/inet.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/af.h:
 /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/bytes.h:

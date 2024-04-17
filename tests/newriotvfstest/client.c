@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #include <arpa/inet.h>
 
@@ -47,6 +48,9 @@ static sock_udp_ep_t _proxy_remote;
 static char proxy_uri[64];
 extern int message_ack_flag;
 int expected_msg_id;
+extern int sych_time_length;
+extern char sych_time_payload[11];
+extern char payload_digit[11];
 
 /* Retain request path to re-request if response includes block. User must not
  * start a new request (with a new path) until any blockwise transfer
@@ -108,6 +112,18 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
             /* Expecting diagnostic payload in failure cases */
             printf(", %u bytes\n%.*s\n", pdu->payload_len, pdu->payload_len,
                                                           (char *)pdu->payload);
+            if (pdu->payload_len<= 10) {
+                puts("received\n");
+                memcpy(sych_time_payload, (char *)pdu->payload, pdu->payload_len);
+                printf("%s\n",sych_time_payload);
+                int i, j = 0;
+                for (i = 0; i < 10 && j < 10; i++){
+                    if (isdigit((unsigned char)sych_time_payload[i])){
+                        payload_digit[j++] = sych_time_payload[i];
+                    }
+                }
+                payload_digit[j] = '\0';
+            }
         }
         else {
             printf(", %u bytes\n", pdu->payload_len);

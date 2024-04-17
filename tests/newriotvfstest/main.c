@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <time.h>
+#include <ctype.h>
 
 
 #include "shell.h"
@@ -160,6 +161,11 @@ int message_ack_flag =0;
 
 extern int _gnrc_netif_config(int argc, char **argv);
 extern int gcoap_cli_cmd(int argc, char **argv);
+struct  tm  sych_time;
+int sych_time_length;
+// char* sych_time_payload;
+char sych_time_payload[11];
+char payload_digit[11];
 
 /*-----------------FAT File System config Start-----------------*/
 static fatfs_desc_t fatfs;
@@ -453,105 +459,7 @@ int ds3231_print_time(struct tm testtime)
     return 0;
 }
 
-// static int cmd_unblock_rtc(int argc, char **argv)
-// {
-//     if (check_mode_duration(argc, argv) != 0) {
-//         return 1;
-//     }
 
-//     int mode = parse_mode(argv[1]);
-//     int duration = parse_duration(argv[2]);
-
-//     if (mode < 0 || duration < 0) {
-//         return 1;
-//     }
-
-//     pm_blocker_t pm_blocker = pm_get_blocker();
-//     if (pm_blocker.blockers[mode] == 0) {
-//         printf("Mode %d is already unblocked.\n", mode);
-//         return 1;
-//     }
-
-//     printf("Unblocking power mode %d for %d seconds.\n", mode, duration);
-//     fflush(stdout);
-
-//     struct tm time;
-
-//     rtc_get_time(&time);
-//     time.tm_sec += duration;
-//     rtc_set_alarm(&time, cb_rtc, (void *)mode);
-
-//     pm_unblock(mode);
-
-//     return 0;
-// }
-
-// static int cmd_set_rtc(int argc, char **argv)
-// {
-//     if (check_mode_duration(argc, argv) != 0) {
-//         return 1;
-//     }
-
-//     int mode = parse_mode(argv[1]);
-//     int duration = parse_duration(argv[2]);
-
-//     if (mode < 0 || duration < 0) {
-//         return 1;
-//     }
-
-//     printf("Setting power mode %d for %d seconds.\n", mode, duration);
-//     fflush(stdout);
-
-//     struct tm time;
-
-//     rtc_get_time(&time);
-//     time.tm_sec += duration;
-//     rtc_set_alarm(&time, cb_rtc_puts, "The alarm rang");
-
-//     pm_set(mode);
-//     radio_off(netif);
-
-//     return 0;
-// }
-
-
-// static void _sd_card_cid(void)
-// {
-//     puts("SD Card CID info:");
-//     printf("MID: %d\n", dev.sdcard.cid.MID);
-//     printf("OID: %c%c\n", dev.sdcard.cid.OID[0], dev.sdcard.cid.OID[1]);
-//     printf("PNM: %c%c%c%c%c\n",
-//            dev.sdcard.cid.PNM[0], dev.sdcard.cid.PNM[1], dev.sdcard.cid.PNM[2],
-//            dev.sdcard.cid.PNM[3], dev.sdcard.cid.PNM[4]);
-//     printf("PRV: %u\n", dev.sdcard.cid.PRV);
-//     printf("PSN: %" PRIu32 "\n", dev.sdcard.cid.PSN);
-//     printf("MDT: %u\n", dev.sdcard.cid.MDT);
-//     printf("CRC: %u\n", dev.sdcard.cid.CID_CRC);
-//     puts("+----------------------------------------+\n");
-// }
-
-// static void _MTD_define(void)
-// {
-//     #if defined(MODULE_MTD_NATIVE) || defined(MODULE_MTD_MCI)
-//         fatfs.dev = mtd_dev_get(0);
-//     #elif defined(MODULE_MTD_SDMMC)
-//         fatfs.dev = &mtd_sdmmc_dev0.base;
-//     #elif defined(MODULE_MTD_SDCARD)
-//         for(unsigned int i = 0; i < SDCARD_SPI_NUM; i++){
-//             mtd_sdcard_devs[i].base.driver = &mtd_sdcard_driver;
-//             mtd_sdcard_devs[i].sd_card = &dev.sdcard;
-//             mtd_sdcard_devs[i].params = &sdcard_params;
-//             mtd_init(&mtd_sdcard_devs[i].base);
-//         }
-
-//         //     for(unsigned int i = 0; i < SDCARD_SPI_NUM; i++){
-//         // mtd_sdcard_devs[i].base.driver = &mtd_sdcard_driver;
-//         // mtd_sdcard_devs[i].sd_card = &dev.sdcard;
-//         // mtd_sdcard_devs[i].params = &sdcard_spi_params[i];
-//         // mtd_init(&mtd_sdcard_devs[i].base);
-//         fatfs.dev = mtd_sdcard;
-//     #endif
-// }
 
 static const shell_command_t shell_commands[] = {
     { "cat", "print the content of a file", _cat },
@@ -858,14 +766,14 @@ int main(void){
     /*sychronization*/
     //
 
-    while (1){
+  
     ds3231_get_time(&_dev, &current_time);
     puts("This is the current system time");
     ds3231_print_time(current_time);
     // xtimer_sleep(10);
 
     while (message_ack_flag == 0){
-    xtimer_sleep(3);
+    // xtimer_sleep(3);
     int argc = 6;
     char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", "1710939181/+24.23/"};
     // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
@@ -883,11 +791,55 @@ int main(void){
     }
     xtimer_sleep(3);
     int argc1 = 4;
-    char *argv1[] = {"coap", "get", "[2001:630:d0:1000::d6f9]:5683", "/time"};
+    char *argv1[] = {"coap", "get", "[2001:630:d0:1000::d6f9]:5683", "/realtime"};
     // char *argv1[] = {"coap", "get", "[2001:db8::58a4:8450:8511:6445]:5683", "/riot/value"};
     _coap_result = gcoap_cli_cmd(argc1,argv1);
     xtimer_sleep(3);
+
+    if (_coap_result == 0) {
+        printf("Command executed successfully\n");
+        printf("%s\n", payload_digit);
+        unsigned long req_count = strtoull(payload_digit, NULL, 10);
+        //req_count = atoi(payload_digit);
+        printf("%ld\n", req_count);
+        req_count = req_count -1577836800;
+        puts("have the number\n");
+        rtc_localtime((int)req_count, &sych_time);
+        
+        // rtc_set_time(&handler_time);
+        ds3231_set_time(&_dev, &sych_time);
+        ds3231_get_time(&_dev, &current_time);
+        ds3231_print_time(current_time);
+    } else {
+        printf("Command execution failed\n");
     }
+
+    // if (sych_time_length<= 10) {
+    //     puts("******************\n");
+    //     // printf("%.*s\n",sych_time_length,sych_time_payload);
+    //     // char sych_time_payload[11];
+    //     char payload_digit[11];
+    //     puts("received\n");
+    //     // memcpy(payload, (char *)sych_time_payload, sych_time_length);
+    //     puts("memery allocation\n");
+    //     printf("%s\n",sych_time_payload);
+    //     int i, j = 0;
+    //     for (i = 0; i < 10 && j < 10; i++){
+    //         if (isdigit((unsigned char)sych_time_payload[i])){
+    //             payload_digit[j++] = sych_time_payload[i];
+    //         }
+    //     }
+    //     payload_digit[j] = '\0';
+
+    ds3231_get_time(&_dev, &current_time);
+    if (res != 0) {
+        puts("error: unable to read time");
+        return 1;
+    }
+
+    puts("Clock value is now :");
+    ds3231_print_time(current_time);
+    
     //
     radio_off(netif);
     while (1){
