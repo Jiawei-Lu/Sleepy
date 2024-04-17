@@ -10,5 +10,7 @@
 	3. Working sleepy network schdule
 	4. CoAP PUT Confirmable with ACK reply
  	5. ACK and message ID reply check scheme 
-
+	6. Node GET real time from BR-libcoap server (/realtime)
+		* libcoap server inet6 address [2001:630:d0:1000::d6f9]:5683
+		* libcoap server complie: gcc -I /usr/local/include/ coap-server.c -o coap-server -l coap-3-openssl
 
