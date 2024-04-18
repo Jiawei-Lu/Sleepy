@@ -13,4 +13,6 @@
 	6. Node GET real time from BR-libcoap server (/realtime)
 		* libcoap server inet6 address [2001:630:d0:1000::d6f9]:5683
 		* libcoap server complie: gcc -I /usr/local/include/ coap-server.c -o coap-server -l coap-3-openssl
+		* libcaop error: ./coap-server: symbol lookup error: ./coap-server: undefined symbol --> cd liibcoap and follow the 
+				 install guidance ofgithub libcoap install --> export LD_LIBRARY_PATH=/usr/local/lib -->gcc as above
 

@@ -771,7 +771,80 @@ int main(void){
     puts("This is the current system time");
     ds3231_print_time(current_time);
     // xtimer_sleep(10);
+    int sens = 0;
+    char buffer[100];  // Adjust the buffer size according to your expectations of the data size
+    ssize_t bytes_read;
+    while (sens!=5){
+        int16_t temperature;
+        float ds18_data = 0.00;   
+        // gpio_set(DS18_PARAM_PIN);
+        // gpio_set(GPIO_PIN(PA, 13));
+        vfs_DIR mount = {0};
+        puts("******************\n");
 
+        /* list mounted file systems */
+
+        puts("mount points:");
+        while (vfs_iterate_mount_dirs(&mount)) {
+            printf("\t%s\n", mount.mp->mount_point);
+        }
+        vfs_mount(&flash_mount);
+        char file_path[] = "/sd0/data";
+        sprintf(data_file_path, "%s%d.txt", file_path, data_numbering);
+        int fo = open(data_file_path, O_RDWR | O_CREAT, 00777);
+        if (fo < 0) {
+            printf("error while trying to create %s\n", data_file_path);
+            return 1;
+        }
+        else{
+            puts("creating file success");
+        }
+        // gpio_set(GPIO_PIN(PA, 13));
+        /* Get temperature in centidegrees celsius */
+        ds18_get_temperature(&dev18, &temperature);
+        bool negative = (temperature < 0);
+        ds18_data = (float) temperature/100;
+        if (negative) {
+            ds18_data = -ds18_data;
+        }
+        
+        
+        printf("Temperature [ºC]: %c%.2f"
+                "\n+-------------------------------------+\n",
+                negative ? '-': '+',
+                ds18_data);
+        char test[100];
+        fmt_float(test,ds18_data,2);
+        printf("%s\n",test);
+        // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
+        
+
+
+        if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
+            puts("Error while writing");
+        }
+        close(fo);
+        int fd1 = open(data_file_path, O_RDONLY);
+        if (fd1 < 0) {
+            perror("Failed to open file for reading");
+            return 1;
+        }
+        bytes_read = read(fd1, buffer, sizeof(buffer) - 1);  // Leave space for null terminator
+        if (bytes_read < 0) {
+            perror("Failed to read from file");
+            close(fd1);
+            return 1;
+        }
+        buffer[bytes_read] = '\0'; 
+        printf("Read data: %s\n", buffer);
+        close(fd1);
+
+        vfs_umount(&flash_mount, false);   
+        // gpio_set(DS18_PARAM_PIN);
+        puts("flash point umount");
+        sens = sens + 1;
+    }
+   
     while (message_ack_flag == 0){
     // xtimer_sleep(3);
     int argc = 6;
@@ -790,6 +863,8 @@ int main(void){
         printf("Command execution failed\n");
     }
     xtimer_sleep(3);
+
+    while (message_ack_flag == 0 && _coap_result != 0){
     int argc1 = 4;
     char *argv1[] = {"coap", "get", "[2001:630:d0:1000::d6f9]:5683", "/realtime"};
     // char *argv1[] = {"coap", "get", "[2001:db8::58a4:8450:8511:6445]:5683", "/riot/value"};
@@ -812,6 +887,7 @@ int main(void){
         ds3231_print_time(current_time);
     } else {
         printf("Command execution failed\n");
+    }
     }
 
     // if (sych_time_length<= 10) {
