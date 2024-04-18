@@ -17,5 +17,10 @@
 		* libcoap server complie: gcc -I /usr/local/include/ coap-server.c -o coap-server -l coap-3-openssl
 		* libcaop error: ./coap-server: symbol lookup error: ./coap-server: undefined symbol --> cd liibcoap and follow the 
 				 install guidance ofgithub libcoap install --> export LD_LIBRARY_PATH=/usr/local/lib -->gcc as above
-	7.
+	7.Environment ready & Code frame ready for : fixing error in PUT data from sd card file and Payload text.
+	
+******* RIOT-Sniffer usage hint:
+	1. cd applications/sniffer: sudo make BOARD=samr30-xpro PORT=/dev/ttyACM0 flash
+	2. cd /tools: in the makefile, define channel page number for 0 of subGHz
+	3. sudo ./sniffer.py /dev/ttyACM0 0 | sudo wireshark -k -i -
 
