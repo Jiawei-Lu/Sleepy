@@ -17,7 +17,11 @@
 		* libcoap server complie: gcc -I /usr/local/include/ coap-server.c -o coap-server -l coap-3-openssl
 		* libcaop error: ./coap-server: symbol lookup error: ./coap-server: undefined symbol --> cd liibcoap and follow the 
 				 install guidance ofgithub libcoap install --> export LD_LIBRARY_PATH=/usr/local/lib -->gcc as above
-	7.Environment ready & Code frame ready for : fixing error in PUT data from sd card file and Payload text.
+		* libcoap server: now = my_clock_base + (t / COAP_TICKS_PER_SECOND) +3600; // +3600 here to apapt to UK Summer Time
+	7. Environment ready & Code frame ready for : fixing error in PUT data from sd card file and Payload text.
+	8. PUT SD card data to server successful.
+	9. Data structure: temp,timestamp,......,temp,timestamp,......
+	10.Payload test: ready for further radio conflict test.
 	
 ******* RIOT-Sniffer usage hint:
 	1. cd applications/sniffer: sudo make BOARD=samr30-xpro PORT=/dev/ttyACM0 flash
