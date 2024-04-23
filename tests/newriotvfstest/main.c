@@ -165,8 +165,8 @@ extern int gcoap_cli_cmd(int argc, char **argv);
 struct  tm  sych_time;
 int sych_time_length;
 // char* sych_time_payload;
-char sych_time_payload[11];
-char payload_digit[11];
+char sych_time_payload[12];
+char payload_digit[12];
 
 /*-----------------FAT File System config Start-----------------*/
 static fatfs_desc_t fatfs;
@@ -443,6 +443,22 @@ static void btn_cb(void *ctx)
 // {
 //     puts(arg);
 // }
+
+static void _sd_card_cid(void)
+{
+    puts("SD Card CID info:");
+    printf("MID: %d\n", dev.sdcard.cid.MID);
+    printf("OID: %c%c\n", dev.sdcard.cid.OID[0], dev.sdcard.cid.OID[1]);
+    printf("PNM: %c%c%c%c%c\n",
+           dev.sdcard.cid.PNM[0], dev.sdcard.cid.PNM[1], dev.sdcard.cid.PNM[2],
+           dev.sdcard.cid.PNM[3], dev.sdcard.cid.PNM[4]);
+    printf("PRV: %u\n", dev.sdcard.cid.PRV);
+    printf("PSN: %" PRIu32 "\n", dev.sdcard.cid.PSN);
+    printf("MDT: %u\n", dev.sdcard.cid.MDT);
+    printf("CRC: %u\n", dev.sdcard.cid.CID_CRC);
+    puts("+----------------------------------------+\n");
+}
+
 int ds3231_print_time(struct tm testtime)
 {
     int re;
@@ -521,7 +537,11 @@ int main(void){
 
     puts("Initialization successful");
     puts("\n+--------Starting tests --------+");
-    
+    /* Card detect pin is inverted */
+    if (!gpio_read(IO1_SDCARD_SPI_PARAM_DETECT)) {
+        _sd_card_cid();
+        ztimer_sleep(ZTIMER_MSEC, DELAY_1S);
+    }
     /* Get temperature in degrees celsius */
     at30tse75x_get_temperature(&dev.temp, &at30tse75x_temperature);
     printf("Temperature [°C]: %i.%03u\n"
@@ -530,35 +550,31 @@ int main(void){
             (unsigned)((at30tse75x_temperature - (int)at30tse75x_temperature) * 1000));
     ztimer_sleep(ZTIMER_MSEC, DELAY_1S);
 
-    /* Card detect pin is inverted */
-    if (!gpio_read(IO1_SDCARD_SPI_PARAM_DETECT)) {
-        // _sd_card_cid();
-        // ztimer_sleep(ZTIMER_MSEC, DELAY_1S);
-    }
+    
 
     // uint16_t light;
     // io1_xplained_read_light_level(&light);
     // printf("Light level: %i\n"
     //         "+-------------------------------------+\n",
-    //         light);
-    ztimer_sleep(ZTIMER_MSEC, DELAY_1S);
+    // //         light);
+    // ztimer_sleep(ZTIMER_MSEC, DELAY_1S);
 
-    /* set led */
-    gpio_set(IO1_LED_PIN);
-    ztimer_sleep(ZTIMER_MSEC, DELAY_1S);
+    // /* set led */
+    // gpio_set(IO1_LED_PIN);
+    // ztimer_sleep(ZTIMER_MSEC, DELAY_1S);
     
 
-    /* clear led */
-    gpio_clear(IO1_LED_PIN);
-    ztimer_sleep(ZTIMER_MSEC, DELAY_1S);
+    // /* clear led */
+    // gpio_clear(IO1_LED_PIN);
+    // ztimer_sleep(ZTIMER_MSEC, DELAY_1S);
 
-    /* toggle led */
-    gpio_toggle(IO1_LED_PIN);
-    ztimer_sleep(ZTIMER_MSEC, DELAY_1S);
+    // /* toggle led */
+    // gpio_toggle(IO1_LED_PIN);
+    // ztimer_sleep(ZTIMER_MSEC, DELAY_1S);
 
-    /* toggle led again */
-    gpio_toggle(IO1_LED_PIN);
-    ztimer_sleep(ZTIMER_MSEC, DELAY_1S);
+    // /* toggle led again */
+    // gpio_toggle(IO1_LED_PIN);
+    // ztimer_sleep(ZTIMER_MSEC, DELAY_1S);
     
     
     /*------------Typical file create and write test end----------------*/
@@ -733,7 +749,7 @@ int main(void){
     else{
         puts("creating file success");
     }
-    char test_data[] = "1710953364/+23.23/1710953364/-22.22/1710953364/+22.22/1710953364/+58.56/1710953364/+23.23/";
+    char test_data[] = "1710953364/+23.23/1710953364/-22.22/1710953364/+22.22/1710953364/+58.56/1710953364/+23.23/1710953364/";
 
 
     if (write(fo, test_data, strlen(test_data)) != (ssize_t)strlen(test_data)) {
@@ -789,6 +805,9 @@ int main(void){
         unsigned long req_count = strtoull(payload_digit, NULL, 10);
         //req_count = atoi(payload_digit);
         printf("%ld\n", req_count);
+        if (req_count == 0){
+            message_ack_flag =0;
+        } else {
         req_count = req_count -1577836800;
         puts("have the number\n");
         rtc_localtime((int)req_count, &sych_time);
@@ -798,21 +817,35 @@ int main(void){
         ds3231_get_time(&_dev, &current_time);
         ds3231_print_time(current_time);
         message_ack_flag =1;
-    } else {
+        }
+    } 
+    else {
         printf("Command execution failed\n");
     }
     }
     message_ack_flag =0;
 
+    while (message_ack_flag == 0){
+    // xtimer_sleep(3);
+    int argc2 = 6;
+    char *argv2[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", "+11.11,1111111111,+22.22,2222222222,+33.33,3333333333,+44.44,4444444444,+55.55,5555555555,"};//+66.66,6666666666,+77.777"};//15-4 maximum 128 bytes
+    // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
+
+    _coap_result = gcoap_cli_cmd(argc2,argv2);
+    xtimer_sleep(3);
+
+    }
+    message_ack_flag = 0;
+
 
 
     // xtimer_sleep(10);
     int sens = 0;
-    char buffer[100];  // Adjust the buffer size according to your expectations of the data size
+    char buffer[128];  // Adjust the buffer size according to your expectations of the data size
     ssize_t bytes_read;
     int16_t temperature_test;
     float ds18_data_test = 0.00;  
-    while (sens!=5){
+    while (sens!=7){
  
         // gpio_set(DS18_PARAM_PIN);
         // gpio_set(GPIO_PIN(PA, 13));
@@ -857,7 +890,7 @@ int main(void){
                 "\n+-------------------------------------+\n",
                 negative ? '-': '+',
                 ds18_data_test);
-        char payloadtest[50];
+        char payloadtest[40];
         int len = fmt_float(payloadtest,ds18_data_test,2);
         ds3231_get_time(&_dev, &current_time);
         int current_sensing_time = mktime(&current_time);
@@ -900,15 +933,7 @@ int main(void){
         puts("flash point umount");
         sens = sens + 1;
     }
-    // vfs_DIR mount = {0};
-    puts("******************\n");
 
-    /* list mounted file systems */
-
-    // puts("mount points:");
-    // while (vfs_iterate_mount_dirs(&mount)) {
-    //     printf("\t%s\n", mount.mp->mount_point);
-    // }
     vfs_mount(&flash_mount);
     int fd1 = open(data_file_path2, O_RDONLY, 00777);
     if (fd1 < 0) {
