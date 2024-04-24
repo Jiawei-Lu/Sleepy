@@ -25,6 +25,8 @@
 	11.PAYLOAD test 128 bytes coap maxsize with 115bytes text.
 	12.Fix IO1 bug.
 	13.Tried to fix unrecongnized coap realtime reply.
+	14.Schedule should not use ONE_S, cause 1000 times bigger gap
+	15.CoAP PUT before GET /realtime to sychronize, this can help to avoid long wait to get correct sychronized clock using GCoAP
 	
 ******* RIOT-Sniffer usage hint:
 	1. cd applications/sniffer: sudo make BOARD=samr30-xpro PORT=/dev/ttyACM0 flash
