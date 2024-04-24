@@ -167,7 +167,7 @@ USEMODULE += vfs_auto_format
 USEMODULE += vfs
 USEMODULE += fatfs_vfs
 
-
+# CFLAGS += -DCONFIG_GCOAP_PDU_BUF_SIZE=512
 include $(RIOTBASE)/Makefile.include
 
 # Set a custom channel if needed
