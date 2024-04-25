@@ -807,22 +807,22 @@ int main(void){
     // message_ack_flag = 0;
 
     while (message_ack_flag == 0){
-    int argc1 = 4;
-    char *argv1[] = {"coap", "get", "[2001:630:d0:1000::d6f9]:5683", "/realtime"};
-    // char *argv1[] = {"coap", "get", "[2001:db8::58a4:8450:8511:6445]:5683", "/riot/value"};
-    _coap_result = gcoap_cli_cmd(argc1,argv1);
-    xtimer_sleep(10);
+        int argc1 = 4;
+        char *argv1[] = {"coap", "get", "[2001:630:d0:1000::d6f9]:5683", "/realtime"};
+        // char *argv1[] = {"coap", "get", "[2001:db8::58a4:8450:8511:6445]:5683", "/riot/value"};
+        _coap_result = gcoap_cli_cmd(argc1,argv1);
+        xtimer_sleep(10);
 
-    if (_coap_result == 0) {
-        printf("Command executed successfully\n");
-        
-        ds3231_get_time(&_dev, &current_time);
-        ds3231_print_time(current_time);
-        message_ack_flag =1;
-    } 
-    else {
-        printf("Command execution failed\n");
-    }
+        if (_coap_result == 0) {
+            printf("Command executed successfully\n");
+            
+            ds3231_get_time(&_dev, &current_time);
+            ds3231_print_time(current_time);
+            
+        } 
+        else {
+            printf("Command execution failed\n");
+        }
     }
     message_ack_flag =0;
 
@@ -997,13 +997,50 @@ int main(void){
         else{
             extra_slots = 0 ;
         }
+        char file_path[] = "/sd0/data";
         /*sensing state start*/
         for (int counter_slots = 0; counter_slots != slots; counter_slots++){
             if (counter_slots % times == 0){
                 //commnunication start
                 radio_on(netif);
-                //send /sd0/DATA_data_numbering.txt
-                xtimer_sleep(2);
+                vfs_mount(&flash_mount);
+                sprintf(data_file_path, "%s%d.txt", file_path, data_numbering);
+                int fd1 = open(data_file_path, O_RDONLY, 00777);
+                if (fd1 < 0) {
+                    perror("Failed to open file for reading");
+                    return 1;
+                }
+                bytes_read = read(fd1, buffer, sizeof(buffer) - 1);  // Leave space for null terminator
+                if (bytes_read < 0) {
+                    perror("Failed to read from file");
+                    close(fd1);
+                    return 1;
+                }
+                buffer[bytes_read] = '\0'; 
+                printf("Read data: %s\n", buffer);
+                close(fd1);
+                vfs_umount(&flash_mount, false);   
+                // gpio_set(DS18_PARAM_PIN);
+                puts("flash point umount");
+            
+                while (message_ack_flag == 0){
+                // xtimer_sleep(3);
+                int argc = 6;
+                char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", buffer};
+                // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
+
+                _coap_result = gcoap_cli_cmd(argc,argv);
+                xtimer_sleep(3);
+
+                }
+                message_ack_flag = 0;
+                // Check the result
+                if (_coap_result == 0) {
+                    printf("Command executed successfully\n");
+                } else {
+                    printf("Command execution failed\n");
+                }
+                
                 radio_off(netif);
                 data_numbering = data_numbering +1;
             }
@@ -1040,7 +1077,7 @@ int main(void){
                 // gpio_set(DS18_PARAM_PIN);
                 // gpio_set(GPIO_PIN(PA, 13));
                 vfs_mount(&flash_mount);
-                char file_path[] = "/sd0/data";
+
                 sprintf(data_file_path, "%s%d.txt", file_path, data_numbering);
                 int fo = open(data_file_path, O_RDWR | O_CREAT, 00777);
                 if (fo < 0) {

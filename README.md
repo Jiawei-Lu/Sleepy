@@ -28,7 +28,7 @@
 	14.Schedule should not use ONE_S, cause 1000 times bigger gap
 	15.CoAP PUT before GET /realtime to sychronize, this can help to avoid long wait to get correct sychronized clock using GCoAP
 	16.CFLAGS += -DGCOAP_RESPONSE_TIMEOUT=5000 (default 2000).
-	17.Modified Client.c to test weather the GET /realtime value be used to set DS3231 RTC successfully. (may cause 1s delay caused by program run time)
+	17.Modified Client.c to test weather the GET /realtime value be used to set DS3231 RTC successfully. (may cause 1s delay caused by program run time, fixed message_ack_flag BUG)
 	18.Data structure has include "negative? +:-"
 	
 ******* RIOT-Sniffer usage hint:

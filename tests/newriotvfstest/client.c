@@ -143,18 +143,19 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
             if (req_count == 0){
                 message_ack_flag =0;
             } else {
-            req_count = req_count -1577836800;
-            
-            puts("have the number\n");
-            rtc_localtime((int)req_count, &sych_time);
-            if ((mktime(&current_time) - mktime(&_riot_bday)) > 86400) {
-                puts("error: device time has unexpected value");
-                message_ack_flag =0;
-            }else{
-            // rtc_set_time(&handler_time);
-                ds3231_set_time(&_dev, &sych_time);
-                ds3231_get_time(&_dev, &current_time);
-            }
+                req_count = req_count -1577836800;
+                
+                puts("have the number\n");
+                rtc_localtime((int)req_count, &sych_time);
+                if ((mktime(&current_time) - mktime(&_riot_bday)) > 86400) {
+                    puts("error: device time has unexpected value");
+                    message_ack_flag =0;
+                }else{
+                // rtc_set_time(&handler_time);
+                    ds3231_set_time(&_dev, &sych_time);
+                    ds3231_get_time(&_dev, &current_time);
+                    message_ack_flag =1;
+                }
             }
         }
         else {
