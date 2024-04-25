@@ -234,9 +234,9 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/universal_address.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/ipv6/addr.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/rpl/rpl_netstats.h \
- /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/periph_conf.h \
  /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/board.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/gpio.h \
+ /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/periph_conf.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/rtc.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/rtc_utils.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/i2c.h \
@@ -268,7 +268,6 @@
  /home/jl1n119/test_RPL/RIOT/build/pkg/fatfs/source/ff.h \
  /home/jl1n119/test_RPL/RIOT/pkg/fatfs/vendor/include/ffconf.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/vfs.h \
- /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdatomic.h \
  /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/statvfs.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/iolist.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/mtd.h \
@@ -531,9 +530,9 @@
 /home/jl1n119/test_RPL/RIOT/sys/include/universal_address.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/ipv6/addr.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/rpl/rpl_netstats.h:
-/home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/periph_conf.h:
 /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/board.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/periph/gpio.h:
+/home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/periph_conf.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/periph/rtc.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/rtc_utils.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/periph/i2c.h:
@@ -565,7 +564,6 @@
 /home/jl1n119/test_RPL/RIOT/build/pkg/fatfs/source/ff.h:
 /home/jl1n119/test_RPL/RIOT/pkg/fatfs/vendor/include/ffconf.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/vfs.h:
-/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdatomic.h:
 /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/statvfs.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/iolist.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/mtd.h:

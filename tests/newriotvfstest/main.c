@@ -45,8 +45,8 @@
 #include "net/gnrc/rpl/structs.h"
 #include "net/gnrc/rpl/dodag.h"
 
-/*RTC*/
-#include "periph_conf.h"
+// /*RTC*/
+// #include "periph_conf.h"
 // #include "periph/rtc.h"
 // #include "periph/rtc_mem.h"
 
@@ -69,6 +69,7 @@
 #include "net/gnrc/netapi.h"
 
 /*DS3231 wakeup and sleep schedule*/
+#include "periph_conf.h"
 #include "periph/i2c.h"
 #include "ds3231.h"
 #include "ds3231_params.h"
@@ -127,15 +128,15 @@ static msg_t _main_msg_queue[MAIN_QUEUE_SIZE];
 
 int data_numbering = 0;
 
-int sensing_rate = 10;
-int communication_rate = 20;
+int sensing_rate = 60;
+int communication_rate = 3600;
 
 int extra_slots;
 char data_file_path[30];
 char data_file_path2[30];
 
 /*DS3231 Device*/
-static ds3231_t _dev;
+ds3231_t _dev;
 
 /*DS18 Device*/
 extern ds18_t dev18;
@@ -336,7 +337,7 @@ static int _umount(int argc, char **argv)
 //             time->tm_min,
 //             time->tm_sec);
 // }
-static struct tm _riot_bday = {
+struct tm _riot_bday = {
     .tm_sec = 42,
     .tm_min = 10,
     .tm_hour = 15,
@@ -793,17 +794,17 @@ int main(void){
     // gpio_set(GPIO_PIN(PA, 13));
 
 
-    while (message_ack_flag == 0){
-    // xtimer_sleep(3);
-    int argc2 = 6;
-    char *argv2[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", "+11.11,1111111111,+22.22,2222222222,+33.33,3333333333,+44.44,4444444444,+55.55,5555555555,+66.66,6666666666,+77.777"};//15-4 maximum 128 bytes
-    // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
+    // while (message_ack_flag == 0){
+    // // xtimer_sleep(3);
+    // int argc2 = 6;
+    // char *argv2[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", "+11.11,1111111111,+22.22,2222222222,+33.33,3333333333,+44.44,4444444444,+55.55,5555555555,+66.66,6666666666,"};//15-4 maximum 128 bytes
+    // // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
 
-    _coap_result = gcoap_cli_cmd(argc2,argv2);
-    xtimer_sleep(5);
+    // _coap_result = gcoap_cli_cmd(argc2,argv2);
+    // xtimer_sleep(5);
 
-    }
-    message_ack_flag = 0;
+    // }
+    // message_ack_flag = 0;
 
     while (message_ack_flag == 0){
     int argc1 = 4;
@@ -814,24 +815,10 @@ int main(void){
 
     if (_coap_result == 0) {
         printf("Command executed successfully\n");
-        printf("%s\n", payload_digit);
-        unsigned long req_count = strtoull(payload_digit, NULL, 10);
-        //req_count = atoi(payload_digit);
-        printf("%ld\n", req_count);
-        if (req_count == 0){
-            message_ack_flag =0;
-        } else {
-        req_count = req_count -1577836800;
         
-        puts("have the number\n");
-        rtc_localtime((int)req_count, &sych_time);
-        
-        // rtc_set_time(&handler_time);
-        ds3231_set_time(&_dev, &sych_time);
         ds3231_get_time(&_dev, &current_time);
         ds3231_print_time(current_time);
         message_ack_flag =1;
-        }
     } 
     else {
         printf("Command execution failed\n");
@@ -843,158 +830,148 @@ int main(void){
 
 
 
-    // // xtimer_sleep(10);
-    // int sens = 0;
-    // char buffer[128];  // Adjust the buffer size according to your expectations of the data size
-    // ssize_t bytes_read;
-    // int16_t temperature_test;
-    // float ds18_data_test = 0.00;  
-    // int data_numbering1 =0;
-    // while (sens!=6){
+    // xtimer_sleep(10);
+    int sens = 0;
+    char buffer[128];  // Adjust the buffer size according to your expectations of the data size
+    ssize_t bytes_read;
+    int16_t temperature_test;
+    float ds18_data_test = 0.00;  
+    int data_numbering1 =0;
+    while (sens!=6){
  
-    //     // gpio_set(DS18_PARAM_PIN);
-    //     // gpio_set(GPIO_PIN(PA, 13));
-    //     // vfs_DIR mount = {0};
-    //     puts("******************\n");
+        // gpio_set(DS18_PARAM_PIN);
+        // gpio_set(GPIO_PIN(PA, 13));
+        // vfs_DIR mount = {0};
+        puts("******************\n");
 
-    //     /* list mounted file systems */
+        /* list mounted file systems */
 
-    //     // puts("mount points:");
-    //     // while (vfs_iterate_mount_dirs(&mount)) {
-    //     //     printf("\t%s\n", mount.mp->mount_point);
-    //     // }
-    //     vfs_mount(&flash_mount);
-    //     char path2[] = "/sd0/DATA";
-    //     sprintf(data_file_path2, "%s%d.txt", path2, data_numbering1);
-    //     int fo = open(data_file_path2, O_RDWR | O_CREAT | O_APPEND, 0666);
-    //     if (fo < 0) {
-    //         printf("error while trying to create %s\n", data_file_path2);
+        // puts("mount points:");
+        // while (vfs_iterate_mount_dirs(&mount)) {
+        //     printf("\t%s\n", mount.mp->mount_point);
+        // }
+        vfs_mount(&flash_mount);
+        char path2[] = "/sd0/DATA";
+        sprintf(data_file_path2, "%s%d.txt", path2, data_numbering1);
+        int fo = open(data_file_path2, O_RDWR | O_CREAT | O_APPEND, 0666);
+        if (fo < 0) {
+            printf("error while trying to create %s\n", data_file_path2);
             
-    //     }
-    //     else{
-    //         puts("creating file success");
-    //     }
-    //     /*DS18 INIT*/
-    //     // gpio_set(GPIO_PIN(PA, 13));
-    //     result = ds18_init(&dev18, &ds18_params[0]);
-    //     if (result == DS18_ERROR) {
-    //         puts("[Error] The sensor pin could not be initialized");
-    //         return 1;
-    //     }
-    //     // gpio_set(GPIO_PIN(PA, 13));
-    //     /* Get temperature in centidegrees celsius */
-    //     ds18_get_temperature(&dev18, &temperature_test);
-    //     bool negative = (temperature_test < 0);
-    //     ds18_data_test = (float) temperature_test/100;
-    //     if (negative) {
-    //         ds18_data_test = -ds18_data_test;
-    //     }
+        }
+        else{
+            puts("creating file success");
+        }
+        /*DS18 INIT*/
+        // gpio_set(GPIO_PIN(PA, 13));
+        result = ds18_init(&dev18, &ds18_params[0]);
+        if (result == DS18_ERROR) {
+            puts("[Error] The sensor pin could not be initialized");
+            return 1;
+        }
+        // gpio_set(GPIO_PIN(PA, 13));
+        /* Get temperature in centidegrees celsius */
+        ds18_get_temperature(&dev18, &temperature_test);
+        bool negative = (temperature_test < 0);
+        ds18_data_test = (float) temperature_test/100;
+        if (negative) {
+            ds18_data_test = -ds18_data_test;
+        }
         
         
-    //     printf("Temperature [ºC]: %c%.2f"
-    //             "\n+-------------------------------------+\n",
-    //             negative ? '-': '+',
-    //             ds18_data_test);
-    //     char payloadtest[40];
-    //     int len = fmt_float(payloadtest,ds18_data_test,2);
-    //     ds3231_get_time(&_dev, &current_time);
-    //     int current_sensing_time = mktime(&current_time);
-    //     len += snprintf(payloadtest + len, sizeof(payloadtest) - len, ",%d,", current_sensing_time);
+        printf("Temperature [ºC]: %c%.2f"
+                "\n+-------------------------------------+\n",
+                negative ? '-': '+',
+                ds18_data_test);
+        char payloadtest[40];
+        int len = fmt_float(payloadtest,ds18_data_test,2);
+        ds3231_get_time(&_dev, &current_time);
+        int current_sensing_time = mktime(&current_time);
+        if (negative) {
+            payloadtest[0] = '-';
+            len = 1 + fmt_float(payloadtest + 1, -ds18_data_test, 2); // Ensure the float is positive for correct formatting.
+        } else {
+            payloadtest[0] = '+';
+            len = 1 + fmt_float(payloadtest + 1, ds18_data_test, 2);
+        }
+        len += snprintf(payloadtest + len, sizeof(payloadtest) - len, ",%d,", current_sensing_time);
 
-    //     if (len >= (int)sizeof(payloadtest) - 2) {  // Ensure there's space for two more characters and a null terminator
-    //         payloadtest[sizeof(payloadtest) - 1] = '\0';
-    //     } else {
-    //         puts("Not enough space to append characters");
-    //     }
-    //     printf("%s\n",payloadtest);
-    //     // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
+        if (len >= (int)sizeof(payloadtest) - 2) {  // Ensure there's space for two more characters and a null terminator
+            payloadtest[sizeof(payloadtest) - 1] = '\0';
+        } else {
+            puts("Not enough space to append characters");
+        }
+        printf("%s\n",payloadtest);
+        // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
         
 
 
-    //     if (write(fo, payloadtest, strlen(payloadtest)) != (ssize_t)strlen(payloadtest)) {
-    //         puts("Error while writing");
-    //     }
-    //     close(fo);
+        if (write(fo, payloadtest, strlen(payloadtest)) != (ssize_t)strlen(payloadtest)) {
+            puts("Error while writing");
+        }
+        close(fo);
 
-    //     int fr = open(data_file_path2, O_RDONLY, 00777);  //before open with O_RDWR which 
-    //                                                             //will conflict with open(file)
-    //                                                             //open(file)will equal 0, have to beb a O_RDPNLY for read
-    //     // char data_buf[sizeof(test_data)];
-    //     // printf("data:[],length=");
-    //     // vfs_read(fo,data_buf,sizeof(test_data));    
-    //     // printf("data:[],length=");
-    //     char c;
+        int fr = open(data_file_path2, O_RDONLY, 00777);  //before open with O_RDWR which 
+                                                                //will conflict with open(file)
+                                                                //open(file)will equal 0, have to beb a O_RDPNLY for read
+        // char data_buf[sizeof(test_data)];
+        // printf("data:[],length=");
+        // vfs_read(fo,data_buf,sizeof(test_data));    
+        // printf("data:[],length=");
+        char c;
 
-    //     while (read(fr, &c, 1) != 0){
-    //     putchar(c);  //printf won't work here
-    //     }
-    //     puts("\n");
+        while (read(fr, &c, 1) != 0){
+        putchar(c);  //printf won't work here
+        }
+        puts("\n");
         
-    //     close(fr);
-    //     puts("closing file");
+        close(fr);
+        puts("closing file");
 
-    //     vfs_umount(&flash_mount, false);   
-    //     // gpio_set(DS18_PARAM_PIN);
-    //     puts("flash point umount");
-    //     sens = sens + 1;
-    // }
+        vfs_umount(&flash_mount, false);   
+        // gpio_set(DS18_PARAM_PIN);
+        puts("flash point umount");
+        sens = sens + 1;
+    }
 
-    // vfs_mount(&flash_mount);
-    // int fd1 = open(data_file_path2, O_RDONLY, 00777);
-    // if (fd1 < 0) {
-    //     perror("Failed to open file for reading");
-    //     return 1;
-    // }
-    // bytes_read = read(fd1, buffer, sizeof(buffer) - 1);  // Leave space for null terminator
-    // if (bytes_read < 0) {
-    //     perror("Failed to read from file");
-    //     close(fd1);
-    //     return 1;
-    // }
-    // buffer[bytes_read] = '\0'; 
-    // printf("Read data: %s\n", buffer);
-    // close(fd1);
-    // vfs_umount(&flash_mount, false);   
-    // // gpio_set(DS18_PARAM_PIN);
-    // puts("flash point umount");
+    vfs_mount(&flash_mount);
+    int fd1 = open(data_file_path2, O_RDONLY, 00777);
+    if (fd1 < 0) {
+        perror("Failed to open file for reading");
+        return 1;
+    }
+    bytes_read = read(fd1, buffer, sizeof(buffer) - 1);  // Leave space for null terminator
+    if (bytes_read < 0) {
+        perror("Failed to read from file");
+        close(fd1);
+        return 1;
+    }
+    buffer[bytes_read] = '\0'; 
+    printf("Read data: %s\n", buffer);
+    close(fd1);
+    vfs_umount(&flash_mount, false);   
+    // gpio_set(DS18_PARAM_PIN);
+    puts("flash point umount");
    
-    // while (message_ack_flag == 0){
-    // // xtimer_sleep(3);
-    // int argc = 6;
-    // char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", buffer};
-    // // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
-
-    // _coap_result = gcoap_cli_cmd(argc,argv);
+    while (message_ack_flag == 0){
     // xtimer_sleep(3);
+    int argc = 6;
+    char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", buffer};
+    // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
 
-    // }
-    // message_ack_flag = 0;
-    // // Check the result
-    // if (_coap_result == 0) {
-    //     printf("Command executed successfully\n");
-    // } else {
-    //     printf("Command execution failed\n");
-    // }
-    // xtimer_sleep(3);
+    _coap_result = gcoap_cli_cmd(argc,argv);
+    xtimer_sleep(3);
+
+    }
+    message_ack_flag = 0;
+    // Check the result
+    if (_coap_result == 0) {
+        printf("Command executed successfully\n");
+    } else {
+        printf("Command execution failed\n");
+    }
+    xtimer_sleep(3);
 
     
-    // if (sych_time_length<= 10) {
-    //     puts("******************\n");
-    //     // printf("%.*s\n",sych_time_length,sych_time_payload);
-    //     // char sych_time_payload[11];
-    //     char payload_digit[11];
-    //     puts("received\n");
-    //     // memcpy(payload, (char *)sych_time_payload, sych_time_length);
-    //     puts("memery allocation\n");
-    //     printf("%s\n",sych_time_payload);
-    //     int i, j = 0;
-    //     for (i = 0; i < 10 && j < 10; i++){
-    //         if (isdigit((unsigned char)sych_time_payload[i])){
-    //             payload_digit[j++] = sych_time_payload[i];
-    //         }
-    //     }
-    //     payload_digit[j] = '\0';
-
     ds3231_get_time(&_dev, &current_time);
     if (res != 0) {
         puts("error: unable to read time");
@@ -1040,12 +1017,13 @@ int main(void){
                     puts("error: unable to read time");
                     return 1;
                 }
-                ds3231_print_time(testtime);
-                int mktime0=mktime(&testtime);
-                printf("%d\n",mktime0);
+                // ds3231_print_time(testtime);
+                // int mktime0=mktime(&testtime);
+                // printf("%d\n",mktime0);
                 testtime.tm_sec += sensing_rate;// * ONE_S;
-                int mktime1=mktime(&testtime);
-                printf("%d\n",mktime1);
+                // int mktime1=mktime(&testtime);
+                mktime(&testtime);
+                // printf("%d\n",mktime1);
                 /*DS18 INIT*/
                 gpio_set(GPIO_PIN(PA, 13));
                 result = ds18_init(&dev18, &ds18_params[0]);
@@ -1087,7 +1065,23 @@ int main(void){
                         negative ? '-': '+',
                         ds18_data);
                 char test[100];
-                fmt_float(test,ds18_data,2);
+                // fmt_float(test,ds18_data,2);
+                int len = fmt_float(test,ds18_data,2);
+                ds3231_get_time(&_dev, &current_time);
+                int current_sensing_time = mktime(&current_time);
+                if (negative) {
+                    test[0] = '-';
+                    len = 1 + fmt_float(test + 1, -ds18_data_test, 2); // Ensure the float is positive for correct formatting.
+                } else {
+                    test[0] = '+';
+                    len = 1 + fmt_float(test + 1, ds18_data_test, 2);
+                }
+                len += snprintf(test + len, sizeof(test) - len, ",%d,", current_sensing_time);
+                if (len >= (int)sizeof(test) - 2) {  // Ensure there's space for two more characters and a null terminator
+                    test[sizeof(test) - 1] = '\0';
+                } else {
+                    puts("Not enough space to append characters");
+                }
                 printf("%s\n",test);
                 // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
                 
@@ -1096,6 +1090,7 @@ int main(void){
                 if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
                     puts("Error while writing");
                 }
+
                 close(fo);
                 int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
                                                                         //will conflict with open(file)
@@ -1145,7 +1140,7 @@ int main(void){
                     puts("error: unable to read time");
                     return 1;
                 }
-                testtime.tm_sec += (86400 -sensing_rate * slots) * ONE_S;
+                testtime.tm_sec += (86400 -sensing_rate * slots) ;
                 mktime(&testtime);
                 /*DS18 INIT*/
                 // gpio_set(GPIO_PIN(PA, 13));
@@ -1187,12 +1182,28 @@ int main(void){
                         "\n+-------------------------------------+\n",
                         negative ? '-': '+',
                         ds18_data);
-                char test[150];
-                fmt_float(test,ds18_data,2);
+                char test[100];
+                // fmt_float(test,ds18_data,2);
+                int len = fmt_float(test,ds18_data,2);
+                ds3231_get_time(&_dev, &current_time);
+                int current_sensing_time = mktime(&current_time);
+                if (negative) {
+                    test[0] = '-';
+                    len = 1 + fmt_float(test + 1, -ds18_data_test, 2); // Ensure the float is positive for correct formatting.
+                } else {
+                    test[0] = '+';
+                    len = 1 + fmt_float(test + 1, ds18_data_test, 2);
+                }
+                len += snprintf(test + len, sizeof(test) - len, ",%d,", current_sensing_time);
+                if (len >= (int)sizeof(test) - 2) {  // Ensure there's space for two more characters and a null terminator
+                    test[sizeof(test) - 1] = '\0';
+                } else {
+                    puts("Not enough space to append characters");
+                }
                 printf("%s\n",test);
                 // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
+                // sprintf(test, "%c%f", negative ? '-': '+', ds18_data);
                 
-
 
                 if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
                     puts("Error while writing");

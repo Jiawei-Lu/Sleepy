@@ -114,7 +114,6 @@
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/architecture_arch.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/fs/constfs.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/vfs.h \
- /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdatomic.h \
  /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/statvfs.h \
  /home/jl1n119/test_RPL/RIOT/core/include/sched.h \
  /home/jl1n119/test_RPL/RIOT/core/include/native_sched.h \
@@ -266,7 +265,6 @@
 /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/architecture_arch.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/fs/constfs.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/vfs.h:
-/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdatomic.h:
 /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/statvfs.h:
 /home/jl1n119/test_RPL/RIOT/core/include/sched.h:
 /home/jl1n119/test_RPL/RIOT/core/include/native_sched.h:

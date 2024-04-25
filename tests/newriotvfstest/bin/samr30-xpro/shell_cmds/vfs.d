@@ -138,7 +138,6 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/flash_utils.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/tiny_strerror.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/vfs.h \
- /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdatomic.h \
  /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/statvfs.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/iolist.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/mtd.h \
@@ -298,7 +297,6 @@
 /home/jl1n119/test_RPL/RIOT/sys/include/flash_utils.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/tiny_strerror.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/vfs.h:
-/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdatomic.h:
 /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/statvfs.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/iolist.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/mtd.h:

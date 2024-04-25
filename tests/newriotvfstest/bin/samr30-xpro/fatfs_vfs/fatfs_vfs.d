@@ -27,7 +27,6 @@
  /home/jl1n119/test_RPL/RIOT/build/pkg/fatfs/source/ff.h \
  /home/jl1n119/test_RPL/RIOT/pkg/fatfs/vendor/include/ffconf.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/vfs.h \
- /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdatomic.h \
  /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/statvfs.h \
  /home/jl1n119/test_RPL/RIOT/core/include/sched.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h \
@@ -173,7 +172,6 @@
 /home/jl1n119/test_RPL/RIOT/build/pkg/fatfs/source/ff.h:
 /home/jl1n119/test_RPL/RIOT/pkg/fatfs/vendor/include/ffconf.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/vfs.h:
-/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdatomic.h:
 /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/statvfs.h:
 /home/jl1n119/test_RPL/RIOT/core/include/sched.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h:

@@ -167,6 +167,8 @@ USEMODULE += vfs_auto_format
 USEMODULE += vfs
 USEMODULE += fatfs_vfs
 
+CFLAGS += -DGCOAP_RESPONSE_TIMEOUT=5000
+
 # CFLAGS += -DCONFIG_GCOAP_PDU_BUF_SIZE=512
 include $(RIOTBASE)/Makefile.include
 

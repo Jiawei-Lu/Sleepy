@@ -43,6 +43,14 @@
 #include "net/dsm.h"
 #endif
 
+/*DS3231 wakeup and sleep schedule*/
+#include "periph_conf.h"
+#include "periph/i2c.h"
+#include "ds3231.h"
+#include "ds3231_params.h"
+#include "timex.h"
+#include "periph/rtc.h"
+
 static bool _proxied = false;
 static sock_udp_ep_t _proxy_remote;
 static char proxy_uri[64];
@@ -51,6 +59,10 @@ int expected_msg_id;
 extern int sych_time_length;
 extern char sych_time_payload[12];
 extern char payload_digit[12];
+extern struct  tm  sych_time;
+extern struct tm current_time;
+extern struct tm _riot_bday; 
+extern ds3231_t _dev;
 
 /* Retain request path to re-request if response includes block. User must not
  * start a new request (with a new path) until any blockwise transfer
@@ -123,6 +135,26 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
                     }
                 }
                 payload_digit[j] = '\0';
+            }
+            printf("%s\n", payload_digit);
+            unsigned long req_count = strtoull(payload_digit, NULL, 10);
+            req_count = atoi(payload_digit);
+            printf("%ld\n", req_count);
+            if (req_count == 0){
+                message_ack_flag =0;
+            } else {
+            req_count = req_count -1577836800;
+            
+            puts("have the number\n");
+            rtc_localtime((int)req_count, &sych_time);
+            if ((mktime(&current_time) - mktime(&_riot_bday)) > 86400) {
+                puts("error: device time has unexpected value");
+                message_ack_flag =0;
+            }else{
+            // rtc_set_time(&handler_time);
+                ds3231_set_time(&_dev, &sych_time);
+                ds3231_get_time(&_dev, &current_time);
+            }
             }
         }
         else {

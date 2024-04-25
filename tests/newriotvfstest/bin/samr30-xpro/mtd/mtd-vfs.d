@@ -27,7 +27,6 @@
  /usr/include/newlib/inttypes.h /usr/include/newlib/sys/_intsup.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/compiler_hints.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/vfs.h \
- /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdatomic.h \
  /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/statvfs.h \
  /home/jl1n119/test_RPL/RIOT/core/include/sched.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h \
@@ -80,7 +79,6 @@
 /usr/include/newlib/sys/_intsup.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/compiler_hints.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/vfs.h:
-/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdatomic.h:
 /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/statvfs.h:
 /home/jl1n119/test_RPL/RIOT/core/include/sched.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h:
