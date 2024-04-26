@@ -30,6 +30,7 @@
 	16.CFLAGS += -DGCOAP_RESPONSE_TIMEOUT=5000 (default 2000).
 	17.Modified Client.c to test weather the GET /realtime value be used to set DS3231 RTC successfully. (may cause 1s delay caused by program run time, fixed message_ack_flag BUG)
 	18.Data structure has include "negative? +:-"
+	19.Communication slot BUG fixed, sensor reading and store BUG fixed.
 	
 ******* RIOT-Sniffer usage hint:
 	1. cd applications/sniffer: sudo make BOARD=samr30-xpro PORT=/dev/ttyACM0 flash
