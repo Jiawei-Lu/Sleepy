@@ -128,8 +128,8 @@ static msg_t _main_msg_queue[MAIN_QUEUE_SIZE];
 
 int data_numbering = 0;
 
-int sensing_rate = 600;
-int communication_rate = 3600;
+int sensing_rate = 10;
+int communication_rate = 60;
 
 int extra_slots;
 char data_file_path[40];
@@ -851,7 +851,7 @@ int main(void){
         //     printf("\t%s\n", mount.mp->mount_point);
         // }
         vfs_mount(&flash_mount);
-        char path2[] = "/sd0/DATAt";
+        char path2[] = "/sd0/data";
         sprintf(data_file_path2, "%s%d.txt", path2, data_numbering1);
         int fo = open(data_file_path2, O_RDWR | O_CREAT | O_APPEND, 0666);
         if (fo < 0) {
@@ -1025,17 +1025,17 @@ int main(void){
                 // gpio_set(DS18_PARAM_PIN);
                 puts("flash point umount");
             
-                while (message_ack_flag == 0){
+                // while (message_ack_flag == 0){
                 // xtimer_sleep(3);
-                int argc = 6;
-                char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", data_buffer};
+                int argc = 5;
+                char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/data", data_buffer};
                 // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
 
                 _coap_result = gcoap_cli_cmd(argc,argv);
-                xtimer_sleep(3);
+                // xtimer_sleep(5);
 
-                }
-                message_ack_flag = 0;
+                // }
+                // message_ack_flag = 0;
                 // Check the result
                 if (_coap_result == 0) {
                     printf("Command executed successfully\n");
