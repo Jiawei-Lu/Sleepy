@@ -128,8 +128,8 @@ static msg_t _main_msg_queue[MAIN_QUEUE_SIZE];
 
 int data_numbering = 0;
 
-int sensing_rate = 10;
-int communication_rate = 60;
+int sensing_rate = 600;
+int communication_rate = 3600;
 
 int extra_slots;
 char data_file_path[40];
@@ -504,7 +504,7 @@ int main(void){
     xtimer_sleep(5);
 
     /* print network addresses */
-    printf("{\"IPv6 addresses\": [\"");
+    puts("{\"IPv6 addresses\": [\"");
     netifs_print_ipv6("\", \"");
     puts("\"]}");
     _gnrc_netif_config(0, NULL);
@@ -1024,72 +1024,74 @@ int main(void){
                 vfs_umount(&flash_mount, false);   
                 // gpio_set(DS18_PARAM_PIN);
                 puts("flash point umount");
-            
-                // while (message_ack_flag == 0){
-                // xtimer_sleep(3);
-                int argc = 5;
-                char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/data", data_buffer};
-                // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
+                int counter_retry = 0;
+                while (message_ack_flag == 0 && counter_retry < 3){
+                    xtimer_sleep(3);
+                    int argc = 6;
+                    char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", data_buffer};
+                    // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
 
-                _coap_result = gcoap_cli_cmd(argc,argv);
-                // xtimer_sleep(5);
-
-                // }
-                // message_ack_flag = 0;
+                    _coap_result = gcoap_cli_cmd(argc,argv);
+                    // xtimer_sleep(5);
+                    counter_retry ++;
+                }
+                
+                message_ack_flag = 0;
                 // Check the result
                 if (_coap_result == 0) {
                     printf("Command executed successfully\n");
                 } else {
                     printf("Command execution failed\n");
                 }
-                
-                radio_off(netif);
-                data_numbering = data_numbering +1;
-            }
-                printf("%d", data_numbering);
-                res = ds3231_clear_alarm_1_flag(&_dev);
-                if (res != 0) {
-                    puts("error: unable to clear alarm flag");
-                    return 1;
-                }
-                res = ds3231_get_time(&_dev, &testtime);
-                if (res != 0) {
-                    puts("error: unable to read time");
-                    return 1;
-                }
-                // ds3231_print_time(testtime);
-                // int mktime0=mktime(&testtime);
-                // printf("%d\n",mktime0);
-                testtime.tm_sec += sensing_rate;// * ONE_S;
-                // int mktime1=mktime(&testtime);
-                mktime(&testtime);
-                // printf("%d\n",mktime1);
-                /*DS18 INIT*/
-                gpio_set(GPIO_PIN(PA, 13));
-                result = ds18_init(&dev18, &ds18_params[0]);
-                if (result == DS18_ERROR) {
-                    puts("[Error] The sensor pin could not be initialized");
-                    return 1;
-                }
-                
-                /*DS18 sensing*/
             
                 
-                int16_t temperature;
-                float ds18_data = 0.00;   
-                // gpio_set(DS18_PARAM_PIN);
-                // gpio_set(GPIO_PIN(PA, 13));
-                vfs_mount(&flash_mount);
+            radio_off(netif);
+            data_numbering = data_numbering +1;
+            }
+            printf("%d", data_numbering);
+            res = ds3231_clear_alarm_1_flag(&_dev);
+            if (res != 0) {
+                puts("error: unable to clear alarm flag");
+                return 1;
+            }
+            res = ds3231_get_time(&_dev, &testtime);
+            if (res != 0) {
+                puts("error: unable to read time");
+                return 1;
+            }
+            // ds3231_print_time(testtime);
+            // int mktime0=mktime(&testtime);
+            // printf("%d\n",mktime0);
+            testtime.tm_sec += sensing_rate;// * ONE_S;
+            // int mktime1=mktime(&testtime);
+            mktime(&testtime);
+            // printf("%d\n",mktime1);
+            /*DS18 INIT*/
+            // gpio_set(GPIO_PIN(PA, 13));
+            result = ds18_init(&dev18, &ds18_params[0]);
+            if (result == DS18_ERROR) {
+                puts("[Error] The sensor pin could not be initialized");
+                return 1;
+            }
+            
+            /*DS18 sensing*/
+        
+            
+            int16_t temperature;
+            float ds18_data = 0.00;   
+            // gpio_set(DS18_PARAM_PIN);
+            // gpio_set(GPIO_PIN(PA, 13));
+            vfs_mount(&flash_mount);
 
-                sprintf(data_file_path, "%s%d.txt", file_path, data_numbering);
-                int fo = open(data_file_path, O_RDWR | O_CREAT | O_APPEND, 0666);
-                if (fo < 0) {
-                    printf("error while trying to create %s\n", data_file_path);
-                    return 1;
-                }
-                else{
-                    puts("creating file success");
-                }
+            sprintf(data_file_path, "%s%d.txt", file_path, data_numbering);
+            int ff = open(data_file_path, O_RDWR | O_CREAT | O_APPEND, 0666);
+            if (ff < 0) {
+                printf("error while trying to create %s\n", data_file_path);
+                return 1;
+            }
+            else{
+                puts("creating file success");
+            
                 // gpio_set(GPIO_PIN(PA, 13));
                 /* Get temperature in centidegrees celsius */
                 ds18_get_temperature(&dev18, &temperature);
@@ -1104,8 +1106,7 @@ int main(void){
                         "\n+-------------------------------------+\n",
                         negative ? '-': '+',
                         ds18_data);
-                char test[128];
-                // fmt_float(test,ds18_data,2);
+                char test[40];
                 int len = fmt_float(test,ds18_data,2);
                 ds3231_get_time(&_dev, &current_time);
                 int current_sensing_time = mktime(&current_time);
@@ -1127,12 +1128,12 @@ int main(void){
                 
 
 
-                if (write(fo, test, strlen(test)) != (ssize_t)strlen(test)) {
+                if (write(ff, test, strlen(test)) != (ssize_t)strlen(test)) {
                     puts("Error while writing");
                 }
 
                 close(fo);
-                int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
+                int fr = open(data_file_path, O_RDONLY, 00777);  //before open with O_RDWR which 
                                                                         //will conflict with open(file)
                                                                         //open(file)will equal 0, have to beb a O_RDPNLY for read
                 // char data_buf[sizeof(test_data)];
@@ -1151,23 +1152,24 @@ int main(void){
 
                 /*11111111111111111*/
                 //vfs_umount_jl(&flash_mount);
-                vfs_umount(&flash_mount, false);
-                // gpio_set(DS18_PARAM_PIN);
-                // gpio_set(GPIO_PIN(PA, 13));
-                puts("flash point umount");
-                puts("start alarm1");
-                // res = ds3231_enable_bat(&_dev);
-                res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
-                if (res != 0) {
-                    puts("error: unable to program alarm");
-                    return 1;
-                }
+            }
+            vfs_umount(&flash_mount, false);
+            // gpio_set(DS18_PARAM_PIN);
+            // gpio_set(GPIO_PIN(PA, 13));
+            puts("flash point umount");
+            puts("start alarm1");
+            // res = ds3231_enable_bat(&_dev);
+            res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
+            if (res != 0) {
+                puts("error: unable to program alarm");
+                return 1;
+            }
 
-                pm_set(SAML21_PM_MODE_STANDBY);
+            pm_set(SAML21_PM_MODE_STANDBY);
 
-                puts(" WAKED UP SUCCESSFULLY ");
+            puts(" WAKED UP SUCCESSFULLY ");
 
-            
+        
         }
         if (extra_slots == 1){
                 res = ds3231_clear_alarm_1_flag(&_dev);
@@ -1249,7 +1251,7 @@ int main(void){
                     puts("Error while writing");
                 }
                 close(fo);
-                int fr = open(data_file_path, O_RDONLY | O_CREAT, 00777);  //before open with O_RDWR which 
+                int fr = open(data_file_path, O_RDONLY, 00777);  //before open with O_RDWR which 
                                                                         //will conflict with open(file)
                                                                         //open(file)will equal 0, have to beb a O_RDPNLY for read
                 // char data_buf[sizeof(test_data)];
@@ -1285,7 +1287,7 @@ int main(void){
                 puts(" WAKED UP SUCCESSFULLY ");
                         
             }
-            else {
+            //else {
         /*sensing state end*/
         /*
         if (extra_slots){
@@ -1295,7 +1297,7 @@ int main(void){
             int sensing_count = slots;
         }
         */
-            }
+            //}
     }
 
 

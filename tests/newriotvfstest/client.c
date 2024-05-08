@@ -212,6 +212,7 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
         if (expected_msg_id == pdu->hdr->id) {
             puts("ACK received with correct message ID");
             message_ack_flag =1;
+            printf("message flag now is: %d\n", message_ack_flag);
         } else {
             printf("Mismatch in message ID. Expected %u, got %u\n", expected_msg_id, pdu->hdr->id);
             message_ack_flag =0;
