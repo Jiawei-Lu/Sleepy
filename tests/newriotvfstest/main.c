@@ -495,6 +495,8 @@ static const shell_command_t shell_commands[] = {
 
 int main(void){   
 
+    xtimer_sleep(5);
+    board_antenna_config(RFCTL_ANTENNA_EXT);
     msg_init_queue(_main_msg_queue, MAIN_QUEUE_SIZE);
     server_init();
 
