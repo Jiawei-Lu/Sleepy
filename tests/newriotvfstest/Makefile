@@ -169,6 +169,23 @@ USEMODULE += fatfs_vfs
 
 CFLAGS += -DGCOAP_RESPONSE_TIMEOUT=5000
 
+
+# USEMODULE += test_utils_netdev_ieee802154_minimal
+# DISABLE_MODULE += auto_init_at86rf2xx
+# # define the driver to be used for selected boards
+# ifneq (,$(filter samr21-xpro,$(BOARD)))
+#   DRIVER := at86rf233
+# endif
+# ifneq (,$(filter sam30-xpro,$(BOARD)))
+#   DRIVER := at86rf212b
+# endif
+
+# # use the at86rf212b as fallback device
+# DRIVER ?= at86rf212b
+
+# include the selected driver
+USEMODULE += $(DRIVER)
+
 # CFLAGS += -DCONFIG_GCOAP_PDU_BUF_SIZE=512
 include $(RIOTBASE)/Makefile.include
 
