@@ -5,7 +5,7 @@ APPLICATION = gnrc_border_router
 BOARD ?= native
 
 # This has to be the absolute path to the RIOT base directory:
-RIOTBASE ?= $(CURDIR)/../../../RIOT
+RIOTBASE ?= $(CURDIR)/../../../test_RPL/RIOT
 
 CFLAGS += -DCONFIG_IEEE802154_DEFAULT_TXPOWER=-20 
 CFLAGS += -DCONFIG_IEEE802154_DEFAULT_SUBGHZ_CHANNEL=0 

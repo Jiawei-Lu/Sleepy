@@ -285,15 +285,7 @@
  /home/jl1n119/test_RPL/RIOT/drivers/include/mtd_sdcard.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/mtd.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/sdcard_spi.h \
- /home/jl1n119/test_RPL/RIOT/drivers/sdcard_spi/include/sdcard_spi_params.h \
- /home/jl1n119/test_RPL/RIOT/drivers/at86rf2xx/include/at86rf2xx_internal.h \
- /home/jl1n119/test_RPL/RIOT/drivers/at86rf2xx/include/at86rf2xx_registers.h \
- /home/jl1n119/test_RPL/RIOT/drivers/include/net/netdev/ieee802154.h \
- /home/jl1n119/test_RPL/RIOT/sys/include/test_utils/netdev_ieee802154_minimal.h \
- /home/jl1n119/test_RPL/RIOT/sys/include/test_utils/expect.h \
- /home/jl1n119/test_RPL/RIOT/core/lib/include/compiler_hints.h \
- /home/jl1n119/test_RPL/RIOT/core/lib/include/panic.h \
- /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h
+ /home/jl1n119/test_RPL/RIOT/drivers/sdcard_spi/include/sdcard_spi_params.h
 /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:
@@ -597,11 +589,3 @@
 /home/jl1n119/test_RPL/RIOT/drivers/include/mtd.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/sdcard_spi.h:
 /home/jl1n119/test_RPL/RIOT/drivers/sdcard_spi/include/sdcard_spi_params.h:
-/home/jl1n119/test_RPL/RIOT/drivers/at86rf2xx/include/at86rf2xx_internal.h:
-/home/jl1n119/test_RPL/RIOT/drivers/at86rf2xx/include/at86rf2xx_registers.h:
-/home/jl1n119/test_RPL/RIOT/drivers/include/net/netdev/ieee802154.h:
-/home/jl1n119/test_RPL/RIOT/sys/include/test_utils/netdev_ieee802154_minimal.h:
-/home/jl1n119/test_RPL/RIOT/sys/include/test_utils/expect.h:
-/home/jl1n119/test_RPL/RIOT/core/lib/include/compiler_hints.h:
-/home/jl1n119/test_RPL/RIOT/core/lib/include/panic.h:
-/home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h:
