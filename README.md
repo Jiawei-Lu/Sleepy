@@ -31,6 +31,8 @@
 	17.Modified Client.c to test weather the GET /realtime value be used to set DS3231 RTC successfully. (may cause 1s delay caused by program run time, fixed message_ack_flag BUG)
 	18.Data structure has include "negative? +:-"
 	19.Communication slot BUG fixed, sensor reading and store BUG fixed.
+	20.Stop CoAP auto-retransmission by adding "CFLAGS += -DCONFIG_COAP_MAX_RETRANSMIT=0" into Makefile.
+	21.Set CoAP PUT retry to 3 manually, it can be fixed by identifying the gap between each retry set by RIOT.
 	
 ******* RIOT-Sniffer usage hint:
 	1. cd applications/sniffer: sudo make BOARD=samr30-xpro PORT=/dev/ttyACM0 flash

@@ -33,6 +33,8 @@
 #include "net/sock/util.h"
 #include "net/utils.h"
 #include "od.h"
+#include "board.h"
+#include "periph/gpio.h"
 
 #include "gcoap_example.h"
 
@@ -91,6 +93,7 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
 
     if (memo->state == GCOAP_MEMO_TIMEOUT) {
         printf("gcoap: timeout for msg ID %02u\n", coap_get_id(pdu));
+        message_ack_flag =1;
         return;
     }
     else if (memo->state == GCOAP_MEMO_RESP_TRUNC) {
@@ -212,17 +215,23 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
         if (expected_msg_id == pdu->hdr->id) {
             puts("ACK received with correct message ID");
             message_ack_flag =1;
+            gpio_toggle(GPIO_PIN(PA,14));
+            // gpio_set(GPIO_PIN(PA,14));
             printf("message flag now is: %d\n", message_ack_flag);
+            // gpio_toggle(DS3231_PARAM_INT_PIN);
         } else {
             printf("Mismatch in message ID. Expected %u, got %u\n", expected_msg_id, pdu->hdr->id);
-            message_ack_flag =0;
+            message_ack_flag =1;
         }
     } else if (memo->state  == GCOAP_MEMO_TIMEOUT) {
+        gpio_toggle(GPIO_PIN(PA,14));
+        // gpio_set(GPIO_PIN(PA,14));
         puts("Request timeout");
-        message_ack_flag =0;
+        message_ack_flag =1;
     } else if (memo->state  == GCOAP_MEMO_ERR) {
+        // gpio_toggle(DS3231_PARAM_INT_PIN);
         puts("Request error");
-        message_ack_flag =0;
+        message_ack_flag =1;
     }
 }
 
