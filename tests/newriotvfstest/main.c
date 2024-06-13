@@ -133,8 +133,8 @@ static msg_t _main_msg_queue[MAIN_QUEUE_SIZE];
 
 int data_numbering = 0;
 
-int sensing_rate = 60;
-int communication_rate = 360;
+int sensing_rate = 10;
+int communication_rate = 60;
 
 int extra_slots;
 char data_file_path[40];
@@ -664,7 +664,7 @@ int main(void){
     gpio_init(GPIO_PIN(PA , 8), GPIO_OUT); 
     gpio_init(GPIO_PIN(PA , 13), GPIO_OUT); 
     // gpio_init(GPIO_PIN(PA , 15), GPIO_OUT);
-    
+    gpio_set(GPIO_PIN(PA , 13));
     // gpio_set(DS18_PARAM_PIN);
 
     /* print test application information */
@@ -866,7 +866,7 @@ int main(void){
         // char *argv1[] = {"coap", "get", "[2001:db8::58a4:8450:8511:6445]:5683", "/riot/value"};
         _coap_result = gcoap_cli_cmd(argc1,argv1);
 
-        ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC);
+        ztimer_sleep(ZTIMER_MSEC, 0.11* MS_PER_SEC);
         // xtimer_sleep(10);
 
         if (_coap_result == 0) {
@@ -1029,20 +1029,36 @@ int main(void){
         int retry = 0;
         while (message_ack_flag != 1 && retry < 3){
             _coap_result = gcoap_cli_cmd(argc,argv);
-
-            xtimer_sleep(0.2);
-            // xtimer_sleep(10);
-
             if (_coap_result == 0) {
                 printf("Command executed successfully\n");
                 
             } 
             else {
                 printf("Command execution failed\n");
-                xtimer_sleep(1);
+                
             }
-            retry++;
-        }        
+            while(message_ack_flag != 1){
+                puts("waitting for the message sent flag\n");
+                ztimer_sleep(ZTIMER_MSEC, 0.11* MS_PER_SEC);
+            }
+            count_total_try++;
+        }
+        // while (message_ack_flag != 1 && retry < 3){
+        //     _coap_result = gcoap_cli_cmd(argc,argv);
+
+        //     ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC);
+        //     // xtimer_sleep(10);
+
+        //     if (_coap_result == 0) {
+        //         printf("Command executed successfully\n");
+                
+        //     } 
+        //     else {
+        //         printf("Command execution failed\n");
+                
+        //     }
+        //     retry++;
+        // }        
         // res = ds3231_await_alarm(&_dev);
         // if (res < 0){
         // puts("error: unable to program GPIO interrupt or to clear alarm flag");
@@ -1056,7 +1072,7 @@ int main(void){
 
         sens =0;
         /*check start*/
-        count_total_try++;
+        
         // ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC);
 
         if (message_ack_flag == 1){
@@ -1092,11 +1108,38 @@ int main(void){
 
     puts("Clock value is now :");
     ds3231_print_time(current_time);
-    
+
+
+    /*tiny test to measure how long an ACK can be received after sent PUT request*/
+    /*identified ACK receiving gap is around 110ms*/
+    // while (1){
+    // retry = 0;
+    // // while (message_ack_flag != 1 && retry < 3){
+    //     _coap_result = gcoap_cli_cmd(argc,argv);
+    //     if (_coap_result == 0) {
+    //         printf("Command executed successfully\n");
+    //         gpio_clear(GPIO_PIN(PA , 13));    
+    //     } 
+    //     else {
+    //         printf("Command execution failed\n");
+            
+    //     }
+    //     while(message_ack_flag != 1){
+    //         puts("waitting for the message sent flag\n");
+    //         ztimer_sleep(ZTIMER_MSEC, 110* NS_PER_MS);
+    //     }
+    //     gpio_set(GPIO_PIN(PA , 13));   
+    //     count_total_try++;
+    // // }
+    // xtimer_sleep(3);
+    // }
+    /*test finish*/
+
+
     //
     radio_off(netif);
 
-    
+   
 
 
     while (1){
@@ -1144,27 +1187,44 @@ int main(void){
                 char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", data_buffer};
                     // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
                 retry = 0;
-                while (message_ack_flag != 1 && retry < 3){
-                _coap_result = gcoap_cli_cmd(argc,argv);
+                message_ack_flag = 0;
+                // while (message_ack_flag != 1 && retry < 3){
+                // _coap_result = gcoap_cli_cmd(argc,argv);
 
-                xtimer_sleep(0.2);
-                // xtimer_sleep(10);
+                // ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC);
+                // // xtimer_sleep(10);
 
-                if (_coap_result == 0) {
-                    printf("Command executed successfully\n");
+                // if (_coap_result == 0) {
+                //     printf("Command executed successfully\n");
                     
-                } 
-                else {
-                    printf("Command execution failed\n");
-                    xtimer_sleep(1);
+                // } 
+                // else {
+                //     printf("Command execution failed\n");
+                //     xtimer_sleep(1);
+                // }
+                // retry++;
+                // } 
+                while (message_ack_flag != 1 && retry < 3){
+                    _coap_result = gcoap_cli_cmd(argc,argv);
+                    if (_coap_result == 0) {
+                        printf("Command executed successfully\n");
+                        
+                    } 
+                    else {
+                        printf("Command execution failed\n");
+                        
+                    }
+                    while(message_ack_flag != 1){
+                        puts("waitting for the message sent flag\n");
+                        ztimer_sleep(ZTIMER_MSEC, 0.11* MS_PER_SEC); //DO NOT use 110*NS_PER_MS as it curshs program 
+                    }
+                    count_total_try++;
                 }
-                retry++;
-                } 
                 // ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC);
                 // xtimer_sleep(1);
                     // counter_retry ++;
                 // }
-                count_total_try++;
+                
                 // ztimer_sleep(ZTIMER_MSEC, 1U * US_PER_MS);
 
                 

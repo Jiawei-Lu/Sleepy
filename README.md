@@ -6,7 +6,7 @@
 	RTC: DS3231
 	Sensor: DS18
 	
-	Feature Updates: (12/04/2024)
+	Feature Updates: (13/06/2024)
 	1. Adapting to the latest RIOT-OS file system and IO1 Xplained extension board sdcard spi & params.
 	2. Node communication using CoAP: request PUT/GET
 	3. Working sleepy network schdule
@@ -33,6 +33,10 @@
 	19.Communication slot BUG fixed, sensor reading and store BUG fixed.
 	20.Stop CoAP auto-retransmission by adding "CFLAGS += -DCONFIG_COAP_MAX_RETRANSMIT=0" into Makefile.
 	21.Set CoAP PUT retry to 3 manually, it can be fixed by identifying the gap between each retry set by RIOT.
+	22.Set CFLAGS += -DCONFIG_GCOAP_PDU_BUF_SIZE=1024 to test if multiple and long time test will cause stack overflow by CoAP PUT.
+	23.In CoAP Client, buf[CONFIG_GCOAP_PDU_BUF_SIZE] defined in "int gcoap_cli_cmd(int argc, char **argv)" is moved and defined as a globl variable. 
+	24.Set CFLAGS += -DTHREAD_STACKSIZE_MAIN=\(3*THREAD_STACKSIZE_DEFAULT\), which is copied from /RIOT/tests/nannocoap_cli to enable more sensible stacksize. 
+	
 	
 ******* RIOT-Sniffer usage hint:
 	1. cd applications/sniffer: sudo make BOARD=samr30-xpro PORT=/dev/ttyACM0 flash

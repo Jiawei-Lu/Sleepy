@@ -65,6 +65,7 @@ extern struct  tm  sych_time;
 extern struct tm current_time;
 extern struct tm _riot_bday; 
 extern ds3231_t _dev;
+uint8_t buf[CONFIG_GCOAP_PDU_BUF_SIZE]; 
 
 /* Retain request path to re-request if response includes block. User must not
  * start a new request (with a new path) until any blockwise transfer
@@ -274,7 +275,7 @@ int gcoap_cli_cmd(int argc, char **argv)
 {
     /* Ordered like the RFC method code numbers, but off by 1. GET is code 0. */
     char *method_codes[] = {"ping", "get", "post", "put"};
-    uint8_t buf[CONFIG_GCOAP_PDU_BUF_SIZE];
+    // uint8_t buf[CONFIG_GCOAP_PDU_BUF_SIZE]; // move to global
     coap_pkt_t pdu;
     size_t len;
     unsigned observe = false;
