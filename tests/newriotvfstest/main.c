@@ -866,7 +866,7 @@ int main(void){
         // char *argv1[] = {"coap", "get", "[2001:db8::58a4:8450:8511:6445]:5683", "/riot/value"};
         _coap_result = gcoap_cli_cmd(argc1,argv1);
 
-        ztimer_sleep(ZTIMER_MSEC, 0.11* MS_PER_SEC);
+        ztimer_sleep(ZTIMER_MSEC, 0.1* MS_PER_SEC);
         // xtimer_sleep(10);
 
         if (_coap_result == 0) {
@@ -1039,7 +1039,7 @@ int main(void){
             }
             while(message_ack_flag != 1){
                 puts("waitting for the message sent flag\n");
-                ztimer_sleep(ZTIMER_MSEC, 0.11* MS_PER_SEC);
+                ztimer_sleep(ZTIMER_MSEC, 0.1* MS_PER_SEC);
             }
             count_total_try++;
         }
@@ -1141,7 +1141,7 @@ int main(void){
 
    
 
-
+    int retries = 0;
     while (1){
         struct tm testtime;
         int slots = 86400 / sensing_rate; 
@@ -1156,99 +1156,7 @@ int main(void){
         char file_path[] = "/sd0/data";
         /*sensing state start*/
         for (int counter_slots = 0; counter_slots != slots; counter_slots++){
-            if (counter_slots % times == 0){
-                //commnunication start
-                radio_on(netif);
-
-                vfs_mount(&flash_mount);
-                sprintf(data_file_path, "%s%d.txt", file_path, data_numbering);
-                int fd_com = open(data_file_path, O_RDONLY | O_CREAT, 00777);
-                while (fd_com < 0) {
-                    printf("error while trying to create %s\n", data_file_path2);
-                    perror("Failed to open file for reading");
-                    fd_com = open(data_file_path, O_RDONLY | O_CREAT, 00777);
-                }
-                bytes_read = read(fd_com, data_buffer, sizeof(data_buffer) - 1);  // Leave space for null terminator
-                if (bytes_read < 0) {
-                    perror("Failed to read from file");
-                    close(fd_com);
-                    return 1;
-                }
-                data_buffer[bytes_read] = '\0'; 
-                printf("Read data: %s\n", data_buffer);
-                close(fd_com);
-                vfs_umount(&flash_mount, false);   
-                // gpio_set(DS18_PARAM_PIN);
-                puts("flash point umount");
-                // int counter_retry = 0;
-                // while (message_ack_flag == 0 && counter_retry < 3){
-                    // xtimer_sleep(3);
-                int argc = 6;
-                char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", data_buffer};
-                    // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
-                retry = 0;
-                message_ack_flag = 0;
-                // while (message_ack_flag != 1 && retry < 3){
-                // _coap_result = gcoap_cli_cmd(argc,argv);
-
-                // ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC);
-                // // xtimer_sleep(10);
-
-                // if (_coap_result == 0) {
-                //     printf("Command executed successfully\n");
-                    
-                // } 
-                // else {
-                //     printf("Command execution failed\n");
-                //     xtimer_sleep(1);
-                // }
-                // retry++;
-                // } 
-                while (message_ack_flag != 1 && retry < 3){
-                    _coap_result = gcoap_cli_cmd(argc,argv);
-                    if (_coap_result == 0) {
-                        printf("Command executed successfully\n");
-                        
-                    } 
-                    else {
-                        printf("Command execution failed\n");
-                        
-                    }
-                    while(message_ack_flag != 1){
-                        puts("waitting for the message sent flag\n");
-                        ztimer_sleep(ZTIMER_MSEC, 0.11* MS_PER_SEC); //DO NOT use 110*NS_PER_MS as it curshs program 
-                    }
-                    count_total_try++;
-                }
-                // ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC);
-                // xtimer_sleep(1);
-                    // counter_retry ++;
-                // }
-                
-                // ztimer_sleep(ZTIMER_MSEC, 1U * US_PER_MS);
-
-                
-                if (message_ack_flag == 1){
-                    count_successful++;
-                }
-                
-                successful_rate=count_successful/ (float)count_total_try;
-                printf("packet deliver rate : %f out of %d tries.\n", successful_rate, count_total_try);
-                
-                message_ack_flag = 0;
-                // Check the result
-                // if (_coap_result == 0) {
-                //     printf("Command executed successfully\n");
-                // } else {
-                //     printf("Command execution failed\n");
-                // }
-            
-                
-            radio_off(netif);
-            data_numbering = data_numbering +1;
-            }
-            printf("%d", data_numbering);
-                res = ds3231_clear_alarm_1_flag(&_dev);
+            res = ds3231_clear_alarm_1_flag(&_dev);
             if (res != 0) {
                 puts("error: unable to clear alarm flag");
                 return 1;
@@ -1267,6 +1175,107 @@ int main(void){
             // printf("%d\n",mktime1);
             /*DS18 INIT*/
             // gpio_set(GPIO_PIN(PA, 13));
+            if (counter_slots % times == 0){
+                //commnunication start
+                
+                radio_on(netif);
+
+                
+
+                vfs_mount(&flash_mount);
+                sprintf(data_file_path, "%s%d.txt", file_path, data_numbering);
+                int fd_com = open(data_file_path, O_RDONLY | O_CREAT, 00777);
+                while ((fd_com < 0) && retries < 3){
+                    printf("error while trying to create %s\n", data_file_path2);
+                    perror("Failed to open file for reading");
+                    fd_com = open(data_file_path, O_RDONLY | O_CREAT, 00777);
+                    ztimer_sleep(ZTIMER_MSEC, 1* MS_PER_SEC);
+                }
+                if (fd_com >= 0){
+                    bytes_read = read(fd_com, data_buffer, sizeof(data_buffer) - 1);  // Leave space for null terminator
+                    if (bytes_read < 0) {
+                        perror("Failed to read from file");
+                        close(fd_com);
+                        return 1;
+                    }
+                    data_buffer[bytes_read] = '\0'; 
+                    printf("Read data: %s\n", data_buffer);
+                    close(fd_com);
+                    vfs_umount(&flash_mount, false);   
+                    // gpio_set(DS18_PARAM_PIN);
+                    puts("flash point umount");
+                    // int counter_retry = 0;
+                    // while (message_ack_flag == 0 && counter_retry < 3){
+                        // xtimer_sleep(3);
+                    int argc = 6;
+                    char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", data_buffer};
+                        // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
+                    message_ack_flag = 0;
+                    // while (message_ack_flag != 1 && retry < 3){
+                    // _coap_result = gcoap_cli_cmd(argc,argv);
+
+                    // ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC);
+                    // // xtimer_sleep(10);
+
+                    // if (_coap_result == 0) {
+                    //     printf("Command executed successfully\n");
+                        
+                    // } 
+                    // else {
+                    //     printf("Command execution failed\n");
+                    //     xtimer_sleep(1);
+                    // }
+                    // retry++;
+                    // } 
+                    retries = 0;
+                    while (message_ack_flag != 1 && retries < 3){
+                        _coap_result = gcoap_cli_cmd(argc,argv);
+                        if (_coap_result == 0) {
+                            printf("Command executed successfully\n");
+                            
+                            while(message_ack_flag != 1){
+                            puts("waitting for the message sent flag\n");
+                            ztimer_sleep(ZTIMER_MSEC, 0.1* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
+                        }
+                        } 
+                        else {
+                            printf("Command execution failed\n");
+                            
+                        }
+                        retries++;
+                        count_total_try++;
+                    }
+                    // ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC);
+                    // xtimer_sleep(1);
+                        // counter_retry ++;
+                    // }
+                    
+                    // ztimer_sleep(ZTIMER_MSEC, 1U * US_PER_MS);
+
+                    
+                    if (message_ack_flag == 1){
+                        count_successful++;
+                    }
+                    
+                    successful_rate=count_successful/ (float)count_total_try;
+                    printf("packet deliver rate : %f out of %d tries.\n", successful_rate, count_total_try);
+                    
+                    message_ack_flag = 0;
+                    // Check the result
+                    // if (_coap_result == 0) {
+                    //     printf("Command executed successfully\n");
+                    // } else {
+                    //     printf("Command execution failed\n");
+                    // }
+                    data_numbering = data_numbering +1;    
+                } else{
+                    close(fd_com);
+                    data_numbering = data_numbering +1;
+                }
+                radio_off(netif);
+            }
+            printf("%d", data_numbering);
+            
             result = ds18_init(&dev18, &ds18_params[0]);
             if (result == DS18_ERROR) {
                 puts("[Error] The sensor pin could not be initialized");
@@ -1278,18 +1287,21 @@ int main(void){
             
             int16_t temperature;
             float ds18_data = 0.00;   
+            retries = 0;
             // gpio_set(DS18_PARAM_PIN);
             // gpio_set(GPIO_PIN(PA, 13));
             vfs_mount(&flash_mount);
 
             sprintf(data_file_path, "%s%d.txt", file_path, data_numbering);
             int ff = open(data_file_path, O_RDWR | O_CREAT | O_APPEND, 0666);
-            while (ff < 0) {
-                printf("error while trying to create %s\n", data_file_path);
-                ff = open(data_file_path, O_RDWR | O_CREAT | O_APPEND, 0666);
-                
+            while ((ff < 0) && retries < 3){
+                printf("error while trying to create %s\n", data_file_path2);
+                perror("Failed to open file for reading");
+                ff = open(data_file_path, O_RDONLY | O_CREAT, 00777);
+                ztimer_sleep(ZTIMER_MSEC, 1* MS_PER_SEC);
             }
-            // else{
+            if (ff >= 0){
+
                 puts("creating file success");
             
                 // gpio_set(GPIO_PIN(PA, 13));
@@ -1332,7 +1344,7 @@ int main(void){
                     puts("Error while writing");
                 }
 
-                close(fo);
+                close(ff);
                 int fr = open(data_file_path, O_RDONLY, 00777);  //before open with O_RDWR which 
                                                                         //will conflict with open(file)
                                                                         //open(file)will equal 0, have to beb a O_RDPNLY for read
@@ -1347,16 +1359,20 @@ int main(void){
                 }
                 puts("\n");
                 
-                close(fo);
+                close(fr);
                 puts("closing file");
 
                 /*11111111111111111*/
                 //vfs_umount_jl(&flash_mount);
-            // }
-            vfs_umount(&flash_mount, false);
-            // gpio_set(DS18_PARAM_PIN);
-            // gpio_set(GPIO_PIN(PA, 13));
-            puts("flash point umount");
+                // }
+                vfs_umount(&flash_mount, false);
+                // gpio_set(DS18_PARAM_PIN);
+                // gpio_set(GPIO_PIN(PA, 13));
+                puts("flash point umount");
+            }
+            else{
+                close(ff);
+            }
             puts("start alarm1");
             // res = ds3231_enable_bat(&_dev);
             res = ds3231_set_alarm_1(&_dev, &testtime, DS3231_AL1_TRIG_H_M_S);
@@ -1368,8 +1384,6 @@ int main(void){
             pm_set(SAML21_PM_MODE_STANDBY);
 
             puts(" WAKED UP SUCCESSFULLY ");
-
-        
         }
         if (extra_slots == 1){
                 res = ds3231_clear_alarm_1_flag(&_dev);
@@ -1466,7 +1480,7 @@ int main(void){
                 }
                 puts("\n");
                 
-                close(fo);
+                close(fr);
                 puts("closing file");
 
                 /*11111111111111111*/

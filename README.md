@@ -36,6 +36,11 @@
 	22.Set CFLAGS += -DCONFIG_GCOAP_PDU_BUF_SIZE=1024 to test if multiple and long time test will cause stack overflow by CoAP PUT.
 	23.In CoAP Client, buf[CONFIG_GCOAP_PDU_BUF_SIZE] defined in "int gcoap_cli_cmd(int argc, char **argv)" is moved and defined as a globl variable. 
 	24.Set CFLAGS += -DTHREAD_STACKSIZE_MAIN=\(3*THREAD_STACKSIZE_DEFAULT\), which is copied from /RIOT/tests/nannocoap_cli to enable more sensible stacksize. 
+	25.Modified schedule: 
+		* adjust communication retry (within MAX 3*1s reading + 0.1s*3 PUT)
+		* if openfile failed, then close() and start alarm
+		* set alarm time before communication start
+	26.CoAP retry: ztimer_sleep(ZTIMER_MSEC, 0.1* MS_PER_SEC); as the gap between CoAP PUT and ACK rceive is around 110 ms //DO NOT use NS_PER_MS as it curshs program.
 	
 	
 ******* RIOT-Sniffer usage hint:
