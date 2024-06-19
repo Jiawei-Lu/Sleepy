@@ -6,7 +6,7 @@
 	RTC: DS3231
 	Sensor: DS18
 	
-	Feature Updates: (13/06/2024)
+	Feature Updates: (19/06/2024)
 	1. Adapting to the latest RIOT-OS file system and IO1 Xplained extension board sdcard spi & params.
 	2. Node communication using CoAP: request PUT/GET
 	3. Working sleepy network schdule
@@ -41,6 +41,9 @@
 		* if openfile failed, then close() and start alarm
 		* set alarm time before communication start
 	26.CoAP retry: ztimer_sleep(ZTIMER_MSEC, 0.1* MS_PER_SEC); as the gap between CoAP PUT and ACK rceive is around 110 ms //DO NOT use NS_PER_MS as it curshs program.
+	27.open() to create new .txt file has a numberlimitation which is 512, use fopen instead.
+	28.Sensing data will be stored line by line, and each CoAP PUT will send last "times" line (times = communication_rate / sensing_rate;).
+	29.Still need to change the part of extra line 
 	
 	
 ******* RIOT-Sniffer usage hint:
