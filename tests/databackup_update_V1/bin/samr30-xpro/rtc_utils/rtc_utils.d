@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/rtc_utils/rtc_utils.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/rtc_utils/rtc_utils.o: \
  /home/jl1n119/test_RPL/RIOT/sys/rtc_utils/rtc_utils.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/stdlib.h /usr/include/newlib/machine/ieeefp.h \
  /usr/include/newlib/_ansi.h /usr/include/newlib/nano/newlib.h \
@@ -123,7 +123,7 @@
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/exti_config.h \
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/cpu_conf.h \
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/timer_config.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/stdlib.h:
 /usr/include/newlib/machine/ieeefp.h:

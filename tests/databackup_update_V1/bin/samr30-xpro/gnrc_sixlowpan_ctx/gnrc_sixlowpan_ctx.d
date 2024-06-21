@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/gnrc_sixlowpan_ctx/gnrc_sixlowpan_ctx.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/gnrc_sixlowpan_ctx/gnrc_sixlowpan_ctx.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/network_layer/sixlowpan/ctx/gnrc_sixlowpan_ctx.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  /usr/include/newlib/inttypes.h /usr/include/newlib/nano/newlib.h \
  /usr/include/newlib/_newlib_version.h /usr/include/newlib/sys/config.h \
@@ -126,7 +126,7 @@
  /usr/include/newlib/sys/_pthreadtypes.h \
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
  /home/jl1n119/test_RPL/RIOT/core/include/thread.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h:
 /usr/include/newlib/inttypes.h:
 /usr/include/newlib/nano/newlib.h:

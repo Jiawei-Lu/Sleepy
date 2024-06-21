@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/event/event.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/event/event.o: \
  /home/jl1n119/test_RPL/RIOT/sys/event/event.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
@@ -131,7 +131,7 @@
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/timex.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/ztimer.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h:

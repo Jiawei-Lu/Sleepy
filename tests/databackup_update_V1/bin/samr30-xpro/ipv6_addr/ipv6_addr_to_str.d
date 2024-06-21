@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/ipv6_addr/ipv6_addr_to_str.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/ipv6_addr/ipv6_addr_to_str.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/network_layer/ipv6/addr/ipv6_addr_to_str.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/inttypes.h /usr/include/newlib/nano/newlib.h \
  /usr/include/newlib/_newlib_version.h /usr/include/newlib/sys/config.h \
  /usr/include/newlib/machine/ieeefp.h /usr/include/newlib/sys/features.h \
@@ -20,7 +20,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/net/ipv4/addr.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/ipv6/addr.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/inttypes.h:
 /usr/include/newlib/nano/newlib.h:
 /usr/include/newlib/_newlib_version.h:

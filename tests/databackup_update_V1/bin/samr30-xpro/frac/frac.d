@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/frac/frac.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/frac/frac.o: \
  /home/jl1n119/test_RPL/RIOT/sys/frac/frac.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -111,7 +111,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/architecture.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h \
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/architecture_arch.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:

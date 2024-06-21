@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/periph_common/init_leds.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/periph_common/init_leds.o: \
  /home/jl1n119/test_RPL/RIOT/drivers/periph_common/init_leds.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/board.h \
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/cpu.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
@@ -118,7 +118,7 @@
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/cpu_conf.h \
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/timer_config.h \
  /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/periph_conf.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/board.h:
 /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/cpu.h:
 /usr/include/newlib/stdio.h:

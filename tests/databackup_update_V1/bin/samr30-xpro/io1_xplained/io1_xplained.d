@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/io1_xplained/io1_xplained.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/io1_xplained/io1_xplained.o: \
  /home/jl1n119/test_RPL/RIOT/drivers/io1_xplained/io1_xplained.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/io1_xplained.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/saul.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
@@ -139,7 +139,7 @@
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/architecture.h \
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/architecture_arch.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/io1_xplained.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/saul.h:
 /usr/include/newlib/errno.h:

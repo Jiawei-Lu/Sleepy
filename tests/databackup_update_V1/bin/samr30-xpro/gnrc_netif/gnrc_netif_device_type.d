@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/gnrc_netif/gnrc_netif_device_type.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/gnrc_netif/gnrc_netif_device_type.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/netif/gnrc_netif_device_type.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
@@ -166,7 +166,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/net/ipv6/hdr.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/inet_csum.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/sixlowpan.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/errno.h:

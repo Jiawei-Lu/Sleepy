@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/fatfs_vfs/fatfs_vfs.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/fatfs_vfs/fatfs_vfs.o: \
  /home/jl1n119/test_RPL/RIOT/pkg/fatfs/fatfs_vfs/fatfs_vfs.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /home/jl1n119/test_RPL/RIOT/sys/posix/include/fcntl.h \
@@ -130,7 +130,7 @@
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
  /usr/include/newlib/sys/stdio.h \
  /home/jl1n119/test_RPL/RIOT/core/include/thread.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /home/jl1n119/test_RPL/RIOT/sys/posix/include/fcntl.h:

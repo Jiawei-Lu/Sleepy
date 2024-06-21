@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/shell_cmds/at30tse75x.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/shell_cmds/at30tse75x.o: \
  /home/jl1n119/test_RPL/RIOT/sys/shell/cmds/at30tse75x.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
  /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
@@ -128,7 +128,7 @@
  /home/jl1n119/test_RPL/RIOT/core/lib/include/modules.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/xfa.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/flash_utils.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:
 /usr/include/newlib/nano/newlib.h:

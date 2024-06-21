@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/gnrc_sock/gnrc_sock.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/gnrc_sock/gnrc_sock.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/sock/gnrc_sock.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
@@ -203,7 +203,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/sock/include/gnrc_sock_internal.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/iana/portrange.h \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/sock/include/sock_types.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/errno.h:

@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/ztimer_core/periph_rtc.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/ztimer_core/periph_rtc.o: \
  /home/jl1n119/test_RPL/RIOT/sys/ztimer/periph_rtc.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/rtc.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
@@ -132,7 +132,7 @@
  /home/jl1n119/test_RPL/RIOT/core/include/thread.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/rmutex.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/periph/rtc.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:

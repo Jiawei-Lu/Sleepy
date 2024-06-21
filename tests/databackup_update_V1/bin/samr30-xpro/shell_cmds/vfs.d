@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/shell_cmds/vfs.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/shell_cmds/vfs.o: \
  /home/jl1n119/test_RPL/RIOT/sys/shell/cmds/vfs.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/inttypes.h /usr/include/newlib/nano/newlib.h \
  /usr/include/newlib/_newlib_version.h /usr/include/newlib/sys/config.h \
@@ -143,7 +143,7 @@
  /home/jl1n119/test_RPL/RIOT/drivers/include/mtd.h \
  /home/jl1n119/test_RPL/RIOT/pkg/fatfs/vendor/include/ffconf.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/vfs_util.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/inttypes.h:
 /usr/include/newlib/nano/newlib.h:

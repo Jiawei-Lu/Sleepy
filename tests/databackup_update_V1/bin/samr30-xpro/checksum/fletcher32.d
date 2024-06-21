@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/checksum/fletcher32.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/checksum/fletcher32.o: \
  /home/jl1n119/test_RPL/RIOT/sys/checksum/fletcher32.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/unaligned.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/checksum/fletcher32.h \
@@ -15,7 +15,7 @@
  /usr/include/newlib/sys/lock.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/include/newlib/sys/cdefs.h /usr/include/newlib/machine/stdlib.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/unaligned.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/checksum/fletcher32.h:

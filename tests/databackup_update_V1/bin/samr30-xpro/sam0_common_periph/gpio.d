@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/sam0_common_periph/gpio.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/sam0_common_periph/gpio.o: \
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/periph/gpio.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/cpu.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -123,7 +123,7 @@
  /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/periph_conf.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/architecture.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/cpu.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:

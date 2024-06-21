@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/mtd_sdcard/mtd_sdcard.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/mtd_sdcard/mtd_sdcard.o: \
  /home/jl1n119/test_RPL/RIOT/drivers/mtd_sdcard/mtd_sdcard.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -137,7 +137,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/time_units.h \
  /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/board.h \
  /usr/include/newlib/string.h /usr/include/newlib/sys/string.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:

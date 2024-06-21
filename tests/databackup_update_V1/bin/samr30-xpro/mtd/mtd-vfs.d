@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/mtd/mtd-vfs.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/mtd/mtd-vfs.o: \
  /home/jl1n119/test_RPL/RIOT/drivers/mtd/mtd-vfs.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/sys/posix/include/fcntl.h \
  /usr/include/newlib/fcntl.h /usr/include/newlib/sys/fcntl.h \
  /usr/include/newlib/sys/_default_fcntl.h /usr/include/newlib/_ansi.h \
@@ -38,7 +38,7 @@
  /home/jl1n119/test_RPL/RIOT/core/lib/include/list.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/iolist.h \
  /home/jl1n119/test_RPL/RIOT/pkg/fatfs/vendor/include/ffconf.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/sys/posix/include/fcntl.h:
 /usr/include/newlib/fcntl.h:
 /usr/include/newlib/sys/fcntl.h:

@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/sock_util/sock_util.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/sock_util/sock_util.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/sock/sock_util.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/sys/posix/include/arpa/inet.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/af.h \
  /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/bytes.h \
@@ -190,7 +190,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/random.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/fmt.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/sys/posix/include/arpa/inet.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/af.h:
 /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/bytes.h:

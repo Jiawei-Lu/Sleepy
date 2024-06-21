@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/constfs/constfs.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/constfs/constfs.o: \
  /home/jl1n119/test_RPL/RIOT/sys/fs/constfs/constfs.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
  /usr/include/newlib/string.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -135,7 +135,7 @@
  /home/jl1n119/test_RPL/RIOT/core/lib/include/thread_config.h \
  /home/jl1n119/test_RPL/RIOT/core/include/thread_flags.h \
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/thread_arch.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h:
 /usr/include/newlib/string.h:
 /usr/include/newlib/_ansi.h:

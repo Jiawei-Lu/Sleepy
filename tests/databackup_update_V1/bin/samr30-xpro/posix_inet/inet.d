@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/posix_inet/inet.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/posix_inet/inet.o: \
  /home/jl1n119/test_RPL/RIOT/sys/posix/inet/inet.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/sys/posix/include/arpa/inet.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/af.h \
  /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/bytes.h \
@@ -36,7 +36,7 @@
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/ipv4/addr.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/sys/posix/include/arpa/inet.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/af.h:
 /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/bytes.h:

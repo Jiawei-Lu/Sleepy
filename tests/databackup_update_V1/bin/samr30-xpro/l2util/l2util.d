@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/l2util/l2util.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/l2util/l2util.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/link_layer/l2util/l2util.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/log.h \
@@ -49,7 +49,7 @@
  /home/jl1n119/test_RPL/RIOT/core/lib/include/container.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/l2util.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/ndp.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/log.h:

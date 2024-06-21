@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/at30tse75x/at30tse75x.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/at30tse75x/at30tse75x.o: \
  /home/jl1n119/test_RPL/RIOT/drivers/at30tse75x/at30tse75x.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/i2c.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
@@ -128,7 +128,7 @@
  /home/jl1n119/test_RPL/RIOT/drivers/include/at30tse75x.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/i2c.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/periph/i2c.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h:

@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/fatfs_diskio_mtd/mtd_diskio.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/fatfs_diskio_mtd/mtd_diskio.o: \
  /home/jl1n119/test_RPL/RIOT/pkg/fatfs/fatfs_diskio/mtd/mtd_diskio.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/pkg/fatfs/fatfs_diskio/mtd/include/fatfs_diskio_mtd.h \
  /home/jl1n119/test_RPL/RIOT/build/pkg/fatfs/source/ff.h \
  /home/jl1n119/test_RPL/RIOT/pkg/fatfs/vendor/include/ffconf.h \
@@ -129,7 +129,7 @@
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/exti_config.h \
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/cpu_conf.h \
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/timer_config.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/pkg/fatfs/fatfs_diskio/mtd/include/fatfs_diskio_mtd.h:
 /home/jl1n119/test_RPL/RIOT/build/pkg/fatfs/source/ff.h:
 /home/jl1n119/test_RPL/RIOT/pkg/fatfs/vendor/include/ffconf.h:

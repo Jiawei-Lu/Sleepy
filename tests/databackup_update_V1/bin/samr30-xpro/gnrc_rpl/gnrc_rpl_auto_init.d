@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/gnrc_rpl/gnrc_rpl_auto_init.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/gnrc_rpl/gnrc_rpl_auto_init.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/routing/rpl/gnrc_rpl_auto_init.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/log.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -194,7 +194,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/net/ipv6/addr.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/rpl/rpl_netstats.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/log.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:

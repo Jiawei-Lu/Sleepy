@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/luid/luid.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/luid/luid.o: \
  /home/jl1n119/test_RPL/RIOT/sys/luid/luid.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/string.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -129,7 +129,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/iolist.h \
  /usr/include/newlib/unistd.h /usr/include/newlib/sys/unistd.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/netopt.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/string.h:
 /usr/include/newlib/_ansi.h:

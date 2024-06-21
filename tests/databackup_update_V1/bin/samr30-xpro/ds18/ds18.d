@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/ds18/ds18.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/ds18/ds18.o: \
  /home/jl1n119/test_RPL/RIOT/drivers/ds18/ds18.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/ds18.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/gpio.h \
@@ -137,7 +137,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/timex.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/ztimer.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/ds18.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/periph/gpio.h:

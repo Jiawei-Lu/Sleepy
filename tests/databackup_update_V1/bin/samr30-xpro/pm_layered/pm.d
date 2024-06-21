@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/pm_layered/pm.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/pm_layered/pm.o: \
  /home/jl1n119/test_RPL/RIOT/sys/pm_layered/pm.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/board.h \
@@ -122,7 +122,7 @@
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/architecture_arch.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/architecture.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/board.h:

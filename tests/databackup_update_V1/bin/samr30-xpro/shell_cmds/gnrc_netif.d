@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/shell_cmds/gnrc_netif.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/shell_cmds/gnrc_netif.o: \
  /home/jl1n119/test_RPL/RIOT/sys/shell/cmds/gnrc_netif.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/ctype.h /usr/include/newlib/_ansi.h \
@@ -185,7 +185,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/architecture.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/xfa.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/flash_utils.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/ctype.h:

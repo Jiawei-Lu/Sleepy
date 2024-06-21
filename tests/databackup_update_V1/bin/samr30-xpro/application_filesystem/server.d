@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/application_filesystem/server.o: \
- /home/jl1n119/Sleepy/tests/newriotvfstest/server.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/application_filesystem/server.o: \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/server.c \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -195,7 +195,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/time_units.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/utils.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/od.h \
- /home/jl1n119/Sleepy/tests/newriotvfstest/gcoap_example.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/gcoap_example.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/ipv6/nib.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/ipv6/nib/abr.h \
@@ -220,7 +220,7 @@
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/gpio.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/i2c.h \
  /home/jl1n119/test_RPL/RIOT/drivers/ds3231/include/ds3231_params.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:
@@ -428,7 +428,7 @@
 /home/jl1n119/test_RPL/RIOT/sys/include/time_units.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/utils.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/od.h:
-/home/jl1n119/Sleepy/tests/newriotvfstest/gcoap_example.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/gcoap_example.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/ipv6/nib.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/ipv6/nib/abr.h:

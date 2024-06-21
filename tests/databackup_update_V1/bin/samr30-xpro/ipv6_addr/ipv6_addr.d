@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/ipv6_addr/ipv6_addr.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/ipv6_addr/ipv6_addr.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/network_layer/ipv6/addr/ipv6_addr.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/stdlib.h /usr/include/newlib/machine/ieeefp.h \
@@ -101,7 +101,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/endian.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/unaligned.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/ipv4/addr.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/stdlib.h:

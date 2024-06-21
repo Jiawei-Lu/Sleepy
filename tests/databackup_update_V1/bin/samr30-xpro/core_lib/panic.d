@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/core_lib/panic.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/core_lib/panic.o: \
  /home/jl1n119/test_RPL/RIOT/core/lib/panic.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/modules.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/riot_version.h \
@@ -123,7 +123,7 @@
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/architecture_arch.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/log.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/ps.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/modules.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/riot_version.h:

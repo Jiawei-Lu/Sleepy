@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/sdcard_spi/sdcard_spi.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/sdcard_spi/sdcard_spi.o: \
  /home/jl1n119/test_RPL/RIOT/drivers/sdcard_spi/sdcard_spi.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -140,7 +140,7 @@
  /home/jl1n119/test_RPL/RIOT/core/include/thread.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/rmutex.h \
  /usr/include/newlib/string.h /usr/include/newlib/sys/string.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:

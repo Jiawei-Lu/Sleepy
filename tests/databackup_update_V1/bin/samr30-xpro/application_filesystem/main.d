@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/application_filesystem/main.o: \
- /home/jl1n119/Sleepy/tests/newriotvfstest/main.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/application_filesystem/main.o: \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/main.c \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
  /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
@@ -27,7 +27,7 @@
  /usr/include/newlib/stdlib.h /usr/include/newlib/machine/stdlib.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
  /usr/include/newlib/ctype.h \
- /home/jl1n119/Sleepy/tests/newriotvfstest/init_dev.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/init_dev.h \
  /home/jl1n119/test_RPL/RIOT/drivers/at86rf2xx/include/at86rf2xx_params.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/at86rf2xx.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
@@ -221,7 +221,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/architecture.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/xfa.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/flash_utils.h \
- /home/jl1n119/Sleepy/tests/newriotvfstest/gcoap_example.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/gcoap_example.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/fmt.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/utils.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/od.h \
@@ -278,7 +278,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/statvfs.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/iolist.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/mtd.h \
- /home/jl1n119/Sleepy/tests/newriotvfstest/vfs.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/vfs.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/vfs_default.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/vfs.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/fs/fatfs.h \
@@ -286,7 +286,7 @@
  /home/jl1n119/test_RPL/RIOT/drivers/include/mtd.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/sdcard_spi.h \
  /home/jl1n119/test_RPL/RIOT/drivers/sdcard_spi/include/sdcard_spi_params.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:
 /usr/include/newlib/nano/newlib.h:
@@ -330,7 +330,7 @@
 /usr/include/newlib/errno.h:
 /usr/include/newlib/sys/errno.h:
 /usr/include/newlib/ctype.h:
-/home/jl1n119/Sleepy/tests/newriotvfstest/init_dev.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/init_dev.h:
 /home/jl1n119/test_RPL/RIOT/drivers/at86rf2xx/include/at86rf2xx_params.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/at86rf2xx.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h:
@@ -524,7 +524,7 @@
 /home/jl1n119/test_RPL/RIOT/sys/include/architecture.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/xfa.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/flash_utils.h:
-/home/jl1n119/Sleepy/tests/newriotvfstest/gcoap_example.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/gcoap_example.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/fmt.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/utils.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/od.h:
@@ -581,7 +581,7 @@
 /home/jl1n119/test_RPL/RIOT/sys/posix/include/sys/statvfs.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/iolist.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/mtd.h:
-/home/jl1n119/Sleepy/tests/newriotvfstest/vfs.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/vfs.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/vfs_default.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/vfs.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/fs/fatfs.h:

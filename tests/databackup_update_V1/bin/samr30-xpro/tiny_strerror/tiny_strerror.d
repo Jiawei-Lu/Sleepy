@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/tiny_strerror/tiny_strerror.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/tiny_strerror/tiny_strerror.o: \
  /home/jl1n119/test_RPL/RIOT/sys/tiny_strerror/tiny_strerror.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -96,7 +96,7 @@
  /home/jl1n119/test_RPL/RIOT/core/lib/include/compiler_hints.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/container.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/tiny_strerror.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/errno.h:
 /usr/include/newlib/sys/errno.h:
 /usr/include/newlib/sys/reent.h:

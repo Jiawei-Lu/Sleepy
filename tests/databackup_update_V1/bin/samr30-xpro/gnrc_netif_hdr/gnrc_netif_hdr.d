@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/gnrc_netif_hdr/gnrc_netif_hdr.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/gnrc_netif_hdr/gnrc_netif_hdr.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/netif/hdr/gnrc_netif_hdr.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/netif/hdr.h \
@@ -165,7 +165,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/neterr.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/utlist.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/time_units.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/netif/hdr.h:

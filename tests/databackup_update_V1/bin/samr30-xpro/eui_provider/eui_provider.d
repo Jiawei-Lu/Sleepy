@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/eui_provider/eui_provider.o: \
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/eui_provider/eui_provider.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/link_layer/eui_provider/eui_provider.c \
- /home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /home/jl1n119/test_RPL/RIOT/sys/net/link_layer/eui_provider/include/eui48_provider_params.h \
@@ -129,7 +129,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/luid.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/eui48.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/eui64.h
-/home/jl1n119/Sleepy/tests/newriotvfstest/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/tests/databackup_update_V1/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /home/jl1n119/test_RPL/RIOT/sys/net/link_layer/eui_provider/include/eui48_provider_params.h:
