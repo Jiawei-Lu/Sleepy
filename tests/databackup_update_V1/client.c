@@ -94,7 +94,7 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
 
     if (memo->state == GCOAP_MEMO_TIMEOUT) {
         printf("gcoap: timeout for msg ID %02u\n", coap_get_id(pdu));
-        message_ack_flag =1;
+        message_ack_flag = 0;
         return;
     }
     else if (memo->state == GCOAP_MEMO_RESP_TRUNC) {

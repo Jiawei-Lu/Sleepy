@@ -16,11 +16,12 @@ FEATURES_BLACKLIST += arch_msp430
 # Comment this out to disable code in RIOT that does safety checking
 # which is not needed in a production environment but helps in the
 # development process:
-DEVELHELP ?= 1
+#DEVELHELP ?= 1
 
 # Change this to 0 show compiler invocation lines by default:
-QUIET ?= 1
+#QUIET ?= 1
 
+CFLAGS += -DCONFIG_IEEE802154_DEFAULT_TXPOWER=-10
 CFLAGS += -DCONFIG_IEEE802154_DEFAULT_SUBGHZ_CHANNEL=0 
 CFLAGS += -DCONFIG_IEEE802154_DEFAULT_SUBGHZ_PAGE=0 
 CFLAGS += -DCONFIG_COAP_MAX_RETRANSMIT=0
@@ -36,11 +37,11 @@ USEMODULE += constfs
 
 # USEMODULE += devfs
 
-
+USEMODULE += auto_init
 
 # Include packages that pull up and auto-init the link layer.
 # NOTE: 6LoWPAN will be included if IEEE802.15.4 devices are present
-USEMODULE += gnrc_netif
+# USEMODULE += gnrc_netif
 USEMODULE += netdev_default
 USEMODULE += auto_init_gnrc_netif
 # Activate ICMPv6 error messages
@@ -48,11 +49,15 @@ USEMODULE += gnrc_icmpv6_error
 # Specify the mandatory networking module for a IPv6 routing node
 USEMODULE += gnrc_ipv6_router_default
 # Add a routing protocol
-USEMODULE += gnrc_rpl
-USEMODULE += auto_init_gnrc_rpl
+
 # Additional networking modules that can be dropped if not needed
 USEMODULE += gnrc_icmpv6_echo
+
+USEMODULE += gnrc_rpl
+USEMODULE += auto_init_gnrc_rpl
+
 USEMODULE += shell_cmd_gnrc_udp
+
 # Add also the shell, some shell commands
 USEMODULE += shell
 USEMODULE += shell_cmds_default
@@ -74,8 +79,6 @@ ifeq (,$(filter 1, $(LWIP_IPV4) $(LWIP_IPV6)))
   # Additional networking modules that can be dropped if not needed
   USEMODULE += gnrc_icmpv6_echo
 else
-  USEMODULE += lwip_netdev
-
   ifeq (1,$(LWIP_IPV4))
     USEMODULE += ipv4_addr
 
@@ -106,6 +109,7 @@ USEMODULE += random
 USEMODULE += shell
 USEMODULE += shell_cmds_default
 USEMODULE += ps
+USEMODULE += uri_parser
 
 # Comment this out to disable code in RIOT that does safety checking
 # which is not needed in a production environment but helps in the

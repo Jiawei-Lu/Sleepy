@@ -34,7 +34,7 @@ int main(void)
     /* we need a message queue for the thread running the shell in order to
      * receive potentially fast incoming networking packets */
      
-    board_antenna_config(RFCTL_ANTENNA_EXT);
+    //board_antenna_config(RFCTL_ANTENNA_EXT);
     msg_init_queue(_main_msg_queue, MAIN_QUEUE_SIZE);
     puts("RIOT network stack example application");
 

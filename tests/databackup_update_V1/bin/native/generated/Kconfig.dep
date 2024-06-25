@@ -286,6 +286,9 @@ config USEMODULE_NETDEV_DEFAULT
 config USEMODULE_NETDEV_ETH
 	bool
 	default y
+config USEMODULE_NETDEV_LEGACY_API
+	bool
+	default y
 config USEMODULE_NETDEV_REGISTER
 	bool
 	default y

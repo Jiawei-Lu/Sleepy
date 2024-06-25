@@ -29,7 +29,20 @@
 #include <ctype.h>
 
 
-#include "init_dev.h"
+//#include "init_dev.h"
+#include "auto_init_priorities.h"
+#include "net/gnrc/ipv6/hdr.h"
+#include "net/gnrc/netif/hdr.h"
+#include "net/gnrc/netif.h"
+#include "net/gnrc/netif/ethernet.h"
+#include "net/gnrc/netif/ieee802154.h"
+#include "net/gnrc/netif/internal.h"
+#include "net/netdev_test.h"
+#include "net/netif.h"
+#ifndef NETIF_PRINT_IPV6_NUMOF
+#define NETIF_PRINT_IPV6_NUMOF 4
+#endif
+
 
 
 
@@ -155,8 +168,8 @@ ds3231_t _dev;
 extern ds18_t dev18;
 
 /*Radio netif*/
-gnrc_netif_t* netif = NULL;
-
+gnrc_netif_t* radio_netif = NULL;
+int global_flag =0; 
 
 // static kernel_pid_t _recv_pid;
 
@@ -463,15 +476,45 @@ int main(void){
     
     puts("Waiting for address autoconfiguration...");
     // xtimer_sleep(5);
-    ztimer_sleep(ZTIMER_MSEC, 2* MS_PER_SEC);
+    
 
     /* print network addresses */
-    puts("{\"IPv6 addresses\": [\"");
-    netifs_print_ipv6("\", \"");
-    puts("\"]}");
-    _gnrc_netif_config(0, NULL);
-    ztimer_sleep(ZTIMER_MSEC, 2* MS_PER_SEC);
     
+    _gnrc_netif_config(0, NULL);
+    //ztimer_sleep(ZTIMER_MSEC, 10* MS_PER_SEC);
+    while(1){
+    _gnrc_netif_config(0, NULL);
+    xtimer_sleep(1);
+    }
+    puts("{\"IPv6 addresses\": [\"");
+    //netifs_print_ipv6("\", \"");
+    while (global_flag == 0){
+        netif_t *netif = 0;
+        bool first = true;
+        while ((netif = netif_iter(netif)) != NULL) {
+            ipv6_addr_t addrs[NETIF_PRINT_IPV6_NUMOF];
+            ssize_t num = netif_get_ipv6(netif, addrs, ARRAY_SIZE(addrs));
+            if (num > 0) {
+                if (first) {
+                    first = false;
+                }
+                else {
+                    printf("%s", "\", \"");
+                }
+                ipv6_addrs_print(addrs, num, "\", \"");
+            }
+      
+        if(ipv6_addr_is_global(addrs)){
+            global_flag = 1;
+        }
+        else{
+            _gnrc_netif_config(0, NULL);
+            //ztimer_sleep(ZTIMER_MSEC, 10* MS_PER_SEC);
+            xtimer_sleep(1);
+        }
+      }	
+    }
+    puts("\"]}");
     puts("gcoap example app");
     puts("insert SD-card and use 'init' command to set card to spi mode");
     puts("WARNING: using 'write' or 'copy' commands WILL overwrite data on your sd-card and");
@@ -606,7 +649,9 @@ int main(void){
     // gpio_set(GPIO_PIN(PA, 13));
     // // //gpio_set(DS18_PARAM_PIN);
 
-    gnrc_rpl_init(7);
+    // gnrc_rpl_init(7);
+    puts("ztimer sleep for 60s wait rpl configuration\n");
+    ztimer_sleep(ZTIMER_MSEC, 5* MS_PER_SEC);
     
     // gpio_set(GPIO_PIN(PA, 13));
     // ztimer_sleep(ZTIMER_MSEC, 3 * MS_PER_SEC);
@@ -754,7 +799,7 @@ int main(void){
         // char *argv1[] = {"coap", "get", "[2001:db8::58a4:8450:8511:6445]:5683", "/riot/value"};
         _coap_result = gcoap_cli_cmd(argc1,argv1);
 
-        ztimer_sleep(ZTIMER_MSEC, 0.1* MS_PER_SEC);
+        ztimer_sleep(ZTIMER_MSEC, 2* MS_PER_SEC);
         // xtimer_sleep(10);
 
         if (_coap_result == 0) {
@@ -1027,7 +1072,7 @@ int main(void){
 
 
     //
-    radio_off(netif);
+    radio_off(radio_netif);
 
    
 
@@ -1428,7 +1473,7 @@ int main(void){
     int count_sleepgap = 1;
     struct tm testtime;
     while (1){
-        radio_on(netif);
+        radio_on(radio_netif);
         res = ds3231_clear_alarm_1_flag(&_dev);
         if (res != 0) {
             puts("error: unable to clear alarm flag");
@@ -1469,7 +1514,7 @@ int main(void){
         
         message_ack_flag = 0;
 
-        radio_off(netif);
+        radio_off(radio_netif);
         count_sleepgap++;
         puts("start alarm1");
         // res = ds3231_enable_bat(&_dev);
@@ -1527,7 +1572,7 @@ int main(void){
             if (counter_slots % times == 0){
                 //commnunication start
                 
-                radio_on(netif);
+                radio_on(radio_netif);
 
                 vfs_mount(&flash_mount);
 
@@ -1678,7 +1723,7 @@ int main(void){
                     vfs_umount(&flash_mount, false); 
                     data_numbering = data_numbering +1;
                 }
-                radio_off(netif);
+                radio_off(radio_netif);
             }
             
             printf("%d", data_numbering);
