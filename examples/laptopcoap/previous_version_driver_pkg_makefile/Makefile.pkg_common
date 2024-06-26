@@ -1,0 +1,2 @@
+RIOTBASE ?= $(CURDIR)/../../../test_RPL/RIOT
+include $(CURDIR)/Makefile.tests_common
