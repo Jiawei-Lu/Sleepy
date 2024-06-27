@@ -1,0 +1,3 @@
+RIOTBASE ?= $(CURDIR)/../../../test_RPL/RIOT
+BOARD ?= samr21-xpro
+include $(CURDIR)/../Makefile.tests_common

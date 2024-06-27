@@ -187,7 +187,7 @@ struct  tm  sych_time;
 
 /*RPL*/
 gnrc_ipv6_nib_ft_t entry;      
-void *state = NULL;
+void *rpl_state = NULL;
 unsigned iface = 0U;
 // uint8_t dst_address[] = {0};
 
@@ -460,6 +460,24 @@ int main(void)
     /* print network addresses */
     _gnrc_netif_config(0, NULL);
 
+    ztimer_sleep(ZTIMER_MSEC, 5* MS_PER_SEC);
+    kernel_pid_t iface_pid = 7;
+    if (gnrc_netif_get_by_pid(iface_pid) == NULL) {
+        printf("unknown interface specified\n");
+        return 1;
+    }
+    gnrc_rpl_init(iface_pid);
+    printf("successfully initialized RPL on interface %d\n", iface_pid);
+
+    // iface_pid = 6;
+    // if (gnrc_netif_get_by_pid(iface_pid) == NULL) {
+    //     printf("unknown interface specified\n");
+    //     return 1;
+    // }
+    // gnrc_rpl_init(iface_pid);
+    // printf("successfully initialized RPL on interface %d\n", iface_pid);
+    puts("ztimer sleep for few seconds wait rpl configuration\n");
+    ztimer_sleep(ZTIMER_MSEC, 5* MS_PER_SEC);
     puts("{\"IPv6 addresses\": [\"");
     //netifs_print_ipv6("\", \"");
     while (global_flag == 0){
@@ -621,7 +639,7 @@ int main(void)
     puts("Configured rpl:");
     // gpio_set(GPIO_PIN(PA, 13));
     // // //gpio_set(DS18_PARAM_PIN);
-    kernel_pid_t iface_pid = 7;
+    iface_pid = 7;
     if (gnrc_netif_get_by_pid(iface_pid) == NULL) {
         printf("unknown interface specified\n");
         return 1;
@@ -629,13 +647,13 @@ int main(void)
     gnrc_rpl_init(iface_pid);
     printf("successfully initialized RPL on interface %d\n", iface_pid);
 
-    iface_pid = 6;
-    if (gnrc_netif_get_by_pid(iface_pid) == NULL) {
-        printf("unknown interface specified\n");
-        return 1;
-    }
-    gnrc_rpl_init(iface_pid);
-    printf("successfully initialized RPL on interface %d\n", iface_pid);
+    // iface_pid = 6;
+    // if (gnrc_netif_get_by_pid(iface_pid) == NULL) {
+    //     printf("unknown interface specified\n");
+    //     return 1;
+    // }
+    // gnrc_rpl_init(iface_pid);
+    // printf("successfully initialized RPL on interface %d\n", iface_pid);
     puts("ztimer sleep for few seconds wait rpl configuration\n");
     ztimer_sleep(ZTIMER_MSEC, 5* MS_PER_SEC);
     

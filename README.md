@@ -51,3 +51,12 @@
 	2. cd /tools: in the makefile, define channel page number for 0 of subGHz
 	3. sudo ./sniffer.py /dev/ttyACM0 0 | sudo wireshark -k -i -
 
+
+******* Libcoap server IPV6 address problem:
+	1. add ipv6 address to interface :
+		a. sudo nano /etc/netplan/01-netcfg.yaml  -->>Netplan (default in Ubuntu 18.04 and later), the file could be in /etc/netplan/01-netcfg.yaml. For older versions, it might 				 
+		   be /etc/network/interfaces.
+		b. open file, find the interface name.
+		c. sudo ifconfig <interface name> inet6 add 2001:630:d0:1000::d6fx [x can be any numeber]
+		d. ping 2001:630:d0:1000::d6fx
+		e. coap get 2001:630:d0:1000::d6fx to verify

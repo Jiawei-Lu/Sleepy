@@ -7,7 +7,7 @@ APPLICATION = gcoap_example
 BOARD ?= native
 
 # This has to be the absolute path to the RIOT base directory:
-RIOTBASE ?= $(CURDIR)/../..
+RIOTBASE ?= $(CURDIR)/../../../test_RPL/RIOT
 
 
 CFLAGS += -DCONFIG_IEEE802154_DEFAULT_TXPOWER=-10

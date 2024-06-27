@@ -43,9 +43,6 @@
 #define NETIF_PRINT_IPV6_NUMOF 4
 #endif
 
-
-
-
 #include "msg.h"
 
 /*GCoAP*/
@@ -182,7 +179,7 @@ struct tm current_time;
 
 /*RPL*/
 gnrc_ipv6_nib_ft_t entry;      
-void *state = NULL;
+void *rpl_state = NULL;
 uint8_t dst_address[] = {0};
 // uint8_t nexthop_address[] = {0};
 // int i = 0;
@@ -658,7 +655,7 @@ int main(void){
     // gpio_clear(GPIO_PIN(PA, 13));
     // gpio_set(DS18_PARAM_PIN);
     puts("printing route:");
-    while (gnrc_ipv6_nib_ft_iter(NULL, iface, &state, &entry)) {
+    while (gnrc_ipv6_nib_ft_iter(NULL, iface, &rpl_state, &entry)) {
         char addr_str[IPV6_ADDR_MAX_STR_LEN];
         if ((entry.dst_len == 0) || ipv6_addr_is_unspecified(&entry.dst)) {
             printf("default%s ", (entry.primary ? "*" : ""));
