@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/board/board.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/board/board.o: \
  /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/board.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
  /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
@@ -118,7 +118,7 @@
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/cpu_conf.h \
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/timer_config.h \
  /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/periph_conf.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:
 /usr/include/newlib/nano/newlib.h:

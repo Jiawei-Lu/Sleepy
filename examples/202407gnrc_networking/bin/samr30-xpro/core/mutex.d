@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/core/mutex.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/core/mutex.o: \
  /home/jl1n119/test_RPL/RIOT/core/mutex.c \
- /home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -118,7 +118,7 @@
  /home/jl1n119/test_RPL/RIOT/core/lib/include/list.h \
  /home/jl1n119/test_RPL/RIOT/core/include/thread.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/errno.h:
 /usr/include/newlib/sys/errno.h:
 /usr/include/newlib/sys/reent.h:

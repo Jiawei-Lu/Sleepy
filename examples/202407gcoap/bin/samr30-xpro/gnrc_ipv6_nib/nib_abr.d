@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/gnrc_ipv6_nib/nib_abr.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/gnrc_ipv6_nib/nib_abr.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/network_layer/ipv6/nib/nib_abr.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
@@ -186,7 +186,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/pktqueue.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/sixlowpan/ctx.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/random.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/stdio.h:

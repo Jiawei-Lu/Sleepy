@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/isrpipe/isrpipe.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/isrpipe/isrpipe.o: \
  /home/jl1n119/test_RPL/RIOT/sys/isrpipe/isrpipe.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/isrpipe.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /home/jl1n119/test_RPL/RIOT/core/include/mutex.h \
@@ -106,7 +106,7 @@
  /home/jl1n119/test_RPL/RIOT/core/lib/include/irq.h \
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/irq_arch.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/debug_irq_disable.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/isrpipe.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /home/jl1n119/test_RPL/RIOT/core/include/mutex.h:

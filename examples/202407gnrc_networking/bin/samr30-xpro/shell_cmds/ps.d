@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/shell_cmds/ps.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/shell_cmds/ps.o: \
  /home/jl1n119/test_RPL/RIOT/sys/shell/cmds/ps.c \
- /home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/ps.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/shell.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
@@ -125,7 +125,7 @@
  /home/jl1n119/test_RPL/RIOT/core/lib/include/xfa.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/flash_utils.h \
  /usr/include/newlib/string.h /usr/include/newlib/sys/string.h
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/ps.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/shell.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:

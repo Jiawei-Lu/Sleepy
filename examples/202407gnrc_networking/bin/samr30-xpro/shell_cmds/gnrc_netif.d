@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/shell_cmds/gnrc_netif.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/shell_cmds/gnrc_netif.o: \
  /home/jl1n119/test_RPL/RIOT/sys/shell/cmds/gnrc_netif.c \
- /home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/ctype.h /usr/include/newlib/_ansi.h \
@@ -120,6 +120,7 @@
  /usr/include/newlib/stdlib.h /usr/include/newlib/machine/stdlib.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/list.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/netreg.h \
+ /home/jl1n119/test_RPL/RIOT/core/include/mbox.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/netif.h \
  /home/jl1n119/test_RPL/RIOT/core/include/msg.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/event.h \
@@ -184,7 +185,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/architecture.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/xfa.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/flash_utils.h
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/ctype.h:
@@ -315,6 +316,7 @@
 /usr/include/newlib/machine/stdlib.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/list.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/netreg.h:
+/home/jl1n119/test_RPL/RIOT/core/include/mbox.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/netif.h:
 /home/jl1n119/test_RPL/RIOT/core/include/msg.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/event.h:

@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/inet_csum/inet_csum.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/inet_csum/inet_csum.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/crosslayer/inet_csum/inet_csum.c \
- /home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/inttypes.h /usr/include/newlib/nano/newlib.h \
  /usr/include/newlib/_newlib_version.h /usr/include/newlib/sys/config.h \
  /usr/include/newlib/machine/ieeefp.h /usr/include/newlib/sys/features.h \
@@ -112,7 +112,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/architecture.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h \
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/architecture_arch.h
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/inttypes.h:
 /usr/include/newlib/nano/newlib.h:
 /usr/include/newlib/_newlib_version.h:

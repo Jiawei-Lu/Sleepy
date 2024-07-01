@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/board_common_init/board_common.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/board_common_init/board_common.o: \
  /home/jl1n119/test_RPL/RIOT/boards/common/init/board_common.c \
- /home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/board.h \
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/cpu.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
@@ -118,7 +118,7 @@
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/cpu_conf.h \
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/timer_config.h \
  /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/periph_conf.h
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/board.h:
 /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/cpu.h:
 /usr/include/newlib/stdio.h:

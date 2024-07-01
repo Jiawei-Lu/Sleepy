@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/periph_common/spi.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/periph_common/spi.o: \
  /home/jl1n119/test_RPL/RIOT/drivers/periph_common/spi.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
  /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/board.h \
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/cpu.h \
@@ -121,7 +121,7 @@
  /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/periph_conf.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/gpio.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h:
 /home/jl1n119/test_RPL/RIOT/boards/samr30-xpro/include/board.h:
 /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/cpu.h:

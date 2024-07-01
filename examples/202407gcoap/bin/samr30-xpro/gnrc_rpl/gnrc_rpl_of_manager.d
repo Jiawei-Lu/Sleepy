@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/gnrc_rpl/gnrc_rpl_of_manager.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/gnrc_rpl/gnrc_rpl_of_manager.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/routing/rpl/gnrc_rpl_of_manager.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/rpl.h \
  /usr/include/newlib/string.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -196,7 +196,7 @@
  /usr/include/newlib/stdio.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
  /usr/include/newlib/sys/stdio.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/rpl.h:
 /usr/include/newlib/string.h:
 /usr/include/newlib/_ansi.h:

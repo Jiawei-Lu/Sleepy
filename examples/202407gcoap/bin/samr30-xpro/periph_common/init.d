@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/periph_common/init.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/periph_common/init.o: \
  /home/jl1n119/test_RPL/RIOT/drivers/periph_common/init.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/modules.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/riot_version.h \
@@ -121,7 +121,7 @@
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/gpio.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/rtt.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/modules.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/riot_version.h:

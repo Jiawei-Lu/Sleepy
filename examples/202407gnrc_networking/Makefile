@@ -5,7 +5,7 @@ APPLICATION = gnrc_networking
 BOARD ?= native
 
 # This has to be the absolute path to the RIOT base directory:
-RIOTBASE ?= $(CURDIR)/../../../../../test_RPL/RIOT
+RIOTBASE ?= $(CURDIR)/../../../test_RPL/RIOT
 
 CFLAGS += -DCONFIG_IEEE802154_DEFAULT_SUBGHZ_CHANNEL=0 
 CFLAGS += -DCONFIG_IEEE802154_DEFAULT_SUBGHZ_PAGE=0 
@@ -24,10 +24,14 @@ USEMODULE += auto_init_gnrc_rpl
 # Additional networking modules that can be dropped if not needed
 USEMODULE += gnrc_icmpv6_echo
 USEMODULE += shell_cmd_gnrc_udp
+
+USEMODULE += gcoap
+
 # Add also the shell, some shell commands
 USEMODULE += shell
 USEMODULE += shell_cmds_default
 USEMODULE += ps
+USEMODULE += uri_parser
 USEMODULE += netstats_l2
 USEMODULE += netstats_ipv6
 USEMODULE += netstats_rpl
@@ -53,6 +57,13 @@ ifeq (1,$(USE_ZEP))
   USEMODULE += socket_zep
 endif
 
+# Pass through application configuration to the docker container, if
+# BUILD_IN_DOCKER=1 is used:
+DOCKER_ENV_VARS += LWIP_IPV4
+DOCKER_ENV_VARS += LWIP_IPV6
+DOCKER_ENV_VARS += USE_ZEP
+DOCKER_ENV_VARS += ZEP_PORT_BASE
+
 # Uncomment the following 2 lines to specify static link lokal IPv6 address
 # this might be useful for testing, in cases where you cannot or do not want to
 # run a shell with ifconfig to get the real link lokal address.
@@ -72,3 +83,20 @@ include $(RIOTBASE)/Makefile.include
 
 # Set a custom channel if needed
 include $(RIOTMAKE)/default-radio-settings.inc.mk
+
+# For now this goes after the inclusion of Makefile.include so Kconfig symbols
+# are available. Only set configuration via CFLAGS if Kconfig is not being used
+# for this module.
+ifndef CONFIG_KCONFIG_MODULE_GCOAP
+## Uncomment to redefine port, for example use 61616 for RFC 6282 UDP compression.
+#GCOAP_PORT = 5683
+#CFLAGS += -DCONFIG_GCOAP_PORT=$(GCOAP_PORT)
+
+## Uncomment to redefine request token length, max 8.
+#GCOAP_TOKENLEN = 2
+#CFLAGS += -DCONFIG_GCOAP_TOKENLEN=$(GCOAP_TOKENLEN)
+
+# Increase from default for confirmable block2 follow-on requests
+GCOAP_RESEND_BUFS_MAX ?= 2
+CFLAGS += -DCONFIG_GCOAP_RESEND_BUFS_MAX=$(GCOAP_RESEND_BUFS_MAX)
+endif

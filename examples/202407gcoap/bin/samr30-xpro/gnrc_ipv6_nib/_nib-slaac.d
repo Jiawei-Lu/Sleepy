@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/gnrc_ipv6_nib/_nib-slaac.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/gnrc_ipv6_nib/_nib-slaac.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/network_layer/ipv6/nib/_nib-slaac.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/modules.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/riot_version.h \
@@ -191,7 +191,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/sixlowpan/ctx.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/random.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/modules.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/riot_version.h:

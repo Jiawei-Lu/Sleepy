@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/gnrc_pktbuf_static/gnrc_pktbuf_static.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/gnrc_pktbuf_static/gnrc_pktbuf_static.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/pktbuf_static/gnrc_pktbuf_static.c \
- /home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
@@ -130,7 +130,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/pktbuf/include/pktbuf_internal.h \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/pktbuf_static/include/pktbuf_static.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/errno.h:

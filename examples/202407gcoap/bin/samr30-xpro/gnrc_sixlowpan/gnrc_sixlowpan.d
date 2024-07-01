@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/gnrc_sixlowpan/gnrc_sixlowpan.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/gnrc_sixlowpan/gnrc_sixlowpan.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/network_layer/sixlowpan/gnrc_sixlowpan.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /home/jl1n119/test_RPL/RIOT/core/include/sched.h \
@@ -184,7 +184,7 @@
  /usr/include/newlib/stdio.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
  /usr/include/newlib/sys/stdio.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /home/jl1n119/test_RPL/RIOT/core/include/sched.h:

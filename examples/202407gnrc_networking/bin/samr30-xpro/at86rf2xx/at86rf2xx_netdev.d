@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/at86rf2xx/at86rf2xx_netdev.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/at86rf2xx/at86rf2xx_netdev.o: \
  /home/jl1n119/test_RPL/RIOT/drivers/at86rf2xx/at86rf2xx_netdev.c \
- /home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/string.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
  /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
@@ -151,7 +151,7 @@
  /home/jl1n119/test_RPL/RIOT/drivers/at86rf2xx/include/at86rf2xx_registers.h \
  /home/jl1n119/test_RPL/RIOT/drivers/at86rf2xx/include/at86rf2xx_registers.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/string.h:
 /usr/include/newlib/_ansi.h:
 /usr/include/newlib/nano/newlib.h:

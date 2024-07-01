@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/malloc_thread_safe/malloc_wrappers.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/malloc_thread_safe/malloc_wrappers.o: \
  /home/jl1n119/test_RPL/RIOT/sys/malloc_thread_safe/malloc_wrappers.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
  /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
@@ -118,7 +118,7 @@
  /home/jl1n119/test_RPL/RIOT/core/include/mutex.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/list.h \
  /home/jl1n119/test_RPL/RIOT/core/include/thread.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:
 /usr/include/newlib/nano/newlib.h:

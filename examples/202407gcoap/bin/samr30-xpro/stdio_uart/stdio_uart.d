@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/stdio_uart/stdio_uart.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/stdio_uart/stdio_uart.o: \
  /home/jl1n119/test_RPL/RIOT/sys/stdio_uart/stdio_uart.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -135,7 +135,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/stdio_uart.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/stdio_base.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/errno.h:
 /usr/include/newlib/sys/errno.h:
 /usr/include/newlib/sys/reent.h:

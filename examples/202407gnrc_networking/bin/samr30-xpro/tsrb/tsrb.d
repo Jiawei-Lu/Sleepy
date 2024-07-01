@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/tsrb/tsrb.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/tsrb/tsrb.o: \
  /home/jl1n119/test_RPL/RIOT/sys/tsrb/tsrb.c \
- /home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/irq.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/cpu_conf.h \
@@ -84,7 +84,7 @@
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/debug_irq_disable.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/tsrb.h
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/irq.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h:
 /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/cpu_conf.h:

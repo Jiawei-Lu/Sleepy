@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/application_gcoap_example/server.o: \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/server.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/application_gcoap_example/server.o: \
+ /home/jl1n119/Sleepy/examples/202407gcoap/server.c \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -194,9 +194,9 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/time_units.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/utils.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/od.h \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/gcoap_example.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/gcoap_example.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:
@@ -403,5 +403,5 @@
 /home/jl1n119/test_RPL/RIOT/sys/include/time_units.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/utils.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/od.h:
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/gcoap_example.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/gcoap_example.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h:

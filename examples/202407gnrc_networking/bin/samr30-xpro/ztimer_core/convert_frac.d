@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/ztimer_core/convert_frac.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/ztimer_core/convert_frac.o: \
  /home/jl1n119/test_RPL/RIOT/sys/ztimer/convert_frac.c \
- /home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/inttypes.h /usr/include/newlib/nano/newlib.h \
  /usr/include/newlib/_newlib_version.h /usr/include/newlib/sys/config.h \
@@ -121,7 +121,7 @@
  /usr/include/newlib/sys/_pthreadtypes.h \
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
  /home/jl1n119/test_RPL/RIOT/core/include/thread.h
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/inttypes.h:
 /usr/include/newlib/nano/newlib.h:

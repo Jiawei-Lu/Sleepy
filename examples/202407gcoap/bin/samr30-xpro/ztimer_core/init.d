@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/ztimer_core/init.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/ztimer_core/init.o: \
  /home/jl1n119/test_RPL/RIOT/sys/ztimer/init.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/modules.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/riot_version.h \
@@ -137,7 +137,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/ztimer/periph_rtc.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/ztimer/config.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/log.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/modules.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/riot_version.h:

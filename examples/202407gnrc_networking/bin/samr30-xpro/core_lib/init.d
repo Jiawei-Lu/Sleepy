@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/core_lib/init.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/core_lib/init.o: \
  /home/jl1n119/test_RPL/RIOT/core/lib/init.c \
- /home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -135,7 +135,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/tsrb.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/xfa.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/errno.h:
 /usr/include/newlib/sys/errno.h:
 /usr/include/newlib/sys/reent.h:

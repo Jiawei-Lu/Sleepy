@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/cortexm_common_periph/pm.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/cortexm_common_periph/pm.o: \
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/periph/pm.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/cpu.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -119,7 +119,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/architecture.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h \
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/architecture_arch.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/cpu.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:

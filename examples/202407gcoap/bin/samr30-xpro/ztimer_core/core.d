@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/ztimer_core/core.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/ztimer_core/core.o: \
  /home/jl1n119/test_RPL/RIOT/sys/ztimer/core.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/inttypes.h /usr/include/newlib/nano/newlib.h \
@@ -127,7 +127,7 @@
  /home/jl1n119/test_RPL/RIOT/core/lib/include/rmutex.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/log.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/inttypes.h:

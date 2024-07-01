@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/nanocoap/nanocoap.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/nanocoap/nanocoap.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/application_layer/nanocoap/nanocoap.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
@@ -183,7 +183,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/net/sock/ip.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/sock/tcp.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/include/newlib/errno.h:

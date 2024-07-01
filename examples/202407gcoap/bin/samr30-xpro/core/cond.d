@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/core/cond.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/core/cond.o: \
  /home/jl1n119/test_RPL/RIOT/core/cond.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/include/cond.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
@@ -117,7 +117,7 @@
  /usr/include/newlib/sys/_stdint.h \
  /usr/include/newlib/sys/_pthreadtypes.h \
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/include/cond.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h:

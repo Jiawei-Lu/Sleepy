@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/gcoap/gcoap.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/gcoap/gcoap.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/application_layer/gcoap/gcoap.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -202,7 +202,7 @@
  /usr/include/newlib/stdio.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
  /usr/include/newlib/sys/stdio.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/errno.h:
 /usr/include/newlib/sys/errno.h:
 /usr/include/newlib/sys/reent.h:

@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/ipv6_addr/ipv6_addr_from_str.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/ipv6_addr/ipv6_addr_from_str.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/network_layer/ipv6/addr/ipv6_addr_from_str.c \
- /home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -22,7 +22,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/net/ipv4/addr.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/ipv6/addr.h
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/errno.h:
 /usr/include/newlib/sys/errno.h:
 /usr/include/newlib/sys/reent.h:

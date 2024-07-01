@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/core_lib/atomic_c11.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/core_lib/atomic_c11.o: \
  /home/jl1n119/test_RPL/RIOT/core/lib/atomic_c11.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h \
  /usr/include/newlib/stdlib.h /usr/include/newlib/machine/ieeefp.h \
  /usr/include/newlib/_ansi.h /usr/include/newlib/nano/newlib.h \
@@ -94,7 +94,7 @@
  /home/jl1n119/test_RPL/RIOT/core/lib/include/compiler_hints.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/container.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/debug_irq_disable.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h:
 /usr/include/newlib/stdlib.h:
 /usr/include/newlib/machine/ieeefp.h:

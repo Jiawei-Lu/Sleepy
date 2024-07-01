@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/shell/shell.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/shell/shell.o: \
  /home/jl1n119/test_RPL/RIOT/sys/shell/shell.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/string.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
  /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
@@ -129,7 +129,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/flash_utils.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/shell_lock.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/shell.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/string.h:
 /usr/include/newlib/_ansi.h:
 /usr/include/newlib/nano/newlib.h:

@@ -1,6 +1,6 @@
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/gnrc_netif/gnrc_netif.o: \
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/gnrc_netif/gnrc_netif.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/netif/gnrc_netif.c \
- /home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h \
@@ -192,7 +192,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/ztimer.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/tx_sync.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/test_RPL/RIOT/examples/gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gcoap/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h:
