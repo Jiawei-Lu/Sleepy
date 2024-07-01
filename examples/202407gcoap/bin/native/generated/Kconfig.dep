@@ -1,0 +1,462 @@
+config USEMODULE_AUTO_INIT
+	bool
+	default y
+config USEMODULE_AUTO_INIT_GNRC_IPV6
+	bool
+	default y
+config USEMODULE_AUTO_INIT_GNRC_IPV6_NIB
+	bool
+	default y
+config USEMODULE_AUTO_INIT_GNRC_NETIF
+	bool
+	default y
+config USEMODULE_AUTO_INIT_GNRC_PKTBUF
+	bool
+	default y
+config USEMODULE_AUTO_INIT_GNRC_RPL
+	bool
+	default y
+config USEMODULE_AUTO_INIT_GNRC_UDP
+	bool
+	default y
+config USEMODULE_AUTO_INIT_RANDOM
+	bool
+	default y
+config USEMODULE_AUTO_INIT_ZTIMER
+	bool
+	default y
+config USEMODULE_BOARD
+	bool
+	default y
+config USEMODULE_BOARD_COMMON_INIT
+	bool
+	default y
+config USEMODULE_CORE
+	bool
+	default y
+config USEMODULE_CORE_IDLE_THREAD
+	bool
+	default y
+config USEMODULE_CORE_INIT
+	bool
+	default y
+config USEMODULE_CORE_LIB
+	bool
+	default y
+config USEMODULE_CORE_MBOX
+	bool
+	default y
+config USEMODULE_CORE_MSG
+	bool
+	default y
+config USEMODULE_CORE_PANIC
+	bool
+	default y
+config USEMODULE_CORE_THREAD
+	bool
+	default y
+config USEMODULE_CORE_THREAD_FLAGS
+	bool
+	default y
+config USEMODULE_CPU
+	bool
+	default y
+config USEMODULE_DIV
+	bool
+	default y
+config USEMODULE_EUI_PROVIDER
+	bool
+	default y
+config USEMODULE_EVENT
+	bool
+	default y
+config USEMODULE_EVENT_CALLBACK
+	bool
+	default y
+config USEMODULE_EVENT_TIMEOUT_ZTIMER
+	bool
+	default y
+config USEMODULE_EVTIMER
+	bool
+	default y
+config USEMODULE_FMT
+	bool
+	default y
+config USEMODULE_FRAC
+	bool
+	default y
+config USEMODULE_GCOAP
+	bool
+	default y
+config USEMODULE_GNRC
+	bool
+	default y
+config USEMODULE_GNRC_ICMPV6
+	bool
+	default y
+config USEMODULE_GNRC_ICMPV6_ECHO
+	bool
+	default y
+config USEMODULE_GNRC_IPV6
+	bool
+	default y
+config USEMODULE_GNRC_IPV6_CLASSIC
+	bool
+	default y
+config USEMODULE_GNRC_IPV6_DEFAULT
+	bool
+	default y
+config USEMODULE_GNRC_IPV6_HDR
+	bool
+	default y
+config USEMODULE_GNRC_IPV6_NIB
+	bool
+	default y
+config USEMODULE_GNRC_NDP
+	bool
+	default y
+config USEMODULE_GNRC_NETAPI
+	bool
+	default y
+config USEMODULE_GNRC_NETAPI_CALLBACKS
+	bool
+	default y
+config USEMODULE_GNRC_NETAPI_MBOX
+	bool
+	default y
+config USEMODULE_GNRC_NETIF
+	bool
+	default y
+config USEMODULE_GNRC_NETIF_ETHERNET
+	bool
+	default y
+config USEMODULE_GNRC_NETIF_HDR
+	bool
+	default y
+config USEMODULE_GNRC_NETIF_INIT_DEVS
+	bool
+	default y
+config USEMODULE_GNRC_NETIF_IPV6
+	bool
+	default y
+config USEMODULE_GNRC_NETREG
+	bool
+	default y
+config USEMODULE_GNRC_NETTYPE_ICMPV6
+	bool
+	default y
+config USEMODULE_GNRC_NETTYPE_IPV6
+	bool
+	default y
+config USEMODULE_GNRC_NETTYPE_UDP
+	bool
+	default y
+config USEMODULE_GNRC_PKT
+	bool
+	default y
+config USEMODULE_GNRC_PKTBUF
+	bool
+	default y
+config USEMODULE_GNRC_PKTBUF_STATIC
+	bool
+	default y
+config USEMODULE_GNRC_RPL
+	bool
+	default y
+config USEMODULE_GNRC_SOCK
+	bool
+	default y
+config USEMODULE_GNRC_SOCK_ASYNC
+	bool
+	default y
+config USEMODULE_GNRC_SOCK_UDP
+	bool
+	default y
+config USEMODULE_GNRC_UDP
+	bool
+	default y
+config USEMODULE_ICMPV6
+	bool
+	default y
+config USEMODULE_INET_CSUM
+	bool
+	default y
+config USEMODULE_IOLIST
+	bool
+	default y
+config USEMODULE_IPV6
+	bool
+	default y
+config USEMODULE_IPV6_ADDR
+	bool
+	default y
+config USEMODULE_IPV6_HDR
+	bool
+	default y
+config USEMODULE_ISRPIPE
+	bool
+	default y
+config USEMODULE_L2UTIL
+	bool
+	default y
+config USEMODULE_LIBC
+	bool
+	default y
+config USEMODULE_LUID
+	bool
+	default y
+config USEMODULE_NANOCOAP
+	bool
+	default y
+config USEMODULE_NATIVE_CLI_EUI_PROVIDER
+	bool
+	default y
+config USEMODULE_NATIVE_DRIVERS
+	bool
+	default y
+config USEMODULE_NETDEV
+	bool
+	default y
+config USEMODULE_NETDEV_DEFAULT
+	bool
+	default y
+config USEMODULE_NETDEV_ETH
+	bool
+	default y
+config USEMODULE_NETDEV_LEGACY_API
+	bool
+	default y
+config USEMODULE_NETDEV_REGISTER
+	bool
+	default y
+config USEMODULE_NETDEV_TAP
+	bool
+	default y
+config USEMODULE_NETIF
+	bool
+	default y
+config USEMODULE_NETSTATS
+	bool
+	default y
+config USEMODULE_NETSTATS_IPV6
+	bool
+	default y
+config USEMODULE_NETSTATS_L2
+	bool
+	default y
+config USEMODULE_NETSTATS_RPL
+	bool
+	default y
+config USEMODULE_NETUTILS
+	bool
+	default y
+config USEMODULE_OD
+	bool
+	default y
+config USEMODULE_PERIPH
+	bool
+	default y
+config USEMODULE_PERIPH_COMMON
+	bool
+	default y
+config USEMODULE_PERIPH_CPUID
+	bool
+	default y
+config USEMODULE_PERIPH_GPIO
+	bool
+	default y
+config USEMODULE_PERIPH_GPIO_LINUX
+	bool
+	default y
+config USEMODULE_PERIPH_HWRNG
+	bool
+	default y
+config USEMODULE_PERIPH_INIT
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_CPUID
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_GPIO
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_GPIO_LINUX
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_HWRNG
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED0
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED1
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED2
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED3
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED4
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED5
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED6
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED7
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LEDS
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_PM
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_TIMER
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_UART
+	bool
+	default y
+config USEMODULE_PERIPH_PM
+	bool
+	default y
+config USEMODULE_PERIPH_TIMER
+	bool
+	default y
+config USEMODULE_PERIPH_UART
+	bool
+	default y
+config USEMODULE_POSIX_HEADERS
+	bool
+	default y
+config USEMODULE_POSIX_INET
+	bool
+	default y
+config USEMODULE_PREPROCESSOR
+	bool
+	default y
+config USEMODULE_PREPROCESSOR_SUCCESSOR
+	bool
+	default y
+config USEMODULE_PRNG
+	bool
+	default y
+config USEMODULE_PRNG_MUSL_LCG
+	bool
+	default y
+config USEMODULE_PS
+	bool
+	default y
+config USEMODULE_RANDOM
+	bool
+	default y
+config USEMODULE_SHELL
+	bool
+	default y
+config USEMODULE_SHELL_CMD_GNRC_ICMPV6_ECHO
+	bool
+	default y
+config USEMODULE_SHELL_CMD_GNRC_IPV6_NIB
+	bool
+	default y
+config USEMODULE_SHELL_CMD_GNRC_NETIF
+	bool
+	default y
+config USEMODULE_SHELL_CMD_GNRC_RPL
+	bool
+	default y
+config USEMODULE_SHELL_CMD_PM
+	bool
+	default y
+config USEMODULE_SHELL_CMD_PS
+	bool
+	default y
+config USEMODULE_SHELL_CMD_SYS
+	bool
+	default y
+config USEMODULE_SHELL_CMDS
+	bool
+	default y
+config USEMODULE_SHELL_CMDS_DEFAULT
+	bool
+	default y
+config USEMODULE_SOCK
+	bool
+	default y
+config USEMODULE_SOCK_ASYNC
+	bool
+	default y
+config USEMODULE_SOCK_ASYNC_EVENT
+	bool
+	default y
+config USEMODULE_SOCK_AUX_LOCAL
+	bool
+	default y
+config USEMODULE_SOCK_UDP
+	bool
+	default y
+config USEMODULE_SOCK_UTIL
+	bool
+	default y
+config USEMODULE_STDIN
+	bool
+	default y
+config USEMODULE_STDIO_NATIVE
+	bool
+	default y
+config USEMODULE_SYS
+	bool
+	default y
+config USEMODULE_TRICKLE
+	bool
+	default y
+config USEMODULE_TSRB
+	bool
+	default y
+config USEMODULE_UDP
+	bool
+	default y
+config USEMODULE_URI_PARSER
+	bool
+	default y
+config USEMODULE_XTIMER
+	bool
+	default y
+config USEMODULE_ZTIMER
+	bool
+	default y
+config USEMODULE_ZTIMER_CONVERT
+	bool
+	default y
+config USEMODULE_ZTIMER_CONVERT_FRAC
+	bool
+	default y
+config USEMODULE_ZTIMER_CONVERT_SHIFT
+	bool
+	default y
+config USEMODULE_ZTIMER_CORE
+	bool
+	default y
+config USEMODULE_ZTIMER_EXTEND
+	bool
+	default y
+config USEMODULE_ZTIMER_INIT
+	bool
+	default y
+config USEMODULE_ZTIMER_MSEC
+	bool
+	default y
+config USEMODULE_ZTIMER_PERIPH_TIMER
+	bool
+	default y
+config USEMODULE_ZTIMER_USEC
+	bool
+	default y
+config USEMODULE_ZTIMER_XTIMER_COMPAT
+	bool
+	default y
