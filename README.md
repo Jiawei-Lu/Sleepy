@@ -60,3 +60,6 @@
 		c. sudo ifconfig <interface name> inet6 add 2001:630:d0:1000::d6fx [x can be any numeber]
 		d. ping 2001:630:d0:1000::d6fx
 		e. coap get 2001:630:d0:1000::d6fx to verify
+	2. OpenSSL: sudo apt-get install libssl-dev
+	3. Libcoap: cd ~/libcoap ---> export LD_LIBRARY_PATH=/usr/local/lib
+	   Libcoap_server_JL: cd ~/libcoap_server_JL ---> export LD_LIBRARY_PATH=/usr/local/lib
