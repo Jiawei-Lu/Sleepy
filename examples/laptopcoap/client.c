@@ -134,6 +134,7 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
     printf("gcoap: response %s, code %1u.%02u", class_str,
                                                 coap_get_code_class(pdu),
                                                 coap_get_code_detail(pdu));
+    message_ack_flag =1;
     if (pdu->payload_len) {
         unsigned content_type = coap_get_content_type(pdu);
         if (content_type == COAP_FORMAT_TEXT
@@ -167,7 +168,7 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
                 
                 puts("have the number\n");
                 rtc_localtime((int)req_count_payload, &sych_time);
-                if ((mktime(&current_time) - mktime(&_riot_bday)) > 86400) {
+                if ((mktime(&sych_time) - mktime(&_riot_bday)) < 86400) {
                     puts("error: device time has unexpected value");
                     message_ack_flag =0;
                 }else{
@@ -213,7 +214,7 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
                 if (expected_msg_id == pdu->hdr->id) {
                     puts("ACK received with correct message ID");
                     message_ack_flag =1;
-                    gpio_toggle(GPIO_PIN(PA,14));
+                    // gpio_toggle(GPIO_PIN(PA,14));
                     // gpio_set(GPIO_PIN(PA,14));
                     printf("message flag now is: %d\n", message_ack_flag);
                     // gpio_toggle(DS3231_PARAM_INT_PIN);

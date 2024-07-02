@@ -1,3 +1,5 @@
+include $(CURDIR)/../Makefile.tests_common
+
 # name of your application
 APPLICATION = gnrc_networking
 
@@ -9,6 +11,7 @@ RIOTBASE ?= $(CURDIR)/../../../test_RPL/RIOT
 
 CFLAGS += -DCONFIG_IEEE802154_DEFAULT_SUBGHZ_CHANNEL=0 
 CFLAGS += -DCONFIG_IEEE802154_DEFAULT_SUBGHZ_PAGE=0 
+CFLAGS += -DTHREAD_STACKSIZE_MAIN=\(3*THREAD_STACKSIZE_DEFAULT\)
 
 # Include packages that pull up and auto-init the link layer.
 # NOTE: 6LoWPAN will be included if IEEE802.15.4 devices are present
@@ -21,11 +24,14 @@ USEMODULE += gnrc_ipv6_router_default
 # Add a routing protocol
 USEMODULE += gnrc_rpl
 USEMODULE += auto_init_gnrc_rpl
+USEMODULE += gnrc_pktdump
 # Additional networking modules that can be dropped if not needed
 USEMODULE += gnrc_icmpv6_echo
 USEMODULE += shell_cmd_gnrc_udp
 
 USEMODULE += gcoap
+CFLAGS += -DCONFIG_GCOAP_PDU_BUF_SIZE=1024
+CFLAGS += -DGCOAP_RESPONSE_TIMEOUT=5000
 
 # Add also the shell, some shell commands
 USEMODULE += shell
@@ -35,6 +41,17 @@ USEMODULE += uri_parser
 USEMODULE += netstats_l2
 USEMODULE += netstats_ipv6
 USEMODULE += netstats_rpl
+
+# Required by gcoap example
+USEMODULE += od
+USEMODULE += fmt
+USEMODULE += netutils
+USEMODULE += random
+
+# Ztimer
+USEMODULE += ztimer ztimer_usec ztimer_msec ztimer_periph_rtc   
+
+FEATURES_REQUIRED += periph_rtc
 
 # Optionally include DNS support. This includes resolution of names at an
 # upstream DNS server and the handling of RDNSS options in Router Advertisements
@@ -63,6 +80,16 @@ DOCKER_ENV_VARS += LWIP_IPV4
 DOCKER_ENV_VARS += LWIP_IPV6
 DOCKER_ENV_VARS += USE_ZEP
 DOCKER_ENV_VARS += ZEP_PORT_BASE
+
+#DS3231
+FEATURES_REQUIRED = periph_i2c
+FEATURES_OPTIONAL = periph_i2c_reconfigure
+FEATURES_OPTIONAL += periph_gpio_irq
+USEMODULE += pm_layered
+USEMODULE += ds3231
+USEMODULE += ds3231_int
+CFLAGS +="-DDS3231_PARAM_INT_PIN=(GPIO_PIN(PA,15))"
+
 
 # Uncomment the following 2 lines to specify static link lokal IPv6 address
 # this might be useful for testing, in cases where you cannot or do not want to

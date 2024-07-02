@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "net/gcoap.h"
 #include "net/sock/util.h"
@@ -33,6 +34,36 @@
 #include "uri_parser.h"
 
 #include "gcoap_example.h"
+
+/*formating and board*/
+#include "fmt.h"
+#include "board.h"
+#include "periph/gpio.h"
+#include <arpa/inet.h>
+
+/*DS3231 wakeup and sleep schedule*/
+#include "periph_conf.h"
+#include "periph/i2c.h"
+#include "ds3231.h"
+#include "ds3231_params.h"
+#include "timex.h"
+#include "periph/rtc.h"
+
+/*CONFIG_GCOAP_PDU_BUF_SIZE: dedine it as global to save stack size resources*/
+uint8_t buf[CONFIG_GCOAP_PDU_BUF_SIZE]; 
+
+/*external schedule variables*/
+extern int message_ack_flag;
+int expected_msg_id;
+extern int sych_time_length;
+extern char sych_time_payload[12];
+extern char payload_digit[12];
+extern struct  tm  sych_time;
+extern struct tm current_time;
+extern struct tm _riot_bday; 
+extern ds3231_t _dev;
+// uint16_t req_count = 0;
+/*---------------------------*/
 
 #define ENABLE_DEBUG 0
 #include "debug.h"
@@ -78,6 +109,7 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
 
     if (memo->state == GCOAP_MEMO_TIMEOUT) {
         printf("gcoap: timeout for msg ID %02u\n", coap_get_id(pdu));
+        message_ack_flag = 0;
         return;
     }
     else if (memo->state == GCOAP_MEMO_RESP_TRUNC) {
@@ -102,6 +134,7 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
     printf("gcoap: response %s, code %1u.%02u", class_str,
                                                 coap_get_code_class(pdu),
                                                 coap_get_code_detail(pdu));
+    message_ack_flag = 1;
     if (pdu->payload_len) {
         unsigned content_type = coap_get_content_type(pdu);
         if (content_type == COAP_FORMAT_TEXT
@@ -111,6 +144,42 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
             /* Expecting diagnostic payload in failure cases */
             printf(", %u bytes\n%.*s\n", pdu->payload_len, pdu->payload_len,
                                                           (char *)pdu->payload);
+
+            if (pdu->payload_len<= 15) {
+                puts("received\n");
+                memcpy(sych_time_payload, (char *)pdu->payload, pdu->payload_len);
+                printf("%s\n",sych_time_payload);
+                int i, j = 0;
+                for (i = 0; i < 10 && j < 10; i++){
+                    if (isdigit((unsigned char)sych_time_payload[i])){
+                        payload_digit[j++] = sych_time_payload[i];
+                    }
+                }
+                payload_digit[j] = '\0';
+            }
+            printf("%s\n", payload_digit);
+            unsigned long req_count_payload = strtoull(payload_digit, NULL, 10);
+            req_count_payload = atoi(payload_digit);
+            printf("%ld\n", req_count_payload);
+            if (req_count_payload == 0){
+                message_ack_flag =0;
+            } else {
+                req_count_payload = req_count_payload -1577836800;
+                
+                puts("have the number\n");
+                rtc_localtime((int)req_count_payload, &sych_time);
+                // ds3231_set_time(&_dev, &sych_time);
+                if ((mktime(&sych_time) - mktime(&_riot_bday)) < 86400) {
+                    puts("error: device time has unexpected value");
+                    message_ack_flag =0;
+                }else{
+                // rtc_set_time(&handler_time);
+                    ds3231_set_time(&_dev, &sych_time);
+                    ds3231_get_time(&_dev, &current_time);
+                    message_ack_flag =1;
+                }
+            }
+
         }
         else {
             printf(", %u bytes\n", pdu->payload_len);
@@ -142,6 +211,18 @@ static void _resp_handler(const gcoap_request_memo_t *memo, coap_pkt_t* pdu,
 
             if (msg_type == COAP_TYPE_ACK) {
                 coap_hdr_set_type(pdu->hdr, COAP_TYPE_CON);
+                printf("Received ACK for message ID %u\n", pdu->hdr->id);
+                if (expected_msg_id == pdu->hdr->id) {
+                    puts("ACK received with correct message ID");
+                    message_ack_flag =1;
+                    // gpio_toggle(GPIO_PIN(PA,14));
+                    // gpio_set(GPIO_PIN(PA,14));
+                    printf("message flag now is: %d\n", message_ack_flag);
+                    // gpio_toggle(DS3231_PARAM_INT_PIN);
+                } else {
+                    printf("Mismatch in message ID. Expected %u, got %u\n", expected_msg_id, pdu->hdr->id);
+                    message_ack_flag =1;
+                }
             }
             block.blknum++;
             coap_opt_add_block2_control(pdu, &block);
@@ -360,6 +441,13 @@ int gcoap_cli_cmd(int argc, char **argv)
         }
 
         coap_hdr_set_type(pdu.hdr, msg_type);
+        /*set the coap_hdr_t* hdr, where 
+        typedef struct __attribute__((packed)) {
+            uint8_t ver_t_tkl;          
+            uint8_t code;               
+            uint16_t id;  //Req/resp ID             
+        } coap_hdr_t;*/
+        expected_msg_id = pdu.hdr->id;
 
         size_t paylen = 0;
         if (apos < argc) {

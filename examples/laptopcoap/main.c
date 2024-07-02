@@ -481,22 +481,27 @@ int main(void)
     puts("{\"IPv6 addresses\": [\"");
     //netifs_print_ipv6("\", \"");
     while (global_flag == 0){
-        netif_t *netif = 0;
-        bool first = true;
-        while ((netif = netif_iter(netif)) != NULL) {
+        // netif_t *netif = 0;
+        // bool first = true;
+        // while ((netif = netif_iter(netif)) != NULL) {
             ipv6_addr_t addrs[NETIF_PRINT_IPV6_NUMOF];
-            ssize_t num = netif_get_ipv6(netif, addrs, ARRAY_SIZE(addrs));
-            if (num > 0) {
-                if (first) {
-                    first = false;
-                }
-                else {
-                    printf("%s", "\", \"");
-                }
-                ipv6_addrs_print(addrs, num, "\", \"");
-            }
-      
+        //     ssize_t num = netif_get_ipv6(netif, addrs, ARRAY_SIZE(addrs));
+        //     if (num > 0) {
+        //         if (first) {
+        //             first = false;
+        //         }
+        //         else {
+        //             printf("%s", "\", \"");
+        //         }
+        //         ipv6_addrs_print(addrs, num, "\", \"");
+        //     }
+        char addr_str[IPV6_ADDR_MAX_STR_LEN];
+
+        printf("inet6 addr: ");
+        ipv6_addr_to_str(addr_str, addrs, sizeof(addr_str));
+        printf("%s  scope: ", addr_str);
         if(ipv6_addr_is_global(addrs)){
+            puts("global address received\n");
             global_flag = 1;
         }
         else{
@@ -504,7 +509,7 @@ int main(void)
             //ztimer_sleep(ZTIMER_MSEC, 10* MS_PER_SEC);
             ztimer_sleep(ZTIMER_MSEC, 1* MS_PER_SEC);
         }
-      }	
+    //   }	
     }
     puts("\"]}");
     
@@ -792,10 +797,20 @@ int main(void)
     // message_ack_flag = 0;
 
     while (message_ack_flag == 0){
-        int argc1 = 4;
-        char *argv1[] = {"coap", "get", "[2001:630:d0:1000::d6f8]:5683", "/realtime"}; //glacsweb-pi
+        
+        /*---------------------------------------202107 GCoAP-------------------------------------------*/
+        // int argc1 = 4;
+        // char *argv1[] = {"coap", "get", "[2001:630:d0:1000::d6f8]:5683", "/realtime"}; //glacsweb-pi
         // char *argv1[] = {"coap", "get", "[2001:630:d0:1000::d6f9]:5683", "/realtime"};//glacsweb-jiawei
         // char *argv1[] = {"coap", "get", "[2001:db8::58a4:8450:8511:6445]:5683", "/riot/value"};
+
+
+        /*---------------------------------------202407 GCoAP (argc=3)-------------------------------------------*/
+        int argc1 = 3;
+        char *argv1[] = {"coap", "get", "coap://[2001:630:d0:1000::d683]:5683/realtime"};  //mini-linux-pc--remote
+
+
+
         _coap_result = gcoap_cli_cmd(argc1,argv1);
 
         ztimer_sleep(ZTIMER_MSEC, 2* MS_PER_SEC);
@@ -942,12 +957,18 @@ int main(void)
 
     // while (message_ack_flag == 0){
     // xtimer_sleep(3);
-    int argc = 6;
-    
-    char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f8]:5683", "/data", buffer};  //glacsweb-pi
+
+    /*---------------------------------------202107 GCoAP-------------------------------------------*/
+    // int argc = 6;
+    // char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f8]:5683", "/data", buffer};  //glacsweb-pi
     // char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", buffer};  //glacsweb-jiawei
 
     // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
+
+    /*--------------------------------------------202407 GCoAP (argc=5)------------------------------------------------*/
+    int argc = 5;
+    char *argv[] = {"coap", "put", "-c", "coap://[2001:630:d0:1000::d683]:5683/data", buffer};  //mini-linux-pc--remote
+
 
     // res = ds3231_get_time(&_dev, &current_time);
     // if (res != 0) {
@@ -1025,11 +1046,15 @@ int main(void)
         testtime.tm_sec += 100 * count_sleepgap;// * ONE_S;
         mktime(&testtime);
         
-        int argc2 = 6;
-        char *argv2[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f8]:5683", "/data", "+11.11,1111111111,+22.22,2222222222,+33.33,3333333333,+44.44,4444444444,+55.55,5555555555,+66.66,6666666666,"};   //glacsweb-pi
+        /*---------------------------------------202107 GCoAP-------------------------------------------*/
+        // int argc2 = 6;
+        // char *argv2[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f8]:5683", "/data", "+11.11,1111111111,+22.22,2222222222,+33.33,3333333333,+44.44,4444444444,+55.55,5555555555,+66.66,6666666666,"};   //glacsweb-pi
         //char *argv2[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", "+11.11,1111111111,+22.22,2222222222,+33.33,3333333333,+44.44,4444444444,+55.55,5555555555,+66.66,6666666666,"};  //glacsweb-jiawei
         // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
 
+        /*--------------------------------------------202407 GCoAP (argc=5)------------------------------------------------*/
+        int argc2 = 5;
+        char *argv2[] = {"coap", "put", "-c", "coap://[2001:630:d0:1000::d683]:5683/data", "+11.11,1111111111,+22.22,2222222222,+33.33,3333333333,+44.44,4444444444,+55.55,5555555555,+66.66,6666666666,"};  //mini-linux-pc--remote
         
         message_ack_flag = 0;
         retries = 0;
@@ -1040,7 +1065,7 @@ int main(void)
                 
                 while(message_ack_flag != 1){
                 puts("waitting for the message sent flag\n");
-                ztimer_sleep(ZTIMER_MSEC, 0.1* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
+                ztimer_sleep(ZTIMER_MSEC, 0.4* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
             }
             }else {
                 printf("Command execution failed\n");
@@ -1185,9 +1210,17 @@ int main(void)
                     // int counter_retry = 0;
                     // while (message_ack_flag == 0 && counter_retry < 3){
                         // xtimer_sleep(3);
-                    int argc = 6;
-                    char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", data_buffer};  //glacsweb-jiawei
-                        // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
+                    
+                    /*---------------------------------------202107 GCoAP-------------------------------------------*/
+                    // int argc = 6;
+                    // char *argv[] = {"coap", "put", "-c", "[2001:630:d0:1000::d6f9]:5683", "/data", data_buffer};  //glacsweb-jiawei
+                    // char *argv[] = {"coap", "put", "[2001:630:d0:1000::d6f9]:5683", "/riot/value", "1710939181/+24.23/"};
+                    
+                    
+                    /*--------------------------------------------202407 GCoAP (argc=5)------------------------------------------------*/
+                    int argc = 5;
+                    char *argv[] = {"coap", "put", "-c", "coap://[2001:630:d0:1000::d683]:5683/data", data_buffer};  //mini-linux-pc--remote
+
                     message_ack_flag = 0;
                     // while (message_ack_flag != 1 && retry < 3){
                     // _coap_result = gcoap_cli_cmd(argc,argv);
