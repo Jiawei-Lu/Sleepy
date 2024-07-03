@@ -172,6 +172,46 @@ void radio_on(gnrc_netif_t *netif){
                 &state, sizeof(state)) == -EBUSY) {}
     }
 }
+static int sleepy(int argc, char **argv){
+    if (argc < 2) {
+        
+        return 1;
+    }
+    struct tm _time;
+    int _res = ds3231_clear_alarm_1_flag(&_dev);
+    if (_res != 0) {
+        puts("error: unable to clear alarm flag");
+        return 1;
+    }            
+    _res = ds3231_get_time(&_dev, &_time);
+    if (_res != 0) {
+        puts("error: unable to read time");
+        return 1;
+    }
+    time_t _start_time, _test_time;
+    _start_time = mktime(&_time);
+    int time = atoi(argv[1]);
+    _test_time = (_start_time/60+time)*60; //int time is how many minutes you want the system sleep with radio off 
+    printf("test_time:%lld\n", (long long) _start_time);
+    double diff = difftime(_test_time, _start_time);
+    
+    _time.tm_sec += (int)diff;// * ONE_S;
+    mktime(&_time);
+    printf("watting %d seconds to start sleepy test\n", (int)diff);
+    radio_off(radio_netif);
+    printf("radio off \n");
+    _res = ds3231_set_alarm_1(&_dev, &_time, DS3231_AL1_TRIG_H_M_S);
+    if (_res != 0) {
+        puts("error: unable to program alarm");
+        return 1;
+    }
+    pm_set(SAML21_PM_MODE_STANDBY);
+
+    puts("waking up and ready to do coap \n");
+    message_ack_flag =0;
+    radio_on(radio_netif);
+    return 0;
+}
 
 #if defined(MODULE_PERIPH_GPIO_IRQ) && defined(BTN0_PIN)
 static void btn_cb(void *ctx)
@@ -184,6 +224,7 @@ static void btn_cb(void *ctx)
 
 static const shell_command_t shell_commands[] = {
     { "coap", "CoAP example", gcoap_cli_cmd },
+    { "sleepy", "make system sleepy and wake up n minutes after", sleepy },
     { NULL, NULL, NULL }
 };
 
@@ -195,7 +236,15 @@ int main(void)
     // ztimer_sleep(ZTIMER_MSEC, 5* MS_PER_SEC);
     msg_init_queue(_main_msg_queue, MAIN_QUEUE_SIZE);
     puts("RIOT network stack example application");
-
+    // int shell_on = 1;
+    int shell_on = 2;
+    // int shell_on = 0;
+    if (shell_on == 1){
+    /* start shell */
+    puts("All up, running the shell now");
+    char line_buf[SHELL_DEFAULT_BUFSIZE];
+    shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
+    }
     puts("ztimer sleep for few seconds wait rpl configuration\n");
     // ztimer_sleep(ZTIMER_MSEC, 5* MS_PER_SEC);
 
@@ -366,10 +415,18 @@ int main(void)
         }
     }
     message_ack_flag =0;
-    while(1){
+    
+    if (shell_on == 2){
+    /* start shell */
+    puts("All up, running the shell now");
+    char line_buf[SHELL_DEFAULT_BUFSIZE];
+    shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
+    }
+    
     /*------------------------Test: Running test in 2min after------------------------*/
     struct tm testtime;
     struct tm targettime;
+    
     res = ds3231_clear_alarm_1_flag(&_dev);
     if (res != 0) {
         puts("error: unable to clear alarm flag");
@@ -380,17 +437,17 @@ int main(void)
         puts("error: unable to read time");
         return 1;
     }
-    // time_t start_time, test_time;
-    // start_time = mktime(&targettime);
-    // test_time = (start_time/60+2)*60;
-    // printf("test_time:%lld\n", (long long) start_time);
-    // double diff = difftime(test_time, start_time);
+    time_t start_time, test_time;
+    start_time = mktime(&targettime);
+    test_time = (start_time/60+5)*60;
+    printf("test_time:%lld\n", (long long) start_time);
+    double diff = difftime(test_time, start_time);
     
-    targettime.tm_sec += 10;// * ONE_S;
+    targettime.tm_sec += (int)diff;// * ONE_S;
     mktime(&targettime);
-    // printf("watting %f seconds to start sleepy test\n", diff);
-    // res = ds3231_enable_bat(&_dev);
+    printf("watting %d seconds to start sleepy test\n", (int)diff);
     radio_off(radio_netif);
+    printf("radio off \n");
     res = ds3231_set_alarm_1(&_dev, &targettime, DS3231_AL1_TRIG_H_M_S);
     if (res != 0) {
         puts("error: unable to program alarm");
@@ -398,15 +455,15 @@ int main(void)
     }
     pm_set(SAML21_PM_MODE_STANDBY);
 
-    puts(" Running the Sleepy Test \n");
+    puts("Running the Sleepy Test \n");
+    message_ack_flag =0;
     
-
     /*------------------------Test: How sleepy system can be ->> increment 100s------------------------*/
     int count_sleepgap = 1;
     int retries = 0;
     int count_total_try = 0;
     int count_successful = 0;
-    float successful_rate =0.00;
+    // float successful_rate =0.00;
     while (1){
         radio_on(radio_netif);
         res = ds3231_clear_alarm_1_flag(&_dev);
@@ -437,12 +494,14 @@ int main(void)
         while (message_ack_flag != 1 && retries < 3){
             _coap_result = gcoap_cli_cmd(argc2,argv2);
             if (_coap_result == 0) {
-                printf("Command executed successfully\n");
-                
-                while(message_ack_flag != 1){
-                puts("waitting for the message sent flag\n");
-                ztimer_sleep(ZTIMER_MSEC, 0.4* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
-            }
+                printf("Command executed successfully, and Reyries: %d\n", retries);
+                int wait = 0;
+                while(message_ack_flag == 0 && wait < 3){
+                    puts("waitting for the message sent flag\n");
+                    ztimer_sleep(ZTIMER_MSEC, 0.4* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
+                    printf("waitting time is %d\n", wait);
+                    wait++;
+                }
             }else {
                 printf("Command execution failed\n");
                 
@@ -451,8 +510,13 @@ int main(void)
             count_total_try++;
         }
         count_successful++;
-        successful_rate= count_successful/ (float)count_total_try;
-        printf("packet deliver rate : %f\n", successful_rate);
+        printf("successful : %d, total : %d\n", count_successful, count_total_try);
+        // if (count_total_try > 0) {
+        // successful_rate = (float)(count_successful*100/count_total_try)/100;
+        // // printf("packet deliver rate : %f\n", successful_rate);
+        // // printf("packet deliver rate : %f\n", (float)(count_successful/count_total_try));
+        // }
+        fflush(stdout);
         message_ack_flag = 0;
 
         radio_off(radio_netif);
@@ -470,12 +534,12 @@ int main(void)
         puts(" WAKED UP SUCCESSFULLY \n");
 
     }
-    }
+    if (shell_on == 0){
     /* start shell */
     puts("All up, running the shell now");
     char line_buf[SHELL_DEFAULT_BUFSIZE];
     shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
-
+    }
     /* should be never reached */
     return 0;
 }
