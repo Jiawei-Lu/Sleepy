@@ -108,6 +108,10 @@ char sych_time_payload[12];
 char payload_digit[12];
 int sych_time_length;
 
+int retries = 0;
+int count_total_try = 0;
+int count_successful = 0;
+
 
 /*external function*/
 extern int _gnrc_netif_config(int argc, char **argv);
@@ -173,42 +177,79 @@ void radio_on(gnrc_netif_t *netif){
     }
 }
 static int sleepy(int argc, char **argv){
-    if (argc < 2) {
-        
-        return 1;
-    }
-    struct tm _time;
-    int _res = ds3231_clear_alarm_1_flag(&_dev);
-    if (_res != 0) {
-        puts("error: unable to clear alarm flag");
-        return 1;
-    }            
-    _res = ds3231_get_time(&_dev, &_time);
-    if (_res != 0) {
-        puts("error: unable to read time");
-        return 1;
-    }
-    time_t _start_time, _test_time;
-    _start_time = mktime(&_time);
-    int time = atoi(argv[1]);
-    _test_time = (_start_time/60+time)*60; //int time is how many minutes you want the system sleep with radio off 
-    printf("test_time:%lld\n", (long long) _start_time);
-    double diff = difftime(_test_time, _start_time);
-    
-    _time.tm_sec += (int)diff;// * ONE_S;
-    mktime(&_time);
-    printf("watting %d seconds to start sleepy test\n", (int)diff);
     radio_off(radio_netif);
-    printf("radio off \n");
-    _res = ds3231_set_alarm_1(&_dev, &_time, DS3231_AL1_TRIG_H_M_S);
-    if (_res != 0) {
-        puts("error: unable to program alarm");
-        return 1;
-    }
-    pm_set(SAML21_PM_MODE_STANDBY);
+    // for (int _i=1;_i<20;_i++){
+    while(1){
+        if (argc < 2) {
+            
+            return 1;
+        }
+        struct tm _time;
+        int _res = ds3231_clear_alarm_1_flag(&_dev);
+        if (_res != 0) {
+            puts("error: unable to clear alarm flag");
+            return 1;
+        }            
+        _res = ds3231_get_time(&_dev, &_time);
+        if (_res != 0) {
+            puts("error: unable to read time");
+            return 1;
+        }
+        time_t _start_time, _test_time;
+        _start_time = mktime(&_time);
+        int time = atoi(argv[1]);
 
-    puts("waking up and ready to do coap \n");
-    message_ack_flag =0;
+        //_test_time = (_start_time/60+time*_i)*60; //int time is how many minutes you want the system sleep with radio off 
+        _test_time = (_start_time/60+time)*60; 
+        // printf("test_time:%lld\n", (long long) _start_time);
+        double diff = difftime(_test_time, _start_time);
+        
+        _time.tm_sec += (int)diff;// * ONE_S;
+        mktime(&_time);
+        printf("watting %d seconds to start sleepy test\n", (int)diff);
+        
+        printf("radio off \n");
+        _res = ds3231_set_alarm_1(&_dev, &_time, DS3231_AL1_TRIG_H_M_S);
+        if (_res != 0) {
+            puts("error: unable to program alarm");
+            return 1;
+        }
+        pm_set(SAML21_PM_MODE_STANDBY);
+
+        puts("waking up and ready to do coap \n");
+        message_ack_flag =0;
+        radio_on(radio_netif);
+
+        /*--------------------------------------------202407 GCoAP (argc=5)------------------------------------------------*/
+        int _argc2 = 5;
+        char *_argv2[] = {"coap", "put", "-c", "coap://[2001:630:d0:1000::d683]:5683/data", "+11.11,1111111111,+22.22,2222222222,+33.33,3333333333,+44.44,4444444444,+55.55,5555555555,+66.66,6666666666,"};  //mini-linux-pc--remote
+        
+        message_ack_flag = 0;
+        retries = 0;
+        ztimer_sleep(ZTIMER_MSEC, 0.3* MS_PER_SEC);
+        message_ack_flag = 0;
+        while (message_ack_flag != 1 && retries < 3){
+            _coap_result = gcoap_cli_cmd(_argc2,_argv2);
+            if (_coap_result == 0) {
+                printf("Command executed successfully, and Reyries: %d\n", retries);
+                int wait = 0;
+                while(message_ack_flag == 0 && wait < 3){
+                    puts("waitting for the message sent flag\n");
+                    ztimer_sleep(ZTIMER_MSEC, 0.5* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
+                    printf("waitting time is %d\n", wait);
+                    wait++;
+                }
+            }else {
+                printf("Command execution failed\n");
+                
+            }
+            retries++;
+            count_total_try++;
+        }
+        count_successful++;
+        printf("successful : %d, total : %d\n", count_successful, count_total_try);
+        radio_off(radio_netif);
+    }
     radio_on(radio_netif);
     return 0;
 }
@@ -400,9 +441,15 @@ int main(void)
 
         _coap_result = gcoap_cli_cmd(argc1,argv1);
 
-        ztimer_sleep(ZTIMER_MSEC, 2* MS_PER_SEC);
+        // ztimer_sleep(ZTIMER_MSEC, 3* MS_PER_SEC);
         // xtimer_sleep(10);
-
+        int _wait = 0;
+        while(message_ack_flag == 0 && _wait < 4){
+            puts("waitting for the message sent flag\n");
+            ztimer_sleep(ZTIMER_MSEC, 1.2* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
+            printf("waitting time is %d\n", _wait);
+            _wait++;
+        }
         if (_coap_result == 0) {
             printf("Command executed successfully\n");
             
@@ -439,7 +486,7 @@ int main(void)
     }
     time_t start_time, test_time;
     start_time = mktime(&targettime);
-    test_time = (start_time/60+5)*60;
+    test_time = (start_time/60+3)*60;
     printf("test_time:%lld\n", (long long) start_time);
     double diff = difftime(test_time, start_time);
     
@@ -460,9 +507,9 @@ int main(void)
     
     /*------------------------Test: How sleepy system can be ->> increment 100s------------------------*/
     int count_sleepgap = 1;
-    int retries = 0;
-    int count_total_try = 0;
-    int count_successful = 0;
+    retries = 0;
+    count_total_try = 0;
+    count_successful = 0;
     // float successful_rate =0.00;
     while (1){
         radio_on(radio_netif);
@@ -476,7 +523,7 @@ int main(void)
             puts("error: unable to read time");
             return 1;
         }
-        testtime.tm_sec += 60 * count_sleepgap;// * ONE_S;
+        testtime.tm_sec += 60 * count_sleepgap+300;// * ONE_S;
         mktime(&testtime);
         
         /*---------------------------------------202107 GCoAP-------------------------------------------*/
