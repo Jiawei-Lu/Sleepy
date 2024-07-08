@@ -67,6 +67,10 @@
 #include "net/gnrc/rpl.h"
 #include "net/gnrc/rpl/structs.h"
 #include "net/gnrc/rpl/dodag.h"
+#include "net/gnrc/netif.h"
+#include "shell.h"
+#include "trickle.h"
+#include "utlist.h"
 
 /*PM layer*/
 #include "periph/pm.h"
@@ -107,15 +111,21 @@ int message_ack_flag =0;
 char sych_time_payload[12];
 char payload_digit[12];
 int sych_time_length;
-
+gnrc_rpl_dodag_t *dodag = NULL;
 int retries = 0;
 int count_total_try = 0;
 int count_successful = 0;
-
+extern int _dao_check;
 
 /*external function*/
 extern int _gnrc_netif_config(int argc, char **argv);
 extern int _gnrc_netif_config(int argc, char **argv);
+extern int _gnrc_rpl_send_dis(void);
+// static int _gnrc_rpl(int argc, char **argv);
+// extern gnrc_pktsnip_t *__netif;
+// extern icmpv6_hdr_t *icmpv6_hdr;
+//         // kernel_pid_t iface = 7;
+// extern msg_t msg;
 
 #define MAIN_QUEUE_SIZE     (8)
 static msg_t _main_msg_queue[MAIN_QUEUE_SIZE];
@@ -176,10 +186,57 @@ void radio_on(gnrc_netif_t *netif){
                 &state, sizeof(state)) == -EBUSY) {}
     }
 }
+
+void _send_dao(void){
+    // icmpv6_hdr_t *icmpv6_hdr;
+    // icmpv6_hdr = (icmpv6_hdr_t *)msg.content.ptr->data;
+    // while (icmpv6_hdr->code != GNRC_RPL_ICMPV6_CODE_DAO_ACK){
+    
+    _dao_check = 0;
+    while (_dao_check == 0){
+        
+    // char addr_str[IPV6_ADDR_MAX_STR_LEN];
+    // gnrc_rpl_dodag_t *dodag = NULL;
+    for (uint8_t i = 0; i < GNRC_RPL_INSTANCES_NUMOF; ++i) {
+        if (gnrc_rpl_instances[i].state == 0) {
+            continue;
+        }
+
+        dodag = &gnrc_rpl_instances[i].dodag;
+        
+        gnrc_rpl_send_DAO(dodag->instance, NULL, dodag->default_lifetime);
+    }
+
+        // // gnrc_pktsnip_t *__netif;
+        // // icmpv6_hdr_t *_icmpv6_hdr;
+        // kernel_pid_t iface = 7;
+        // // msg_t msg
+
+        // // assert(icmpv6 != NULL);
+
+        // // ipv6 = gnrc_pktsnip_search_type(&msg, GNRC_NETTYPE_IPV6);
+        // netif = gnrc_pktsnip_search_type(msg, GNRC_NETTYPE_NETIF);
+
+        // if (netif) {
+        //     iface = ((gnrc_netif_hdr_t *)etif->data)->if_pid;
+        // }
+
+    ztimer_sleep(ZTIMER_MSEC, 2* MS_PER_SEC);
+    puts("send DAO\n");
+        // if (dodag->dao_ack_received){
+        //     _dao_check = 1;
+        // }
+
+        // // ipv6_hdr = (ipv6_hdr_t *)ipv6->data;
+
+        // _icmpv6_hdr = (icmpv6_hdr_t *)msg->data;
+        // _icmpv6_hdr->code == GNRC_RPL_ICMPV6_CODE_DAO_ACK;
+    }
+}
 static int sleepy(int argc, char **argv){
     radio_off(radio_netif);
-    // for (int _i=1;_i<20;_i++){
-    while(1){
+    for (int _i=1;_i<5;_i++){
+    // while(1){
         if (argc < 2) {
             
             return 1;
@@ -226,7 +283,19 @@ static int sleepy(int argc, char **argv){
         
         message_ack_flag = 0;
         retries = 0;
-        ztimer_sleep(ZTIMER_MSEC, 0.3* MS_PER_SEC);
+        // ztimer_sleep(ZTIMER_MSEC, 0.3* MS_PER_SEC);
+        // int _argc_rpl =3;
+        // char *_argv_rpl[] = {"rpl", "send", "dis"};
+        // _gnrc_rpl(_argc_rpl,_argv_rpl);
+        
+        /*------------------------------Send DAO to rejoin--------------------------------*/
+        _send_dao();
+
+        // /*------------------------------Send DAO to rejoin--------------------------------*/
+        // _gnrc_rpl_send_dis();
+        
+
+        // ztimer_sleep(ZTIMER_MSEC, 10* MS_PER_SEC);
         message_ack_flag = 0;
         while (message_ack_flag != 1 && retries < 3){
             _coap_result = gcoap_cli_cmd(_argc2,_argv2);
@@ -248,6 +317,7 @@ static int sleepy(int argc, char **argv){
         }
         count_successful++;
         printf("successful : %d, total : %d\n", count_successful, count_total_try);
+        
         radio_off(radio_netif);
     }
     radio_on(radio_netif);
@@ -462,7 +532,8 @@ int main(void)
         }
     }
     message_ack_flag =0;
-    
+
+    _send_dao();
     if (shell_on == 2){
     /* start shell */
     puts("All up, running the shell now");
