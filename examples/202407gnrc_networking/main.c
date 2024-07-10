@@ -220,13 +220,18 @@ void _send_dao(void){
         // if (netif) {
         //     iface = ((gnrc_netif_hdr_t *)etif->data)->if_pid;
         // }
-
-    ztimer_sleep(ZTIMER_MSEC, 2* MS_PER_SEC);
-    puts("send DAO\n");
+        
+    // ztimer_sleep(ZTIMER_MSEC, 2* MS_PER_SEC);
+        puts("send DAO\n");
         // if (dodag->dao_ack_received){
         //     _dao_check = 1;
         // }
-
+        int _retries_dao = 0;
+        while (_dao_check == 0 && _retries_dao<20){
+            ztimer_sleep(ZTIMER_MSEC, 0.1* MS_PER_SEC);
+            printf("%d\n", _retries_dao);
+            _retries_dao++;
+        }
         // // ipv6_hdr = (ipv6_hdr_t *)ipv6->data;
 
         // _icmpv6_hdr = (icmpv6_hdr_t *)msg->data;
@@ -235,7 +240,7 @@ void _send_dao(void){
 }
 static int sleepy(int argc, char **argv){
     radio_off(radio_netif);
-    for (int _i=1;_i<5;_i++){
+    for (int _i=1;_i<102;_i++){
     // while(1){
         if (argc < 2) {
             
@@ -302,9 +307,9 @@ static int sleepy(int argc, char **argv){
             if (_coap_result == 0) {
                 printf("Command executed successfully, and Reyries: %d\n", retries);
                 int wait = 0;
-                while(message_ack_flag == 0 && wait < 3){
+                while(message_ack_flag == 0 && wait < 10){
                     puts("waitting for the message sent flag\n");
-                    ztimer_sleep(ZTIMER_MSEC, 0.5* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
+                    ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
                     printf("waitting time is %d\n", wait);
                     wait++;
                 }

@@ -46,6 +46,9 @@ config USEMODULE_CORE_INIT
 config USEMODULE_CORE_LIB
 	bool
 	default y
+config USEMODULE_CORE_MBOX
+	bool
+	default y
 config USEMODULE_CORE_MSG
 	bool
 	default y
@@ -61,13 +64,22 @@ config USEMODULE_CORE_THREAD_FLAGS
 config USEMODULE_CPU
 	bool
 	default y
-config USEMODULE_DIV
+config USEMODULE_DS3231
+	bool
+	default y
+config USEMODULE_DS3231_INT
 	bool
 	default y
 config USEMODULE_EUI_PROVIDER
 	bool
 	default y
 config USEMODULE_EVENT
+	bool
+	default y
+config USEMODULE_EVENT_CALLBACK
+	bool
+	default y
+config USEMODULE_EVENT_TIMEOUT_ZTIMER
 	bool
 	default y
 config USEMODULE_EVTIMER
@@ -77,6 +89,9 @@ config USEMODULE_FMT
 	bool
 	default y
 config USEMODULE_FRAC
+	bool
+	default y
+config USEMODULE_GCOAP
 	bool
 	default y
 config USEMODULE_GNRC
@@ -121,6 +136,12 @@ config USEMODULE_GNRC_NDP
 config USEMODULE_GNRC_NETAPI
 	bool
 	default y
+config USEMODULE_GNRC_NETAPI_CALLBACKS
+	bool
+	default y
+config USEMODULE_GNRC_NETAPI_MBOX
+	bool
+	default y
 config USEMODULE_GNRC_NETIF
 	bool
 	default y
@@ -163,6 +184,15 @@ config USEMODULE_GNRC_PKTDUMP
 config USEMODULE_GNRC_RPL
 	bool
 	default y
+config USEMODULE_GNRC_SOCK
+	bool
+	default y
+config USEMODULE_GNRC_SOCK_ASYNC
+	bool
+	default y
+config USEMODULE_GNRC_SOCK_UDP
+	bool
+	default y
 config USEMODULE_GNRC_UDP
 	bool
 	default y
@@ -196,6 +226,9 @@ config USEMODULE_LIBC
 config USEMODULE_LUID
 	bool
 	default y
+config USEMODULE_NANOCOAP
+	bool
+	default y
 config USEMODULE_NATIVE_CLI_EUI_PROVIDER
 	bool
 	default y
@@ -209,6 +242,9 @@ config USEMODULE_NETDEV_DEFAULT
 	bool
 	default y
 config USEMODULE_NETDEV_ETH
+	bool
+	default y
+config USEMODULE_NETDEV_LEGACY_API
 	bool
 	default y
 config USEMODULE_NETDEV_REGISTER
@@ -250,10 +286,16 @@ config USEMODULE_PERIPH_CPUID
 config USEMODULE_PERIPH_GPIO
 	bool
 	default y
+config USEMODULE_PERIPH_GPIO_IRQ
+	bool
+	default y
 config USEMODULE_PERIPH_GPIO_LINUX
 	bool
 	default y
 config USEMODULE_PERIPH_HWRNG
+	bool
+	default y
+config USEMODULE_PERIPH_I2C
 	bool
 	default y
 config USEMODULE_PERIPH_INIT
@@ -265,10 +307,16 @@ config USEMODULE_PERIPH_INIT_CPUID
 config USEMODULE_PERIPH_INIT_GPIO
 	bool
 	default y
+config USEMODULE_PERIPH_INIT_GPIO_IRQ
+	bool
+	default y
 config USEMODULE_PERIPH_INIT_GPIO_LINUX
 	bool
 	default y
 config USEMODULE_PERIPH_INIT_HWRNG
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_I2C
 	bool
 	default y
 config USEMODULE_PERIPH_INIT_LED0
@@ -301,6 +349,9 @@ config USEMODULE_PERIPH_INIT_LEDS
 config USEMODULE_PERIPH_INIT_PM
 	bool
 	default y
+config USEMODULE_PERIPH_INIT_RTC
+	bool
+	default y
 config USEMODULE_PERIPH_INIT_TIMER
 	bool
 	default y
@@ -310,10 +361,22 @@ config USEMODULE_PERIPH_INIT_UART
 config USEMODULE_PERIPH_PM
 	bool
 	default y
+config USEMODULE_PERIPH_RTC
+	bool
+	default y
 config USEMODULE_PERIPH_TIMER
 	bool
 	default y
 config USEMODULE_PERIPH_UART
+	bool
+	default y
+config USEMODULE_PM_LAYERED
+	bool
+	default y
+config USEMODULE_POSIX_HEADERS
+	bool
+	default y
+config USEMODULE_POSIX_INET
 	bool
 	default y
 config USEMODULE_PREPROCESSOR
@@ -332,6 +395,9 @@ config USEMODULE_PS
 	bool
 	default y
 config USEMODULE_RANDOM
+	bool
+	default y
+config USEMODULE_RTC_UTILS
 	bool
 	default y
 config USEMODULE_SHELL
@@ -358,6 +424,9 @@ config USEMODULE_SHELL_CMD_PM
 config USEMODULE_SHELL_CMD_PS
 	bool
 	default y
+config USEMODULE_SHELL_CMD_RTC
+	bool
+	default y
 config USEMODULE_SHELL_CMD_SYS
 	bool
 	default y
@@ -365,6 +434,24 @@ config USEMODULE_SHELL_CMDS
 	bool
 	default y
 config USEMODULE_SHELL_CMDS_DEFAULT
+	bool
+	default y
+config USEMODULE_SOCK
+	bool
+	default y
+config USEMODULE_SOCK_ASYNC
+	bool
+	default y
+config USEMODULE_SOCK_ASYNC_EVENT
+	bool
+	default y
+config USEMODULE_SOCK_AUX_LOCAL
+	bool
+	default y
+config USEMODULE_SOCK_UDP
+	bool
+	default y
+config USEMODULE_SOCK_UTIL
 	bool
 	default y
 config USEMODULE_STDIN
@@ -385,7 +472,7 @@ config USEMODULE_TSRB
 config USEMODULE_UDP
 	bool
 	default y
-config USEMODULE_XTIMER
+config USEMODULE_URI_PARSER
 	bool
 	default y
 config USEMODULE_ZTIMER
@@ -412,12 +499,12 @@ config USEMODULE_ZTIMER_INIT
 config USEMODULE_ZTIMER_MSEC
 	bool
 	default y
+config USEMODULE_ZTIMER_PERIPH_RTC
+	bool
+	default y
 config USEMODULE_ZTIMER_PERIPH_TIMER
 	bool
 	default y
 config USEMODULE_ZTIMER_USEC
-	bool
-	default y
-config USEMODULE_ZTIMER_XTIMER_COMPAT
 	bool
 	default y

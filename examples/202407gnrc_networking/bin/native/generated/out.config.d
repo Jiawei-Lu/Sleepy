@@ -1,7 +1,7 @@
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/native/generated/out.config: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/native/generated/out.config: \
     /home/jl1n119/test_RPL/RIOT/Kconfig \
     /home/jl1n119/test_RPL/RIOT/kconfigs/Kconfig.consts \
-    /home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/native/generated/Kconfig.dep \
+    /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/native/generated/Kconfig.dep \
     /home/jl1n119/test_RPL/RIOT/boards/native/Kconfig \
     /home/jl1n119/test_RPL/RIOT/cpu/native/Kconfig \
     /home/jl1n119/test_RPL/RIOT/boards/Kconfig \
@@ -159,16 +159,19 @@
     /home/jl1n119/test_RPL/RIOT/pkg/tinyvcdiff/Kconfig \
     /home/jl1n119/test_RPL/RIOT/pkg/wakaama/Kconfig \
     /home/jl1n119/test_RPL/RIOT/pkg/wakaama/contrib/objects/Kconfig \
+    /home/jl1n119/test_RPL/RIOT/pkg/wakaama/contrib/objects/Kconfig.device \
+    /home/jl1n119/test_RPL/RIOT/pkg/wakaama/contrib/objects/Kconfig.security \
+    /home/jl1n119/test_RPL/RIOT/pkg/wakaama/contrib/objects/Kconfig.ipso \
     /home/jl1n119/test_RPL/RIOT/pkg/wakaama/contrib/objects/Kconfig.light_control \
-    /home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/native/generated/Kconfig.external_modules \
-    /home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/native/generated/Kconfig.external_pkgs \
+    /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/native/generated/Kconfig.external_modules \
+    /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/native/generated/Kconfig.external_pkgs \
 
 
 /home/jl1n119/test_RPL/RIOT/Kconfig:
 
 /home/jl1n119/test_RPL/RIOT/kconfigs/Kconfig.consts:
 
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/native/generated/Kconfig.dep:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/native/generated/Kconfig.dep:
 
 /home/jl1n119/test_RPL/RIOT/boards/native/Kconfig:
 
@@ -484,9 +487,15 @@
 
 /home/jl1n119/test_RPL/RIOT/pkg/wakaama/contrib/objects/Kconfig:
 
+/home/jl1n119/test_RPL/RIOT/pkg/wakaama/contrib/objects/Kconfig.device:
+
+/home/jl1n119/test_RPL/RIOT/pkg/wakaama/contrib/objects/Kconfig.security:
+
+/home/jl1n119/test_RPL/RIOT/pkg/wakaama/contrib/objects/Kconfig.ipso:
+
 /home/jl1n119/test_RPL/RIOT/pkg/wakaama/contrib/objects/Kconfig.light_control:
 
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/native/generated/Kconfig.external_modules:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/native/generated/Kconfig.external_modules:
 
-/home/jl1n119/test_RPL/RIOT/examples/gnrc_networking/bin/native/generated/Kconfig.external_pkgs:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/native/generated/Kconfig.external_pkgs:
 
