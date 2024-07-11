@@ -116,6 +116,7 @@ int retries = 0;
 int count_total_try = 0;
 int count_successful = 0;
 extern int _dao_check;
+float _dao_count =0.00;
 
 /*external function*/
 extern int _gnrc_netif_config(int argc, char **argv);
@@ -187,11 +188,67 @@ void radio_on(gnrc_netif_t *netif){
     }
 }
 
-void _send_dao(void){
+int _send_dao(void){
     // icmpv6_hdr_t *icmpv6_hdr;
     // icmpv6_hdr = (icmpv6_hdr_t *)msg.content.ptr->data;
     // while (icmpv6_hdr->code != GNRC_RPL_ICMPV6_CODE_DAO_ACK){
     
+    _dao_check = 0;
+    _dao_count = 0.00;
+    while (_dao_check == 0){
+        
+    // char addr_str[IPV6_ADDR_MAX_STR_LEN];
+    // gnrc_rpl_dodag_t *dodag = NULL;
+    for (uint8_t i = 0; i < GNRC_RPL_INSTANCES_NUMOF; ++i) {
+        if (gnrc_rpl_instances[i].state == 0) {
+            continue;
+        }
+
+        dodag = &gnrc_rpl_instances[i].dodag;
+        
+        gnrc_rpl_send_DAO(dodag->instance, NULL, dodag->default_lifetime);
+    }
+
+        // // gnrc_pktsnip_t *__netif;
+        // // icmpv6_hdr_t *_icmpv6_hdr;
+        // kernel_pid_t iface = 7;
+        // // msg_t msg
+
+        // // assert(icmpv6 != NULL);
+
+        // // ipv6 = gnrc_pktsnip_search_type(&msg, GNRC_NETTYPE_IPV6);
+        // netif = gnrc_pktsnip_search_type(msg, GNRC_NETTYPE_NETIF);
+
+        // if (netif) {
+        //     iface = ((gnrc_netif_hdr_t *)etif->data)->if_pid;
+        // }
+        
+    // ztimer_sleep(ZTIMER_MSEC, 2* MS_PER_SEC);
+        puts("send DAO\n");
+        // if (dodag->dao_ack_received){
+        //     _dao_check = 1;
+        // }
+        int _retries_dao = 0;
+        while (_dao_check == 0 && _retries_dao<2){
+            ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC);
+            printf("%d\n", _retries_dao);
+            _retries_dao++;
+        }
+        // // ipv6_hdr = (ipv6_hdr_t *)ipv6->data;
+        _dao_count += _retries_dao*2/10;
+        // _icmpv6_hdr = (icmpv6_hdr_t *)msg->data;
+        // _icmpv6_hdr->code == GNRC_RPL_ICMPV6_CODE_DAO_ACK;
+    }
+    printf("%f", _dao_count);
+    return _dao_count;
+}
+
+static int _cmd_dao_send(int argc, char **argv){
+    if (argc > 1 || strcmp(argv[0], "dao") != 0) {
+            
+        return 1;
+    }
+
     _dao_check = 0;
     while (_dao_check == 0){
         
@@ -227,8 +284,8 @@ void _send_dao(void){
         //     _dao_check = 1;
         // }
         int _retries_dao = 0;
-        while (_dao_check == 0 && _retries_dao<20){
-            ztimer_sleep(ZTIMER_MSEC, 0.1* MS_PER_SEC);
+        while (_dao_check == 0 && _retries_dao<2){
+            ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC);
             printf("%d\n", _retries_dao);
             _retries_dao++;
         }
@@ -237,7 +294,9 @@ void _send_dao(void){
         // _icmpv6_hdr = (icmpv6_hdr_t *)msg->data;
         // _icmpv6_hdr->code == GNRC_RPL_ICMPV6_CODE_DAO_ACK;
     }
+    return 0;
 }
+
 static int sleepy(int argc, char **argv){
     radio_off(radio_netif);
     for (int _i=1;_i<102;_i++){
@@ -266,9 +325,9 @@ static int sleepy(int argc, char **argv){
         // printf("test_time:%lld\n", (long long) _start_time);
         double diff = difftime(_test_time, _start_time);
         
-        _time.tm_sec += (int)diff;// * ONE_S;
+        _time.tm_sec += (int)diff+8;// * ONE_S;
         mktime(&_time);
-        printf("watting %d seconds to start sleepy test\n", (int)diff);
+        // printf("watting %d seconds to start sleepy test\n", (int)diff);
         
         printf("radio off \n");
         _res = ds3231_set_alarm_1(&_dev, &_time, DS3231_AL1_TRIG_H_M_S);
@@ -294,22 +353,21 @@ static int sleepy(int argc, char **argv){
         // _gnrc_rpl(_argc_rpl,_argv_rpl);
         
         /*------------------------------Send DAO to rejoin--------------------------------*/
+        
         _send_dao();
-
+        ztimer_sleep(ZTIMER_MSEC, (5 - _dao_count)* MS_PER_SEC);
         // /*------------------------------Send DAO to rejoin--------------------------------*/
         // _gnrc_rpl_send_dis();
         
-
-        // ztimer_sleep(ZTIMER_MSEC, 10* MS_PER_SEC);
         message_ack_flag = 0;
         while (message_ack_flag != 1 && retries < 3){
             _coap_result = gcoap_cli_cmd(_argc2,_argv2);
             if (_coap_result == 0) {
                 printf("Command executed successfully, and Reyries: %d\n", retries);
                 int wait = 0;
-                while(message_ack_flag == 0 && wait < 10){
+                while(message_ack_flag == 0 && wait < 3){
                     puts("waitting for the message sent flag\n");
-                    ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
+                    ztimer_sleep(ZTIMER_MSEC, 0.33* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
                     printf("waitting time is %d\n", wait);
                     wait++;
                 }
@@ -341,6 +399,7 @@ static void btn_cb(void *ctx)
 static const shell_command_t shell_commands[] = {
     { "coap", "CoAP example", gcoap_cli_cmd },
     { "sleepy", "make system sleepy and wake up n minutes after", sleepy },
+    { "dao", "Send DAO", _cmd_dao_send },
     { NULL, NULL, NULL }
 };
 
