@@ -306,7 +306,7 @@ static int sleepy(int argc, char **argv){
        return _print_usage(argv);
     }
     radio_off(radio_netif);
-    for (int _i=1;_i<102;_i++){
+    for (int _i=1;_i<120;_i++){
     // while(1){
         struct tm _time;
         int _res = ds3231_clear_alarm_1_flag(&_dev);
