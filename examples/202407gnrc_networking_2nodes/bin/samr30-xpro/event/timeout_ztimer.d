@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/event/timeout_ztimer.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/event/timeout_ztimer.o: \
  /home/jl1n119/test_RPL/RIOT/sys/event/timeout_ztimer.c \
- /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/modules.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/riot_version.h \
@@ -119,7 +119,7 @@
  /home/jl1n119/test_RPL/RIOT/core/include/thread.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/rmutex.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/ztimer.h
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/kernel_defines.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/modules.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/riot_version.h:

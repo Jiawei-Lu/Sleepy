@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/sam0_common_periph/spi.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/sam0_common_periph/spi.o: \
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/periph/spi.c \
- /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/cpu.h \
@@ -128,7 +128,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/pm_layered.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/architecture.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/cpu.h:

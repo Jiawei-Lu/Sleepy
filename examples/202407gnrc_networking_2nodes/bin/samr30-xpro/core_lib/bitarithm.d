@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/core_lib/bitarithm.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/core_lib/bitarithm.o: \
  /home/jl1n119/test_RPL/RIOT/core/lib/bitarithm.c \
- /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
  /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
@@ -87,7 +87,7 @@
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/vendor/samr30/include/instance/usb.h \
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/vendor/samr30/include/instance/wdt.h \
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/vendor/samr30/include/pio/samr30g18a.h
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:
 /usr/include/newlib/nano/newlib.h:

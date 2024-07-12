@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/periph_common/i2c.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/periph_common/i2c.o: \
  /home/jl1n119/test_RPL/RIOT/drivers/periph_common/i2c.c \
- /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/errno.h /usr/include/newlib/sys/errno.h \
  /usr/include/newlib/sys/reent.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -124,7 +124,7 @@
  /usr/include/newlib/string.h /usr/include/newlib/sys/string.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/endian.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/unaligned.h
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/errno.h:
 /usr/include/newlib/sys/errno.h:
 /usr/include/newlib/sys/reent.h:

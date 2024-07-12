@@ -117,11 +117,15 @@ int count_total_try = 0;
 int count_successful = 0;
 extern int _dao_check;
 int middle_gap =8;
+float _dao_count =0.00;
+int _node_com_window = 5;
+int sequence = 1;
 
 /*external function*/
 extern int _gnrc_netif_config(int argc, char **argv);
 extern int _gnrc_netif_config(int argc, char **argv);
 extern int _gnrc_rpl_send_dis(void);
+static int _print_usage(char **argv);
 // static int _gnrc_rpl(int argc, char **argv);
 // extern gnrc_pktsnip_t *__netif;
 // extern icmpv6_hdr_t *icmpv6_hdr;
@@ -188,12 +192,13 @@ void radio_on(gnrc_netif_t *netif){
     }
 }
 
-void _send_dao(void){
+int _send_dao(void){
     // icmpv6_hdr_t *icmpv6_hdr;
     // icmpv6_hdr = (icmpv6_hdr_t *)msg.content.ptr->data;
     // while (icmpv6_hdr->code != GNRC_RPL_ICMPV6_CODE_DAO_ACK){
     
     _dao_check = 0;
+    _dao_count = 0.00;
     while (_dao_check == 0){
         
     // char addr_str[IPV6_ADDR_MAX_STR_LEN];
@@ -234,10 +239,12 @@ void _send_dao(void){
             _retries_dao++;
         }
         // // ipv6_hdr = (ipv6_hdr_t *)ipv6->data;
-
+        _dao_count += _retries_dao*2/10;
         // _icmpv6_hdr = (icmpv6_hdr_t *)msg->data;
         // _icmpv6_hdr->code == GNRC_RPL_ICMPV6_CODE_DAO_ACK;
     }
+    printf("%f", _dao_count);
+    return _dao_count;
 }
 
 static int _cmd_dao_send(int argc, char **argv){
@@ -295,7 +302,7 @@ static int _cmd_dao_send(int argc, char **argv){
 }
 
 static int sleepy(int argc, char **argv){
-    if (argc != 3) {
+    if (argc < 2 || argc > 4) {
        return _print_usage(argv);
     }
     radio_off(radio_netif);
@@ -315,17 +322,22 @@ static int sleepy(int argc, char **argv){
         time_t _start_time, _test_time;
         _start_time = mktime(&_time);
         int time = atoi(argv[1]);
-        int sequence = atoi(argv[2])
-
+        if (argc > 2){
+            sequence = atoi(argv[2]);
+        }
+        if (argc == 4){
+            _node_com_window = atoi(argv[3]);
+        }
+        
         //_test_time = (_start_time/60+time*_i)*60; //int time is how many minutes you want the system sleep with radio off 
         _test_time = (_start_time/60+time)*60; 
         // printf("test_time:%lld\n", (long long) _start_time);
         double diff = difftime(_test_time, _start_time);
         
-        _time.tm_sec += (int)diff + middle_gap + sequence * 4;// * ONE_S;
+        _time.tm_sec += ((int)diff + middle_gap + (sequence -1) * _node_com_window);// * ONE_S;
         mktime(&_time);
-        printf("watting %d seconds to start sleepy test\n", (int)diff);
-        
+        // printf("watting %d seconds to start sleepy test\n", (int)diff);
+        printf("watting %d seconds to start sleepy test\n", ((int)diff + middle_gap + (sequence -1) * _node_com_window));
         printf("radio off \n");
         _res = ds3231_set_alarm_1(&_dev, &_time, DS3231_AL1_TRIG_H_M_S);
         if (_res != 0) {
@@ -355,17 +367,18 @@ static int sleepy(int argc, char **argv){
         // /*------------------------------Send DAO to rejoin--------------------------------*/
         // _gnrc_rpl_send_dis();
         
-
-        ztimer_sleep(ZTIMER_MSEC, 3* MS_PER_SEC);
+        ztimer_sleep(ZTIMER_MSEC, (3.00 - _dao_count)* MS_PER_SEC);
+        printf("dao_count: %f\n", (_dao_count));
+        // ztimer_sleep(ZTIMER_MSEC, 3* MS_PER_SEC);
         message_ack_flag = 0;
         while (message_ack_flag != 1 && retries < 3){
             _coap_result = gcoap_cli_cmd(_argc2,_argv2);
             if (_coap_result == 0) {
                 printf("Command executed successfully, and Reyries: %d\n", retries);
                 int wait = 0;
-                while(message_ack_flag == 0 && wait < 4){
+                while(message_ack_flag == 0 && wait < 3){
                     puts("waitting for the message sent flag\n");
-                    ztimer_sleep(ZTIMER_MSEC, 0.3* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
+                    ztimer_sleep(ZTIMER_MSEC, 0.25* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
                     printf("waitting time is %d\n", wait);
                     wait++;
                 }
@@ -387,9 +400,9 @@ static int sleepy(int argc, char **argv){
 
 static int _print_usage(char **argv)
 {
-    printf("usage: %s <sleep duration in minutes> <wake up sequence No.>\n", argv[0]);
-    printf("       %s sleepy 10 2\n", argv[0]);
-    printf("       %s wake node up in the begining of 10 minutes after at sequence number No.2\n", argv[0]);
+    printf("usage: %s <sleep duration in minutes> <wake up sequence No.> [optional communication window size]\n", argv[0]);
+    printf("       %s sleepy 10 2 5\n", argv[0]);
+    printf("       %s wake node up in the begining of 10 minutes after (sequence number No.2,with communication window sieze of 5)\n", argv[0]);
     return 1;
 }
 
@@ -431,18 +444,9 @@ int main(void)
 
     _gnrc_netif_config(0, NULL);
 
-    ztimer_sleep(ZTIMER_MSEC, 5* MS_PER_SEC);
-    kernel_pid_t iface_pid = 7;
-    if (gnrc_netif_get_by_pid(iface_pid) == NULL) {
-        printf("unknown interface specified\n");
-        pm_reboot();
-        return 1;
-    }
-    gnrc_rpl_init(iface_pid);
-    printf("successfully initialized RPL on interface %d\n", iface_pid);
-
-    puts("ztimer sleep for few seconds wait rpl configuration\n");
-    ztimer_sleep(ZTIMER_MSEC, 5* MS_PER_SEC);
+    //ztimer_sleep(ZTIMER_MSEC, 5* MS_PER_SEC);
+    
+    
     puts("{\"IPv6 addresses\": [\"");
     //netifs_print_ipv6("\", \"");
     while (global_flag == 0){
@@ -478,6 +482,19 @@ int main(void)
     }
     puts("\"]}");
 
+    puts("ztimer sleep for few seconds wait rpl configuration\n");
+    //ztimer_sleep(ZTIMER_MSEC, 5* MS_PER_SEC);
+    kernel_pid_t iface_pid = 7;
+    if (gnrc_netif_get_by_pid(iface_pid) == NULL) {
+        printf("unknown interface specified\n");
+        pm_reboot();
+        return 1;
+    }
+    gnrc_rpl_init(iface_pid);
+    printf("successfully initialized RPL on interface %d\n", iface_pid);
+
+    
+    
 
     /*----------------------------------DS3231 INIT-------------------------------------*/
     int res;

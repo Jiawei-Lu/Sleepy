@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/at86rf2xx/at86rf2xx_internal.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/at86rf2xx/at86rf2xx_internal.o: \
  /home/jl1n119/test_RPL/RIOT/drivers/at86rf2xx/at86rf2xx_internal.c \
- /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/ztimer.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /home/jl1n119/test_RPL/RIOT/core/include/sched.h \
@@ -153,7 +153,7 @@
  /home/jl1n119/test_RPL/RIOT/drivers/at86rf2xx/include/at86rf2xx_registers.h \
  /home/jl1n119/test_RPL/RIOT/drivers/at86rf2xx/include/at86rf2xx_registers.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/spi.h
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/ztimer.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /home/jl1n119/test_RPL/RIOT/core/include/sched.h:

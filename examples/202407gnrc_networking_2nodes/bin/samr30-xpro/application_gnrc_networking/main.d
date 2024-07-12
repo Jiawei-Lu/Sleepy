@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/application_gnrc_networking/main.o: \
- /home/jl1n119/Sleepy/examples/202407gnrc_networking/main.c \
- /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/application_gnrc_networking/main.o: \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/main.c \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
  /usr/include/newlib/sys/config.h /usr/include/newlib/machine/ieeefp.h \
@@ -209,7 +209,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/architecture.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/xfa.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/flash_utils.h \
- /home/jl1n119/Sleepy/examples/202407gnrc_networking/gcoap_example.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/gcoap_example.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/fmt.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/utils.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/od.h \
@@ -259,7 +259,7 @@
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/gpio.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/rtc.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/rtc_utils.h
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:
 /usr/include/newlib/nano/newlib.h:
@@ -485,7 +485,7 @@
 /home/jl1n119/test_RPL/RIOT/sys/include/architecture.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/xfa.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/flash_utils.h:
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/gcoap_example.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/gcoap_example.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/fmt.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/utils.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/od.h:

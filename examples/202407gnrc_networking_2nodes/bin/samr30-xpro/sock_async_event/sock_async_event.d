@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/sock_async_event/sock_async_event.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/sock_async_event/sock_async_event.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/sock/async/event/sock_async_event.c \
- /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/irq.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/cpu_conf.h \
@@ -179,7 +179,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/net/sock/udp.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/sock/tcp.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/sock/async.h
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/irq.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h:
 /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/cpu_conf.h:

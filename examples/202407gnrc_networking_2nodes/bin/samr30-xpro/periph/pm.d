@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/periph/pm.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/periph/pm.o: \
  /home/jl1n119/test_RPL/RIOT/cpu/saml21/periph/pm.c \
- /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/pm.h \
  /home/jl1n119/test_RPL/RIOT/cpu/saml21/include/periph_cpu.h \
  /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/periph_cpu_common.h \
@@ -121,7 +121,7 @@
  /home/jl1n119/test_RPL/RIOT/cpu/cortexm_common/include/architecture_arch.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/debug.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/architecture.h
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/drivers/include/periph/pm.h:
 /home/jl1n119/test_RPL/RIOT/cpu/saml21/include/periph_cpu.h:
 /home/jl1n119/test_RPL/RIOT/cpu/sam0_common/include/periph_cpu_common.h:

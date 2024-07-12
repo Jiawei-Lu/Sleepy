@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/gnrc_netif_init_devs/auto_init_at86rf2xx.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/gnrc_netif_init_devs/auto_init_at86rf2xx.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/netif/init_devs/auto_init_at86rf2xx.c \
- /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/log.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
  /usr/include/newlib/nano/newlib.h /usr/include/newlib/_newlib_version.h \
@@ -190,7 +190,7 @@
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/gpio.h \
  /home/jl1n119/test_RPL/RIOT/drivers/include/periph/gpio.h \
  /home/jl1n119/test_RPL/RIOT/drivers/at86rf2xx/include/at86rf2xx_params.h
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/core/lib/include/log.h:
 /usr/include/newlib/stdio.h:
 /usr/include/newlib/_ansi.h:

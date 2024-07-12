@@ -1,6 +1,6 @@
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/gnrc_pkt/gnrc_pkt.o: \
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/gnrc_pkt/gnrc_pkt.o: \
  /home/jl1n119/test_RPL/RIOT/sys/net/gnrc/pkt/gnrc_pkt.c \
- /home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h \
+ /home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/pkt.h \
  /usr/include/newlib/inttypes.h /usr/include/newlib/nano/newlib.h \
  /usr/include/newlib/_newlib_version.h /usr/include/newlib/sys/config.h \
@@ -30,7 +30,7 @@
  /home/jl1n119/test_RPL/RIOT/sys/include/net/ethertype.h \
  /home/jl1n119/test_RPL/RIOT/sys/include/net/protnum.h \
  /home/jl1n119/test_RPL/RIOT/core/lib/include/list.h
-/home/jl1n119/Sleepy/examples/202407gnrc_networking/bin/samr30-xpro/riotbuild/riotbuild.h:
+/home/jl1n119/Sleepy/examples/202407gnrc_networking_2nodes/bin/samr30-xpro/riotbuild/riotbuild.h:
 /home/jl1n119/test_RPL/RIOT/sys/include/net/gnrc/pkt.h:
 /usr/include/newlib/inttypes.h:
 /usr/include/newlib/nano/newlib.h:
