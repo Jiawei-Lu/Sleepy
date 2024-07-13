@@ -44,6 +44,7 @@
 	27.open() to create new .txt file has a numberlimitation which is 512, use fopen instead.
 	28.Sensing data will be stored line by line, and each CoAP PUT will send last "times" line (times = communication_rate / sensing_rate;).
 	29.Still need to change the part of extra line 
+	30.Modified the addr obtain and get multicast and global addr okay
 	
 	
 ******* RIOT-Sniffer usage hint:
