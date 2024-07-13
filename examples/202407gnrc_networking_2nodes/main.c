@@ -118,8 +118,9 @@ int count_successful = 0;
 extern int _dao_check;
 int middle_gap =8;
 float _dao_count =0.00;
-int _node_com_window = 5;
-int sequence = 1;
+int _node_com_window = 6;
+int sequence = 1; 
+int _dao_attampt =0;
 
 /*external function*/
 extern int _gnrc_netif_config(int argc, char **argv);
@@ -199,7 +200,8 @@ int _send_dao(void){
     
     _dao_check = 0;
     _dao_count = 0.00;
-    while (_dao_check == 0){
+    _dao_attampt = 0;
+    while (_dao_check == 0 && _dao_attampt < 3){
         
     // char addr_str[IPV6_ADDR_MAX_STR_LEN];
     // gnrc_rpl_dodag_t *dodag = NULL;
@@ -242,6 +244,7 @@ int _send_dao(void){
         _dao_count += _retries_dao*2/10;
         // _icmpv6_hdr = (icmpv6_hdr_t *)msg->data;
         // _icmpv6_hdr->code == GNRC_RPL_ICMPV6_CODE_DAO_ACK;
+        _dao_attampt++;
     }
     printf("%f", _dao_count);
     return _dao_count;
@@ -367,7 +370,7 @@ static int sleepy(int argc, char **argv){
         // /*------------------------------Send DAO to rejoin--------------------------------*/
         // _gnrc_rpl_send_dis();
         
-        ztimer_sleep(ZTIMER_MSEC, (3.00 - _dao_count)* MS_PER_SEC);
+        ztimer_sleep(ZTIMER_MSEC, (4.00 - _dao_count)* MS_PER_SEC);
         printf("dao_count: %f\n", (_dao_count));
         // ztimer_sleep(ZTIMER_MSEC, 3* MS_PER_SEC);
         message_ack_flag = 0;
@@ -579,7 +582,43 @@ int main(void)
     gnrc_rpl_init(iface_pid);
     printf("successfully initialized RPL on interface %d\n", iface_pid);
 
+    gnrc_rpl_dodag_t *dodag = NULL;
+    char addr_str[IPV6_ADDR_MAX_STR_LEN];
 
+    for (uint8_t i = 0; i < GNRC_RPL_INSTANCES_NUMOF; ++i) {
+        if (gnrc_rpl_instances[i].state == 0) {
+            continue;
+        }
+
+        dodag = &gnrc_rpl_instances[i].dodag;
+        
+        printf("instance [%d | Iface: %" PRIkernel_pid " | mop: %d | ocp: %d | mhri: %d | mri %d]\n",
+                gnrc_rpl_instances[i].id, dodag->iface,
+                gnrc_rpl_instances[i].mop, gnrc_rpl_instances[i].of->ocp,
+                gnrc_rpl_instances[i].min_hop_rank_inc, gnrc_rpl_instances[i].max_rank_inc);
+        
+        printf("\tdodag [%s | R: %d | OP: %s | PIO: %s | "
+               "TR(I=[%d,%d], k=%d, c=%d)]\n",
+               ipv6_addr_to_str(addr_str, &dodag->dodag_id, sizeof(addr_str)),
+               dodag->my_rank, (dodag->node_status == GNRC_RPL_LEAF_NODE ? "Leaf" : "Router"),
+               ((dodag->dio_opts & GNRC_RPL_REQ_DIO_OPT_PREFIX_INFO) ? "on" : "off"),
+               (1 << dodag->dio_min), dodag->dio_interval_doubl, dodag->trickle.k,
+               dodag->trickle.c);
+        
+        gnrc_rpl_parent_t *parent = NULL;
+        LL_FOREACH(gnrc_rpl_instances[i].dodag.parents, parent) {
+            printf("\t\tparent [addr: %s | rank: %d]\n",
+                    ipv6_addr_to_str(addr_str, &parent->addr, sizeof(addr_str)),
+                    parent->rank);
+        }
+    }
+
+
+    /*------------------------------Send DAO to rejoin--------------------------------*/
+    _send_dao();
+
+    // /*------------------------------Send DAO to rejoin--------------------------------*/
+    // _gnrc_rpl_send_dis();
 
     while (message_ack_flag == 0){
     
@@ -620,7 +659,7 @@ int main(void)
     }
     message_ack_flag =0;
 
-    _send_dao();
+
     if (shell_on == 2){
     /* start shell */
     puts("All up, running the shell now");
