@@ -99,11 +99,17 @@ struct  tm  sych_time;
 /*Radio netif*/
 gnrc_netif_t* radio_netif = NULL;
 int global_flag =0; 
+ipv6_addr_t *node_global_address=NULL;
+ipv6_addr_t *node_multcast_address=NULL;
+ipv6_addr_t ipv6_addrs[CONFIG_GNRC_NETIF_IPV6_ADDRS_NUMOF];
+ipv6_addr_t ipv6_groups[GNRC_NETIF_IPV6_GROUPS_NUMOF];
+// msg_t msg;
 
 /*RPL*/
 gnrc_ipv6_nib_ft_t entry;      
 void *rpl_state = NULL;
 unsigned iface = 0U;
+gnrc_rpl_parent_t *parent = NULL;
 
 /*coap message flage define*/
 int _coap_result = 0;
@@ -127,6 +133,14 @@ extern int _gnrc_netif_config(int argc, char **argv);
 extern int _gnrc_netif_config(int argc, char **argv);
 extern int _gnrc_rpl_send_dis(void);
 static int _print_usage(char **argv);
+
+/*--------------------------------NS send-------------------------------*/
+// extern void gnrc_ndp_nbr_sol_send(const ipv6_addr_t *tgt, gnrc_netif_t *netif,
+//                            const ipv6_addr_t *src, const ipv6_addr_t *dst,
+//                            gnrc_pktsnip_t *ext_opts);
+// extern void _snd_ns(const ipv6_addr_t *tgt, gnrc_netif_t *netif,
+//              const ipv6_addr_t *src, const ipv6_addr_t *dst);
+
 // static int _gnrc_rpl(int argc, char **argv);
 // extern gnrc_pktsnip_t *__netif;
 // extern icmpv6_hdr_t *icmpv6_hdr;
@@ -366,6 +380,7 @@ static int sleepy(int argc, char **argv){
         
         /*------------------------------Send DAO to rejoin--------------------------------*/
         _send_dao();
+        
 
         // /*------------------------------Send DAO to rejoin--------------------------------*/
         // _gnrc_rpl_send_dis();
@@ -444,44 +459,119 @@ int main(void)
     }
     puts("ztimer sleep for few seconds wait rpl configuration\n");
     // ztimer_sleep(ZTIMER_MSEC, 5* MS_PER_SEC);
-
+    for (int ii =0; ii<3; ii++){
     _gnrc_netif_config(0, NULL);
 
-    //ztimer_sleep(ZTIMER_MSEC, 5* MS_PER_SEC);
-    
+    ztimer_sleep(ZTIMER_MSEC, 2* MS_PER_SEC);
+    }   
     
     puts("{\"IPv6 addresses\": [\"");
     //netifs_print_ipv6("\", \"");
     while (global_flag == 0){
-        // netif_t *netif = 0;
-        // bool first = true;
-        // while ((netif = netif_iter(netif)) != NULL) {
-            ipv6_addr_t addrs[NETIF_PRINT_IPV6_NUMOF];
-        //     ssize_t num = netif_get_ipv6(netif, addrs, ARRAY_SIZE(addrs));
-        //     if (num > 0) {
-        //         if (first) {
-        //             first = false;
-        //         }
-        //         else {
-        //             printf("%s", "\", \"");
-        //         }
-        //         ipv6_addrs_print(addrs, num, "\", \"");
-        //     }
-        char addr_str[IPV6_ADDR_MAX_STR_LEN];
+        int res;
+        // uint16_t u16;
+        
+        
+        
+        // netif_t *ifcae = 0;
+        // netif_t *iface = netif_get_by_name({“7”});
+        netif_t *last = NULL;
+        while (last != netif_iter(NULL)) {
+            netif_t *netif = NULL;
+            netif_t *next = netif_iter(netif);
+            do {
+                netif = next;
+                next = netif_iter(netif);
+            } while (next && next != last);
+            // res = netif_get_opt(netif, NETOPT_IPV6_ADDR, 0, ipv6_addrs,
+            //                 sizeof(ipv6_addrs));
+            // if (res >= 0) {
+            //     uint8_t ipv6_addrs_flags[CONFIG_GNRC_NETIF_IPV6_ADDRS_NUMOF];
 
-        printf("inet6 addr: ");
-        ipv6_addr_to_str(addr_str, addrs, sizeof(addr_str));
-        printf("%s  scope: ", addr_str);
-        if(ipv6_addr_is_global(addrs)){
-            puts("global address received\n");
-            global_flag = 1;
+            //     memset(ipv6_addrs_flags, 0, sizeof(ipv6_addrs_flags));
+            //     /* assume it to succeed (otherwise array will stay 0) */
+            //     netif_get_opt(iface, NETOPT_IPV6_ADDR_FLAGS, 0, ipv6_addrs_flags,
+            //                 sizeof(ipv6_addrs_flags));
+            //     /* yes, the res of NETOPT_IPV6_ADDR is meant to be here ;-) */
+            //     for (unsigned i = 0; i < (res / sizeof(ipv6_addr_t)); i++) {
+            //         _netif_list_ipv6(&ipv6_addrs[i], ipv6_addrs_flags[i]);
+            //     }
+            // }
+            // res = netif_get_opt(netif, NETOPT_IPV6_GROUP, 0, ipv6_groups,
+            //                     sizeof(ipv6_groups));
+            res = netif_get_opt(netif, NETOPT_IPV6_ADDR, 0, ipv6_addrs,
+                        sizeof(ipv6_addrs));
+            if (res >= 0) {
+                for (unsigned i = 0; i < (res / sizeof(ipv6_addr_t)); i++) {
+                    // _netif_list_groups(&ipv6_groups[i]);
+                    // if ((ipv6_addr_is_multicast(&ipv6_groups[i]))) {
+                        char addr_str[IPV6_ADDR_MAX_STR_LEN];
+
+                        ipv6_addr_to_str(addr_str, &ipv6_addrs[i], sizeof(addr_str));
+                        printf("inet6 addr: %s \n", addr_str);
+                        if(ipv6_addr_is_global(&ipv6_addrs[i])){
+                        node_global_address = &ipv6_addrs[i];
+                        puts("global address received\n");
+                        ipv6_addr_to_str(addr_str, node_global_address, sizeof(addr_str));
+                        printf("inet6 addr: %s \n", addr_str);
+                        global_flag = 1;
+                        }
+                }
+            }
+            res = netif_get_opt(netif, NETOPT_IPV6_GROUP, 0, ipv6_groups,
+                        sizeof(ipv6_groups));
+            if (res >= 0) {
+                for (unsigned i = 0; i < (res / sizeof(ipv6_addr_t)); i++) {
+                    if ((ipv6_addr_is_multicast(&ipv6_groups[i]))) {
+                        char addr_str[IPV6_ADDR_MAX_STR_LEN];
+                        ipv6_addr_to_str(addr_str, &ipv6_groups[i], sizeof(addr_str));
+                        printf("inet6 group: %s", addr_str);
+                        node_multcast_address = &ipv6_groups[i];
+
+                    }
+                }
+            }
+            
+            last = netif;
         }
-        else{
-            _gnrc_netif_config(0, NULL);
+        // // netif_t *netif = 0;
+        // // bool first = true;
+        // ipv6_addr_t addrs[NETIF_PRINT_IPV6_NUMOF];
+        // // while ((netif = netif_iter(netif)) != NULL) {
+        
+        // //     ssize_t num = netif_get_ipv6(netif, addrs, ARRAY_SIZE(addrs));
+        // //     if (num > 0) {
+        // //         if (first) {
+        // //             first = false;
+        // //         }
+        // //         else {
+        // //             printf("%s", "\", \"");
+        // //         }
+        // //         ipv6_addrs_print(addrs, num, "\", \"");
+        // //     }
+        // // }
+        //     char addr_str[IPV6_ADDR_MAX_STR_LEN];
+        // // int _res = netif_get_opt(netif, NETOPT_IPV6_ADDR, 0, addrs,
+        // //                 sizeof(addrs));
+        // // for (unsigned i = 0; i < (_res / sizeof(ipv6_addr_t)); i++) {
+        // printf("inet6 addr: ");
+        // ipv6_addr_to_str(addr_str, addrs, sizeof(addr_str));
+        // printf("%s  scope: ", addr_str);
+        
+        // if(ipv6_addr_is_global(addrs)){
+        //     puts("global address received\n");
+        //     global_flag = 1;
+        // }
+        // // }
+        // _gnrc_netif_config(0, NULL);
             //ztimer_sleep(ZTIMER_MSEC, 10* MS_PER_SEC);
-            ztimer_sleep(ZTIMER_MSEC, 1* MS_PER_SEC);
-        }
-    //   }	
+        // ztimer_sleep(ZTIMER_MSEC, 1* MS_PER_SEC);
+        // else{
+        //     _gnrc_netif_config(0, NULL);
+        //     //ztimer_sleep(ZTIMER_MSEC, 10* MS_PER_SEC);
+        //     ztimer_sleep(ZTIMER_MSEC, 1* MS_PER_SEC);
+        // }
+    //   	
     }
     puts("\"]}");
 
@@ -605,7 +695,7 @@ int main(void)
                (1 << dodag->dio_min), dodag->dio_interval_doubl, dodag->trickle.k,
                dodag->trickle.c);
         
-        gnrc_rpl_parent_t *parent = NULL;
+        // gnrc_rpl_parent_t *parent = NULL;
         LL_FOREACH(gnrc_rpl_instances[i].dodag.parents, parent) {
             printf("\t\tparent [addr: %s | rank: %d]\n",
                     ipv6_addr_to_str(addr_str, &parent->addr, sizeof(addr_str)),
@@ -616,6 +706,14 @@ int main(void)
 
     /*------------------------------Send DAO to rejoin--------------------------------*/
     _send_dao();
+
+
+    /*-------------------------------------Send NS------------------------------------*/
+    // gnrc_ndp_nbr_sol_send(node_multcast_address,radio_netif,node_global_address,&parent->addr,NULL);
+    // while (msg_try_receive(&msg) == 1) {
+    //     /* empty message queue */
+    // }
+    // _snd_ns(node_multcast_address,radio_netif,node_global_address,&parent->addr);
 
     // /*------------------------------Send DAO to rejoin--------------------------------*/
     // _gnrc_rpl_send_dis();
