@@ -122,9 +122,9 @@ int retries = 0;
 int count_total_try = 0;
 int count_successful = 0;
 extern int _dao_check;
-int middle_gap =8;
+float middle_gap = 8.00;
 float _dao_count =0.00;
-int _node_com_window = 6;
+float _node_com_window = 5.00;
 int sequence = 1; 
 int _dao_attampt =0;
 
@@ -249,7 +249,8 @@ int _send_dao(void){
         //     _dao_check = 1;
         // }
         int _retries_dao = 0;
-        while (_dao_check == 0 && _retries_dao<2){
+        // while (_dao_check == 0 && _retries_dao<2){
+        while (_dao_check == 0){
             ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC);
             printf("%d\n", _retries_dao);
             _retries_dao++;
@@ -351,10 +352,10 @@ static int sleepy(int argc, char **argv){
         // printf("test_time:%lld\n", (long long) _start_time);
         double diff = difftime(_test_time, _start_time);
         
-        _time.tm_sec += ((int)diff + middle_gap + (sequence -1) * _node_com_window);// * ONE_S;
+        _time.tm_sec += ((int)diff + middle_gap + (sequence -1) * (int)_node_com_window);// * ONE_S;
         mktime(&_time);
         // printf("watting %d seconds to start sleepy test\n", (int)diff);
-        printf("watting %d seconds to start sleepy test\n", ((int)diff + middle_gap + (sequence -1) * _node_com_window));
+        printf("watting %d seconds to start sleepy test\n", (int)((int)diff + middle_gap + (sequence -1) * _node_com_window));
         printf("radio off \n");
         _res = ds3231_set_alarm_1(&_dev, &_time, DS3231_AL1_TRIG_H_M_S);
         if (_res != 0) {
@@ -385,18 +386,19 @@ static int sleepy(int argc, char **argv){
         // /*------------------------------Send DAO to rejoin--------------------------------*/
         // _gnrc_rpl_send_dis();
         
-        ztimer_sleep(ZTIMER_MSEC, (4.00 - _dao_count)* MS_PER_SEC);
+        // ztimer_sleep(ZTIMER_MSEC, (_node_com_window - 2 - _dao_count)* MS_PER_SEC);
+        ztimer_sleep(ZTIMER_MSEC, (_node_com_window - 10 - _dao_count)* MS_PER_SEC);
         printf("dao_count: %f\n", (_dao_count));
         // ztimer_sleep(ZTIMER_MSEC, 3* MS_PER_SEC);
         message_ack_flag = 0;
-        while (message_ack_flag != 1 && retries < 3){
+        while (message_ack_flag != 1 && retries < 15){
             _coap_result = gcoap_cli_cmd(_argc2,_argv2);
             if (_coap_result == 0) {
                 printf("Command executed successfully, and Reyries: %d\n", retries);
                 int wait = 0;
                 while(message_ack_flag == 0 && wait < 3){
                     puts("waitting for the message sent flag\n");
-                    ztimer_sleep(ZTIMER_MSEC, 0.25* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
+                    ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC); //DO NOT use NS_PER_MS as it curshs program 
                     printf("waitting time is %d\n", wait);
                     wait++;
                 }
@@ -458,11 +460,11 @@ int main(void)
     shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
     }
     puts("ztimer sleep for few seconds wait rpl configuration\n");
-    // ztimer_sleep(ZTIMER_MSEC, 5* MS_PER_SEC);
+    ztimer_sleep(ZTIMER_MSEC, 5* MS_PER_SEC);
     for (int ii =0; ii<3; ii++){
     _gnrc_netif_config(0, NULL);
 
-    ztimer_sleep(ZTIMER_MSEC, 2* MS_PER_SEC);
+    // ztimer_sleep(ZTIMER_MSEC, 2* MS_PER_SEC);
     }   
     
     puts("{\"IPv6 addresses\": [\"");
@@ -476,6 +478,10 @@ int main(void)
         // netif_t *ifcae = 0;
         // netif_t *iface = netif_get_by_name({“7”});
         netif_t *last = NULL;
+        if (last == netif_iter(NULL)){
+            pm_reboot();
+            return 1;
+        }
         while (last != netif_iter(NULL)) {
             netif_t *netif = NULL;
             netif_t *next = netif_iter(netif);
