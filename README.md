@@ -45,6 +45,7 @@
 	28.Sensing data will be stored line by line, and each CoAP PUT will send last "times" line (times = communication_rate / sensing_rate;).
 	29.Still need to change the part of extra line 
 	30.Modified the addr obtain and get multicast and global addr okay
+	31.In turn wakeup CoAP successful! 5s node in turn (3sfor DAP and 2s for CoAP)
 	
 	
 ******* RIOT-Sniffer usage hint:

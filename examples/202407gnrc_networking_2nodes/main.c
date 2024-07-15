@@ -124,7 +124,8 @@ int count_successful = 0;
 extern int _dao_check;
 float middle_gap = 8.00;
 float _dao_count =0.00;
-float _node_com_window = 5.00;
+// float _node_com_window = 5.00;   /* successful in wake up in turns test: 5s for window in M1, for nodeside, 3s for DAO and 2s for CoAP including retries*/
+float _node_com_window = 8.00;      /* wake up together test */
 int sequence = 1; 
 int _dao_attampt =0;
 
@@ -249,8 +250,8 @@ int _send_dao(void){
         //     _dao_check = 1;
         // }
         int _retries_dao = 0;
-        // while (_dao_check == 0 && _retries_dao<2){
-        while (_dao_check == 0){
+        while (_dao_check == 0 && _retries_dao<3){
+        // while (_dao_check == 0){
             ztimer_sleep(ZTIMER_MSEC, 0.2* MS_PER_SEC);
             printf("%d\n", _retries_dao);
             _retries_dao++;
@@ -387,7 +388,7 @@ static int sleepy(int argc, char **argv){
         // _gnrc_rpl_send_dis();
         
         // ztimer_sleep(ZTIMER_MSEC, (_node_com_window - 2 - _dao_count)* MS_PER_SEC);
-        ztimer_sleep(ZTIMER_MSEC, (_node_com_window - 10 - _dao_count)* MS_PER_SEC);
+        ztimer_sleep(ZTIMER_MSEC, (_node_com_window - 4 - _dao_count)* MS_PER_SEC);
         printf("dao_count: %f\n", (_dao_count));
         // ztimer_sleep(ZTIMER_MSEC, 3* MS_PER_SEC);
         message_ack_flag = 0;
