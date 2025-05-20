@@ -357,6 +357,7 @@ static int sleepy(int argc, char **argv){
         
         _send_dao();
         ztimer_sleep(ZTIMER_MSEC, (6.00 - _dao_count)* MS_PER_SEC);
+        // ztimer_sleep(ZTIMER_MSEC, (3.00 - _dao_count)* MS_PER_SEC);
         // /*------------------------------Send DAO to rejoin--------------------------------*/
         // _gnrc_rpl_send_dis();
         
