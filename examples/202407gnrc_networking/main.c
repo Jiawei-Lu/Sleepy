@@ -324,8 +324,9 @@ static int sleepy(int argc, char **argv){
         _test_time = (_start_time/60+time)*60; 
         // printf("test_time:%lld\n", (long long) _start_time);
         double diff = difftime(_test_time, _start_time);
-        
-        _time.tm_sec += (int)diff+8;// * ONE_S;
+
+        // for child node
+        //_time.tm_sec += (int)diff+8;// * ONE_S
         mktime(&_time);
         // printf("watting %d seconds to start sleepy test\n", (int)diff);
         
