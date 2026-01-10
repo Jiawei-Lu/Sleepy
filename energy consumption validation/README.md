@@ -1,0 +1,1 @@
+to open the current measurement .ppk2 file, please install the [nRF Connect for Desktop] from https://www.nordicsemi.com/Products/Development-tools/nRF-Connect-for-Desktop
